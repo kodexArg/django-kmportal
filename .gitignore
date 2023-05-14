@@ -1,0 +1,26 @@
+
+# Django related files
+*.pyc
+__pycache__/
+*.pyo
+*.db
+*.sqlite3
+
+# Local development settings
+*.env
+.envrc
+.venv/
+
+# IDE settings
+.vscode/
+.idea/
+*.code-workspace
+
+# Other
+*.log
+*.swp
+*.swo
+.DS_Store
+
+# Paperwork
+paperwork/
