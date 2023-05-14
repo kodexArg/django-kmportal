@@ -15,9 +15,9 @@ Although this site is written in English but it will be implemented in Argentina
 7. Implement any required JavaScript.
 8. Write tests and debug the code.
 9. Deploy the project to production.
-## Skeleton
+## Skeleton 
 ```
-project/
+**/**
 ├── app/
 │   ├── templates/
 │   │   ├── base.html
@@ -42,7 +42,7 @@ project/
 │           ├── css/
 │           ├── js/
 │           └── ...
-├── project/
+├── portal/ 
 │   ├── settings/
 │   │   ├── base.py
 │   │   ├── development.py
