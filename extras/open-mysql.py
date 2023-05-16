@@ -19,6 +19,6 @@ result = subprocess.run(["docker", "inspect", "-f", "{{range .NetworkSettings.Ne
 ip_address = result.stdout.strip()
 
 # Connect to the MySQL server using the MySQL command-line client
-mysql_command = f"mysql -h {ip_address} -u {os.environ['MYSQL_USER']} -p{os.environ['MYSQL_PASSWORD']}"
+mysql_command = f"mysql -h {ip_address} -u {os.environ['MYSQL_USER']} -p{os.environ['MYSQL_PASS']}"
 subprocess.run(mysql_command, shell=True, check=True)
 

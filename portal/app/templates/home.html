@@ -4,6 +4,10 @@
 
 {% block content %}
 
+{% load socialaccount %}
+<h2>Google Login</h2>
+<a href="{% provider_login_url 'google' %}?next=/">Login with google</a>
+
 <h1>Title 1</h1>
 
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque aliquam quam, ac efficitur nisi
