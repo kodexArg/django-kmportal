@@ -1,0 +1,27 @@
+.custom-navbar {
+    background-color: lightblue;
+    height: 50px;
+    position: relative;
+  }
+  
+  .custom-navbar .logo-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid lightblue;
+    position: absolute;
+    top: 5px;
+    left: 80px;
+    transform: translateX(-50%);
+    bottom: -40px;
+  }
+  
+  .custom-navbar .nav-link {
+    color: #333;
+  }
+  
+  .custom-navbar .nav-link:hover {
+    color: #555;
+  }
+  
