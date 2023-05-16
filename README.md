@@ -59,9 +59,29 @@ Although this site is written in English but it will be implemented in Argentina
 ## Packages and Libraries
 The following packages and libraries are used in this project:
 - Django: A high-level Python web framework.
-- Bootstrap 5: A popular front-end development framework for creating responsive, mobile-first websites.
+- mysqlclient: The database connector
 - python-dotenv: A library for working with environment variables.
 - django-allauth: A Django package that provides user authentication and social login with OAuth providers.
 - pytest: A Python testing framework.
 
 Please note that some additional packages may be required depending on the specific features and functionality you choose to implement.
+
+## Installation
+### ToDo
+_step  by step guide_
+_script to create mysql users and database_
+### Manual steps
+#### ENVIRONMENT VARIABLES
+These are the environment variables this project uses (.env file under development stage).
+Here you provide the required string to connect to your database 'km1151' with any user.
+```
+SECRET-KEY=super-secret-password
+DEBUG=True
+
+MYSQL_DDBB=km1151
+MYSQL_USER=...
+MYSQL_PASS=...
+MYSQL_HOST=...
+MYSQL_PORT=...
+
+```
