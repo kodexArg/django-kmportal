@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-vbpvm9fzbtmv7n+n2h7q1e7ycx^17!rckbpl2#mglg@p^1qi1j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,6 +41,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
     "app",
 ]
 
@@ -138,14 +143,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Allauth configuration
 
-INSTALLED_APPS += [
-    "django.contrib.sites",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
-    # "allauth.socialaccount.providers.facebook",
-]
+# INSTALLED_APPS += [
+#     "allauth",
+#     "allauth.account",
+#     "allauth.socialaccount",
+#     "allauth.socialaccount.providers.google",
+#     # "allauth.socialaccount.providers.facebook",
+# ]
 
 SOCIAL_ACCOUNT_PROVIDERS = {
     "google": {
@@ -157,7 +161,8 @@ SOCIAL_ACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = 1
+# Lol... wtf... I hate you allauth
+SITE_ID = 3
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",

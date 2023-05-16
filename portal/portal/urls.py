@@ -20,12 +20,9 @@ from django.urls import path, include
 from app import views
 
 urlpatterns = [
-    path("", views.home, name="home"),
-    path("signup/", views.signup, name="signup"),
     path("admin/", admin.site.urls),
-    # Allauth:
     path("accounts/", include("allauth.urls")),
-    path("/"),
+    path("", views.home, name="home"),
 ]
 
 if settings.DEBUG:
