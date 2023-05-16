@@ -7,14 +7,14 @@ Although this site is written in English but it will be implemented in Argentina
 **This project is currently a work in progress and is not yet ready for production use**. There may be bugs, incomplete features, and other issues that need to be resolved. Use at your own risk and please report any issues or suggestions to the project team. Thank you for your understanding and patience as we work to improve and finalize the site.
 ## Roadmap
 1. Create the homepage with pictures and information of the Enterprise.
-2. Implement a minimalistic nav-bar that appears on every page of the site.
+2. Implement a minimalistic nav-bar that appears on every page of the site. **🗸**
 3. Develop a user authentication system, allowing users to connect through Google or Instagram OAuth. All pages should be secured to prevent unauthorized access.
-4. Set up a MySQL Docker database for development, and eventually migrate to RDS AWS database in production.
+4. Set up a MySQL Docker database for development **🗸**.
 5. Build out additional modules for specific tasks.
 6. Fine-tune the visual styling with a single base.css file.
 7. Implement any required JavaScript.
 8. Write tests and debug the code.
-9. Deploy the project to production.
+9. Deploy the project to production (Migrate to RDS AWS database in production)
 ## Skeleton 
 ```
 **/**
