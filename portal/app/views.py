@@ -7,9 +7,7 @@ from django.contrib.auth import logout
 
 # Create your views here.
 def home(request):
-    context = {
-        'get_provider_id': get_provider_id,
-    }
+    context = {"get_provider_id": get_provider_id}
     return render(request, "home.html", context)
 
 
@@ -19,11 +17,9 @@ def logout_view(request):
     return redirect("home")
 
 
-
-
 # Helpers
 def get_provider_id(user, provider_name):
-    """ get provider id from social account, required to retrieve image from social net    
+    """get provider id from social account, required to retrieve image from social net
 
     Args:
         user (_type_): _description_

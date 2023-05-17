@@ -8,10 +8,10 @@ Although this site is written in English but it will be implemented in Argentina
 ## Roadmap
 1. Create the homepage with pictures and information of the Enterprise.
 2. Implement a minimalistic nav-bar that appears on every page of the site. **🗸**
-3. Develop a user authentication system, allowing users to connect through Google or Instagram OAuth. All pages should be secured to prevent unauthorized access.
+3. Develop a user authentication system, allowing users to connect through Google or Instagram OAuth. All pages should be secured to prevent unauthorized access. **🗸** (50%:Google)
 4. Set up a MySQL Docker database for development **🗸**.
 5. Build out additional modules for specific tasks.
-6. Fine-tune the visual styling with a single base.css file.
+6. Fine-tune the visual styling with a single base.css file. **🗸**
 7. Implement any required JavaScript.
 8. Write tests and debug the code.
 9. Deploy the project to production (Migrate to RDS AWS database in production)
