@@ -18,12 +18,16 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include
 from app import views
+from allauth.account.views import LoginView
+
+
 
 urlpatterns = [
+    path("", views.home, name="home"),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
-    path("", views.home, name="home"),
-    path("logout", views.logout_view, name="logout"),
+    path("login/", LoginView.as_view(), name="login"),
+    path("logout/", views.logout_view, name="account_logout"),
 ]
 
 if settings.DEBUG:
