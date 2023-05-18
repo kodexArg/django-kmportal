@@ -1,5 +1,6 @@
 {% load static %}
 {% load socialaccount %}
+{% load i18n %}
 
 {% block navbar %}
 <nav class="navbar navbar-expand-sm navbar-light custom-navbar">
@@ -8,16 +9,18 @@
       <img class="logo-circle" src="{% static 'images/logo_km1151.png' %}" alt="Site Logo">
     </a>
 
-
+    <!-- Bubble with user avatar -->
     {% if user.is_authenticated %}
     {% with provider_id=user.socialaccount_set.all.0.get_provider.id %}
     {% if provider_id == 'google' %}
-
     <img class="avatar-circle" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
-
     {% endif %}
     {% endwith %}
     {% endif %}
+
+    <!-- Title -->
+    <h2>{% translate 'page_title' %}</h2>
+
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,16 +29,18 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
+        <!-- Login Logout links -->
         {% if not user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="/login">Ingresa al sitio</a>
+          <a class="nav-link" href="/login">{% trans 'link_login' %}</a>
         </li>
         {% endif %}
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="/logout">Salir</a>
+          <a class="nav-link" href="/logout">{% trans 'link_logout' %}</a>
         </li>
         {% endif %}
+
       </ul>
     </div>
   </div>

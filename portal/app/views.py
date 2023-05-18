@@ -4,10 +4,15 @@ from django.contrib import messages
 
 from django.contrib.auth import logout
 
+from django.utils.translation import gettext as _
 
 # Create your views here.
+
+# 
 def home(request):
-    context = {"get_provider_id": get_provider_id}
+    context = {
+        "get_provider_id": get_provider_id
+        }
     return render(request, "home.html", context)
 
 

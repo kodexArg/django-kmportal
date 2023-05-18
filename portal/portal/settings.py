@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-vbpvm9fzbtmv7n+n2h7q1e7ycx^17!rckbpl2#mglg@p^1qi1j"
+SECRET_KEY = os.environ.get("SECRET-KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -67,6 +68,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'django.template.context_processors.i18n'
+                #... no... solo tarde 10 horas en darme cuenta del i18n missing...
+                # para el gabo del futuro: NO USAR IA PARA CONFIGURACIONES DURAS
             ],
         },
     },
@@ -173,3 +177,19 @@ LOGIN_REDIRECT_URL = "/"
 # More Allauth configs...
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
+
+
+# LOCALE (languages)
+# https://docs.djangoproject.com/en/4.2/topics/i18n/translation/
+
+USE_I18N = True
+LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
+
+from django.conf.global_settings import LANGUAGES
+LANGUAGES = [
+    ('en', 'English'),
+    ('es', 'Spanish'),
+    # Other language options...
+]
+
+LANGUAGE_CODE = 'es'
