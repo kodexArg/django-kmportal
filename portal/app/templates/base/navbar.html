@@ -28,12 +28,13 @@
         {% endif %}
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="/logout">{% trans 'link_logout' %}</a>
+        
           {% with provider_id=user.socialaccount_set.all.0.get_provider.id %}
           {% if provider_id == 'google' %}
           <img class="avatar-circle" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
           {% endif %}
           {% endwith %}
+          <a class="nav-link" href="/logout">{% trans 'link_logout' %}</a>
         </li>
         {% endif %}
 

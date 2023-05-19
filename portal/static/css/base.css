@@ -8,18 +8,20 @@
 /* theme */
 :root {
   --page-title-color: rgb(230, 230, 230);
+  --transp: rgba(255, 255, 255, 0);
   --navbar-color: #173875;
-  --navbar-color-secondary: #99cbf699;
-  --navbar-color-final: rgba(255, 255, 255, 0);
+  /* --navbar-color-secondary: #99cbf649; */
+  /* --navbar-color-secondary: black; */
   --navbar-circle: #173875;
   --navbar-link: #173875;
   --navbar-link-hover: white;
 }
 
+
 .custom-navbar {
-  height: 70px;
+  height: 50px;
   /* background: linear-gradient(to bottom, var(--navbar-color) 15%, var(--navbar-color-secondary) 15%,var(--navbar-color-secondary) 80%, rgba(0, 0, 0, 0) 100%); */
-  background: linear-gradient(to bottom, var(--navbar-color) 15%, var(--navbar-color-secondary) 15% );
+  background: linear-gradient(to bottom, var(--navbar-color) 13%, var(--navbar-color-secondary) 13% );
 
   position: fixed;
   top: 0;
@@ -32,9 +34,11 @@
 }
 
 .custom-navbar .page-title {
-  position: fixed;
+  position: absolute;
   font-family: "Quicksand", "Rubik", "Open Sans Condensed", "Arial Narrow";
-  font-size: 55px;
+  font-size: 75px;
+  left: 140px;
+  /* font-size: 35px; */
   font-weight: bolder !important;
   color: #FFF;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75);
@@ -48,31 +52,28 @@
 
 /* Top Right circle and background */
 .custom-navbar .logo-circle {
-  width: 68px;
-  height: 68px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid var(--navbar-circle);
   position: absolute;
-  top: 5px;
-  left: 20px;
+  top: 10px;
+  left: 30px;
 }
 
 .custom-navbar .logo-square {
-  width: 53px;
-  height: 68px;
+  width: 74px;
+  height: 88px;
   background-color: var(--navbar-circle);
   position: absolute;
-  top: 5px;
+  top: 10px;
   left: 0px;
 }
 
 
 /* Alt Avatar if socialmedia */
 .custom-navbar .avatar-circle {
-  position: relative;
-  top: -8px;
-  left: 0;
   width: 45px;
   height: 45px;
   border-radius: 50%;
