@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-17 22:59-0300\n"
+"POT-Creation-Date: 2023-05-19 06:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,14 +18,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/templates/base/navbar.html:31
+#: app/templates/base/navbar.html:13 app/templates/home.html:4
+msgid "page_title"
+msgstr "KM 1151 Portal"
+
+#: app/templates/base/navbar.html:25
 msgid "link_login"
 msgstr "Access portal"
 
-#: app/templates/base/navbar.html:36
+#: app/templates/base/navbar.html:30
 msgid "link_logout"
 msgstr "End session"
-
-#: app/templates/home.html:11
-msgid "page_title"
-msgstr "YPF KM 1151 | Uspallata, Mza."

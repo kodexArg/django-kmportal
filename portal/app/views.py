@@ -8,11 +8,11 @@ from django.utils.translation import gettext as _
 
 # Create your views here.
 
-# 
+
 def home(request):
     context = {
-        "get_provider_id": get_provider_id
-        }
+        "get_provider_id": get_provider_id,
+    }
     return render(request, "home.html", context)
 
 

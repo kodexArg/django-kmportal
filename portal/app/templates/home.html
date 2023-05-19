@@ -7,10 +7,10 @@
 
 <div class="video-background">
   <div class="video-placeholder">
-    <img src="{% static 'videos_background/video2.png' %}" alt="Video Placeholder">
+    <img src="{% static 'videos_background/video_placeholder.png' %}" alt="Video Placeholder">
   </div>
   <video id="video" class="video-source" autoplay loop muted playsinline>
-    <source src="{% static 'videos_background/video2.mp4' %}" type="video/mp4">
+    <source src="{% static 'videos_background/video_background.mp4' %}" type="video/mp4">
   </video>
 </div>
 
@@ -20,10 +20,10 @@
 
 <script>
   // Wait for the page to load
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function(){
     var video = document.getElementById('video');
 
-    video.addEventListener('canplaythrough', function() {
+    video.addEventListener('canplaythrough', function(){
       var videoPlaceholder = document.querySelector('.video-placeholder');
       videoPlaceholder.style.display = 'none';
       console.log("Playing video... Sorry dude, but art mater... :)")
