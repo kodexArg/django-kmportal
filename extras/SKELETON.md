@@ -18,11 +18,6 @@ project/
 ── static/
 │   ├── css/
 │   ├── js/
-│   └── vendor/
-│       └── bootstrap-5/
-│           ├── css/
-│           ├── js/
-│           └── ...
 ├── project/
 │   ├── settings/
 │   │   ├── base.py

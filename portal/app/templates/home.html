@@ -9,13 +9,15 @@
   <div class="video-placeholder">
     <img src="{% static 'videos_background/video_placeholder.png' %}" alt="Video Placeholder">
   </div>
-  <video id="video" class="video-source" autoplay loop muted playsinline>
+  <video id="video" class="vide-source hide" autoplay loop muted playsinline>
     <source src="{% static 'videos_background/video_background.mp4' %}" type="video/mp4">
   </video>
 </div>
 
 <div class="container">
-
+  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus totam distinctio quibusdam iusto! Explicabo animi
+  reiciendis quas debitis natus consectetur error tempora, maiores voluptates quisquam eveniet doloribus fugit
+  doloremque deserunt.
 </div>
 
 
@@ -25,15 +27,18 @@
 
 <script>
   // Wait for the page to load
-  document.addEventListener('DOMContentLoaded', function(){
+  document.addEventListener('DOMContentLoaded', function () {
     var video = document.getElementById('video');
 
-    video.addEventListener('canplaythrough', function(){
+    // Ready to play
+    video.addEventListener('canplaythrough', function () {
       var videoPlaceholder = document.querySelector('.video-placeholder');
+      var container = document.querySelector('.container');
+
       videoPlaceholder.style.display = 'none';
-      console.log("Playing video... Sorry dude, but art mater... :)")
+
+      console.log("Playing video... Sorry dude, but art mater... :)");
     });
   });
 </script>
-
 {% endblock %}
