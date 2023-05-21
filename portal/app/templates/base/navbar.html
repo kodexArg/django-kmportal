@@ -3,43 +3,18 @@
 {% load i18n %}
 
 {% block navbar %}
-<nav class="navbar navbar-expand-sm navbar-light custom-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-    <div class="logo-square"></div>
-      <img class="logo-circle" src="{% static 'images/logo_km1151.png' %}" alt="Site Logo">
-    </a>
+<nav class="navbar navbar-expand-md custom-navbar">
 
-    <!-- Title -->
-    <h2 class="page-title">{% translate 'page_title' %}</h2>
+  <!-- Logo Bubble -->
+  <div class="custom-square left-square"></div>
+  <img class="custom-circle logo-circle" src="{% static 'images/logo_km1151.png' %}" alt="Site Logo">
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <!-- Title -->
+  <span class="page-title">{% translate 'page_title' %}</span>
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <!-- Login Logout links -->
-        {% if not user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="/login">{% trans 'link_login' %}</a>
-        </li>
-        {% endif %}
-        {% if user.is_authenticated %}
-        <li class="nav-item">
-        
-          {% with provider_id=user.socialaccount_set.all.0.get_provider.id %}
-          {% if provider_id == 'google' %}
-          <img class="avatar-circle" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
-          {% endif %}
-          {% endwith %}
-          <a class="nav-link" href="/logout">{% trans 'link_logout' %}</a>
-        </li>
-        {% endif %}
+  <!-- Collapsable Links -->
+  <div class="collapse navbar-collapse" id="navbar_id">
 
-      </ul>
-  </div>
   </div>
 </nav>
 {% endblock %}

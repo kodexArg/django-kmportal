@@ -1,115 +1,176 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
-/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed&display=swap'); */
+/*
+  I'm honoring fibbonacci here... some respect if u need
+  to modify something please :)
+*/
 
-/* theme */
+
+/* Theme */
 :root {
-  --page-title-color: rgb(230, 230, 230);
-  --transp: rgba(255, 255, 255, 0);
-  --navbar-color: #173875;
-  /* --navbar-color-secondary: #99cbf649; */
-  /* --navbar-color-secondary: black; */
-  --navbar-circle: #173875;
+  --page-title-color: rgb(245, 245, 245);
+  --transp: rgba(255, 255, 255, 0.2);
+  --navbar-primary: #173875;
+  --navbar-secondary: #99cbf6;
   --navbar-link: #173875;
   --navbar-link-hover: white;
+  --navbar-avatar-circle: #173875;
 }
 
 
+/* NavBar */
 .custom-navbar {
-  height: 50px;
-  /* background: linear-gradient(to bottom, var(--navbar-color) 15%, var(--navbar-color-secondary) 15%,var(--navbar-color-secondary) 80%, rgba(0, 0, 0, 0) 100%); */
-  background: linear-gradient(to bottom, var(--navbar-color) 13%, var(--navbar-color-secondary) 13% );
+  position: fixed;
+  height: 144px;
+  width: 100%;
+  z-index: 100;
+  background: linear-gradient(to bottom,
+      var(--navbar-secondary) 10%,
+      var(--transp) 100%);
 
+  display: flex;
+  align-items: center;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+/* Logo & Title */
+.custom-circle {
+  position: absolute;
+  top: 21px;
+  height: 89px;
+  width: 89px;
+  border-radius: 50%;
+  border: 4px solid var(--navbar-primary);
+  object-fit: cover;
+  background-color: #FFF;
+}
+
+.avatar-circle {
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
-  z-index: 100;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  font-size: 14px;
 }
 
-.custom-navbar .page-title {
-  position: absolute;
-  font-family: "Quicksand", "Rubik", "Open Sans Condensed", "Arial Narrow";
-  font-size: 75px;
-  left: 140px;
-  /* font-size: 35px; */
-  font-weight: bolder !important;
-  color: #FFF;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75);
-  top: 10px !important;
-}
-
-.custom-navbar .navbar-toggler-icon {
-  font-size: 8pt;
-}
-
-
-/* Top Right circle and background */
 .custom-navbar .logo-circle {
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--navbar-circle);
-  position: absolute;
-  top: 10px;
-  left: 30px;
+  left: 21px;
 }
 
-.custom-navbar .logo-square {
-  width: 74px;
-  height: 88px;
-  background-color: var(--navbar-circle);
+.custom-navbar .menu-circle {
+  right: 21px;
+}
+
+.custom-navbar .custom-square {
   position: absolute;
-  top: 10px;
+  top: 21px;
+  width: 71px;
+  height: 89px;
+  background-color: var(--navbar-primary);
+}
+
+.custom-navbar .left-square {
   left: 0px;
 }
 
-
-/* Alt Avatar if socialmedia */
-.custom-navbar .avatar-circle {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--navbar-color);
+.custom-navbar .right-square {
+  right: 0px;
 }
 
+.custom-navbar .navbar-toggler {
+  right: -45px;
+  box-shadow: none;
+}
 
-/* More nav... */
 .custom-navbar .nav-link {
-  position: relative;
-  display: inline-flex;
+  position: absolute;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  color: var(--navbar-link) !important;
-
+  text-align: center;
+  line-height: 0.8;
+  text-shadow: #173875;
 }
 
-.custom-navbar .nav-link:hover {
-  color: var(--navbar-link-hover) !important;
+
+
+.custom-navbar .page-title {
+  position: absolute;
+  display: flex;
+  left: 134px;
+  transform: translateY(-5px);
+  white-space: nowrap;
+  font-family: "Quicksand", "Rubik", "Open Sans Condensed", "Arial Narrow";
+  font-weight: bolder;
+  font-size: 76px;
+  color: var(--page-title-color);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.89);
+  /* background-color:#173875; */
 }
 
-.custom-navbar .nav-item {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: small;
-  font-weight: bold;
-  color: var(--navbar-link) !important;
+@media (max-width: 692px) {
+  .custom-navbar .page-title {
+    font-size: 11vw;
+    left: 120px;
+    right: 54px;
+    white-space: normal;
+    line-height: 0.9;
+    text-align: center;
+  }
+}
+/*
+@media (max-width: 375px) {
+  .custom-navbar .page-title {
+    text-align: center;
+    white-space: normal;
+    left: 100px;
+  }
+  
+  .custom-navbar .logo-square {
+    transform: translateX(-20px);
+  }
+  
+  .custom-navbar .logo-circle {
+    transform: translateX(-20px);
+  }
 }
 
+*/
+
+/* .custom-navbar .navbar-collapse {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+} */
+
+/* .navbar-toggler {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  background-color: var(--navbar-primary);
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.custom-navbar .navbar-toggler-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: cover;
+  fill: #fff;
+}
 
 /* Padding */
-
 main {
-  padding-top: 60px;
+  padding-top: 160px;
+  color: whitesmoke;
 }
-
-
 
 
 /* Video Background */

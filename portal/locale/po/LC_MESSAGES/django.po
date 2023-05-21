@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-19 06:24+0000\n"
+"POT-Creation-Date: 2023-05-21 03:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 
 #: app/templates/base/navbar.html:13 app/templates/home.html:4
 msgid "page_title"
-msgstr "Portal KM 1151"
+msgstr "Portal KM&nbsp;1151"
 
-#: app/templates/base/navbar.html:25
+#: app/templates/base/navbar.html:33
 msgid "link_login"
 msgstr "iniciar sessão"
 
-#: app/templates/base/navbar.html:30
+#: app/templates/base/navbar.html:35
 msgid "link_logout"
 msgstr "fechar sessão"
