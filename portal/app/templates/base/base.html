@@ -16,10 +16,6 @@
 
 <body>
     <header>
-        {% block navbar %}
-        <!-- NAVBAR -->
-        {% include 'base/navbar.html' %}
-        {% endblock %}
     </header>
     <main role="main" class="container">
         {% block content %}
@@ -27,7 +23,10 @@
         {% endblock %}
     </main>
     <footer>
-        {% block footer %}{% endblock%}
+        {% block navbar %}
+        <!-- NAVBAR -->
+        {% include 'base/navbar.html' %}
+        {% endblock %}
     </footer>
     {% block scripts %}{% endblock %}
 </body>

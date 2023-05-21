@@ -5,41 +5,28 @@
 {% block content %}
 
 <div class="video-background fullscreen">
-  <img id="video-placeholder" class="video-placeholder fullscreen" src="{% static 'videos_background/video_placeholder.png' %}" alt="Video Placeholder">
-  <video id="video-source" class="video-source fullscreen" autoplay loop>
+  <img class="video-placeholder fullscreen" src="{% static 'videos_background/video_placeholder.png' %}"
+    alt="Video Placeholder">
+  <video id="video" class="video-source fullscreen" loop muted>{# autoplay reminder #}
     <source src="{% static 'videos_background/vid_bg.mp4' %}" type="video/mp4">
   </video>
 </div>
 
-<p>
-  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit ratione at fugit animi assumenda vero sint aliquid
-  eaque corrupti! Explicabo, pariatur odit! Non placeat, aspernatur nulla rerum quaerat doloremque nesciunt.
-</p>
+{% endblock %}
 
 {% block scripts %}
+
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var video = document.getElementById("video-source");
-    var placeholder = document.getElementById("video-placeholder");
+  // Wait for the page to load
+  document.addEventListener('DOMContentLoaded', function () {
+    var video = document.getElementById('video');
 
-
-    // Show the placeholder
-    placeholder.style.display = "block";
-
-    video.addEventListener("canplay", function() {
-      // When the video is ready to play, hide the placeholder and play the video in a loop
-      placeholder.style.display = "none";
-      video.style.display = "block";
-      video.play();
-
-      // Ensure the video is playing or log a message to the console
-      if (video.paused) {
-        console.log("Video is not playing");
-      } else {
-        console.log("Video is playing");
-      }
+    video.addEventListener('canplaythrough', function () {
+      var videoPlaceholder = document.querySelector('.video-placeholder');
+      videoPlaceholder.style.display = 'none';
+      console.log("Playing video... Sorry dude, but art mater... :)")
     });
   });
 </script>
-{% endblock %}
+
 {% endblock %}
