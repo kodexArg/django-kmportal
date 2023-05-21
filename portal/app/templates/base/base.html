@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,8 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title%}{% endblock %}</title>
     <link rel="icon" href="{% static 'favicon.ico' %}">
+    {% include "base/cdn.html" %}
 
-    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    {% block styles %}{% endblock %}
 </head>
 
 <body>
@@ -24,9 +26,10 @@
         <!-- CONTENT -->
         {% endblock %}
     </main>
-    {% block scripts %}
-    <!-- CUSTOM SCRIPTS -->
-    {% endblock %}
+    <footer>
+        {% block footer %}{% endblock%}
+    </footer>
+    {% block scripts %}{% endblock %}
 </body>
 
 </html>

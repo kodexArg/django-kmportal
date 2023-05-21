@@ -1,44 +1,45 @@
 {% extends "base/base.html" %}
-{% load static %}
-{% load i18n %}
+{% load static i18n %}
 {% block title %}{% translate "page_title" %}{% endblock %}
 
 {% block content %}
 
-<div class="video-background">
-  <div class="video-placeholder">
-    <img src="{% static 'videos_background/video_placeholder.png' %}" alt="Video Placeholder">
-  </div>
-  <video id="video" class="vide-source hide" autoplay loop muted playsinline>
-    <source src="{% static 'videos_background/video_background.mp4' %}" type="video/mp4">
+<div class="video-background fullscreen">
+  <img id="video-placeholder" class="video-placeholder fullscreen" src="{% static 'videos_background/video_placeholder.png' %}" alt="Video Placeholder">
+  <video id="video-source" class="video-source fullscreen" autoplay loop>
+    <source src="{% static 'videos_background/vid_bg.mp4' %}" type="video/mp4">
   </video>
 </div>
 
-<div class="container">
-  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus totam distinctio quibusdam iusto! Explicabo animi
-  reiciendis quas debitis natus consectetur error tempora, maiores voluptates quisquam eveniet doloribus fugit
-  doloremque deserunt.
-</div>
-
-
-{% endblock %}
+<p>
+  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit ratione at fugit animi assumenda vero sint aliquid
+  eaque corrupti! Explicabo, pariatur odit! Non placeat, aspernatur nulla rerum quaerat doloremque nesciunt.
+</p>
 
 {% block scripts %}
-
 <script>
-  // Wait for the page to load
-  document.addEventListener('DOMContentLoaded', function () {
-    var video = document.getElementById('video');
+  document.addEventListener("DOMContentLoaded", function() {
+    var video = document.getElementById("video-source");
+    var placeholder = document.getElementById("video-placeholder");
 
-    // Ready to play
-    video.addEventListener('canplaythrough', function () {
-      var videoPlaceholder = document.querySelector('.video-placeholder');
-      var container = document.querySelector('.container');
 
-      videoPlaceholder.style.display = 'none';
+    // Show the placeholder
+    placeholder.style.display = "block";
 
-      console.log("Playing video... Sorry dude, but art mater... :)");
+    video.addEventListener("canplay", function() {
+      // When the video is ready to play, hide the placeholder and play the video in a loop
+      placeholder.style.display = "none";
+      video.style.display = "block";
+      video.play();
+
+      // Ensure the video is playing or log a message to the console
+      if (video.paused) {
+        console.log("Video is not playing");
+      } else {
+        console.log("Video is playing");
+      }
     });
   });
 </script>
+{% endblock %}
 {% endblock %}
