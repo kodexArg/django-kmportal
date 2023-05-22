@@ -39,6 +39,4 @@ urlpatterns += i18n_patterns(
 if settings.DEBUG:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
     urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

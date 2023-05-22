@@ -130,7 +130,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    BASE_DIR / "static"
 ]
 
 
@@ -178,12 +178,11 @@ LOGIN_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
-
 # LOCALE (languages)
 # https://docs.djangoproject.com/en/4.2/topics/i18n/translation/
 
 USE_I18N = True
-LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
+LOCALE_PATHS = [BASE_DIR / "locale"]
 
 from django.conf.global_settings import LANGUAGES
 LANGUAGES = [
