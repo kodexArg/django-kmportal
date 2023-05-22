@@ -556,4 +556,24 @@ video {
   }
 }
 
-/* @tailwind utilities; */
+.static {
+  position: static;
+}
+
+.block {
+  display: block;
+}
+
+.p-10 {
+  padding: 2.5rem;
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
