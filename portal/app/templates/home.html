@@ -4,8 +4,9 @@
 
 {% block content %}
 
-
-
+<div class="p-20 text-red-500 hover:text-white">
+Well this is random text... I hope it works cuz I'm done for today
+</div>
 
 
 <!-- Keep background video and placeholder at bottom -->
@@ -27,15 +28,14 @@
       console.log("Playing video... Sorry dude, but art mater... :)")
 
 
-      // Function to pause the video at random (1%)
+      // Function to pause the video at random (1% each 1000 ms)
       function pauseVideo() {
         if (Math.random() < 0.01) {
           video.pause();
           console.log("Video paused randomly.");
         }
       }
-
-      // Pause video randomly every 10 seconds
+      
       setInterval(pauseVideo, 1000);
 
     });
