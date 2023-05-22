@@ -133,6 +133,8 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
+STATIC_ROOT = BASE_DIR.parent / "local-cdn" / "static" #stored for production
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
