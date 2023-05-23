@@ -2,16 +2,64 @@
 {% load socialaccount %}
 {% load i18n %}
 
+{# bg-gradient-to-b from-sky-100 to-transparent #}
 {% block navbar %}
+<nav class="
+            -z-10
+            flex
+            w-full
+            h-32
+            justify-between
+            bg-gradient-to-b from-sky-200 via-sky-100 to-transparent
+            ">
 
-<!-- Logo Bubmdc-card mdc-card--outlined mdc-card--roundedble -->
-<div class="">
-  <img src="{% static 'images/logo_km1151.png' %}" alt="Site Logo">
-</div>
+  <!-- Logo Circle -->
+  <div class="
+              flex
+              h-20 min-h-fit
+              w-28 min-w-28
+              mt-4
+              bg-sky-900 
+              rounded-r-full 
+              ">
+    <img class="rounded-full m-1 ml-auto" src="{% static 'images/logo_km1151.png' %}" alt="Site Logo">
+  </div>
+  <!-- Title -->
+  <div class="
+              flex
+              mt-4
+              h-20 
+              items-center
+              text-center
+              overflow-clip
+              drop-shadow
+              ">
+    <span class="
+                 font-quicksand
+                 font-bold
+                 text-white
+                 sm:text-6xl
+                 text-4xl
+                 traslate-y-2
+                 drop-shadow-md
+                 sm:whitespace-nowrap
+                 ">
+      {% translate 'page_title' %}</span>
+  </div>
+  <!-- Avatar Circle -->
+  <div class="
+              flex
+              mt-4
+              h-20
+              w-28 min-w-28 
+              bg-sky-900 
+              rounded-l-full 
+              ">
 
-<!-- Title -->
-<span class="page-title">{% translate 'page_title' %}</span>
+    <img class="rounded-full m-1 mr-auto" src="{% static 'images/logo_km1151.png' %}" alt="Site Logo">
 
-<!-- Collapsable Links -->
+  </div>
 
+  <!-- Collapsable Links -->
+</nav>
 {% endblock %}
