@@ -5,11 +5,18 @@
 {% block content %}
 
 <!-- Keep background video and placeholder at bottom -->
-<video class="video-background" id="video" loop muted playsinline> {# autoplay commented!!!!!!!! #}
+<video class="video-background" id="video" autoplay loop muted playsinline> {# autoplay commented!!!!!!!! #}
   <source src="{% static 'videos_background/vid_bg.mp4' %}" type="video/mp4">
 </video>
 <img class="video-placeholder video-background" src="{% static 'videos_background/video_placeholder.png' %}" alt="Video Placeholder">
 {% endblock %}
+
+
+<div class="relative h-screen flex items-center justify-center">
+  <p class="text-4xl font-bold bg-white p-4 rounded-full shadow-lg absolute z-50">Access</p>
+  <!-- Other content of your webpage goes here -->
+</div>
+
 
 {% block scripts %}
 <script>

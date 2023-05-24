@@ -20,11 +20,11 @@ msgstr ""
 
 #: app/templates/base/navbar.html:13 app/templates/home.html:4
 msgid "page_title"
-msgstr "KM&nbsp;1151 Portal"
+msgstr "Portal KM&nbsp;1151l"
 
 #: app/templates/base/navbar.html:33
 msgid "link_login"
-msgstr "Access portal"
+msgstr "Access"
 
 #: app/templates/base/navbar.html:35
 msgid "link_logout"

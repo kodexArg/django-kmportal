@@ -24,7 +24,7 @@ msgstr "Portal KM&nbsp;1151"
 
 #: app/templates/base/navbar.html:33
 msgid "link_login"
-msgstr "Acceder al portal"
+msgstr "ingresar"
 
 #: app/templates/base/navbar.html:35
 msgid "link_logout"

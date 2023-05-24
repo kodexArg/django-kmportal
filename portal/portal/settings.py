@@ -113,16 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
-LANGUAGE_CODE = "en-us"
-
-TIME_ZONE = "UTC"
-
-USE_I18N = True
-
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -180,8 +170,16 @@ LOGIN_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
-# LOCALE (languages)
-# https://docs.djangoproject.com/en/4.2/topics/i18n/translation/
+# Internationalization
+# https://docs.djangoproject.com/en/4.2/topics/i18n/
+
+LANGUAGE_CODE = "es"
+
+TIME_ZONE = "UTC"
+
+USE_I18N = True
+
+USE_TZ = True
 
 USE_I18N = True
 LOCALE_PATHS = [BASE_DIR / "locale"]
@@ -190,7 +188,7 @@ from django.conf.global_settings import LANGUAGES
 LANGUAGES = [
     ('en', 'English'),
     ('es', 'Spanish'),
-    # Other language options...
+    ('po', 'Portuguese')
 ]
 
 LANGUAGE_CODE = 'es'
