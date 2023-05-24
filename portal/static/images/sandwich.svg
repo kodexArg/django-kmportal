@@ -1,0 +1,7 @@
+    <svg class="h-6 w-6 rounded-full m-1 mr-auto text-white" fill="none" stroke="currentColor"
+      viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="12" stroke-width="1" fill="white"></circle>
+      <path d="M5 8H18" stroke-width="1.25" stroke-linecap="round" stroke="#09406e"></path>
+      <path d="M5 12H18" stroke-width="1.25" stroke-linecap="round" stroke="#09406e"></path>
+      <path d="M5 16H18" stroke-width="1.25" stroke-linecap="round" stroke="#09406e"></path>
+    </svg>

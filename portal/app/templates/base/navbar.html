@@ -1,16 +1,13 @@
-{% load static %}
-{% load socialaccount %}
-{% load i18n %}
+{% load static socialaccount i18n %}
 
-{# bg-gradient-to-b from-sky-100 to-transparent #}
 {% block navbar %}
 <nav class="
             -z-10
             flex
             w-full
-            h-32
+            h-28
             justify-between
-            bg-gradient-to-b from-sky-200 via-sky-100 to-transparent
+            bg-gradient-to-b from-sky-200 to-transparent
             ">
 
   <!-- Logo Circle -->
@@ -22,7 +19,9 @@
               bg-sky-900 
               rounded-r-full 
               ">
-    <img class="rounded-full m-1 ml-auto" src="{% static 'images/logo_km1151.png' %}" alt="Site Logo">
+    <a class="flex ml-auto" href="#">
+      <img class="rounded-full m-1" src="{% static 'images/logo_km1151.png' %}" alt="Site Logo">
+    </a>
   </div>
   <!-- Title -->
   <div class="
@@ -52,11 +51,18 @@
               mt-4
               h-20
               w-28 min-w-28 
-              bg-sky-900 
+              {# bg-sky-900  #}
+              bg-sky-900
               rounded-l-full 
               ">
-
-    <img class="rounded-full m-1 mr-auto" src="{% static 'images/logo_km1151.png' %}" alt="Site Logo">
+    <a class="flex mr-auto" href="#">
+      <svg class="h-6 w-6 rounded-full m-1 mr-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="12" stroke-width="1" fill="white"></circle>
+        <path d="M5 8H18" stroke-width="1.25" stroke-linecap="round" stroke="#09406e"></path>
+        <path d="M5 12H18" stroke-width="1.25" stroke-linecap="round" stroke="#09406e"></path>
+        <path d="M5 16H18" stroke-width="1.25" stroke-linecap="round" stroke="#09406e"></path>
+      </svg>
+    </a>
 
   </div>
 
