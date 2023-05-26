@@ -93,7 +93,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -113,6 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+SOCIAL_ACCOUNT_ADAPTER = 'app.adapters.CustomAdapter'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -144,6 +144,8 @@ INSTALLED_APPS += [
     # "allauth.socialaccount.providers.facebook",
 ]
 
+
+SOCIALACCOUNT_LOGIN_ON_GET=True
 
 SOCIAL_ACCOUNT_PROVIDERS = {
     "google": {

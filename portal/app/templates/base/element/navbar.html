@@ -1,6 +1,5 @@
 {% load static socialaccount i18n %}
 
-{% block navbar %}
 <nav class="
             -z-10
             flex
@@ -43,7 +42,7 @@
                  drop-shadow-md
                  sm:whitespace-nowrap
                  ">
-      {% translate 'page_title' %}</span>
+      {% translate 't_page_title' %}</span>
   </div>
   <!-- Avatar Circle -->
   <div class="
@@ -76,23 +75,3 @@
 
   <!-- Collapsable Links -->
 </nav>
-<br>
-<br>
-<div class="fixed bottom-0 w-full bg-sky-900 text-white py-4 px-6 flex justify-center">
-  <!-- Navbar content -->
-  <nav>
-    <!-- Add your navigation links or content here -->
-    <ul class="flex space-x-4">
-      {% if user.is_authenticated %}
-      <li><a href="/logout">{% trans 'link_logout' %}</a></li>
-      {% else %}
-      <li><a href="/login">{% trans 'link_login' %}</a></li>
-      {% endif %}
-    </ul>
-  </nav>
-</div>
-
-  
-  
-</div>
-{% endblock %}

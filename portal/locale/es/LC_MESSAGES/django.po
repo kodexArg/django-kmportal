@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-21 03:07+0000\n"
+"POT-Creation-Date: 2023-05-26 16:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: app/templates/base/element/footer.html:13
+msgid "t_who_this_for"
+msgstr "¿Para quién es esto?"
 
-#: app/templates/base/navbar.html:13 app/templates/home.html:4
-msgid "page_title"
-msgstr "Portal KM&nbsp;1151"
+#: app/templates/base/element/footer.html:14
+msgid "t_about"
+msgstr "Acerca de"
 
-#: app/templates/base/navbar.html:33
-msgid "link_login"
-msgstr "ingresar"
+#: app/templates/base/element/footer.html:15
+msgid "t_contact"
+msgstr "Contacto"
 
-#: app/templates/base/navbar.html:35
-msgid "link_logout"
-msgstr "Finalizar sesión"
+#: app/templates/base/element/google_login_button.html:10
+msgid "t_login_with_google"
+msgstr "Iniciar sesión con Google"
+
+#: app/templates/base/element/navbar.html:45 app/templates/home.html:3
+msgid "t_page_title"
+msgstr "Título de la página"

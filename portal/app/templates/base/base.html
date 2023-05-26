@@ -9,25 +9,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title%}{% endblock %}</title>
     <link rel="icon" href="{% static 'favicon.ico' %}">
-    {% include "base/cdn.html" %}
+
+    {% include "base/element/cdn.html" %}
 
     {% block styles %}{% endblock %}
 </head>
 
-<body>
-    <header>
-        {% block navbar %}
+<body class="">
+    <header class="h-full">
         <!-- NAVBAR -->
-        {% include 'base/navbar.html' %}
-        {% endblock %}
+        {% include 'base/element/navbar.html' %}
     </header>
-    <main role="main" class="container">
+    <main role="main" class="h-full">
         {% block content %}
         <!-- CONTENT -->
         {% endblock %}
     </main>
-    <footer>
+    <footer class="h-full">
+        <!-- FOOTBAR -->
+        {% include 'base/element/footer.html'%}
     </footer>
+
     {% block scripts %}{% endblock %}
 </body>
 
