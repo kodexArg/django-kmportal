@@ -192,5 +192,3 @@ LANGUAGES = [
     ('es', 'Spanish'),
     ('po', 'Portuguese')
 ]
-
-LANGUAGE_CODE = 'es'

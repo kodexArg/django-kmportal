@@ -23,7 +23,7 @@ msgstr "¿Para quién es esto?"
 
 #: app/templates/base/element/footer.html:14
 msgid "t_about"
-msgstr "Acerca de"
+msgstr "Nosotros"
 
 #: app/templates/base/element/footer.html:15
 msgid "t_contact"
@@ -35,4 +35,4 @@ msgstr "Iniciar sesión con Google"
 
 #: app/templates/base/element/navbar.html:45 app/templates/home.html:3
 msgid "t_page_title"
-msgstr "Título de la página"
+msgstr "Portal KM 1151"

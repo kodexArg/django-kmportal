@@ -35,4 +35,4 @@ msgstr "Sign in with Google"
 
 #: app/templates/base/element/navbar.html:45 app/templates/home.html:3
 msgid "t_page_title"
-msgstr "Page Title"
+msgstr "Portal KM 1151"
