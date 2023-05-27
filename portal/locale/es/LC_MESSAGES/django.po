@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-26 16:34+0000\n"
+"POT-Creation-Date: 2023-05-27 19:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,22 +17,56 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: app/templates/base/element/footer.html:13
-msgid "t_who_this_for"
-msgstr "¿Para quién es esto?"
 
-#: app/templates/base/element/footer.html:14
+#: app/templates/base/element/footer.html:2
 msgid "t_about"
-msgstr "Nosotros"
+msgstr "Quiénes somos"
 
-#: app/templates/base/element/footer.html:15
+#: app/templates/base/element/footer.html:3
 msgid "t_contact"
-msgstr "Contacto"
+msgstr "Contáctenos"
 
 #: app/templates/base/element/google_login_button.html:10
 msgid "t_login_with_google"
 msgstr "Iniciar sesión con Google"
 
-#: app/templates/base/element/navbar.html:45 app/templates/home.html:3
+#: app/templates/base/element/navbar.html:44 app/templates/home.html:3
 msgid "t_page_title"
-msgstr "Portal KM 1151"
+msgstr "Portal KM&nbsp;1151"
+
+#: app/templates/base/element/provider_login_button.html:4
+msgid "register_button"
+msgstr "Regístrese"
+
+#: app/templates/home.html:12
+msgid "client_card_text_title"
+msgstr "¡Bienvenido!"
+
+#: app/templates/home.html:14
+msgid "client_card_text"
+msgstr ""
+"En KM 1151, nos enorgullece brindarte una experiencia única. Aquí "
+"encontrarás ofertas exclusivas, novedades emocionantes y eventos especiales. "
+"¡Regístrate y explora todo lo que tenemos para ti! 🎉<br>Además, si visitas "
+"nuestra estación de servicio, tendrás la oportunidad de ganar premios "
+"sorpresa. 🎁"
+
+#: app/templates/home.html:25
+msgid "supplier_card_text_title"
+msgstr "Estimado Proveedor:"
+
+#: app/templates/home.html:27
+msgid "supplier_card_text"
+msgstr ""
+"En Portal KM 1151, ofrecemos una plataforma dedicada a agilizar tus "
+"trámites. Con nuestros módulos especialmente diseñados, podrás generar "
+"autorizaciones para cargar combustible con cuenta corriente y aprovechar al "
+"máximo nuestros servicios. Regístrese ahora para comenzar."
+
+#: app/templates/home.html:40
+msgid "i_am_client_button"
+msgstr "Soy Cliente"
+
+#: app/templates/home.html:44
+msgid "i_am_supplier_button"
+msgstr "Soy Partner"

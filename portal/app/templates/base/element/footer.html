@@ -1,26 +1,25 @@
 {% load i18n %}
-
-
-<div class="fixed bottom-12 left-0 right-0">
-    <div class="container mx-auto flex items-center justify-center">
-        <div class="bottom-10 z-10">
-            {% include "base/element/google_login_button.html" %}
-        </div>
-    </div>
-</div>
-
-<div class="fixed h-12 bottom-0 left-0 right-0 bg-sky-900 text-sky-100 p-4 rounded-t-lg">
-{% translate 't_who_this_for' as translated_who_this_for %}
 {% translate 't_about' as translated_about %}
 {% translate 't_contact' as translated_contact %}
-    
-    
-    <div class="container mx-auto flex items-center justify-between">
-        &copy; 2023 ALVS Group
-        <ul class="flex space-x-4 items-center justify-end">
-            <li><a href="#" class="hover:cursor-pointer">{{ translated_who_this_for|upper }}</a></li>
-            <li><a href="#" class="hover:cursor-pointer">{{ translated_about|upper }}</a></li>
-            <li><a href="#" class="hover:cursor-pointer">{{ translated_contact|upper }}</a></li>
-        </ul>
-    </div>
+
+<div class="
+            fixed 
+            h-9 max-h-9
+            px-4
+            flex
+            items-center 
+            justify-between
+            bottom-0 left-0 right-0
+            rounded-t-lg
+            bg-gray-100
+            text-sky-950
+            dark:bg-[#1E2023]
+            dark:text-sky-100
+            ">
+
+    <span class="text-tiny">&copy; 2023 ALVS Group</span>
+    <ul class="flex space-x-4 justify-end text-sm">
+        <li><a href="#" class="hover:cursor-pointer">{{ translated_about|upper }}</a></li>
+        <li><a href="#" class="hover:cursor-pointer">{{ translated_contact|upper }}</a></li>
+    </ul>
 </div>

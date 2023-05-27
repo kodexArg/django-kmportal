@@ -3,11 +3,54 @@
 {% block title %}{% translate "t_page_title" %}{% endblock %}
 
 {% block content %}
-<!-- socialaccount/snippets/provider_list.html -->
+<!-- socialaccount/snippets/partners_list.html -->
+<section class="mt-6 m-2 p-2">
+
+<!-- Clients Card -->
+  <div id="client-card" class="max-w-xs mx-auto bg-white rounded-lg shadow-md bg-opacity-75 hidden">
+    <div class="p-6">
+      <h2 class="text-xl font-bold mb-4">{% translate 'client_card_text_title' %}</h2>
+      <p class="text-gray-700 text-justify">
+        {% translate 'client_card_text'%}
+      </p>
+    </div>
+    <div class="bg-gray-100 px-3 py-2 flex justify-center items-center rounded-b-lg">
+      {% include "base/element/google_login_button.html" %}
+    </div>
+  </div>
+
+  <!-- partnerss Card -->
+  <div id="partners-card" class="max-w-xs mx-auto bg-white rounded-lg shadow-md bg-opacity-75 hidden">
+    <div class="p-6">
+      <h2 class="text-xl font-bold mb-4">{% translate 'supplier_card_text_title' %}</h2>
+      <p class="text-gray-700 text-justify">
+        {% translate 'supplier_card_text'%}
+      </p>
+    </div>
+    <div class="bg-gray-100 px-3 py-2 flex justify-center items-center rounded-b-lg">
+      {% include "base/element/provider_login_button.html" %}
+    </div>
+  </div>
+
+
+  <!-- Floating Buttons -->
+  <div class="fixed bottom-0 left-0 right-0 flex justify-center mb-16">
+    <button onclick="showCard('client')"
+      class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-l-full">
+      {% translate 'i_am_client_button' %}
+    </button>
+    <button onclick="showCard('partners')"
+      class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-r-full">
+      {% translate 'i_am_supplier_button' %}
+    </button>
+  </div>
+</section>
+
+
 
 
 <!-- Keep background video and placeholder at bottom -->
-<video class="video-background" id="video" loop muted playsinline> {# autoplay commented!!!!!!!! #}
+<video class="video-background" id="video" autoplay loop muted playsinline> {# autoplay commented!!!!!!!! #}
   <source src="{% static 'videos_background/vid_bg.mp4' %}" type="video/mp4">
 </video>
 <img class="video-placeholder video-background" src="{% static 'videos_background/video_placeholder.png' %}"
@@ -15,8 +58,18 @@
 {% endblock %}
 
 
-
 {% block scripts %}
+<script>
+  function showCard(tipo) {
+    if (tipo === 'client') {
+      document.getElementById('client-card').style.display = 'block';
+      document.getElementById('partners-card').style.display = 'none';
+    } else if (tipo === 'partners') {
+      document.getElementById('client-card').style.display = 'none';
+      document.getElementById('partners-card').style.display = 'block';
+    }
+  }
+</script>
 <script>
   // Wait for the page to load then start the bg video
   document.addEventListener('DOMContentLoaded', function () {
