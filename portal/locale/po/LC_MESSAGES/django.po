@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-27 19:52+0000\n"
+"POT-Creation-Date: 2023-05-27 22:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,9 @@ msgstr "Entrar com o Google"
 msgid "t_page_title"
 msgstr "Portal KM&nbsp;1151"
 
+#: app/templates/base/element/partner_login_button.html:4
 #: app/templates/base/element/provider_login_button.html:4
+#: app/templates/base/element/supplier_login_button.html:4
 msgid "register_button"
 msgstr "Registrar-se"
 
@@ -50,11 +52,11 @@ msgstr ""
 "serviços. Registre-se agora para começar."
 
 #: app/templates/home.html:25
-msgid "supplier_card_text_title"
+msgid "partner_card_text_title"
 msgstr "Prezado Partner"
 
 #: app/templates/home.html:27
-msgid "supplier_card_text"
+msgid "partner_card_text"
 msgstr ""
 
 #: app/templates/home.html:40
@@ -62,5 +64,5 @@ msgid "i_am_client_button"
 msgstr "Sou Cliente"
 
 #: app/templates/home.html:44
-msgid "i_am_supplier_button"
+msgid "i_am_partner_button"
 msgstr "Sou Partner"

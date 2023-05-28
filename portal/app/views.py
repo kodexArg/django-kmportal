@@ -22,6 +22,11 @@ def logout_view(request):
     return redirect("home")
 
 
+# Code snippets
+def welcome_card_html(request):
+    return render(request, "welcome_card.html")
+
+
 # Helpers
 def get_provider_id(user, provider_name):
     """get provider id from social account, required to retrieve image from social net

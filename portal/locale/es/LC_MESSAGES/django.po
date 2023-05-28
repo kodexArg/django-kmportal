@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-27 19:52+0000\n"
+"POT-Creation-Date: 2023-05-27 22:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,9 +34,11 @@ msgstr "Iniciar sesión con Google"
 msgid "t_page_title"
 msgstr "Portal KM&nbsp;1151"
 
+#: app/templates/base/element/partner_login_button.html:4
 #: app/templates/base/element/provider_login_button.html:4
+#: app/templates/base/element/supplier_login_button.html:4
 msgid "register_button"
-msgstr "Regístrese"
+msgstr "Registre su Empresa"
 
 #: app/templates/home.html:12
 msgid "client_card_text_title"
@@ -52,21 +54,23 @@ msgstr ""
 "sorpresa. 🎁"
 
 #: app/templates/home.html:25
-msgid "supplier_card_text_title"
-msgstr "Estimado Proveedor:"
+msgid "partner_card_text_title"
+msgstr "Estimado Socio Comercial:"
 
 #: app/templates/home.html:27
-msgid "supplier_card_text"
+msgid "partner_card_text"
 msgstr ""
-"En Portal KM 1151, ofrecemos una plataforma dedicada a agilizar tus "
-"trámites. Con nuestros módulos especialmente diseñados, podrás generar "
-"autorizaciones para cargar combustible con cuenta corriente y aprovechar al "
-"máximo nuestros servicios. Regístrese ahora para comenzar."
+"En Portal KM 1151, ofrecemos una plataforma dedicada a agilizar los "
+"trámites.<br>Para <b>Empresas de Transporte</b> contamos con módulos especialmente diseñados donde podrás generar "
+"autorizaciones para cargar combustible y consultar el paso de tus vehículos "
+"por nuestra Estación de servicio.<br>Si eres un <b>Socio Comercial</b> y arriendas uno de nuestros locales, desde este sitio podrás "
+"aprovechar al máximo los servicios que te ofrecemos, mientras te garantizamos una línea de contacto directa para atender tus necesidades.<br> "
+"Regístra tu empresa ahora para comenzar."
 
 #: app/templates/home.html:40
 msgid "i_am_client_button"
 msgstr "Soy Cliente"
 
 #: app/templates/home.html:44
-msgid "i_am_supplier_button"
-msgstr "Soy Partner"
+msgid "i_am_partner_button"
+msgstr "Soy Empresa"
