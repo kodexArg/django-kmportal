@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-27 22:17+0000\n"
+"POT-Creation-Date: 2023-05-28 22:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,21 +26,16 @@ msgstr "About Us"
 msgid "t_contact"
 msgstr "Contact Us"
 
-#: app/templates/base/element/google_login_button.html:10
-msgid "t_login_with_google"
-msgstr "Sign in with Google"
-
 #: app/templates/base/element/navbar.html:44 app/templates/home.html:3
 msgid "t_page_title"
 msgstr "Portal KM&nbsp;1151"
 
-#: app/templates/base/element/partner_login_button.html:4
-#: app/templates/base/element/provider_login_button.html:4
 #: app/templates/base/element/supplier_login_button.html:4
+#: app/templates/home.html:43
 msgid "register_button"
 msgstr "Register"
 
-#: app/templates/home.html:12
+#: app/templates/home.html:11
 msgid "client_card_text_title"
 msgstr "Welcome!"
 
@@ -52,11 +47,15 @@ msgstr ""
 "now and explore everything we have for you! 🎉In addition, if you visit our "
 "service station, you will have the opportunity to win surprise prizes. 🎁"
 
-#: app/templates/home.html:25
+#: app/templates/home.html:26
+msgid "t_login_with_google"
+msgstr "Sign in with Google"
+
+#: app/templates/home.html:34
 msgid "partner_card_text_title"
 msgstr "Dear Partner:"
 
-#: app/templates/home.html:27
+#: app/templates/home.html:37
 msgid "partner_card_text"
 msgstr ""
 "At Portal KM 1151, we offer a platform dedicated to streamlining your "
@@ -64,10 +63,10 @@ msgstr ""
 "authorizations to refuel with a running account and make the most of our "
 "services. Register now to get started."
 
-#: app/templates/home.html:40
+#: app/templates/home.html:54
 msgid "i_am_client_button"
 msgstr "I am a Customer"
 
-#: app/templates/home.html:44
+#: app/templates/home.html:58
 msgid "i_am_partner_button"
 msgstr "I am a Partner"

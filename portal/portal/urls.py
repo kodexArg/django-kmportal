@@ -20,6 +20,8 @@ from django.urls import path, include
 from app import views
 from allauth.account.views import LoginView
 from django.conf.urls.i18n import i18n_patterns
+from django.urls import path
+from django.views.i18n import set_language
 
 
 urlpatterns = [
@@ -28,7 +30,6 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", views.logout_view, name="account_logout"),
-
 ]
 
 urlpatterns += i18n_patterns(

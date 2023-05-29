@@ -189,6 +189,6 @@ LOCALE_PATHS = [BASE_DIR / "locale"]
 from django.conf.global_settings import LANGUAGES
 LANGUAGES = [
     ('en', 'English'),
-    ('es', 'Spanish'),
-    ('po', 'Portuguese')
+    ('es', 'Español'),
+    ('pt', 'Poortuguêse'),
 ]
