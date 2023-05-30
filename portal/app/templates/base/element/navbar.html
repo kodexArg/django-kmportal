@@ -22,7 +22,7 @@
               bg-sky-900 
               rounded-r-full 
               ">
-    <a class="flex ml-auto" href="#">
+    <a class="flex ml-auto" href="{% url 'home' %}">
       <img class="rounded-full m-1" src="{% static 'images/logo_km1151.png' %}" alt="Site Logo">
     </a>
   </div>
@@ -60,11 +60,13 @@
       {% if user.is_authenticated %}
       {% with provider_id=user.socialaccount_set.all.0.get_provider.id %}
       {% if provider_id == 'google' %}
-      <img class="rounded-full border-4 border-white" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
+      <a class="flex" href="{% url 'logout' %}">
+        <img class="rounded-full border-4 border-white" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
+      </a>
       {% endif %}
       {% endwith %}
       {% else %}
-      <!-- if lang, next lang -->
+      <!-- SHOWS CIRCULAR FLAGS AND CHANGE LANGUAGE ON CLICK -->
       <form id="language-form-{{ language.code }}" action="{% url 'set_language' %}" method="post">{% csrf_token %}
         <input name="next" type="hidden" value="{{ redirect_to }}">
         {% if LANGUAGE_CODE == 'es' %}
@@ -75,7 +77,8 @@
         <input name="language" type="hidden" value="es">
         {% endif %}
         <button class="h-full w-full" type="submit" form="language-form-{{ language.code }}">
-        <img class="rounded-full border-4 border-white h-full aspect-square object-cover" src="{% static 'images/languages/'|add:LANGUAGE_CODE|add:'.svg' %}" />
+          <img class="rounded-full border-4 border-white h-full aspect-square object-cover"
+            src="{% static 'images/languages/'|add:LANGUAGE_CODE|add:'.svg' %}" />
         </button>
       </form>
       {% endif %}

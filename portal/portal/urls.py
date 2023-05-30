@@ -29,11 +29,13 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
     path("accounts/", include("allauth.urls")),
     path("login/", LoginView.as_view(), name="login"),
-    path("logout/", views.logout_view, name="account_logout"),
+    path("logout/", views.logout_view, name="logout"),
 ]
 
 urlpatterns += i18n_patterns(
     path("", views.home, name="home"),
+    path('about-us/', views.about_us, name='about-us'),
+    path('contact-us/', views.contact_us, name='contact-us'),
 )
 
 
