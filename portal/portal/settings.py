@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
+    "django.contrib.sites",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -136,12 +137,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 
 INSTALLED_APPS += [
-    "django.contrib.sites",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
-    # "allauth.socialaccount.providers.facebook",
+    "allauth.socialaccount.providers.facebook",
 ]
 
 
@@ -158,7 +158,7 @@ SOCIAL_ACCOUNT_PROVIDERS = {
 }
 
 # Lol... wtf... I hate you allauth
-SITE_ID = 3
+SITE_ID = 4
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",

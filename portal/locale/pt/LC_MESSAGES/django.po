@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-30 00:02+0000\n"
+"POT-Creation-Date: 2023-05-30 13:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,50 +17,61 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/templates/about_us.html:3 app/templates/base/element/navbar.html:48
+#: app/templates/contact_us.html:3 app/templates/home.html:3
+msgid "t_page_title"
+msgstr "Portal KM&nbsp;1151"
+
 #: app/templates/base/element/footer.html:2
 msgid "t_about"
-msgstr ""
+msgstr "Sobre nós"
 
 #: app/templates/base/element/footer.html:3
 msgid "t_contact"
-msgstr ""
+msgstr "Contate-nos"
 
-#: app/templates/base/element/navbar.html:45 app/templates/home.html:3
-msgid "t_page_title"
-msgstr ""
-
-#: app/templates/home.html:9
-msgid "English"
-msgstr ""
-
-#: app/templates/home.html:23
+#: app/templates/home.html:13
 msgid "customer_card_text_title"
-msgstr ""
+msgstr "Bem-vindo!"
 
-#: app/templates/home.html:26
+#: app/templates/home.html:16
 msgid "customer_card_text"
 msgstr ""
+"No KM 1151, nos enorgullece brindarte una experiencia unica. Aqui "
+"encontrarás ofertas exclusivas, novedades emocionantes y eventos especiais."
+"¡Regístrate y explora todo lo que tenemos para ti! 🎉<br>Además, si visitas "
+"nuestra estación de servicio, tendo a oportunidade de ganhar prémios"
+"sorpresa. 🎁"
 
-#: app/templates/home.html:38
+#: app/templates/home.html:28
 msgid "t_login_with_google"
-msgstr ""
+msgstr "Faça login no Google"
 
-#: app/templates/home.html:51
+#: app/templates/home.html:36
 msgid "partner_card_text_title"
-msgstr ""
+msgstr "Prezado Parceiro:"
 
-#: app/templates/home.html:54
+#: app/templates/home.html:39
 msgid "partner_card_text"
 msgstr ""
+"En Portal KM 1151, ofrecemos una plataforma dedicada a agilizar los "
+"trámites. Para <b>Empresas de Transporte</b> contamos com módulos "
+" especialmente concebidos onde poderão gerar autorizações para carregar "
+"combustible y consult el paso de tus vehículos por nuestra Estación de"
+"servicio. Si eres un <b>Socio Comercial</b> y arriendas uno de nuestros "
+"locales, desde este site podrás aprovechar al máximo los servicios que te "
+"oferecemos, mientras te garantizamos una línea de contacto directo para"
+"atender tus necesidades.<br> Regístra tu empresa ahora para comenzar."
+
+#: app/templates/home.html:45
+msgid "register_button"
+msgstr "Registe a sua empresa"
+
+#: app/templates/home.html:56
+msgid "i_am_customer_button"
+msgstr "I'm Customer"
 
 #: app/templates/home.html:60
-msgid "register_button"
-msgstr ""
-
-#: app/templates/home.html:71
-msgid "i_am_customer_button"
-msgstr ""
-
-#: app/templates/home.html:75
 msgid "i_am_partner_button"
-msgstr ""
+msgstr "I am Company"
