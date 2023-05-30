@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import logout
 
 from django.utils.translation import gettext as _
+from django.views.i18n import set_language
 
 # Create your views here.
 

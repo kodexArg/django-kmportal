@@ -190,5 +190,5 @@ from django.conf.global_settings import LANGUAGES
 LANGUAGES = [
     ('en', 'English'),
     ('es', 'Español'),
-    ('pt', 'Poortuguêse'),
+    ('pt', 'Portuguêse'),
 ]

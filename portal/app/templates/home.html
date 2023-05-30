@@ -2,32 +2,22 @@
 {% load static i18n socialaccount %}
 {% block title %}{% translate "t_page_title" %}{% endblock %}
 
+
 {% block content %}
 
-<!-- Testing change Language -->
-<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
-    <input name="next" type="hidden" value="{{ redirect_to }}">
-    <select name="language">
-        {% get_current_language as LANGUAGE_CODE %}
-        {% get_available_languages as LANGUAGES %}
-        {% get_language_info_list for LANGUAGES as languages %}
-        {% for language in languages %}
-            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-                {{ language.name_local }} ({{ language.code }})
-            </option>
-        {% endfor %}
-    </select>
-    <input type="submit" value="Go">
-</form>
+
+
+
+
 
 <!-- LOG IN AND WELCOME TEXT -->
 <section class="mt-4 flex justify-center">
-  <div id="client-card" class="z-10 w-4/5  bg-white bg-opacity-90 rounded-lg shadow-md hidden">
+  <div id="customer-card" class="z-10 w-4/5  bg-white bg-opacity-90 rounded-lg shadow-md hidden">
     <h2 class="px-6 pt-6 text-xl font-bold">
-      {% translate 'client_card_text_title' %}
+      {% translate 'customer_card_text_title' %}
     </h2>
     <div class="p-6 max-h-64 flex flex-col text-sm text-gray-900 text-justify overflow-auto">
-      {% autoescape off %}{% translate 'client_card_text' %}{% endautoescape %}
+      {% autoescape off %}{% translate 'customer_card_text' %}{% endautoescape %}
     </div>
     <div class="px-3 py-2 flex justify-center items-center rounded-b-lg">
       <!-- GOOGLE LOGIN -->
@@ -65,9 +55,9 @@
 
   <!-- Floating Buttons -->
   <div class="fixed bottom-0 left-0 right-0 flex justify-center mb-16">
-    <button id="client-button" onclick="showCard('client')"
+    <button id="customer-button" onclick="showCard('customer')"
       class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-l-full">
-      {% translate 'i_am_client_button' %}
+      {% translate 'i_am_customer_button' %}
     </button>
     <button id="partner-button" onclick="showCard('partner')"
       class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-r-full">
@@ -89,29 +79,29 @@
 {% block scripts %}
 <script>
   function showCard(tipo) {
-    var clientButton = document.getElementById('client-button');
+    var customerButton = document.getElementById('customer-button');
     var partnerButton = document.getElementById('partner-button');
 
     // shame on me... there's a better way with Tailwind AND javascript... TODO
 
-    if (tipo === 'client') {
-      console.log('client')
-      document.getElementById('client-card').style.display = 'block';
+    if (tipo === 'customer') {
+      console.log('customer')
+      document.getElementById('customer-card').style.display = 'block';
       document.getElementById('partner-card').style.display = 'none';
-      // Add active class to client button
-      clientButton.classList.add('bg-sky-900', 'text-white');
-      clientButton.classList.remove('bg-sky-200', 'text-sky-900');
+      // Add active class to customer button
+      customerButton.classList.add('bg-sky-900', 'text-white');
+      customerButton.classList.remove('bg-sky-200', 'text-sky-900');
       partnerButton.classList.add('bg-sky-200', 'text-sky-900');
       partnerButton.classList.remove('bg-sky-900', 'text-white');
     } else if (tipo === 'partner') {
       console.log('partner')
-      document.getElementById('client-card').style.display = 'none';
+      document.getElementById('customer-card').style.display = 'none';
       document.getElementById('partner-card').style.display = 'block';
       // Add active class to partner button
       partnerButton.classList.add('bg-sky-900', 'text-white');
       partnerButton.classList.remove('bg-sky-200', 'text-sky-900');
-      clientButton.classList.add('bg-sky-200', 'text-sky-900');
-      clientButton.classList.remove('bg-sky-900', 'text-white');
+      customerButton.classList.add('bg-sky-200', 'text-sky-900');
+      customerButton.classList.remove('bg-sky-900', 'text-white');
     }
   }
 </script>

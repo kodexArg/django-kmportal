@@ -1,5 +1,8 @@
 {% load static socialaccount i18n %}
 {% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
+
 
 <nav class="
             -z-10
@@ -53,7 +56,7 @@
               bg-sky-900
               rounded-l-full 
               ">
-    <div class="flex mr-auto p-1 drop-shadow-sm" href="#">
+    <div class="flex mr-auto p-1 drop-shadow-sm">
       {% if user.is_authenticated %}
       {% with provider_id=user.socialaccount_set.all.0.get_provider.id %}
       {% if provider_id == 'google' %}
@@ -61,15 +64,29 @@
       {% endif %}
       {% endwith %}
       {% else %}
-      <a id="flag-toggler" href="#">
-        <img id="flag-image" class="rounded-full border-4 border-white h-full aspect-square object-cover"
-          src="{% static 'images/languages/'|add:LANGUAGE_CODE|add:'.svg' %}" />
-      </a>
+      <!-- if lang, next lang -->
+      <form id="language-form-{{ language.code }}" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+        <input name="next" type="hidden" value="{{ redirect_to }}">
+        {% if LANGUAGE_CODE == 'es' %}
+        <input name="language" type="hidden" value="pt">
+        {% elif LANGUAGE_CODE == 'pt' %}
+        <input name="language" type="hidden" value="en">
+        {% else %}
+        <input name="language" type="hidden" value="es">
+        {% endif %}
+        <button class="h-full w-full" type="submit" form="language-form-{{ language.code }}">
+        <img class="rounded-full border-4 border-white h-full aspect-square object-cover" src="{% static 'images/languages/'|add:LANGUAGE_CODE|add:'.svg' %}" />
+        </button>
+      </form>
       {% endif %}
     </div>
 
     <!-- Collapsable Links -->
 </nav>
+
+
+<!-- ciclo por los language.code y cuando encuentre el código: si es el 'ultimo' poner el primero, si no, index+1 -->
+
 
 {% block scripts %}
 {% endblock %}
