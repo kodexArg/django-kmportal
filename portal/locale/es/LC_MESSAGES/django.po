@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-30 00:02+0000\n"
+"POT-Creation-Date: 2023-05-30 13:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: app/templates/about_us.html:3 app/templates/base/element/navbar.html:48
+#: app/templates/contact_us.html:3 app/templates/home.html:3
+msgid "t_page_title"
+msgstr "Portal KM&nbsp;1151"
+
 #: app/templates/base/element/footer.html:2
 msgid "t_about"
 msgstr "Quiénes somos"
@@ -26,19 +31,11 @@ msgstr "Quiénes somos"
 msgid "t_contact"
 msgstr "Contáctenos"
 
-#: app/templates/base/element/navbar.html:45 app/templates/home.html:3
-msgid "t_page_title"
-msgstr "Portal KM&nbsp;1151"
-
-#: app/templates/home.html:9
-msgid "English"
-msgstr ""
-
-#: app/templates/home.html:23
+#: app/templates/home.html:13
 msgid "customer_card_text_title"
 msgstr "¡Bienvenido!"
 
-#: app/templates/home.html:26
+#: app/templates/home.html:16
 msgid "customer_card_text"
 msgstr ""
 "En KM 1151, nos enorgullece brindarte una experiencia única. Aquí "
@@ -47,15 +44,15 @@ msgstr ""
 "nuestra estación de servicio, tendrás la oportunidad de ganar premios "
 "sorpresa. 🎁"
 
-#: app/templates/home.html:38
+#: app/templates/home.html:28
 msgid "t_login_with_google"
 msgstr "Iniciar sesión con Google"
 
-#: app/templates/home.html:51
+#: app/templates/home.html:36
 msgid "partner_card_text_title"
 msgstr "Estimado Socio Comercial:"
 
-#: app/templates/home.html:54
+#: app/templates/home.html:39
 msgid "partner_card_text"
 msgstr ""
 "En Portal KM 1151, ofrecemos una plataforma dedicada a agilizar los "
@@ -67,14 +64,14 @@ msgstr ""
 "ofrecemos, mientras te garantizamos una línea de contacto directa para "
 "atender tus necesidades.<br> Regístra tu empresa ahora para comenzar."
 
-#: app/templates/home.html:60
+#: app/templates/home.html:45
 msgid "register_button"
-msgstr "Registre su Empresa"
+msgstr "Registrar su Empresa"
 
-#: app/templates/home.html:71
+#: app/templates/home.html:56
 msgid "i_am_customer_button"
 msgstr "Soy Cliente"
 
-#: app/templates/home.html:75
+#: app/templates/home.html:60
 msgid "i_am_partner_button"
 msgstr "Soy Empresa"
