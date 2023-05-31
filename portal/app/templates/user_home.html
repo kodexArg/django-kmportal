@@ -9,22 +9,20 @@
 
     <div class="text-center p-4"> {% for socialaccount in user.socialaccount_set.all %}
         {% if socialaccount.provider == "google" %}
-        <h2 class="text-xl font-bold mb-4">Welcome, {{ socialaccount.extra_data.name }}!</h2>
+        <h2 class="text-xl font-bold mb-4">¡Bienvenido, {{ socialaccount.extra_data.name }}!</h2>
         {% endif %}
         {% endfor %}
-        <p class="text-lg mb-4">It's great to have you on board with us. As an esteemed employee, this portal is your
-            one-stop shop for tracking vehicles, monitoring fuel loads, authorizing procedures, and staying informed
-            about our operations.</p>
 
-        <p class="text-lg mb-4">Nestled between the mountains on the frontier between Argentina and Chile, our
-            enterprise takes pride in overcoming challenges. The journey might be tough, and the roads may be hard, but
-            with your contribution, we fuel progress and keep on moving.</p>
+        <p class="text-lg mb-4">Es un gusto tenerte a bordo. Como un valioso integrante de nuestro equipo, este portal
+            es tu centro de control para rastrear vehículos, monitorear cargas de combustible, autorizar procedimientos
+            y mantenerte informado sobre nuestras operaciones.</p>
 
-        <p class="text-lg mb-4">Please explore the modules in this application to keep abreast of the latest happenings.
-            Together, let's make every drop count, and drive our enterprise to new heights.</p>
+        <p class="text-lg mb-4">Por favor, explora los módulos de esta aplicación para mantenerte al tanto de las
+            últimas novedades. Juntos, hagamos que cada gota cuente y llevemos nuestra empresa a nuevas alturas.</p>
 
-        <p class="text-lg">Happy fueling!</p>
+        <p class="text-lg">¡A darle con todo!</p>
     </div>
+
 
 
     <article></article>
