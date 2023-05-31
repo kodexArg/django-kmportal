@@ -3,32 +3,7 @@
 {% get_available_languages as LANGUAGES %}
 {% get_language_info_list for LANGUAGES as languages %}
 
-{% if user.is_authenticated %}
-<nav class="
-            flex
-            text-bold
-            top-0 left-0 right-0
-            w-full
-            h-6 min-h-6
-            bg-gray-100 text-sky-950
-            dark:bg-[#1E2023] dark:text-sky-100
-            justify-between
-            ">
-  <div class="flex w-full h-full justify-center text-xs space-x-4 px-4">
-    <a href="#">Club de Socios</a>
-    <!--<a href="#">Choferes</a> -->
-    <!--<a href="#">Patentes</a> -->
-    <a href="#">Órdenes</a>
-    <!--<a href="#">Combustible</a>
-      <a href="#">Extra-Cash</a>
-      <a href="#">Envíos de Combustible</a> -->
-      <a href="#">Comprobantes</a>
-      <a href="#">Cuenta Corriente</a>
-      <a href="#">Configuraciones</a>
-      <a href="#">Ayuda</a>
-  </div>
-</nav>
-{% endif %}
+
 
 <nav class="
             -z-10

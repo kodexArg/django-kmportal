@@ -158,15 +158,14 @@ SOCIAL_ACCOUNT_PROVIDERS = {
 }
 
 # Lol... wtf... I hate you allauth
-SITE_ID = 4
+SITE_ID = 3
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-LOGIN_DIRECT_URL = "/"
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = 'user_home'
 
 # More Allauth configs...
 ACCOUNT_LOGOUT_ON_GET = True

@@ -7,8 +7,10 @@
 
 
 <!-- LOG IN AND WELCOME TEXT -->
-<section class="mt-4 flex justify-center">
-  <div id="customer-card" class="z-10 w-4/5  bg-white bg-opacity-90 rounded-lg shadow-md hidden">
+<section class="flex flex-col justify-between h-full px-4" style="min-height: calc(100vh - 180px);">
+  <div></div>
+  <div id="customer-card"
+    class="hidden align-middle self-center mb-2 z-10 md:w-4/5 w-full max-w-lg bg-white bg-opacity-90 rounded-lg shadow-md">
     <h2 class="px-6 pt-6 text-xl font-bold tracking-none">
       {% translate 'customer_card_text_title' %}
     </h2>
@@ -31,14 +33,15 @@
     </div>
   </div>
 
-  <div id="partner-card" class="z-10 w-4/5  bg-white bg-opacity-90 rounded-lg shadow-md hidden">
+  <div id="partner-card"
+    class="hidden align-middle self-center mb-2 z-10 md:w-4/5 w-full max-w-lg bg-white bg-opacity-90 rounded-lg shadow-md">
     <h2 class="px-6 pt-6 text-xl font-bold">
       {% translate 'partner_card_text_title' %}
     </h2>
     <div class="p-6 max-h-64 flex flex-col text-sm text-gray-900 text-justify overflow-auto">
       {% autoescape off %}{% translate 'partner_card_text'%}{% endautoescape %}
     </div>
-    <div class="px-3 py-2 flex justify-center items-center rounded-b-lg">
+    <div class="px-3 py-2 flex justify-center mb-2 items-center rounded-b-lg">
       <!-- PARTNER Login -->
       <button type="button"
         class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
@@ -50,7 +53,7 @@
 
 
   <!-- Floating Buttons -->
-  <div class="fixed bottom-0 left-0 right-0 flex justify-center mb-16">
+  <div class="align-bottom self-center flex">
     <button id="customer-button" onclick="showCard('customer')"
       class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-l-full">
       {% translate 'i_am_customer_button' %}
