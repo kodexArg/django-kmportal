@@ -7,7 +7,7 @@
 
 
 <!-- LOG IN AND WELCOME TEXT -->
-<section class="flex flex-col justify-between h-full px-4" style="min-height: calc(100vh - 180px);">
+<section class="flex flex-col justify-between h-full px-4" style="min-height: calc(100vh - 185px);">
   <div></div>
   <div id="customer-card"
     class="hidden align-middle self-center mb-2 z-10 md:w-4/5 w-full max-w-lg bg-white bg-opacity-90 rounded-lg shadow-md">
@@ -53,7 +53,7 @@
 
 
   <!-- Floating Buttons -->
-  <div class="align-bottom self-center flex">
+  <div class="align-bottom self-center mb-4 flex">
     <button id="customer-button" onclick="showCard('customer')"
       class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-l-full">
       {% translate 'i_am_customer_button' %}
@@ -77,30 +77,31 @@
 
 {% block scripts %}
 <script>
+  var customerCard = document.getElementById('customer-card');
+  var partnerCard = document.getElementById('partner-card');
+  var customerButton = document.getElementById('customer-button');
+  var partnerButton = document.getElementById('partner-button');
+
   function showCard(tipo) {
-    var customerButton = document.getElementById('customer-button');
-    var partnerButton = document.getElementById('partner-button');
-
-    // shame on me... there's a better way with Tailwind AND javascript... TODO
-
     if (tipo === 'customer') {
-      console.log('customer')
-      document.getElementById('customer-card').style.display = 'block';
-      document.getElementById('partner-card').style.display = 'none';
-      // Add active class to customer button
-      customerButton.classList.add('bg-sky-900', 'text-white');
-      customerButton.classList.remove('bg-sky-200', 'text-sky-900');
-      partnerButton.classList.add('bg-sky-200', 'text-sky-900');
-      partnerButton.classList.remove('bg-sky-900', 'text-white');
+      toggleCard(customerCard, partnerCard, customerButton, partnerButton);
     } else if (tipo === 'partner') {
-      console.log('partner')
-      document.getElementById('customer-card').style.display = 'none';
-      document.getElementById('partner-card').style.display = 'block';
-      // Add active class to partner button
-      partnerButton.classList.add('bg-sky-900', 'text-white');
-      partnerButton.classList.remove('bg-sky-200', 'text-sky-900');
-      customerButton.classList.add('bg-sky-200', 'text-sky-900');
-      customerButton.classList.remove('bg-sky-900', 'text-white');
+      toggleCard(partnerCard, customerCard, partnerButton, customerButton);
+    }
+  }
+
+  function toggleCard(activeCard, inactiveCard, activeButton, inactiveButton) {
+    if (activeCard.style.display === 'block') {
+      activeCard.style.display = 'none';
+      activeButton.classList.remove('bg-sky-900', 'text-white');
+      activeButton.classList.add('bg-sky-200', 'text-sky-900');
+    } else {
+      activeCard.style.display = 'block';
+      inactiveCard.style.display = 'none';
+      activeButton.classList.add('bg-sky-900', 'text-white');
+      activeButton.classList.remove('bg-sky-200', 'text-sky-900');
+      inactiveButton.classList.add('bg-sky-200', 'text-sky-900');
+      inactiveButton.classList.remove('bg-sky-900', 'text-white');
     }
   }
 </script>

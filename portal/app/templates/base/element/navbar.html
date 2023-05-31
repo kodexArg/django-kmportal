@@ -3,8 +3,6 @@
 {% get_available_languages as LANGUAGES %}
 {% get_language_info_list for LANGUAGES as languages %}
 
-
-
 <nav class="
             -z-10
             flex
@@ -27,6 +25,7 @@
       <img class="rounded-full m-1" src="{% static 'images/logo_km1151.png' %}" alt="Site Logo">
     </a>
   </div>
+
   <!-- Title -->
   <div class="
               flex
@@ -48,6 +47,7 @@
                  ">
       {% translate 't_page_title' %}</span>
   </div>
+
   <!-- Avatar Circle -->
   <div class="
               flex
@@ -67,6 +67,7 @@
       {% endif %}
       {% endwith %}
       {% else %}
+      
       <!-- SHOWS CIRCULAR FLAGS AND CHANGE LANGUAGE ON CLICK -->
       <form id="language-form-{{ language.code }}" action="{% url 'set_language' %}" method="post">{% csrf_token %}
         <input name="next" type="hidden" value="{{ redirect_to }}">
