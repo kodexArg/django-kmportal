@@ -11,6 +11,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 
+
 class CustomTemplateView(TemplateView):
     provider_name = "Google"
 
@@ -28,7 +29,6 @@ class CustomTemplateView(TemplateView):
                 self.request.user, self.provider_name
             )
         return context
-
 
 
 class HomeView(CustomTemplateView):
@@ -81,5 +81,3 @@ class VehiclesView(CustomTemplateView):
 ### Code snippets ###
 def welcome_card_html(request):
     return render(request, "welcome_card.html")
-
-
