@@ -22,97 +22,94 @@ msgstr ""
 #: app/templates/contact_us.html:3 app/templates/home.html:3
 #: app/templates/user_home.html:3
 msgid "t_page_title"
-msgstr "Portal KM&nbsp;1151"
+msgstr "Portal KM 1151"
 
 #: app/templates/base/element/footer.html:2
 msgid "t_about"
-msgstr "quiénes somos"
+msgstr "sobre nós"
 
 #: app/templates/base/element/footer.html:3
 msgid "t_contact"
-msgstr "contáctenos"
+msgstr "entre em contato"
 
 #: app/templates/base/module/company.html:3
 #, fuzzy
 #| msgid "t_page_title"
 msgid "company_page_title"
-msgstr "Portal KM&nbsp;1151"
+msgstr "Portal KM 1151"
 
 #: app/templates/base/module/drivers.html:3
 #, fuzzy
 #| msgid "t_page_title"
 msgid "drivers_page_title"
-msgstr "Portal KM&nbsp;1151"
+msgstr "Portal KM 1151"
 
 #: app/templates/base/module/orders.html:3
 #, fuzzy
 #| msgid "t_page_title"
 msgid "orders_page_title"
-msgstr "Portal KM&nbsp;1151"
+msgstr "Portal KM 1151"
 
 #: app/templates/base/module/tickets.html:3
 #, fuzzy
 #| msgid "t_page_title"
 msgid "tickets_page_title"
-msgstr "Portal KM&nbsp;1151"
+msgstr "Portal KM 1151"
 
 #: app/templates/base/module/vehicles.html:3
 #, fuzzy
 #| msgid "t_page_title"
 msgid "vehicles_page_title"
-msgstr "Portal KM&nbsp;1151"
+msgstr "Portal KM 1151"
 
 #: app/templates/home.html:15
 msgid "associated_shops_card_text_title"
-msgstr "Bienvenido, Transportista"
+msgstr "Bem-vindo, Locatário"
 
 #: app/templates/home.html:19
 msgid "associated_shops_card_text"
 msgstr ""
-"Te invitamos a unirte a nuestra plataforma donde podrás mantener un control "
-"detallado y completo de tus vehículos en tránsito por la frontera, además de "
-"poder gestionar la carga de combustible de tus camiones de manera fácil y "
-"online. Mantente al tanto de todo lo que sucede en nuestra estación y más "
-"allá gracias a nuestro tablón de anuncios, donde compartiremos novedades, "
-"eventos y posibles inconvenientes. Regístrate hoy y forma parte de nuestra "
-"comunidad.<br><small class='text-muted'>*Algunas funciones serán habilitadas "
-"una vez que corroboremos tu identidad como Transportista.</small>"
+"Convidamos você a se juntar à nossa plataforma, onde você pode ter um controle "
+"detalhado e completo dos seus veículos em trânsito na fronteira. Também é "
+"fácil gerenciar o abastecimento dos seus caminhões online. Fique informado sobre "
+"tudo o que acontece na nossa estação e além, através do nosso quadro de avisos, onde "
+"compartilhamos notícias, eventos e possíveis problemas. Cadastre-se hoje e faça parte "
+"da nossa comunidade.<br><small class='text-muted'>*Algumas funcionalidades serão habilitadas "
+"após verificarmos sua identidade como Locatário.</small>"
 
 #: app/templates/home.html:32 app/templates/home.html:59
 msgid "t_login_with_google"
-msgstr "Regístrate con Google"
+msgstr "Cadastre-se com o Google"
 
 #: app/templates/home.html:42
 msgid "carriers_card_text_title"
-msgstr "Estimado socio comercial"
+msgstr "Caro parceiro comercial"
 
 #: app/templates/home.html:46
 msgid "carriers_card_text"
 msgstr ""
-"Unirte a nuestra comunidad significa poder solicitar nuevos servicios y "
-"asistencia de manera rápida y eficiente, adaptando nuestro espacio a tus "
-"necesidades. Además, nuestro tablón de anuncios será una valiosa herramienta "
-"para mantenerte al día con las últimas noticias, eventos y problemas que "
-"pueden afectar tu negocio. No esperes más, regístrate hoy mismo y comienza a "
-"disfrutar de estos beneficios.<br><small class='text-muted'>*Algunas "
-"funciones estarán disponibles una vez que hayamos verificado tu identidad "
-"como Comercio Asociado.</small>"
+"Fazer parte da nossa comunidade significa poder solicitar novos serviços e assistência "
+"de forma rápida e eficiente, adaptando o nosso espaço às suas necessidades. Além disso, "
+"nosso quadro de avisos será uma ferramenta valiosa para mantê-lo atualizado com as últimas "
+"notícias, eventos e problemas que podem afetar o seu negócio. Não espere mais, cadastre-se "
+"hoje mesmo e comece a desfrutar desses benefícios.<br><small class='text-muted'>*Algumas "
+"funcionalidades estarão disponíveis após verificarmos sua identidade como Comércio Associado.</small>"
 
 #: app/templates/home.html:70
 msgid "i_am_associated_shops_button"
-msgstr "Soy Locatario"
+msgstr "Sou Locatário"
 
 #: app/templates/home.html:74
 msgid "i_am_carriers_button"
-msgstr "Soy Transportista"
+msgstr "Sou Transportador"
 
 #: app/templates/user_home.html:14
 msgid "user_home_welcome"
-msgstr "Bienvenido"
+msgstr "Bem-vindo"
 
 #: app/templates/user_home.html:17
 msgid "user_home_greeting"
-msgstr "Bienvenido"
+msgstr "Bem-vindo"
 
 #~ msgid "register_button"
-#~ msgstr "Registra tu Empresa"
+#~ msgstr "Cadastre sua Empresa"
