@@ -22,7 +22,7 @@ msgstr ""
 #: app/templates/contact_us.html:3 app/templates/home.html:3
 #: app/templates/user_home.html:3
 msgid "t_page_title"
-msgstr "Portal KM 1151"
+msgstr "Portal KM&nbsp;1151"
 
 #: app/templates/base/element/footer.html:2
 msgid "t_about"
@@ -36,31 +36,31 @@ msgstr "entre em contato"
 #, fuzzy
 #| msgid "t_page_title"
 msgid "company_page_title"
-msgstr "Portal KM 1151"
+msgstr "Portal KM&nbsp;1151"
 
 #: app/templates/base/module/drivers.html:3
 #, fuzzy
 #| msgid "t_page_title"
 msgid "drivers_page_title"
-msgstr "Portal KM 1151"
+msgstr "Portal KM&nbsp;1151"
 
 #: app/templates/base/module/orders.html:3
 #, fuzzy
 #| msgid "t_page_title"
 msgid "orders_page_title"
-msgstr "Portal KM 1151"
+msgstr "Portal KM&nbsp;1151"
 
 #: app/templates/base/module/tickets.html:3
 #, fuzzy
 #| msgid "t_page_title"
 msgid "tickets_page_title"
-msgstr "Portal KM 1151"
+msgstr "Portal KM&nbsp;1151"
 
 #: app/templates/base/module/vehicles.html:3
 #, fuzzy
 #| msgid "t_page_title"
 msgid "vehicles_page_title"
-msgstr "Portal KM 1151"
+msgstr "Portal KM&nbsp;1151"
 
 #: app/templates/home.html:15
 msgid "associated_shops_card_text_title"
