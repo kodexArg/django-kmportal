@@ -4,7 +4,8 @@
 
 
 {% block content %}
-<section class="flex flex-col justify-between h-full px-4" style="min-height: calc(100vh - 180px);">
+<section class="flex flex-col justify-between px-4 mb-4 rounded-lg drop-shadow-lg bg-gray-100 md:w-3/4 w-full"
+    style="min-height: calc(100vh - 185px);">
 
 
     <div class="text-center p-4"> {% for socialaccount in user.socialaccount_set.all %}
@@ -21,10 +22,5 @@
             últimas novedades. Juntos, hagamos que cada gota cuente y llevemos nuestra empresa a nuevas alturas.</p>
 
         <p class="text-lg">¡A darle con todo!</p>
-    </div>
-
-
-
-    <article></article>
 </section>
 {% endblock %}

@@ -10,24 +10,29 @@
     <title>{% block title%}{% endblock %}</title>
     <link rel="icon" href="{% static 'favicon.ico' %}">
 
+    <!-- DEBUG -->
+
+
     {% include "base/element/cdn.html" %}
 
     {% block styles %}{% endblock %}
 </head>
 
-<body class="">
-    <header class="h-full">
+<body class="flex flex-col min-h-screen bg-gradient-to-b from-sky-200 to-transparent">
+    <header class="fixed top-0 w-full z-50">
         <!-- NAVBAR -->
         {% include 'base/element/navbar.html' %}
     </header>
-    <main role="main" class="h-full">
+    
+    <main role="main" class="mt-10 flex flex-col justify-center items-center overflow-auto flex-grow w-full">
         {% block content %}
         <!-- CONTENT -->
         {% endblock %}
     </main>
-    <footer class="h-full">
+
+    <footer class="h-7 w-full fixed bottom-0">
         <!-- FOOTBAR -->
-        {% include 'base/element/footer.html'%}
+        {% include 'base/element/footer.html' %}
     </footer>
 
     {% block scripts %}{% endblock %}

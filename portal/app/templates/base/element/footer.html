@@ -3,13 +3,12 @@
 {% translate 't_contact' as translated_contact %}
 
 <div class="
-            fixed 
-            h-9 max-h-9
-            px-4
             flex
+            h-full
+            w-full
+            px-4
             items-center 
             justify-between
-            bottom-0 left-0 right-0
             rounded-t-lg
             bg-gray-100
             text-sky-950
@@ -17,8 +16,8 @@
             dark:text-sky-100
             ">
 
-    <span class="text-tiny">&copy; 2023 ALVS Group</span>
-    <ul class="flex space-x-4 justify-end text-sm">
+    <span class="text-tiny">&copy; 2023 AVS Group</span>
+    <ul class="flex space-x-4 justify-end text-xs">
         <li><a href="{% url 'about-us' %}" class="hover:cursor-pointer">{{ translated_about|upper }}</a></li>
         <li><a href="{% url 'contact-us' %}" class="hover:cursor-pointer">{{ translated_contact|upper }}</a></li>
     </ul>

@@ -4,23 +4,25 @@
 
 
 {% block content %}
-
-
-<!-- LOG IN AND WELCOME TEXT -->
 <section class="flex flex-col justify-between h-full px-4" style="min-height: calc(100vh - 185px);">
-  <div></div>
-  <div id="customer-card"
-    class="hidden align-middle self-center mb-2 z-10 md:w-4/5 w-full max-w-lg bg-white bg-opacity-90 rounded-lg shadow-md">
-    <h2 class="px-6 pt-6 text-xl font-bold tracking-none">
-      {% translate 'customer_card_text_title' %}
+  <div class="w-20">
+  </div>
+  <!-- LOG IN AND WELCOME TEXT -->
+  <div id="associated_shops-card"
+    class="hidden align-middle self-center max-h-[95vw] z-10 md:w-4/5 w-full max-w-20 bg-gray-100 rounded-lg shadow-md">
+
+    <h2 class="px-6 p-4 text-xl font-bold tracking-none">
+      {% translate 'associated_shops_card_text_title' %}
     </h2>
-    <div class="p-6 max-h-64 flex flex-col text-sm text-gray-900 text-justify overflow-auto">
-      {% autoescape off %}{% translate 'customer_card_text' %}{% endautoescape %}
+
+    <div class="bg-white bg-opacity-80 p-6 max-h-64 flex flex-col text-sm text-gray-900 text-justify overflow-y-auto">
+      {% autoescape off %}{% translate 'associated_shops_card_text' %}{% endautoescape %}
     </div>
-    <div class="px-3 py-2 flex justify-center items-center rounded-b-lg">
+
+    <div class="h-16 px-3 bg-gray-100 py-2 flex justify-center items-center rounded-b-lg">
       <!-- GOOGLE LOGIN -->
       <a type="button" href="{% provider_login_url 'google' %}"
-        class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
+        class="text-white px-5 py-2 bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-md  text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
         <svg class="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google"
           role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
           <path fill="currentColor"
@@ -33,38 +35,47 @@
     </div>
   </div>
 
-  <div id="partner-card"
-    class="hidden align-middle self-center mb-2 z-10 md:w-4/5 w-full max-w-lg bg-white bg-opacity-90 rounded-lg shadow-md">
-    <h2 class="px-6 pt-6 text-xl font-bold">
-      {% translate 'partner_card_text_title' %}
+  <div id="carriers-card"
+    class="hidden align-middle self-center max-h-[95vw] z-10 md:w-4/5 w-full max-w-20 bg-gray-100 rounded-lg shadow-md">
+
+    <h2 class="px-6 p-4 text-xl font-bold tracking-none">
+      {% translate 'carriers_card_text_title' %}
     </h2>
-    <div class="p-6 max-h-64 flex flex-col text-sm text-gray-900 text-justify overflow-auto">
-      {% autoescape off %}{% translate 'partner_card_text'%}{% endautoescape %}
+
+    <div class="bg-white bg-opacity-80 p-6 max-h-64 flex flex-col text-sm text-gray-900 text-justify overflow-y-auto">
+      {% autoescape off %}{% translate 'carriers_card_text' %}{% endautoescape %}
     </div>
-    <div class="px-3 py-2 flex justify-center mb-2 items-center rounded-b-lg">
-      <!-- PARTNER Login -->
-      <button type="button"
-        class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
-        <span class="">{% translate 'register_button' %}</span>
-      </button>
+
+    <div class="h-16 px-3 bg-gray-100 py-2 flex justify-center items-center rounded-b-lg">
+      <!-- GOOGLE LOGIN -->
+      <a type="button" href="{% provider_login_url 'google' %}"
+        class="text-white px-5 py-2 bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-md  text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
+        <svg class="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google"
+          role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
+          <path fill="currentColor"
+            d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z">
+          </path>
+        </svg>
+        {% translate 't_login_with_google' %}
+      </a>
       <!-- End Login -->
     </div>
   </div>
 
-
   <!-- Floating Buttons -->
-  <div class="align-bottom self-center mb-4 flex">
-    <button id="customer-button" onclick="showCard('customer')"
+  {% if not user.is_authenticated %}
+  <div class="align-bottom self-center my-2 flex min-h-fit">
+    <button id="associated_shops-button" onclick="showCard('associated_shops')"
       class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-l-full">
-      {% translate 'i_am_customer_button' %}
+      {% translate 'i_am_associated_shops_button' %}
     </button>
-    <button id="partner-button" onclick="showCard('partner')"
+    <button id="carriers-button" onclick="showCard('carriers')"
       class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-r-full">
-      {% translate 'i_am_partner_button' %}
+      {% translate 'i_am_carriers_button' %}
     </button>
   </div>
 </section>
-
+{% endif %}
 
 <!-- Keep background video and placeholder at bottom -->
 <video class="video-background" id="video" autoplay loop muted playsinline> {# autoplay commented!!!!!!!! #}
@@ -77,16 +88,16 @@
 
 {% block scripts %}
 <script>
-  var customerCard = document.getElementById('customer-card');
-  var partnerCard = document.getElementById('partner-card');
-  var customerButton = document.getElementById('customer-button');
-  var partnerButton = document.getElementById('partner-button');
+  var associated_shopsCard = document.getElementById('associated_shops-card');
+  var carriersCard = document.getElementById('carriers-card');
+  var associated_shopsButton = document.getElementById('associated_shops-button');
+  var carriersButton = document.getElementById('carriers-button');
 
   function showCard(tipo) {
-    if (tipo === 'customer') {
-      toggleCard(customerCard, partnerCard, customerButton, partnerButton);
-    } else if (tipo === 'partner') {
-      toggleCard(partnerCard, customerCard, partnerButton, customerButton);
+    if (tipo === 'associated_shops') {
+      toggleCard(associated_shopsCard, carriersCard, associated_shopsButton, carriersButton);
+    } else if (tipo === 'carriers') {
+      toggleCard(carriersCard, associated_shopsCard, carriersButton, associated_shopsButton);
     }
   }
 
