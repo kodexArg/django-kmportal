@@ -98,6 +98,10 @@
       {% endif %}
     </div>
 
+
+
+    <!-- RIGHT SIDE (Flag, Exit) -->
+    {% if user.is_authenticated %}
     <!-- Ticket -->
     <div class="
               fixed
@@ -122,10 +126,6 @@
         </svg>
       </a>
     </div>
-
-
-    <!-- RIGHT SIDE (Flag, Exit) -->
-    {% if user.is_authenticated %}
 
     <div class="
     fixed
