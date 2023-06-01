@@ -48,6 +48,7 @@ class LogoutView(View):
         logout(request)
         return redirect("home")
 
+
 @method_decorator(login_required, name="dispatch")
 class UserHomeView(CustomTemplateView):
     template_name = "user_home.html"
