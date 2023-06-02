@@ -22,6 +22,18 @@ from allauth.account.views import LoginView
 from django.conf.urls.i18n import i18n_patterns
 from django.urls import path
 from django.views.i18n import set_language
+from app.views import (
+    HomeView,
+    AboutUsView,
+    UserHomeView,
+    CompanyView,
+    DriversView,
+    OrdersView,
+    TicketsView,
+    VehiclesView,
+    ContactUsView,
+    LogoutView
+)
 
 
 urlpatterns = [
@@ -29,17 +41,23 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
     path("accounts/", include("allauth.urls")),
     path("login/", LoginView.as_view(), name="login"),
-    path("logout/", views.logout_view, name="logout"),
 ]
 
 urlpatterns += i18n_patterns(
-    path("", views.home, name="home"),
-    path('about-us/', views.about_us, name='about-us'),
-    path('contact-us/', views.contact_us, name='contact-us'),
-    path('user_home/', views.user_home, name='user_home'),
-)
+    path("", HomeView.as_view(), name="home"),
+    path("about_us/", AboutUsView.as_view(), name="about-us"),
+    path("contact_us/", ContactUsView.as_view(), name="contact-us"),
+    path("user_home/", UserHomeView.as_view(), name="user_home"),
+    path("company/", CompanyView.as_view(), name="company"),
+    path("drivers/", DriversView.as_view(), name="drivers"),
+    path("orders/", OrdersView.as_view(), name="orders"),
+    path("tickets/", TicketsView.as_view(), name="tickets"),
+    path("vehicles/", VehiclesView.as_view(), name="vehicles"),
+    path('logout/', LogoutView.as_view(), name='logout'),
 
+)
 
 if settings.DEBUG:
     from django.conf.urls.static import static
+
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

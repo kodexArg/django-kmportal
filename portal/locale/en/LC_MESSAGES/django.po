@@ -26,11 +26,11 @@ msgstr "Portal KM&nbsp;1151"
 
 #: app/templates/base/element/footer.html:2
 msgid "t_about"
-msgstr "quiénes somos"
+msgstr "about us"
 
 #: app/templates/base/element/footer.html:3
 msgid "t_contact"
-msgstr "contáctenos"
+msgstr "contact us"
 
 #: app/templates/base/module/company.html:3
 #, fuzzy
@@ -64,55 +64,52 @@ msgstr "Portal KM&nbsp;1151"
 
 #: app/templates/home.html:15
 msgid "associated_shops_card_text_title"
-msgstr "Bienvenido, Transportista"
+msgstr "Welcome, Merchant"
 
 #: app/templates/home.html:19
 msgid "associated_shops_card_text"
 msgstr ""
-"Te invitamos a unirte a nuestra plataforma donde podrás mantener un control "
-"detallado y completo de tus vehículos en tránsito por la frontera, además de "
-"poder gestionar la carga de combustible de tus camiones de manera fácil y "
-"online. Mantente al tanto de todo lo que sucede en nuestra estación y más "
-"allá gracias a nuestro tablón de anuncios, donde compartiremos novedades, "
-"eventos y posibles inconvenientes. Regístrate hoy y forma parte de nuestra "
-"comunidad.<br><small class='text-muted'>*Algunas funciones serán habilitadas "
-"una vez que corroboremos tu identidad como Transportista.</small>"
+"We invite you to join our platform where you can maintain detailed and "
+"comprehensive control of your vehicles in transit at the border. You can "
+"also easily manage the refueling of your trucks online. Stay informed about "
+"everything happening at our station and beyond with our notice board, where "
+"we will share news, events, and possible issues. Register today and become "
+"part of our community.<br><small class='text-muted'>*Some features will be "
+"enabled once we verify your identity as a Merchant.</small>"
 
 #: app/templates/home.html:32 app/templates/home.html:59
 msgid "t_login_with_google"
-msgstr "Regístrate con Google"
+msgstr "Sign up with Google"
 
 #: app/templates/home.html:42
 msgid "carriers_card_text_title"
-msgstr "Estimado socio comercial"
+msgstr "Dear Business Partner"
 
 #: app/templates/home.html:46
 msgid "carriers_card_text"
 msgstr ""
-"Unirte a nuestra comunidad significa poder solicitar nuevos servicios y "
-"asistencia de manera rápida y eficiente, adaptando nuestro espacio a tus "
-"necesidades. Además, nuestro tablón de anuncios será una valiosa herramienta "
-"para mantenerte al día con las últimas noticias, eventos y problemas que "
-"pueden afectar tu negocio. No esperes más, regístrate hoy mismo y comienza a "
-"disfrutar de estos beneficios.<br><small class='text-muted'>*Algunas "
-"funciones estarán disponibles una vez que hayamos verificado tu identidad "
-"como Comercio Asociado.</small>"
+"Joining our community means being able to request new services and assistance "
+"quickly and efficiently, tailoring our space to your needs. In addition, our "
+"notice board will be a valuable tool to keep you up to date with the latest "
+"news, events, and issues that may affect your business. Don't wait any longer, "
+"register today and start enjoying these benefits.<br><small class='text-muted'>*Some "
+"features will be available once we have verified your identity as an Associated Business.</small>"
 
 #: app/templates/home.html:70
 msgid "i_am_associated_shops_button"
-msgstr "Soy Locatario"
+msgstr "I'm a Tenant"
 
 #: app/templates/home.html:74
 msgid "i_am_carriers_button"
-msgstr "Soy Transportista"
+msgstr "I'm a Carrier"
 
 #: app/templates/user_home.html:14
 msgid "user_home_welcome"
-msgstr "Bienvenido"
+msgstr "Welcome"
 
 #: app/templates/user_home.html:17
 msgid "user_home_greeting"
-msgstr "Bienvenido"
+msgstr "Welcome"
 
 #~ msgid "register_button"
-#~ msgstr "Registra tu Empresa"
+#~ msgstr "Register Your Company"

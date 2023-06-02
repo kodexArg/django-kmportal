@@ -4,7 +4,7 @@
 
 
 {% block content %}
-<section class="flex flex-col justify-between h-full px-4" style="min-height: calc(100vh - 185px);">
+<section class="flex flex-col justify-between h-full px-4" style="min-height: calc(100vh - 195px);">
   <div class="w-20">
   </div>
   <!-- LOG IN AND WELCOME TEXT -->
@@ -64,7 +64,7 @@
 
   <!-- Floating Buttons -->
   {% if not user.is_authenticated %}
-  <div class="align-bottom self-center my-2 flex min-h-fit">
+  <div class="align-bottom self-center my-2 flex min-h-fit mb-2">
     <button id="associated_shops-button" onclick="showCard('associated_shops')"
       class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-l-full">
       {% translate 'i_am_associated_shops_button' %}
