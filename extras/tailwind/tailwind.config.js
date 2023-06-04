@@ -25,6 +25,11 @@ module.exports = {
         'Roboto': ['Roboto', 'Quicksand', 'sans-serif'],
       },
     },
-    plugins: [],
+    plugins: [
+      require('@tailwindcss/typography'),
+      require('@tailwindcss/forms'),
+      require('@tailwindcss/aspect-ratio'),
+      require('@tailwindcss/container-queries'),
+    ],
   },
 }

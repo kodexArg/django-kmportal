@@ -32,15 +32,17 @@ from app.views import (
     TicketsView,
     VehiclesView,
     ContactUsView,
-    LogoutView
+    CashTransferView,
+    LogoutView,
+    UnderConstructionView,
 )
-
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
     path("accounts/", include("allauth.urls")),
     path("login/", LoginView.as_view(), name="login"),
+    path("under_construction/", UnderConstructionView.as_view(), name="under_construction")
 ]
 
 urlpatterns += i18n_patterns(
@@ -48,13 +50,15 @@ urlpatterns += i18n_patterns(
     path("about_us/", AboutUsView.as_view(), name="about-us"),
     path("contact_us/", ContactUsView.as_view(), name="contact-us"),
     path("user_home/", UserHomeView.as_view(), name="user_home"),
-    path("company/", CompanyView.as_view(), name="company"),
-    path("drivers/", DriversView.as_view(), name="drivers"),
-    path("orders/", OrdersView.as_view(), name="orders"),
-    path("tickets/", TicketsView.as_view(), name="tickets"),
-    path("vehicles/", VehiclesView.as_view(), name="vehicles"),
     path('logout/', LogoutView.as_view(), name='logout'),
-
+    
+    # Modules Pages
+    path("company/", UnderConstructionView.as_view(), name="company"),
+    path("drivers/", UnderConstructionView.as_view(), name="drivers"),
+    path("orders/", UnderConstructionView.as_view(), name="orders"),
+    path("tickets/", UnderConstructionView.as_view(), name="tickets"),
+    path("vehicles/", UnderConstructionView.as_view(), name="vehicles"),
+    path("cashtransfer/", UnderConstructionView.as_view(), name="cashtransfer"),
 )
 
 if settings.DEBUG:

@@ -4,22 +4,19 @@
 
 
 {% block content %}
-<section class="flex flex-col justify-between h-full px-4" style="min-height: calc(100vh - 195px);">
-  <div class="w-20">
-  </div>
+<section class="w-auto h-full px-4 mt-0 md:mt-20 overflow-hidden relative">
   <!-- LOG IN AND WELCOME TEXT -->
-  <div id="associated_shops-card"
-    class="hidden align-middle self-center max-h-[95vw] z-10 md:w-4/5 w-full max-w-20 bg-gray-100 rounded-lg shadow-md">
+  <div id="associated_shops-card" class="welcome-card">
 
-    <h2 class="px-6 p-4 text-xl font-bold tracking-none">
+    <h2 class="card-headder">
       {% translate 'associated_shops_card_text_title' %}
     </h2>
 
-    <div class="bg-white bg-opacity-80 p-6 max-h-64 flex flex-col text-sm text-gray-900 text-justify overflow-y-auto">
+    <div class="card-body">
       {% autoescape off %}{% translate 'associated_shops_card_text' %}{% endautoescape %}
     </div>
 
-    <div class="h-16 px-3 bg-gray-100 py-2 flex justify-center items-center rounded-b-lg">
+    <div class="card-footer">
       <!-- GOOGLE LOGIN -->
       <a type="button" href="{% provider_login_url 'google' %}"
         class="text-white px-5 py-2 bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-md  text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
@@ -35,18 +32,17 @@
     </div>
   </div>
 
-  <div id="carriers-card"
-    class="hidden align-middle self-center max-h-[95vw] z-10 md:w-4/5 w-full max-w-20 bg-gray-100 rounded-lg shadow-md">
+  <div id="carriers-card" class="welcome-card">
 
-    <h2 class="px-6 p-4 text-xl font-bold tracking-none">
+    <h2 class="card-headder">
       {% translate 'carriers_card_text_title' %}
     </h2>
 
-    <div class="bg-white bg-opacity-80 p-6 max-h-64 flex flex-col text-sm text-gray-900 text-justify overflow-y-auto">
+    <div class="card-body">
       {% autoescape off %}{% translate 'carriers_card_text' %}{% endautoescape %}
     </div>
 
-    <div class="h-16 px-3 bg-gray-100 py-2 flex justify-center items-center rounded-b-lg">
+    <div class="card-footer">
       <!-- GOOGLE LOGIN -->
       <a type="button" href="{% provider_login_url 'google' %}"
         class="text-white px-5 py-2 bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-md  text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
@@ -61,20 +57,20 @@
       <!-- End Login -->
     </div>
   </div>
-
-  <!-- Floating Buttons -->
-  {% if not user.is_authenticated %}
-  <div class="align-bottom self-center my-2 flex min-h-fit mb-2">
-    <button id="associated_shops-button" onclick="showCard('associated_shops')"
-      class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-l-full">
-      {% translate 'i_am_associated_shops_button' %}
-    </button>
-    <button id="carriers-button" onclick="showCard('carriers')"
-      class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-r-full">
-      {% translate 'i_am_carriers_button' %}
-    </button>
-  </div>
 </section>
+
+<!-- Floating Buttons -->
+{% if not user.is_authenticated %}
+<div class="fixed bottom-11 flex min-h-fit">
+  <button id="associated_shops-button" onclick="showCard('associated_shops')"
+    class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-l-full">
+    {% translate 'i_am_associated_shops_button' %}
+  </button>
+  <button id="carriers-button" onclick="showCard('carriers')"
+    class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-r-full">
+    {% translate 'i_am_carriers_button' %}
+  </button>
+</div>
 {% endif %}
 
 <!-- Keep background video and placeholder at bottom -->

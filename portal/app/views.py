@@ -42,6 +42,9 @@ class AboutUsView(CustomTemplateView):
 class ContactUsView(CustomTemplateView):
     template_name = "contact_us.html"
 
+class UnderConstructionView(CustomTemplateView):
+    template_name = "under_construction.html"
+
 
 class LogoutView(View):
     def get(self, request, *args, **kwargs):
@@ -73,6 +76,9 @@ class OrdersView(CustomTemplateView):
 class TicketsView(CustomTemplateView):
     template_name = "modules/tickets.html"
 
+@method_decorator(login_required, name="dispatch")
+class CashTransferView(CustomTemplateView):
+    template_name = "modules/cashtransfer.html"
 
 @method_decorator(login_required, name="dispatch")
 class VehiclesView(CustomTemplateView):
