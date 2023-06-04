@@ -56,27 +56,27 @@ class UserHomeView(CustomTemplateView):
 
 @method_decorator(login_required, name="dispatch")
 class CompanyView(CustomTemplateView):
-    template_name = "base/module/company.html"
+    template_name = "modules/company.html"
 
 
 @method_decorator(login_required, name="dispatch")
 class DriversView(CustomTemplateView):
-    template_name = "base/module/drivers.html"
+    template_name = "modules/drivers.html"
 
 
 @method_decorator(login_required, name="dispatch")
 class OrdersView(CustomTemplateView):
-    template_name = "base/module/orders.html"
+    template_name = "modules/orders.html"
 
 
 @method_decorator(login_required, name="dispatch")
 class TicketsView(CustomTemplateView):
-    template_name = "base/module/tickets.html"
+    template_name = "modules/tickets.html"
 
 
 @method_decorator(login_required, name="dispatch")
 class VehiclesView(CustomTemplateView):
-    template_name = "base/module/vehicles.html"
+    template_name = "modules/vehicles.html"
 
 
 ### Code snippets ###

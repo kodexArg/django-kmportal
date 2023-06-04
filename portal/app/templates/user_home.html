@@ -11,7 +11,7 @@
     <div class="text-center p-4">
         {% for socialaccount in user.socialaccount_set.all %}
         {% if socialaccount.provider == "google" %}
-        <h3 class="text-xl font-bold mb-4">{% translate 'user_home_welcome' %}{{ socialaccount.extra_data.name }}</h3>
+        <h3 class="text-xl font-bold mb-4">{% translate 'user_home_welcome' %}<br>{{ socialaccount.extra_data.name }}</h3>
         {% endif %}
         {% endfor %}
         <article>{% translate 'user_home_greeting' %}</article>

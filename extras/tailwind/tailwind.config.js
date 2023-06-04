@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["../../portal/**/*.{html,js}"],
+  content: [
+    "../../portal/**/*.{html,js}",
+    "../../portal/app/templatetags/*.py",
+  ],
   theme: {
     fontSize: {
       'tiny': '.5rem',

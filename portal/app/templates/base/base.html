@@ -18,13 +18,13 @@
     {% block styles %}{% endblock %}
 </head>
 
-<body class="flex flex-col min-h-screen bg-gradient-to-b from-sky-200 to-transparent">
+<body class="flex flex-col min-h-screen bg-gradient-to-b from-sky-200 to-transparent justify-center items-center">
     <header class="fixed top-0 w-full z-50">
         <!-- NAVBAR -->
         {% include 'base/element/navbar.html' %}
     </header>
     
-    <main role="main" class="mt-10 flex flex-col justify-center items-center overflow-auto flex-grow w-full">
+    <main role="main" class="flex flex-col justify-center items-center overflow-auto flex-grow ">
         {% block content %}
         <!-- CONTENT -->
         {% endblock %}
