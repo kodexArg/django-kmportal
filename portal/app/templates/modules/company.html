@@ -4,7 +4,28 @@
 
 
 {% block content %}
-
-<h3>Company</h3>
+<h1 class="z-50 fixed top-8 font-bold font-quicksand text-2xl md:text-xl drop-shadow-md">{% translate "company_details" %}</h1>
+<section id="Company">
+    <article class="flex flex-col">
+        <div class="p-2">
+            <h3 class="font-semibold">
+                {% translate "company_name" %}
+            </h3>
+            <p>{{ company.name }}</p>
+        </div>
+        <div class="p-2">
+            <h3 class="font-semibold">
+                {% translate "company_fantasy_name" %}
+            </h3>
+            <p>{{ company.fantasy_name }}</p>
+        </div>
+        <div class="p-2">
+            <h3 class="font-semibold">
+                {% translate "company_cuit" %}
+            </h3>
+            <p>{{ company.cuit }}</p>
+        </div>
+    </article>
+</section>
 
 {% endblock %}

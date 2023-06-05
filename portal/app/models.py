@@ -2,6 +2,7 @@ import secrets
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
+from allauth.socialaccount.models import SocialAccount
 
 
 # Create your models here.
@@ -59,6 +60,24 @@ class Company(models.Model):
 
     def __str__(self):
         return self.fantasy_name
+    
+    class Meta:
+        verbose_name_plural = "Companies"
+
+
+class CompanySocialAccount(models.Model):
+    """This model creates a one-to-one relation with SocialAccount
+    and a foreign key relation with Company.
+    A social account can have one Company assigned to it (or none, as
+    indicated by null=True, blank=True)."""
+
+    social_account = models.OneToOneField(SocialAccount, on_delete=models.CASCADE)
+    company = models.ForeignKey(
+        Company, on_delete=models.SET_NULL, null=True, blank=True
+    )
+    
+    def __str__(self):
+        return f"{self.social_account.extra_data['name']} -> {self.company}"
 
 
 class Drivers(models.Model):
@@ -178,13 +197,21 @@ class Refuelings(models.Model):
     tractor_liters = models.PositiveIntegerField(default=0)
     backpack_liters = models.PositiveIntegerField(default=0)
     chamber_liters = models.PositiveIntegerField(default=0)
-    tractor_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES)
-    backpack_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES)
-    chamber_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES)
+    tractor_fuel_type = models.CharField(
+        max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES
+    )
+    backpack_fuel_type = models.CharField(
+        max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES
+    )
+    chamber_fuel_type = models.CharField(
+        max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES
+    )
     odometer = models.PositiveIntegerField(null=True, blank=True)
     kilometers = models.PositiveIntegerField(null=True, blank=True)
     dispatch_note_pic = models.ImageField(upload_to="operation_code/dispatch_note")
-    observation_pic = models.ImageField(upload_to="operation_code/others", null=True, blank=True)
+    observation_pic = models.ImageField(
+        upload_to="operation_code/others", null=True, blank=True
+    )
     observation = models.CharField(max_length=512, null=True, blank=True)
 
     def __str__(self):

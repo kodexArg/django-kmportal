@@ -1,18 +1,16 @@
-from django.shortcuts import render
-
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-
-from django.utils.translation import gettext as _
+from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
-
+from django.utils.translation import gettext as _
 from django.views import View
 from django.views.generic import TemplateView
-from django.contrib.auth import logout
-from django.shortcuts import redirect
+
+from app.models import CompanySocialAccount
 
 
 class CustomTemplateView(TemplateView):
+    """Used instead of TemplateView to add a custom context_data method"""
     provider_name = "Google"
 
     def get_provider_id(self, user, provider_name):
@@ -57,9 +55,30 @@ class UserHomeView(CustomTemplateView):
     template_name = "user_home.html"
 
 
+### MODULES ###
+# Company #
 @method_decorator(login_required, name="dispatch")
 class CompanyView(CustomTemplateView):
     template_name = "modules/company.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            try:
+                social_account = self.request.user.socialaccount_set.get(provider=self.provider_name)
+                company_social_account = CompanySocialAccount.objects.get(social_account=social_account)
+                if company_social_account.company is None:
+                    return redirect('user_home')
+            except CompanySocialAccount.DoesNotExist:
+                return redirect('user_home')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            social_account = self.request.user.socialaccount_set.get(provider=self.provider_name)
+            company_social_account = CompanySocialAccount.objects.get(social_account=social_account)
+            context['company'] = company_social_account.company
+        return context
 
 
 @method_decorator(login_required, name="dispatch")

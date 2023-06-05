@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-01 15:50+0000\n"
+"POT-Creation-Date: 2023-06-05 02:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,96 +20,104 @@ msgstr ""
 
 #: app/templates/about_us.html:3 app/templates/base/element/navbar.html:55
 #: app/templates/contact_us.html:3 app/templates/home.html:3
-#: app/templates/user_home.html:3
+#: app/templates/under_construction.html:3 app/templates/user_home.html:3
 msgid "t_page_title"
-msgstr "Portal KM&nbsp;1151"
+msgstr "Portal KM 1151"
 
 #: app/templates/base/element/footer.html:2
 msgid "t_about"
-msgstr "about us"
+msgstr "About Our Company"
 
 #: app/templates/base/element/footer.html:3
 msgid "t_contact"
-msgstr "contact us"
+msgstr "Contact"
 
-#: app/templates/base/module/company.html:3
-#, fuzzy
-#| msgid "t_page_title"
-msgid "company_page_title"
-msgstr "Portal KM&nbsp;1151"
-
-#: app/templates/base/module/drivers.html:3
-#, fuzzy
-#| msgid "t_page_title"
-msgid "drivers_page_title"
-msgstr "Portal KM&nbsp;1151"
-
-#: app/templates/base/module/orders.html:3
-#, fuzzy
-#| msgid "t_page_title"
-msgid "orders_page_title"
-msgstr "Portal KM&nbsp;1151"
-
-#: app/templates/base/module/tickets.html:3
-#, fuzzy
-#| msgid "t_page_title"
-msgid "tickets_page_title"
-msgstr "Portal KM&nbsp;1151"
-
-#: app/templates/base/module/vehicles.html:3
-#, fuzzy
-#| msgid "t_page_title"
-msgid "vehicles_page_title"
-msgstr "Portal KM&nbsp;1151"
-
-#: app/templates/home.html:15
+#: app/templates/home.html:12
 msgid "associated_shops_card_text_title"
-msgstr "Welcome, Merchant"
+msgstr "Associated Shops"
 
-#: app/templates/home.html:19
+#: app/templates/home.html:16
 msgid "associated_shops_card_text"
-msgstr ""
-"We invite you to join our platform where you can maintain detailed and "
-"comprehensive control of your vehicles in transit at the border. You can "
-"also easily manage the refueling of your trucks online. Stay informed about "
-"everything happening at our station and beyond with our notice board, where "
-"we will share news, events, and possible issues. Register today and become "
-"part of our community.<br><small class='text-muted'>*Some features will be "
-"enabled once we verify your identity as a Merchant.</small>"
+msgstr "Associated Shops Text"
 
-#: app/templates/home.html:32 app/templates/home.html:59
+#: app/templates/home.html:29 app/templates/home.html:55
 msgid "t_login_with_google"
-msgstr "Sign up with Google"
+msgstr "Login with Google"
+
+#: app/templates/home.html:38
+msgid "carriers_card_text_title"
+msgstr "Carriers"
 
 #: app/templates/home.html:42
-msgid "carriers_card_text_title"
-msgstr "Dear Business Partner"
-
-#: app/templates/home.html:46
 msgid "carriers_card_text"
-msgstr ""
-"Joining our community means being able to request new services and assistance "
-"quickly and efficiently, tailoring our space to your needs. In addition, our "
-"notice board will be a valuable tool to keep you up to date with the latest "
-"news, events, and issues that may affect your business. Don't wait any longer, "
-"register today and start enjoying these benefits.<br><small class='text-muted'>*Some "
-"features will be available once we have verified your identity as an Associated Business.</small>"
+msgstr "Carriers Text"
 
-#: app/templates/home.html:70
+#: app/templates/home.html:67
 msgid "i_am_associated_shops_button"
-msgstr "I'm a Tenant"
+msgstr "Shops"
 
-#: app/templates/home.html:74
+#: app/templates/home.html:71
 msgid "i_am_carriers_button"
-msgstr "I'm a Carrier"
+msgstr "Carrier"
 
-#: app/templates/user_home.html:14
+#: app/templates/modules/cashtransfer.html:3
+#, fuzzy
+#| msgid "orders_page_title"
+msgid "cashtransfer_page_title"
+msgstr "Orders"
+
+#: app/templates/modules/company.html:3
+msgid "company_page_title"
+msgstr "Company"
+
+#: app/templates/modules/company.html:7
+#, fuzzy
+#| msgid "company_page_title"
+msgid "company_details"
+msgstr "Company"
+
+#: app/templates/modules/company.html:12
+#, fuzzy
+#| msgid "company_page_title"
+msgid "company_name"
+msgstr "Company"
+
+#: app/templates/modules/company.html:18
+msgid "company_fantasy_name"
+msgstr ""
+
+#: app/templates/modules/company.html:24
+#, fuzzy
+#| msgid "company_page_title"
+msgid "company_cuit"
+msgstr "Company"
+
+#: app/templates/modules/drivers.html:3
+msgid "drivers_page_title"
+msgstr "Drivers"
+
+#: app/templates/modules/orders.html:3
+msgid "orders_page_title"
+msgstr "Fuel Load Orders"
+
+#: app/templates/modules/tickets.html:3
+msgid "tickets_page_title"
+msgstr "Helpdesk System"
+
+#: app/templates/modules/vehicles.html:3
+msgid "vehicles_page_title"
+msgstr "Trucks"
+
+#: app/templates/user_home.html:11
 msgid "user_home_welcome"
-msgstr "Welcome"
+msgstr "Welcome to Portal KM 1151"
 
-#: app/templates/user_home.html:17
+#: app/templates/user_home.html:16
 msgid "user_home_greeting"
-msgstr "Welcome"
+msgstr ""
+"We are delighted to see you here at Portal KM 1151! We hope you find all the"
+" information and tools you need. If you have any questions or need "
+"assistance, please don't hesitate to contact us."
 
 #~ msgid "register_button"
-#~ msgstr "Register Your Company"
+#~ msgstr "Register"

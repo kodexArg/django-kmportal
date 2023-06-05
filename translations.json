@@ -1,0 +1,92 @@
+{
+  "t_page_title": {
+    "es": "Portal KM 1151",
+    "en": "Portal KM 1151",
+    "pt": "Portal KM 1151"
+  },
+  "t_about": {
+    "es": "Nuestra Empresa",
+    "en": "About Our Company",
+    "pt": "Nossa Empresa"
+  },
+  "t_contact": {
+    "es": "Contacto",
+    "en": "Contact",
+    "pt": "Contato"
+  },
+  "company_page_title": {
+    "es": "Empresa",
+    "en": "Company",
+    "pt": "Empresa"
+  },
+  "drivers_page_title": {
+    "es": "Conductores",
+    "en": "Drivers",
+    "pt": "Motoristas"
+  },
+  "orders_page_title": {
+    "es": "Pedidos de Carga de Combustible",
+    "en": "Fuel Load Orders",
+    "pt": "Pedidos de Carga de Combustível"
+  },
+  "tickets_page_title": {
+    "es": "Sistema de Ayuda",
+    "en": "Helpdesk System",
+    "pt": "Sistema de Suporte"
+  },
+  "vehicles_page_title": {
+    "es": "Camiones",
+    "en": "Trucks",
+    "pt": "Caminhões"
+  },
+  "associated_shops_card_text_title": {
+    "es": "Tiendas Asociadas",
+    "en": "Associated Shops",
+    "pt": "Lojas Associadas"
+  },
+  "associated_shops_card_text": {
+    "es": "Texto de Tiendas Asociadas",
+    "en": "Associated Shops Text",
+    "pt": "Texto das Lojas Associadas"
+  },
+  "t_login_with_google": {
+    "es": "Iniciar sesión con Google",
+    "en": "Login with Google",
+    "pt": "Entrar com Google"
+  },
+  "carriers_card_text_title": {
+    "es": "Transportistas",
+    "en": "Carriers",
+    "pt": "Transportadoras"
+  },
+  "carriers_card_text": {
+    "es": "Texto de Transportistas",
+    "en": "Carriers Text",
+    "pt": "Texto das Transportadoras"
+  },
+  "i_am_associated_shops_button": {
+    "es": "Tiendas",
+    "en": "Shops",
+    "pt": "Lojas"
+  },
+  "i_am_carriers_button": {
+    "es": "Transportista",
+    "en": "Carrier",
+    "pt": "Transportadora"
+  },
+  "user_home_welcome": {
+    "es": "Bienvenido a Portal KM 1151",
+    "en": "Welcome to Portal KM 1151",
+    "pt": "Bem-vindo ao Portal KM 1151"
+  },
+  "user_home_greeting": {
+    "es": "¡Estamos encantados de verte aquí en el Portal KM 1151! Esperamos que encuentres toda la información y las herramientas que necesitas. Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.",
+    "en": "We are delighted to see you here at Portal KM 1151! We hope you find all the information and tools you need. If you have any questions or need assistance, please don't hesitate to contact us.",
+    "pt": "Estamos encantados em vê-lo aqui no Portal KM 1151! Esperamos que você encontre todas as informações e ferramentas de que precisa. Se tiver alguma dúvida ou precisar de assistência, não hesite em nos contactar."
+  },
+  "register_button": {
+    "es": "Registrarse",
+    "en": "Register",
+    "pt": "Registe-se"
+  }
+}

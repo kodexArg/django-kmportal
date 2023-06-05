@@ -53,7 +53,7 @@ urlpatterns += i18n_patterns(
     path('logout/', LogoutView.as_view(), name='logout'),
     
     # Modules Pages
-    path("company/", UnderConstructionView.as_view(), name="company"),
+    path("company/", CompanyView.as_view(), name="company"),
     path("drivers/", UnderConstructionView.as_view(), name="drivers"),
     path("orders/", UnderConstructionView.as_view(), name="orders"),
     path("tickets/", UnderConstructionView.as_view(), name="tickets"),
