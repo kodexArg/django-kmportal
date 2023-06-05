@@ -38,7 +38,12 @@ msgstr "Associated Shops"
 
 #: app/templates/home.html:16
 msgid "associated_shops_card_text"
-msgstr "Associated Shops Text"
+msgstr ""
+"Welcome to our Associated Shops! We're thrilled that you're here. This space"
+" is uniquely designed to bring you closer to a world of options that sets us"
+" apart in the market. To enjoy all the benefits, we invite you to log in "
+"with Google. Take a moment to do so and access the opportunities waiting for"
+" you. We're excited to have you with us!"
 
 #: app/templates/home.html:29 app/templates/home.html:55
 msgid "t_login_with_google"
@@ -50,11 +55,18 @@ msgstr "Carriers"
 
 #: app/templates/home.html:42
 msgid "carriers_card_text"
-msgstr "Carriers Text"
+msgstr ""
+"Welcome to the Associated Shops at Parador KM 1151! This is a unique space "
+"where businesses thrive in the heart of the mountain between Mendoza and "
+"Chile. We're thrilled to have you with us and invite you to log in with "
+"Google to enhance communication and stay updated with the latest news from "
+"the Parador and the KM 1151 Service Station. Here, you have the advantage of"
+" services ranging from internet to restrooms, all to facilitate your daily "
+"operation. We hope your experience with us is exceptional!"
 
 #: app/templates/home.html:67
 msgid "i_am_associated_shops_button"
-msgstr "Shops"
+msgstr "Associated Shops"
 
 #: app/templates/home.html:71
 msgid "i_am_carriers_button"
@@ -64,7 +76,7 @@ msgstr "Carrier"
 #, fuzzy
 #| msgid "orders_page_title"
 msgid "cashtransfer_page_title"
-msgstr "Orders"
+msgstr ""
 
 #: app/templates/modules/company.html:3
 msgid "company_page_title"
@@ -74,7 +86,7 @@ msgstr "Company"
 #, fuzzy
 #| msgid "company_page_title"
 msgid "company_details"
-msgstr "Company"
+msgstr ""
 
 #: app/templates/modules/company.html:12
 #, fuzzy
@@ -84,13 +96,13 @@ msgstr "Company"
 
 #: app/templates/modules/company.html:18
 msgid "company_fantasy_name"
-msgstr ""
+msgstr "Trading"
 
 #: app/templates/modules/company.html:24
 #, fuzzy
 #| msgid "company_page_title"
 msgid "company_cuit"
-msgstr "Company"
+msgstr "RUT"
 
 #: app/templates/modules/drivers.html:3
 msgid "drivers_page_title"
@@ -115,9 +127,11 @@ msgstr "Welcome to Portal KM 1151"
 #: app/templates/user_home.html:16
 msgid "user_home_greeting"
 msgstr ""
-"We are delighted to see you here at Portal KM 1151! We hope you find all the"
-" information and tools you need. If you have any questions or need "
-"assistance, please don't hesitate to contact us."
+"👋 Hello and welcome to the Portal KM 1151! We're just checking a few details"
+" so you can log in. In the meantime, sit back and enjoy the magnificent "
+"mountain view. You'll soon have access to all the wonderful tools and "
+"benefits we've prepared for you. If you have any questions, please don't "
+"hesitate to contact us. We're here to help! 🤗"
 
 #~ msgid "register_button"
 #~ msgstr "Register"

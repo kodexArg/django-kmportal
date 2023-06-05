@@ -45,9 +45,9 @@
     "pt": "Lojas Associadas"
   },
   "associated_shops_card_text": {
-    "es": "Texto de Tiendas Asociadas",
-    "en": "Associated Shops Text",
-    "pt": "Texto das Lojas Associadas"
+    "es": "¡Bienvenido a nuestras Tiendas Asociadas! Nos complace que estés aquí. Este espacio está especialmente diseñado para acercarte a un mundo de opciones que nos hace destacar en el mercado. Para disfrutar de todos los beneficios, te invitamos a iniciar sesión con Google. Toma un momento para hacerlo y accede a las oportunidades que te están esperando. ¡Nos emociona tenerte con nosotros!",
+    "en": "Welcome to our Associated Shops! We're thrilled that you're here. This space is uniquely designed to bring you closer to a world of options that sets us apart in the market. To enjoy all the benefits, we invite you to log in with Google. Take a moment to do so and access the opportunities waiting for you. We're excited to have you with us!",
+    "pt": "Bem-vindo às nossas Lojas Associadas! Estamos emocionados por você estar aqui. Este espaço foi criado especialmente para te aproximar de um mundo de opções que nos distingue no mercado. Para desfrutar de todos os benefícios, convidamos você a fazer login com o Google. Dedique um momento para isso e acesse as oportunidades que estão te esperando. Estamos ansiosos para tê-lo conosco!"
   },
   "t_login_with_google": {
     "es": "Iniciar sesión con Google",
@@ -60,14 +60,14 @@
     "pt": "Transportadoras"
   },
   "carriers_card_text": {
-    "es": "Texto de Transportistas",
-    "en": "Carriers Text",
-    "pt": "Texto das Transportadoras"
+    "es": "¡Bienvenido a las Tiendas Asociadas del Parador KM 1151! Este es un espacio único donde los negocios prosperan en el corazón de la montaña entre Mendoza y Chile. Nos alegra mucho tenerles con nosotros y les invitamos a iniciar sesión con Google para mantener una comunicación fluida y estar al día con las novedades del Parador y la Estación de Servicios KM 1151. Aquí, ustedes tienen la ventaja de contar con servicios que van desde internet hasta sanitarios, todo para facilitar su operación diaria. ¡Esperamos que su experiencia sea excepcional con nosotros!",
+    "en": "Welcome to the Associated Shops at Parador KM 1151! This is a unique space where businesses thrive in the heart of the mountain between Mendoza and Chile. We're thrilled to have you with us and invite you to log in with Google to enhance communication and stay updated with the latest news from the Parador and the KM 1151 Service Station. Here, you have the advantage of services ranging from internet to restrooms, all to facilitate your daily operation. We hope your experience with us is exceptional!",
+    "pt": "Bem-vindo às Lojas Associadas do Parador KM 1151! Este é um espaço único onde os negócios prosperam no coração da montanha entre Mendoza e Chile. Estamos emocionados por tê-los conosco e convidamos você a fazer login com o Google para melhorar a comunicação e manter-se atualizado com as últimas notícias do Parador e da Estação de Serviços KM 1151. Aqui, você tem a vantagem de serviços que vão desde internet até sanitários, tudo para facilitar sua operação diária. Esperamos que sua experiência conosco seja excepcional!"
   },
   "i_am_associated_shops_button": {
-    "es": "Tiendas",
-    "en": "Shops",
-    "pt": "Lojas"
+    "es": "Tiendas Asociadas",
+    "en": "Associated Shops",
+    "pt": "Lojas Associadas"
   },
   "i_am_carriers_button": {
     "es": "Transportista",
@@ -80,13 +80,28 @@
     "pt": "Bem-vindo ao Portal KM 1151"
   },
   "user_home_greeting": {
-    "es": "¡Estamos encantados de verte aquí en el Portal KM 1151! Esperamos que encuentres toda la información y las herramientas que necesitas. Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.",
-    "en": "We are delighted to see you here at Portal KM 1151! We hope you find all the information and tools you need. If you have any questions or need assistance, please don't hesitate to contact us.",
-    "pt": "Estamos encantados em vê-lo aqui no Portal KM 1151! Esperamos que você encontre todas as informações e ferramentas de que precisa. Se tiver alguma dúvida ou precisar de assistência, não hesite em nos contactar."
-  },
+    "es": "👋 ¡Hola y bienvenide al Portal KM 1151! Estamos revisando algunos detalles para que puedas ingresar. Mientras tanto, relájate y disfruta de la magnífica vista de las montañas. Pronto tendrás acceso a todas las maravillosas herramientas y beneficios que hemos preparado para ti. Si tienes alguna pregunta, no dudes en contactarnos. ¡Estamos aquí para ayudarte! 🤗",
+    "en": "👋 Hello and welcome to the Portal KM 1151! We're just checking a few details so you can log in. In the meantime, sit back and enjoy the magnificent mountain view. You'll soon have access to all the wonderful tools and benefits we've prepared for you. If you have any questions, please don't hesitate to contact us. We're here to help! 🤗",
+    "pt": "👋 Olá e bem-vinde ao Portal KM 1151! Estamos verificando alguns detalhes para que você possa entrar. Enquanto isso, relaxe e aproveite a magnífica vista da montanha. Em breve, você terá acesso a todas as maravilhosas ferramentas e benefícios que preparamos para você. Se tiver alguma dúvida, não hesite em nos contactar. Estamos aqui para ajudar! 🤗"
+ },
   "register_button": {
     "es": "Registrarse",
     "en": "Register",
     "pt": "Registe-se"
+  },
+  "company_name": {
+    "es": "Empresa",
+    "en": "Company",
+    "pt": "Empresa"
+  },
+  "company_fantasy_name": {
+    "es": "Fantasía",
+    "en": "Trading",
+    "pt": "Fantasia"
+  },
+  "company_cuit": {
+    "es": "CUIT",
+    "en": "RUT",
+    "pt": "CNPJ"
   }
 }

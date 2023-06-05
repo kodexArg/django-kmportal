@@ -4,31 +4,19 @@
 
 
 {% block content %}
-<section class="w-auto mb-24 md:mb-12 flex flex-col mx-16 rounded-md justify-center drop-shadow-lg">
-    <h1 class="card-headder">
+<div class="fixed top-0 w-screen h-screen mb-24 justify-center bg-cover bg-center bg-no-repeat" style="background-image: url('{% static 'videos_background/mountains.jpg' %}');">
+<section class="w-auto mt-24 mb-24 md:mb-12 flex flex-col mx-16 rounded-md justify-center drop-shadow-lg">
+    <h1 class="text-blue-950 text-xl text-center font-quicksand font-bold flex-grow-0 ">
         {% for socialaccount in user.socialaccount_set.all %}
         {% if socialaccount.provider == "google" %}
         {% translate 'user_home_welcome' %} {{ socialaccount.extra_data.name }}
         {% endif %}
         {% endfor %}
     </h1>
-    <article class="p-3 overflow-auto pb-11">
+    <article class="p-1 pt-6 mt-6 lex-grow pb-11 text-black drop-shadow-sm rounded-md bg-opacity-70 bg-white">
         {% translate 'user_home_greeting' %}
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla similique commodi, impedit quis aliquid magni
-            officia consequuntur dicta omnis consequatur corrupti quibusdam ipsum non</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla similique commodi, impedit quis aliquid magni
-            officia consequuntur dicta omnis consequatur corrupti quibusdam ipsum non</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla similique commodi, impedit quis aliquid magni
-            officia consequuntur dicta omnis consequatur corrupti quibusdam ipsum non</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla similique commodi, impedit quis aliquid magni
-            officia consequuntur dicta omnis consequatur corrupti quibusdam ipsum non</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla similique commodi, impedit quis aliquid magni
-            officia consequuntur dicta omnis consequatur corrupti quibusdam ipsum non</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla similique commodi, impedit quis aliquid magni
-            officia consequuntur dicta omnis consequatur corrupti quibusdam ipsum non</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla similique commodi, impedit quis aliquid magni
-            officia consequuntur dicta omnis consequatur corrupti quibusdam ipsum non</p>
-            <p>end</p>
     </article>
+
+    </div>
 </section>
-{% endblock %}
+{% endblock %}  

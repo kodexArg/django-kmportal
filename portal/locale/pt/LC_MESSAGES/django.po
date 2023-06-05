@@ -38,7 +38,13 @@ msgstr "Lojas Associadas"
 
 #: app/templates/home.html:16
 msgid "associated_shops_card_text"
-msgstr "Texto das Lojas Associadas"
+msgstr ""
+"Bem-vindo às nossas Lojas Associadas! Estamos emocionados por você estar "
+"aqui. Este espaço foi criado especialmente para te aproximar de um mundo de "
+"opções que nos distingue no mercado. Para desfrutar de todos os benefícios, "
+"convidamos você a fazer login com o Google. Dedique um momento para isso e "
+"acesse as oportunidades que estão te esperando. Estamos ansiosos para tê-lo "
+"conosco!"
 
 #: app/templates/home.html:29 app/templates/home.html:55
 msgid "t_login_with_google"
@@ -50,11 +56,19 @@ msgstr "Transportadoras"
 
 #: app/templates/home.html:42
 msgid "carriers_card_text"
-msgstr "Texto das Transportadoras"
+msgstr ""
+"Bem-vindo às Lojas Associadas do Parador KM 1151! Este é um espaço único "
+"onde os negócios prosperam no coração da montanha entre Mendoza e Chile. "
+"Estamos emocionados por tê-los conosco e convidamos você a fazer login com o"
+" Google para melhorar a comunicação e manter-se atualizado com as últimas "
+"notícias do Parador e da Estação de Serviços KM 1151. Aqui, você tem a "
+"vantagem de serviços que vão desde internet até sanitários, tudo para "
+"facilitar sua operação diária. Esperamos que sua experiência conosco seja "
+"excepcional!"
 
 #: app/templates/home.html:67
 msgid "i_am_associated_shops_button"
-msgstr "Lojas"
+msgstr "Lojas Associadas"
 
 #: app/templates/home.html:71
 msgid "i_am_carriers_button"
@@ -64,7 +78,7 @@ msgstr "Transportadora"
 #, fuzzy
 #| msgid "orders_page_title"
 msgid "cashtransfer_page_title"
-msgstr "Pedidos"
+msgstr ""
 
 #: app/templates/modules/company.html:3
 msgid "company_page_title"
@@ -74,7 +88,7 @@ msgstr "Empresa"
 #, fuzzy
 #| msgid "company_page_title"
 msgid "company_details"
-msgstr "Empresa"
+msgstr ""
 
 #: app/templates/modules/company.html:12
 #, fuzzy
@@ -84,13 +98,13 @@ msgstr "Empresa"
 
 #: app/templates/modules/company.html:18
 msgid "company_fantasy_name"
-msgstr ""
+msgstr "Fantasia"
 
 #: app/templates/modules/company.html:24
 #, fuzzy
 #| msgid "company_page_title"
 msgid "company_cuit"
-msgstr "Empresa"
+msgstr "CNPJ"
 
 #: app/templates/modules/drivers.html:3
 msgid "drivers_page_title"
@@ -115,9 +129,11 @@ msgstr "Bem-vindo ao Portal KM 1151"
 #: app/templates/user_home.html:16
 msgid "user_home_greeting"
 msgstr ""
-"Estamos encantados em vê-lo aqui no Portal KM 1151! Esperamos que você "
-"encontre todas as informações e ferramentas de que precisa. Se tiver alguma "
-"dúvida ou precisar de assistência, não hesite em nos contactar."
+"👋 Olá e bem-vinde ao Portal KM 1151! Estamos verificando alguns detalhes "
+"para que você possa entrar. Enquanto isso, relaxe e aproveite a magnífica "
+"vista da montanha. Em breve, você terá acesso a todas as maravilhosas "
+"ferramentas e benefícios que preparamos para você. Se tiver alguma dúvida, "
+"não hesite em nos contactar. Estamos aqui para ajudar! 🤗"
 
 #~ msgid "register_button"
 #~ msgstr "Registe-se"
