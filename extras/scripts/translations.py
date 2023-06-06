@@ -1,24 +1,28 @@
-import json
+import os
 import polib
+import json
 
-# Load translations from JSON file
-with open("translations.json") as file:
-    translations = json.load(file)
+BASE_DIR = "portal/locale/{}/LC_MESSAGES/django.po"
+LANGUAGES = ['en', 'es', 'pt']
 
-# Cycle through each language in the translations
-for language in translations[list(translations.keys())[0]].keys():
-    # Load the .po file for this language
-    po_file_path = f"./portal/locale/{language}/LC_MESSAGES/django.po"
-    po = polib.pofile(po_file_path)
+# Load translations from the JSON file
+with open("translations.json", "r") as f:
+    translations = json.load(f)
 
-    # Cycle through the translations in the .po file
-    for entry in po:
-        print(f"checking {entry.msgid} in {language} translation")
-        if entry.msgid in translations:
-            entry.msgstr = translations[entry.msgid][language]
-        else:
-            print(f"no translation for {entry.msgid} in {language} translation")
-            entry.msgstr = ""
-
-    # Save the modified .po file
-    po.save(po_file_path)
+for language in LANGUAGES:
+    path = BASE_DIR.format(language)
+    if os.path.exists(path):
+        po = polib.pofile(path)
+        for entry in po:
+            if entry.msgstr == "":
+                # Check if the translation exists in the JSON file
+                if entry.msgid in translations and language in translations[entry.msgid]:
+                    print(f'Setting translation for msgid "{entry.msgid}" in {language}')
+                    entry.msgstr = translations[entry.msgid][language]
+                else:
+                    print(f'Translating msgid "{entry.msgid}" for language {language}')
+                    translation = input("Please enter the translation: ")
+                    entry.msgstr = translation
+        po.save(path)
+    else:
+        print(f"File {path} does not exist.")
