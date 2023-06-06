@@ -112,7 +112,7 @@ msgstr "Motoristas"
 
 #: app/templates/modules/orders.html:3
 msgid "orders_page_title"
-msgstr "Pedidos de Carga de Combustível"
+msgstr "Pedidos de Carga"
 
 #: app/templates/modules/tickets.html:3
 msgid "tickets_page_title"
@@ -129,9 +129,9 @@ msgstr "Bem-vindo ao Portal KM 1151"
 #: app/templates/user_home.html:16
 msgid "user_home_greeting"
 msgstr ""
-"👋 Olá e bem-vinde ao Portal KM 1151! Estamos verificando alguns detalhes "
+"👋 Olá e bem-vinde ao Portal KM 1151! Estamos verificando alguns detalhes 🕵️ "
 "para que você possa entrar. Enquanto isso, relaxe e aproveite a magnífica "
-"vista da montanha. Em breve, você terá acesso a todas as maravilhosas "
+"vista da montanha 😜...🙏. Em breve, você terá acesso a todas as maravilhosas "
 "ferramentas e benefícios que preparamos para você. Se tiver alguma dúvida, "
 "não hesite em nos contactar. Estamos aqui para ajudar! 🤗"
 
