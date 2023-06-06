@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 02:29+0000\n"
+"POT-Creation-Date: 2023-06-06 00:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,8 +59,8 @@ msgid "carriers_card_text"
 msgstr ""
 "Bem-vindo às Lojas Associadas do Parador KM 1151! Este é um espaço único "
 "onde os negócios prosperam no coração da montanha entre Mendoza e Chile. "
-"Estamos emocionados por tê-los conosco e convidamos você a fazer login com o"
-" Google para melhorar a comunicação e manter-se atualizado com as últimas "
+"Estamos emocionados por tê-los conosco e convidamos você a fazer login com o "
+"Google para melhorar a comunicação e manter-se atualizado com as últimas "
 "notícias do Parador e da Estação de Serviços KM 1151. Aqui, você tem a "
 "vantagem de serviços que vão desde internet até sanitários, tudo para "
 "facilitar sua operação diária. Esperamos que sua experiência conosco seja "
@@ -75,8 +75,6 @@ msgid "i_am_carriers_button"
 msgstr "Transportadora"
 
 #: app/templates/modules/cashtransfer.html:3
-#, fuzzy
-#| msgid "orders_page_title"
 msgid "cashtransfer_page_title"
 msgstr ""
 
@@ -85,8 +83,6 @@ msgid "company_page_title"
 msgstr "Empresa"
 
 #: app/templates/modules/company.html:7
-#, fuzzy
-#| msgid "company_page_title"
 msgid "company_details"
 msgstr ""
 
@@ -122,18 +118,18 @@ msgstr "Sistema de Suporte"
 msgid "vehicles_page_title"
 msgstr "Caminhões"
 
-#: app/templates/user_home.html:11
+#: app/templates/user_home.html:12
 msgid "user_home_welcome"
 msgstr "Bem-vindo ao Portal KM 1151"
 
-#: app/templates/user_home.html:16
+#: app/templates/user_home.html:17
 msgid "user_home_greeting"
 msgstr ""
 "👋 Olá e bem-vinde ao Portal KM 1151! Estamos verificando alguns detalhes 🕵️ "
 "para que você possa entrar. Enquanto isso, relaxe e aproveite a magnífica "
-"vista da montanha 😜...🙏. Em breve, você terá acesso a todas as maravilhosas "
-"ferramentas e benefícios que preparamos para você. Se tiver alguma dúvida, "
-"não hesite em nos contactar. Estamos aqui para ajudar! 🤗"
+"vista da montanha 😜...🙏. Em breve, você terá acesso a todas as "
+"maravilhosas ferramentas e benefícios que preparamos para você. Se tiver "
+"alguma dúvida, não hesite em nos contactar. Estamos aqui para ajudar! 🤗"
 
 #~ msgid "register_button"
 #~ msgstr "Registe-se"

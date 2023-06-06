@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 02:27+0000\n"
+"POT-Creation-Date: 2023-06-06 00:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,10 +41,10 @@ msgid "associated_shops_card_text"
 msgstr ""
 "¡Bienvenido a nuestras Tiendas Asociadas! Nos complace que estés aquí. Este "
 "espacio está especialmente diseñado para acercarte a un mundo de opciones "
-"que nos hace destacar en el mercado. Para disfrutar de todos los beneficios,"
-" te invitamos a iniciar sesión con Google. Toma un momento para hacerlo y "
-"accede a las oportunidades que te están esperando. ¡Nos emociona tenerte con"
-" nosotros!"
+"que nos hace destacar en el mercado. Para disfrutar de todos los beneficios, "
+"te invitamos a iniciar sesión con Google. Toma un momento para hacerlo y "
+"accede a las oportunidades que te están esperando. ¡Nos emociona tenerte con "
+"nosotros!"
 
 #: app/templates/home.html:29 app/templates/home.html:55
 msgid "t_login_with_google"
@@ -58,8 +58,8 @@ msgstr "Transportistas"
 msgid "carriers_card_text"
 msgstr ""
 "¡Bienvenido a las Tiendas Asociadas del Parador KM 1151! Este es un espacio "
-"único donde los negocios prosperan en el corazón de la montaña entre Mendoza"
-" y Chile. Nos alegra mucho tenerles con nosotros y les invitamos a iniciar "
+"único donde los negocios prosperan en el corazón de la montaña entre Mendoza "
+"y Chile. Nos alegra mucho tenerles con nosotros y les invitamos a iniciar "
 "sesión con Google para mantener una comunicación fluida y estar al día con "
 "las novedades del Parador y la Estación de Servicios KM 1151. Aquí, ustedes "
 "tienen la ventaja de contar con servicios que van desde internet hasta "
@@ -75,8 +75,6 @@ msgid "i_am_carriers_button"
 msgstr "Transportista"
 
 #: app/templates/modules/cashtransfer.html:3
-#, fuzzy
-#| msgid "orders_page_title"
 msgid "cashtransfer_page_title"
 msgstr ""
 
@@ -85,8 +83,6 @@ msgid "company_page_title"
 msgstr "Empresa"
 
 #: app/templates/modules/company.html:7
-#, fuzzy
-#| msgid "company_page_title"
 msgid "company_details"
 msgstr ""
 
@@ -122,11 +118,11 @@ msgstr "Sistema de Ayuda"
 msgid "vehicles_page_title"
 msgstr "Camiones"
 
-#: app/templates/user_home.html:11
+#: app/templates/user_home.html:12
 msgid "user_home_welcome"
 msgstr "Bienvenido a Portal KM 1151"
 
-#: app/templates/user_home.html:16
+#: app/templates/user_home.html:17
 msgid "user_home_greeting"
 msgstr ""
 "👋 ¡Hola y bienvenide al Portal KM 1151! Estamos revisando algunos detalles "

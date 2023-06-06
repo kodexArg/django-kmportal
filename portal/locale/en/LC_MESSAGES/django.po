@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-05 02:29+0000\n"
+"POT-Creation-Date: 2023-06-06 00:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,11 +39,11 @@ msgstr "Associated Shops"
 #: app/templates/home.html:16
 msgid "associated_shops_card_text"
 msgstr ""
-"Welcome to our Associated Shops! We're thrilled that you're here. This space"
-" is uniquely designed to bring you closer to a world of options that sets us"
-" apart in the market. To enjoy all the benefits, we invite you to log in "
-"with Google. Take a moment to do so and access the opportunities waiting for"
-" you. We're excited to have you with us!"
+"Welcome to our Associated Shops! We're thrilled that you're here. This space "
+"is uniquely designed to bring you closer to a world of options that sets us "
+"apart in the market. To enjoy all the benefits, we invite you to log in with "
+"Google. Take a moment to do so and access the opportunities waiting for you. "
+"We're excited to have you with us!"
 
 #: app/templates/home.html:29 app/templates/home.html:55
 msgid "t_login_with_google"
@@ -60,8 +60,8 @@ msgstr ""
 "where businesses thrive in the heart of the mountain between Mendoza and "
 "Chile. We're thrilled to have you with us and invite you to log in with "
 "Google to enhance communication and stay updated with the latest news from "
-"the Parador and the KM 1151 Service Station. Here, you have the advantage of"
-" services ranging from internet to restrooms, all to facilitate your daily "
+"the Parador and the KM 1151 Service Station. Here, you have the advantage of "
+"services ranging from internet to restrooms, all to facilitate your daily "
 "operation. We hope your experience with us is exceptional!"
 
 #: app/templates/home.html:67
@@ -73,8 +73,6 @@ msgid "i_am_carriers_button"
 msgstr "Carrier"
 
 #: app/templates/modules/cashtransfer.html:3
-#, fuzzy
-#| msgid "orders_page_title"
 msgid "cashtransfer_page_title"
 msgstr ""
 
@@ -83,8 +81,6 @@ msgid "company_page_title"
 msgstr "Company"
 
 #: app/templates/modules/company.html:7
-#, fuzzy
-#| msgid "company_page_title"
 msgid "company_details"
 msgstr ""
 
@@ -120,18 +116,18 @@ msgstr "Helpdesk System"
 msgid "vehicles_page_title"
 msgstr "Trucks"
 
-#: app/templates/user_home.html:11
+#: app/templates/user_home.html:12
 msgid "user_home_welcome"
 msgstr "Welcome to Portal KM 1151"
 
-#: app/templates/user_home.html:16
+#: app/templates/user_home.html:17
 msgid "user_home_greeting"
 msgstr ""
-"👋 Hello and welcome to the Portal KM 1151! We're just checking a few details"
-" 🕵️ so you can log in. In the meantime, sit back and enjoy the magnificent "
-"mountain view 😜...🙏. You'll soon have access to all the wonderful tools and "
-"benefits we've prepared for you. If you have any questions, please don't "
-"hesitate to contact us. We're here to help! 🤗"
+"👋 Hello and welcome to the Portal KM 1151! We're just checking a few "
+"details 🕵️ so you can log in. In the meantime, sit back and enjoy the "
+"magnificent mountain view 😜...🙏. You'll soon have access to all the "
+"wonderful tools and benefits we've prepared for you. If you have any "
+"questions, please don't hesitate to contact us. We're here to help! 🤗"
 
 #~ msgid "register_button"
 #~ msgstr "Register"
