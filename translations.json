@@ -103,5 +103,15 @@
     "es": "CUIT",
     "en": "RUT",
     "pt": "CNPJ"
+  },
+  "company_details": {
+    "es": "Detalles de Compañía",
+    "en": "Company Details",
+    "pt": "Detalhes da Companhia"
+  },
+  "cashtransfer_page_title": {
+    "en": "Cash Transfer",
+    "es": "Transferencia de efectivo",
+    "pt": "Transferência de dinheiro"
   }
 }
