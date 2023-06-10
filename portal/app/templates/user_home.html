@@ -4,18 +4,18 @@
 
 
 {% block content %}
-<div class="fixed top-0 w-screen h-screen mb-24 justify-center bg-cover bg-center bg-no-repeat"
+<div class="-z-50 fixed top-0 w-screen h-screen mb-24 justify-center bg-cover bg-center bg-no-repeat"
     style="background-image: url('{% static 'videos_background/mountains.jpg' %}');">
 </div>
 <section class="w-auto mt-24 mb-24 md:mb-12 flex flex-col mx-16 rounded-md justify-center drop-shadow-lg">
-    <h1 class="text-blue-950 text-xl text-center font-quicksand font-bold flex-grow-0 ">
+    <h1 class="text-blue-950 text-xl text-center font-quicksand font-bold flex-grow-0">
         {% for socialaccount in user.socialaccount_set.all %}
         {% if socialaccount.provider == "google" %}
         {% translate 'user_home_welcome' %} {{ socialaccount.extra_data.name }}
         {% endif %}
         {% endfor %}
     </h1>
-    <article class="p-1 pt-6 mt-6 lex-grow pb-11 text-black drop-shadow-sm rounded-md bg-opacity-70 bg-white">
+    <article class="p-1 pt-6 mt-6 flex-grow pb-11 text-black drop-shadow-sm rounded-md bg-opacity-80 bg-white">
         {% translate 'user_home_greeting' %}
     </article>
 </section>

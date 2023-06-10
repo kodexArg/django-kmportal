@@ -570,6 +570,10 @@ video {
   top: 11rem;
 }
 
+.top-6 {
+  top: 1.5rem;
+}
+
 .top-60 {
   top: 15rem;
 }
@@ -582,16 +586,12 @@ video {
   top: 19rem;
 }
 
-.-z-10 {
-  z-index: -10;
+.-z-50 {
+  z-index: -50;
 }
 
 .z-50 {
   z-index: 50;
-}
-
-.m-1 {
-  margin: 0.25rem;
 }
 
 .mx-16 {
@@ -624,16 +624,8 @@ video {
   margin-left: 1.5rem;
 }
 
-.ml-auto {
-  margin-left: auto;
-}
-
 .mr-2 {
   margin-right: 0.5rem;
-}
-
-.mr-auto {
-  margin-right: auto;
 }
 
 .mt-0 {
@@ -642,10 +634,6 @@ video {
 
 .mt-24 {
   margin-top: 6rem;
-}
-
-.mt-4 {
-  margin-top: 1rem;
 }
 
 .mt-6 {
@@ -721,10 +709,6 @@ video {
   width: 5rem;
 }
 
-.w-32 {
-  width: 8rem;
-}
-
 .w-4 {
   width: 1rem;
 }
@@ -745,8 +729,16 @@ video {
   width: 100vw;
 }
 
+.w-28 {
+  width: 7rem;
+}
+
 .flex-shrink-0 {
   flex-shrink: 0;
+}
+
+.flex-grow {
+  flex-grow: 1;
 }
 
 .flex-grow-0 {
@@ -765,6 +757,10 @@ video {
 
 .flex-col {
   flex-direction: column;
+}
+
+.place-items-center {
+  place-items: center;
 }
 
 .items-center {
@@ -881,8 +877,8 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-opacity-70 {
-  --tw-bg-opacity: 0.7;
+.bg-opacity-80 {
+  --tw-bg-opacity: 0.8;
 }
 
 .bg-gradient-to-b {
@@ -973,10 +969,6 @@ video {
   font-size: 1.5rem;
 }
 
-.text-4xl {
-  font-size: 2.25rem;
-}
-
 .text-lg {
   font-size: 1.125rem;
 }
@@ -1038,11 +1030,6 @@ video {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.drop-shadow {
-  --tw-drop-shadow: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .drop-shadow-lg {
@@ -1213,16 +1200,6 @@ video {
   .dark\:text-sky-100 {
     --tw-text-opacity: 1;
     color: rgb(224 242 254 / var(--tw-text-opacity));
-  }
-}
-
-@media (min-width: 640px) {
-  .sm\:whitespace-nowrap {
-    white-space: nowrap;
-  }
-
-  .sm\:text-6xl {
-    font-size: 4rem;
   }
 }
 

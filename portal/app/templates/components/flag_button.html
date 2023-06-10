@@ -1,0 +1,31 @@
+{% load static %}
+
+<div class="
+            fixed
+            {% if side == 'left' %}left-0{% else %}right-0{% endif %}
+            {% if position == 'top-6' %}h-20{% else %}h-14{% endif %}
+            {% if position == 'top-6' %}w-20{% else %}w-14{% endif %}
+            {{ position }}
+            bg-sky-900 
+            rounded-{% if side == 'left' %}r{% else %}l{% endif %}-full
+            items-center
+            justify-center
+            ">
+    <!-- SHOWS CIRCULAR FLAGS AND CHANGE LANGUAGE ON CLICK -->
+    <div class="p-1 w-full h-full rounded-full">
+        <form id="language-form-{{ language_code }}" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}">
+            {% if language_code == 'es' %}
+            <input name="language" type="hidden" value="pt">
+            {% elif language_code == 'pt' %}
+            <input name="language" type="hidden" value="en">
+            {% else %}
+            <input name="language" type="hidden" value="es">
+            {% endif %}
+            <button class="h-full w-full" type="submit" form="language-form-{{ language_code }}">
+                <img class="rounded-full border-4 border-white h-full aspect-square object-cover"
+                    src="{% static 'images/languages/'|add:language_code|add:'.svg' %}" alt="{{ language_code }}" />
+            </button>
+        </form>
+    </div>
+</div>
