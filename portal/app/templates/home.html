@@ -120,19 +120,7 @@
     video.addEventListener('canplaythrough', function () {
       var videoPlaceholder = document.querySelector('.video-placeholder');
       videoPlaceholder.style.display = 'none';
-      console.log("Playing video... Sorry dude, but art mater... :)")
-
-
-      // Function to pause the video at random (1% each 1000 ms)
-      function pauseVideo() {
-        if (Math.random() < 0.001) {
-          video.pause();
-          console.log("Video paused randomly.");
-        }
-      }
-
-      setInterval(pauseVideo, 1000);
-
+      console.log("Playing video... Sorry dude, art matter... :)")
     });
   });
 </script>

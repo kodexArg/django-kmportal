@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "livereload",
     "app",
 ]
 
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "livereload.middleware.LiveReloadScript",
 ]
 
 ROOT_URLCONF = "portal.urls"
@@ -68,8 +70,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                'django.template.context_processors.i18n'
-                #... no... solo tarde 10 horas en darme cuenta del i18n missing...
+                "django.template.context_processors.i18n"
+                # ... no... solo tarde 10 horas en darme cuenta del i18n missing...
                 # para el gabo del futuro: NO USAR IA PARA CONFIGURACIONES DURAS
             ],
         },
@@ -112,18 +114,16 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-SOCIAL_ACCOUNT_ADAPTER = 'app.adapters.CustomAdapter'
+SOCIAL_ACCOUNT_ADAPTER = "app.adapters.CustomAdapter"
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [
-    BASE_DIR / "static"
-]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
-STATIC_ROOT = BASE_DIR.parent / "local-cdn" / "static" #stored for production
+STATIC_ROOT = BASE_DIR.parent / "local-cdn" / "static"  # stored for production
 
 
 # Default primary key field type
@@ -144,7 +144,7 @@ INSTALLED_APPS += [
 ]
 
 
-SOCIALACCOUNT_LOGIN_ON_GET=True
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 SOCIAL_ACCOUNT_PROVIDERS = {
     "google": {
@@ -165,7 +165,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-LOGIN_REDIRECT_URL = 'user_home'
+LOGIN_REDIRECT_URL = "user_home"
 
 # More Allauth configs...
 ACCOUNT_LOGOUT_ON_GET = True
@@ -186,8 +186,9 @@ USE_I18N = True
 LOCALE_PATHS = [BASE_DIR / "locale"]
 
 from django.conf.global_settings import LANGUAGES
+
 LANGUAGES = [
-    ('en', 'English'),
-    ('es', 'Español'),
-    ('pt', 'Portuguêse'),
+    ("en", "English"),
+    ("es", "Español"),
+    ("pt", "Portuguêse"),
 ]
