@@ -6,9 +6,9 @@ module.exports = {
   ],
   theme: {
     fontSize: {
-      'tiny': '.5rem',
-      'xs': '.75rem',
-      'sm': '.875rem',
+      'tiny': '.25rem',
+      'xs': '.5rem',
+      'sm': '.75rem',
       'base': '1rem',
       'lg': '1.125rem',
       'xl': '1.25rem',
@@ -25,9 +25,9 @@ module.exports = {
         'Roboto': ['Roboto', 'Quicksand', 'sans-serif'],
       },
       colors: {
-        'pantone307c': 'rgb(0, 122, 165)',
-        'pantone7689c': 'rgb(0, 119, 200)',
-        'pantone7472c': 'rgb(75, 183, 173)',
+        'pantone307c': 'rgb(0, 105, 166)',
+        'pantone7689c': 'rgb(43, 142, 193)',
+        'pantone7472c': 'rgb(90, 183, 178)',
       },
     },
     plugins: [

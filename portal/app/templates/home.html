@@ -1,80 +1,37 @@
 {% extends "base/base.html" %}
-{% load static i18n socialaccount %}
+{% load static i18n socialaccount custom_components %}
 {% block title %}{% translate "t_page_title" %}{% endblock %}
 
-
 {% block content %}
-<section class="w-auto h-full px-4 mt-0 overflow-hidden relative">
-  <!-- LOG IN AND WELCOME TEXT -->
-  <div id="associated_shops-card" class="welcome-card">
-
-    <h2 class="card-headder">
-      {% translate 'associated_shops_card_text_title' %}
-    </h2>
-
-    <div class="card-body">
-      {% autoescape off %}{% translate 'associated_shops_card_text' %}{% endautoescape %}
+<section class="flex px-3 flex-col align-bottom">
+  <!-- Welcome Cards -->
+  <div class="w-full h-96 md:h-auto max-h-72 flex overflow-clip rounded-md ">
+    <div id="associated_shops-card" class="hidden">
+      {% welcome_card_component '1' %}
     </div>
-
-    <div class="card-footer">
-      <!-- GOOGLE LOGIN -->
-      <a type="button" href="{% provider_login_url 'google' %}"
-        class="text-white px-5 py-2 bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-md  text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
-        <svg class="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google"
-          role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
-          <path fill="currentColor"
-            d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z">
-          </path>
-        </svg>
-        {% translate 't_login_with_google' %}
-      </a>
-      <!-- End Login -->
-    </div>
-  </div>
-
-  <div id="carriers-card" class="welcome-card">
-
-    <h2 class="card-headder">
-      {% translate 'carriers_card_text_title' %}
-    </h2>
-
-    <div class="card-body">
-      {% autoescape off %}{% translate 'carriers_card_text' %}{% endautoescape %}
-    </div>
-
-    <div class="card-footer">
-      <!-- GOOGLE LOGIN -->
-      <a type="button" href="{% provider_login_url 'google' %}"
-        class="text-white px-5 py-2 bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-md  text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
-        <svg class="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google"
-          role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
-          <path fill="currentColor"
-            d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z">
-          </path>
-        </svg>
-        {% translate 't_login_with_google' %}
-      </a>
-      <!-- End Login -->
+    <div id="carriers-card" class="hidden">
+      {% welcome_card_component '2' %}
     </div>
   </div>
 </section>
 
 <!-- Floating Buttons -->
-{% if not user.is_authenticated %}
-<div class="fixed bottom-11 flex min-h-fit">
-  <button id="associated_shops-button" onclick="showCard('associated_shops')"
-    class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-l-full">
-    {% translate 'i_am_associated_shops_button' %}
-  </button>
-  <button id="carriers-button" onclick="showCard('carriers')"
-    class="bg-sky-200 hover:bg-sky-900 text-sky-900 hover:text-white font-bold py-2 px-4 rounded-r-full">
-    {% translate 'i_am_carriers_button' %}
-  </button>
+<div class="fixed flex bottom-11 justify-center w-full">
+  {% if not user.is_authenticated %}
+  <div class="flex justify-center space-x-0">
+    <button id="associated_shops-button" onclick="showCard('associated_shops')"
+      class="bg-sky-200 hover:bg-pantone307c text-pantone307c hover:text-white text-sm font-bold m-0 p-2 rounded-l-full">
+      {% translate 'i_am_associated_shops_button' %}
+    </button>
+    <button id="carriers-button" onclick="showCard('carriers')"
+      class="bg-sky-200 hover:bg-pantone307c text-pantone307c hover:text-white text-sm font-bold m-0 p-2 rounded-r-full">
+      {% translate 'i_am_carriers_button' %}
+    </button>
+  </div>
+  {% endif %}
 </div>
-{% endif %}
 
-<!-- Keep background video and placeholder at bottom -->
-<video class="video-background" id="video" autoplay loop muted playsinline> {# autoplay commented!!!!!!!! #}
+<video class="video-background" id="video" loop muted playsinline> {# autoplay commented!!!!!!!! #}
   <source src="{% static 'videos_background/vid_bg.mp4' %}" type="video/mp4">
 </video>
 <img class="video-placeholder video-background" src="{% static 'videos_background/video_placeholder.png' %}"
@@ -100,15 +57,15 @@
   function toggleCard(activeCard, inactiveCard, activeButton, inactiveButton) {
     if (activeCard.style.display === 'block') {
       activeCard.style.display = 'none';
-      activeButton.classList.remove('bg-sky-900', 'text-white');
-      activeButton.classList.add('bg-sky-200', 'text-sky-900');
+      activeButton.classList.remove('bg-pantone307c', 'text-white');
+      activeButton.classList.add('bg-sky-200', 'text-pantone307c');
     } else {
       activeCard.style.display = 'block';
       inactiveCard.style.display = 'none';
-      activeButton.classList.add('bg-sky-900', 'text-white');
-      activeButton.classList.remove('bg-sky-200', 'text-sky-900');
-      inactiveButton.classList.add('bg-sky-200', 'text-sky-900');
-      inactiveButton.classList.remove('bg-sky-900', 'text-white');
+      activeButton.classList.add('bg-pantone307c', 'text-white');
+      activeButton.classList.remove('bg-sky-200', 'text-pantone307c');
+      inactiveButton.classList.add('bg-sky-200', 'text-pantone307c');
+      inactiveButton.classList.remove('bg-pantone307c', 'text-white');
     }
   }
 </script>

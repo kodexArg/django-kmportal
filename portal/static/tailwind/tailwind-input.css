@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .video-background {
-  @apply fixed top-0 bottom-0 left-0 right-0 p-0 m-0 object-cover w-full h-full z-[-10];
+  @apply fixed top-0 bottom-0 left-0 right-0 p-0 m-0 object-cover w-full h-full z-[-999];
 }
 
 .welcome-card {

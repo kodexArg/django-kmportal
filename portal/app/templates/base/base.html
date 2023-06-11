@@ -13,19 +13,20 @@
     {% block styles %}{% endblock %}
 </head>
 
-<body class="relative h-screen flex flex-col bg-gradient-to-b from-sky-200 to-transparent">
-    <header class="w-full z-50 h-28 flex-shrink-0">
+<body class="flex flex-col bg-gradient-to-b from-sky-200 to-transparent">
+    <header class="w-full z-50 h-24 flex-shrink-0">
         <!-- NAVBAR -->
         {% include 'base/element/navbar.html' %}
     </header>
 
-    <main role="main" class="relative flex justify-center overflow-hidden">
+    <main role="main" class="flex flex-col flex-grow">
+        <div></div>
         {% block content %}
         <!-- CONTENT -->
         {% endblock %}
     </main>
 
-    <footer class="fixed bottom-0 h-7 w-full flex-shrink-0">
+    <footer class="z-50 fixed bottom-0 h-7 w-full flex-shrink-0">
         <!-- FOOTBAR -->
         {% include 'base/element/footer.html' %}
     </footer>
