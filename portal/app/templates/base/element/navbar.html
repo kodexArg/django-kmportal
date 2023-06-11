@@ -1,16 +1,24 @@
 {% load static socialaccount i18n custom_components %}
 {% get_current_language as LANGUAGE_CODE %}
 
-<nav>
-<!-- left buttons -->
-  {% menu_button_component position="2" side="left" url="company" icon="gears" %}
-  {% menu_button_component position="3" side="left" url="vehicles" icon="truck" %}
-  {% menu_button_component position="4" side="left" url="orders" icon="fuel" %}
-  {% menu_button_component position="5" side="left" url="cashtransfer" icon="cash" %}
+<nav class="fixed top-0">
 
-<!-- right buttons -->
-{% flag_button_component position="1" side="right" language_code=LANGUAGE_CODE %}
-{% flag_button_component position="2" side="right" language_code=LANGUAGE_CODE %}
-{% menu_button_component position="3" side="right" url="tickets" icon="ticket" %}
-{% menu_button_component position="4" side="right" url="logout" icon="logout" %}
+
+    {% if user.is_authenticated %}
+    <!-- left buttons -->
+    {% menu_button_component position="2" side="left" url="company" icon="gears" size="small" %}
+    {% menu_button_component position="3" side="left" url="vehicles" icon="truck" size="small" %}
+    {% menu_button_component position="4" side="left" url="orders" icon="fuel" size="small" %}
+    {% menu_button_component position="5" side="left" url="cashtransfer" icon="cash" size="small" %}
+
+    <!-- right buttons -->
+    {% avatar_button_component position="1" side="right" url="user_home" icon="ticket" size="big" %}
+    {% flag_button_component position="2" side="right" language_code=LANGUAGE_CODE size="small" %}
+    {% menu_button_component position="3" side="right" url="tickets" icon="ticket" size="small" %}
+    {% menu_button_component position="4" side="right" url="logout" icon="logout" size="small" %}
+
+    {% else %}
+    <!-- right buttons -->
+    {% flag_button_component position="1" side="right" language_code=LANGUAGE_CODE size="big" %}
+    {% endif %}
 </nav>

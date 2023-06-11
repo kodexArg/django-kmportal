@@ -5,11 +5,10 @@
             fixed
             {{ position }}
             {% if side == 'left' %}left-0{% else %}right-0{% endif %}
-            {% if size == 'small' %}w-14 md:w-20 h-14{% else %}w-20 h-16{% endif %}
+            {% if size == 'small' %}w-14 md:w-20 h-14{% else %}w-24 h-20{% endif %}
             bg-sky-900 
             rounded-{% if side == 'left' %}r{% else %}l{% endif %}-full
             flex {% if side == 'left' %}justify-end{% else %}justify-start{% endif %}
-            drop-shadow-md
             ">
 
         <img class="p-1 aspect-square h-full rounded-full" src="{% static 'svg/'|add:icon|add:'.svg' %}" />

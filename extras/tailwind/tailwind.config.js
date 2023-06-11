@@ -24,6 +24,11 @@ module.exports = {
         'rubik': ['Rubik', 'Quicksand', 'sans-serif'],
         'Roboto': ['Roboto', 'Quicksand', 'sans-serif'],
       },
+      colors: {
+        'pantone307c': 'rgb(0, 122, 165)',
+        'pantone7689c': 'rgb(0, 119, 200)',
+        'pantone7472c': 'rgb(75, 183, 173)',
+      },
     },
     plugins: [
       require('@tailwindcss/typography'),
