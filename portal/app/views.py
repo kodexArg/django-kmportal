@@ -120,7 +120,7 @@ class VehiclesView(CustomTemplateView):
 ### Helpers ###
 def get_provider_id(user, provider_name):
     """get provider id from social account, required to retrieve
-    image from social net
+    image from social nets
     """
     try:
         social_account = user.socialaccount_set.get(provider=provider_name)

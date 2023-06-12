@@ -2,22 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-.video-background {
-  @apply fixed top-0 bottom-0 left-0 right-0 p-0 m-0 object-cover w-full h-full z-[-999];
-}
-
-.welcome-card {
-  @apply hidden w-full md:max-w-md max-w-sm flex items-center bg-gray-100 self-center max-h-[95vw] z-10 rounded-lg shadow-md;
-}
-
-.card-headder {
-  @apply p-3 text-xl font-bold;
-}
-
-.card-body {
-  @apply px-6 max-h-64 py-2 flex flex-col text-sm text-gray-900 text-justify overflow-y-auto bg-white bg-opacity-80;
-}
-
-.card-footer {
-  @apply h-16 px-3 bg-gray-100 py-2 flex justify-center items-center rounded-b-lg;
-}
