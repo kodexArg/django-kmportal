@@ -1,3 +1,4 @@
+from loguru import logger as log
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
@@ -11,6 +12,7 @@ from app.models import CompanySocialAccount
 
 class CustomTemplateView(TemplateView):
     """Used instead of TemplateView to add a custom context_data method"""
+
     provider_name = "Google"
 
     def get_provider_id(self, user, provider_name):
@@ -40,6 +42,7 @@ class AboutUsView(CustomTemplateView):
 class ContactUsView(CustomTemplateView):
     template_name = "contact_us.html"
 
+
 class UnderConstructionView(CustomTemplateView):
     template_name = "under_construction.html"
 
@@ -64,20 +67,28 @@ class CompanyView(CustomTemplateView):
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
             try:
-                social_account = self.request.user.socialaccount_set.get(provider=self.provider_name)
-                company_social_account = CompanySocialAccount.objects.get(social_account=social_account)
+                social_account = self.request.user.socialaccount_set.get(
+                    provider=self.provider_name
+                )
+                company_social_account = CompanySocialAccount.objects.get(
+                    social_account=social_account
+                )
                 if company_social_account.company is None:
-                    return redirect('user_home')
+                    return redirect("user_home")
             except CompanySocialAccount.DoesNotExist:
-                return redirect('user_home')
+                return redirect("user_home")
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
-            social_account = self.request.user.socialaccount_set.get(provider=self.provider_name)
-            company_social_account = CompanySocialAccount.objects.get(social_account=social_account)
-            context['company'] = company_social_account.company
+            social_account = self.request.user.socialaccount_set.get(
+                provider=self.provider_name
+            )
+            company_social_account = CompanySocialAccount.objects.get(
+                social_account=social_account
+            )
+            context["company"] = company_social_account.company
         return context
 
 
@@ -95,15 +106,25 @@ class OrdersView(CustomTemplateView):
 class TicketsView(CustomTemplateView):
     template_name = "modules/tickets.html"
 
+
 @method_decorator(login_required, name="dispatch")
 class CashTransferView(CustomTemplateView):
     template_name = "modules/cashtransfer.html"
+
 
 @method_decorator(login_required, name="dispatch")
 class VehiclesView(CustomTemplateView):
     template_name = "modules/vehicles.html"
 
 
-### Code snippets ###
-def welcome_card_html(request):
-    return render(request, "welcome_card.html")
+### Helpers ###
+def get_provider_id(user, provider_name):
+    """get provider id from social account, required to retrieve
+    image from social net
+    """
+    try:
+        social_account = user.socialaccount_set.get(provider=provider_name)
+        log.debug(type(social_account.get_provider().id))
+        return social_account.get_provider().id
+    except user.socialaccount_set.model.DoesNotExist:
+        return None

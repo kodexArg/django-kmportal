@@ -1,16 +1,56 @@
-{% load static %}
+{% load static socialaccount i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
-<a class="flex" href="{% url url %}">
+<a class="flex" href="{% if url == '#' %}#{% else %}{% url url %}{% endif %}">
     <div class="
             fixed
-            {{ position }}
+            {{ pos }}
             {% if side == 'left' %}left-0{% else %}right-0{% endif %}
-            {% if size == 'small' %}w-10 md:w-16 h-10{% else %}w-26 h-16{% endif %}
+            {% if size == 'small' %}h-12{% else %}h-16{% endif %}
+            aspect-square md:aspect-fibbo-fwd
             bg-pantone307c 
             rounded-{% if side == 'left' %}r{% else %}l{% endif %}-full
             flex {% if side == 'left' %}justify-end{% else %}justify-start{% endif %}
             ">
 
+        {% if style == 'avatar' %}
+        <!-- social avatar -->
+        {% if user.is_authenticated %}
+        {% with provider_id=user.socialaccount_set.all.0.get_provider.id %}
+        {% if provider_id == 'google' %}
+        <a href="{% url 'user_home' %}" class="flex p-1">
+            <img class="rounded-full border-2 border-white" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
+        </a>
+        {% endif %}
+        {% endwith %}
+        {% else %}
+        not working dude
+        {% endif %}
+
+        {% elif style == 'flag' %}
+        <!-- change language -->
+        <form id="language-form-{{ LANGUAGE_CODE }}" action="{% url 'set_language' %}" method="post"
+            class="p-1 w-full h-full">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}">
+            {% if LANGUAGE_CODE == 'es' %}
+            <input name="language" type="hidden" value="pt">
+            {% elif LANGUAGE_CODE == 'pt' %}
+            <input name="language" type="hidden" value="en">
+            {% else %}
+            <input name="language" type="hidden" value="es">
+            {% endif %}
+            <button type="submit" form="language-form-{{ LANGUAGE_CODE }}"
+                class="aspect-square border-2 border-white h-full bg-no-repeat bg-cover rounded-full"
+                style="background-image: url({% static 'svg/languages/'|add:LANGUAGE_CODE|add:'.svg' %});"
+                aria-label="Change Language">
+            </button>
+        </form>
+
+        {% else %}
+        <!-- normal button -->
         <img class="p-1 aspect-square h-full rounded-full" src="{% static 'svg/'|add:icon|add:'.svg' %}" />
+        {% endif %}
+
     </div>
 </a>

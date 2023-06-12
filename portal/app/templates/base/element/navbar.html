@@ -2,24 +2,25 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 <nav class="fixed top-0">
-
-
+    
+    {% menu_button_component pos="1" size="large" side="left" url="home" icon="my-company-logo" %}
+    
     {% if user.is_authenticated %}
     <!-- left buttons -->
-    {% menu_button_component position="1" side="left" url="home" icon="my-company-logo" size="big" %}
-    {% menu_button_component position="2" side="left" url="company" icon="gears" size="small" %}
-    {% menu_button_component position="3" side="left" url="vehicles" icon="truck" size="small" %}
-    {% menu_button_component position="4" side="left" url="orders" icon="fuel" size="small" %}
-    {% menu_button_component position="5" side="left" url="cashtransfer" icon="cash" size="small" %}
-
+    {% menu_button_component pos="2" side="left" url="company" icon="gears" %}
+    {% menu_button_component pos="3" side="left" url="vehicles" icon="truck" %}
+    {% menu_button_component pos="4" side="left" url="orders" icon="fuel" %}
+    {% menu_button_component pos="5" side="left" url="cashtransfer" icon="cash" %}
+    
     <!-- right buttons -->
-    {% avatar_button_component position="1" side="right" url="user_home" icon="my-company-logo" size="big" %}
-    {% flag_button_component position="2" side="right" language_code=LANGUAGE_CODE size="small" %}
-    {% menu_button_component position="3" side="right" url="tickets" icon="ticket" size="small" %}
-    {% menu_button_component position="4" side="right" url="logout" icon="logout" size="small" %}
+    {% menu_button_component pos="1" side="right" style="avatar" size="large" %}
+    {% menu_button_component pos="2" side="right" style="flag" %}
+    {% menu_button_component pos="3" side="right" url="tickets" icon="ticket" %}
+    {% menu_button_component pos="4" side="right" url="logout" icon="logout" %}
 
     {% else %}
-    <!-- right buttons -->
-    {% flag_button_component position="1" side="right" language_code=LANGUAGE_CODE size="big" %}
+    <!-- Not a registered user -->
+    {% menu_button_component pos="1" side="right" style="flag" size="large" %}
+
     {% endif %}
 </nav>

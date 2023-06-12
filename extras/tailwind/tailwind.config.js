@@ -19,6 +19,13 @@ module.exports = {
       '6xl': '4rem',
     },
     extend: {
+      aspectRatio: {
+        'fibbo-up': '1.618', //golden ratio'
+        'fibbo-down': '0.618',
+        'fibbo-ret': '0.382',
+        'fibbo-fwd': '1.382',
+        'fibbo-half': '0.5', // wheres the fibbo?
+      },
       fontFamily: {
         'quicksand': ['Quicksand', 'Rubik', 'sans-serif'],
         'rubik': ['Rubik', 'Quicksand', 'sans-serif'],
@@ -29,6 +36,9 @@ module.exports = {
         'pantone7689c': 'rgb(43, 142, 193)',
         'pantone7472c': 'rgb(90, 183, 178)',
       },
+    },
+    corePlugins: {
+      aspectRatio: false,
     },
     plugins: [
       require('@tailwindcss/typography'),
