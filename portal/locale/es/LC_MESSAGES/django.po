@@ -22,7 +22,7 @@ msgstr ""
 #: app/templates/contact_us.html:3 app/templates/home.html:3
 #: app/templates/under_construction.html:3 app/templates/user_home.html:3
 msgid "t_page_title"
-msgstr "Portal KM 1151"
+msgstr "Portal&nbsp;KM&nbsp;1151"
 
 #: app/templates/base/element/footer.html:2
 msgid "t_about"
@@ -48,7 +48,7 @@ msgstr ""
 
 #: app/templates/home.html:29 app/templates/home.html:55
 msgid "t_login_with_google"
-msgstr "Iniciar sesión con Google"
+msgstr "Ingresar con Google"
 
 #: app/templates/home.html:38
 msgid "carriers_card_text_title"
@@ -116,7 +116,7 @@ msgstr "Camiones"
 
 #: app/templates/user_home.html:12
 msgid "user_home_welcome"
-msgstr "Bienvenido a Portal KM 1151"
+msgstr "Bienvenido a Portal&nbsp;KM&nbsp;1151"
 
 #: app/templates/user_home.html:17
 msgid "user_home_greeting"

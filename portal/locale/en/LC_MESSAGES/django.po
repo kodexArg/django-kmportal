@@ -22,11 +22,11 @@ msgstr ""
 #: app/templates/contact_us.html:3 app/templates/home.html:3
 #: app/templates/under_construction.html:3 app/templates/user_home.html:3
 msgid "t_page_title"
-msgstr "Portal KM 1151"
+msgstr "Portal&nbsp;KM&nbsp;1151"
 
 #: app/templates/base/element/footer.html:2
 msgid "t_about"
-msgstr "About Our Company"
+msgstr "Our Company"
 
 #: app/templates/base/element/footer.html:3
 msgid "t_contact"
@@ -114,7 +114,7 @@ msgstr "Trucks"
 
 #: app/templates/user_home.html:12
 msgid "user_home_welcome"
-msgstr "Welcome to Portal KM 1151"
+msgstr "Welcome to Portal&nbsp;KM&nbsp;1151"
 
 #: app/templates/user_home.html:17
 msgid "user_home_greeting"

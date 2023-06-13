@@ -25,4 +25,4 @@ local-cdn/
 
 # Paperwork
 **/paperwork/
-extras/tailwind/node_modules/
+# extras/tailwind/node_modules/

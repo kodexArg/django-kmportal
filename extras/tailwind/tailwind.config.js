@@ -41,10 +41,10 @@ module.exports = {
       aspectRatio: false,
     },
     plugins: [
-      require('@tailwindcss/typography'),
+      require('@marcoguidara/tailwindcss-quick-center'), // center-flex, center-...
       require('@tailwindcss/forms'),
       require('@tailwindcss/aspect-ratio'),
-      require('@tailwindcss/container-queries'),
+      require('@tailwindcss/container-queries'), // how to use: https://github.com/tailwindlabs/tailwindcss-container-queries
     ],
   },
 }

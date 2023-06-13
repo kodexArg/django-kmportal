@@ -4,27 +4,29 @@
 
 
 {% block content %}
-<h1 class="z-50 fixed top-8 font-bold font-quicksand text-2xl md:text-xl drop-shadow-md">{% translate "company_details" %}</h1>
-<section id="Company">
+{% module_title_component 'company_details' %}
+<section id="Company" class="mt-24 mx-12 md:mx-10">
     <article class="flex flex-col">
         <div class="p-2">
-            <h3 class="font-semibold">
+            <h3 class="font-semibold text-sky-900 font-Roboto text-sm">
                 {% translate "company_name" %}
             </h3>
-            <p>{{ company.name }}</p>
+            <p class="from-sky-950 font-mono text-sm text-sky-950">{{ company.name }}</p>
         </div>
         <div class="p-2">
-            <h3 class="font-semibold">
+            <h3 class="font-semibold text-sky-900 font-Roboto text-sm">
                 {% translate "company_fantasy_name" %}
             </h3>
-            <p>{{ company.fantasy_name }}</p>
+            <p class="from-sky-950 font-mono text-sm text-sky-950">{{ company.fantasy_name }}</p>
         </div>
         <div class="p-2">
-            <h3 class="font-semibold">
+            <h3 class="font-semibold text-sky-900 font-Roboto text-sm">
                 {% translate "company_cuit" %}
             </h3>
-            <p>{{ company.cuit }}</p>
+            <p class="from-sky-950 font-mono text-sm text-sky-950">{{ company.cuit }}</p>
         </div>
+    </article>
+    <article>
     </article>
 </section>
 
