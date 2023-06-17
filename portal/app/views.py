@@ -15,6 +15,7 @@ class CustomTemplateView(TemplateView):
 
     provider_name = "Google"
 
+    # context["provider_id"]
     def get_provider_id(self, user, provider_name):
         try:
             social_account = user.socialaccount_set.get(provider=provider_name)
@@ -22,13 +23,28 @@ class CustomTemplateView(TemplateView):
         except user.socialaccount_set.model.DoesNotExist:
             return None
 
+    # context["company"]
+    def get_company(self, user, provider_name):
+        try:
+            social_account = user.socialaccount_set.get(provider=provider_name)
+            return social_account.companysocialaccount.company
+        except (
+            user.socialaccount_set.model.DoesNotExist,
+            CompanySocialAccount.DoesNotExist,
+        ):
+            print("Company does not exist")
+            return None
+
+    # Context data getter
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             context["provider_id"] = self.get_provider_id(
                 self.request.user, self.provider_name
             )
+            context["company"] = self.get_company(self.request.user, self.provider_name)
         return context
+
 
 
 class HomeView(CustomTemplateView):

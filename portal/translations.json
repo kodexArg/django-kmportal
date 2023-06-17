@@ -41,7 +41,7 @@
   },
   "associated_shops_card_text_title": {
     "es": "Tiendas Asociadas",
-    "en": "Associated Shops",
+    "en": "Asociated Stores",
     "pt": "Lojas Associadas"
   },
   "associated_shops_card_text": {
@@ -55,9 +55,9 @@
     "pt": "Entrar com Google"
   },
   "carriers_card_text_title": {
-    "es": "Transportistas",
-    "en": "Carriers",
-    "pt": "Transportadoras"
+    "es": "Empresas de Transporte",
+    "en": "Transport Commpanies",
+    "pt": "Empresas de Transporte "
   },
   "carriers_card_text": {
     "es": "¡Bienvenido a las Tiendas Asociadas del Parador KM 1151! Este es un espacio único donde los negocios prosperan en el corazón de la montaña entre Mendoza y Chile. Nos alegra mucho tenerles con nosotros y les invitamos a iniciar sesión con Google para mantener una comunicación fluida y estar al día con las novedades del Parador y la Estación de Servicios KM 1151. Aquí, ustedes tienen la ventaja de contar con servicios que van desde internet hasta sanitarios, todo para facilitar su operación diaria. ¡Esperamos que su experiencia sea excepcional con nosotros!",
@@ -65,14 +65,14 @@
     "pt": "Bem-vindo às Lojas Associadas do Parador KM 1151! Este é um espaço único onde os negócios prosperam no coração da montanha entre Mendoza e Chile. Estamos emocionados por tê-los conosco e convidamos você a fazer login com o Google para melhorar a comunicação e manter-se atualizado com as últimas notícias do Parador e da Estação de Serviços KM 1151. Aqui, você tem a vantagem de serviços que vão desde internet até sanitários, tudo para facilitar sua operação diária. Esperamos que sua experiência conosco seja excepcional!"
   },
   "i_am_associated_shops_button": {
-    "es": "Tiendas Asociadas",
-    "en": "Associated Shops",
-    "pt": "Lojas Associadas"
+    "es": "Tiendas",
+    "en": "Shops",
+    "pt": "Lojas"
   },
   "i_am_carriers_button": {
     "es": "Transportista",
     "en": "Carrier",
-    "pt": "Transportadora"
+    "pt": "Operadora"
   },
   "user_home_welcome": {
     "es": "Bienvenido&nbsp;a<br>Portal&nbsp;KM&nbsp;1151",

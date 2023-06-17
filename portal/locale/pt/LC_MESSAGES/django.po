@@ -52,7 +52,7 @@ msgstr "Entrar com Google"
 
 #: app/templates/home.html:38
 msgid "carriers_card_text_title"
-msgstr "Transportadoras"
+msgstr "Empresas de Transporte "
 
 #: app/templates/home.html:42
 msgid "carriers_card_text"
@@ -68,11 +68,11 @@ msgstr ""
 
 #: app/templates/home.html:67
 msgid "i_am_associated_shops_button"
-msgstr "Lojas Associadas"
+msgstr "Lojas"
 
 #: app/templates/home.html:71
 msgid "i_am_carriers_button"
-msgstr "Transportadora"
+msgstr "Operadora"
 
 #: app/templates/modules/cashtransfer.html:3
 msgid "cashtransfer_page_title"

@@ -7,23 +7,26 @@
 <div class="-z-50 fixed top-0 bottom-0 left-0 right-0 bg-cover bg-center w-full h-full"
     style="background-image: url('{% static 'videos_background/mountains.jpg' %}');">
 </div>
+
+
 <section class="grid
-                place-items-center h-screen
+place-items-center h-screen
                 mx-16 md:mx-36
                 px-2
                 ">
-    <div class="flex
-                w-auto h-auto
-                rounded-lg
-                p-1
-                ">
-        <span class="neon text-center font-Monserrat text-white font-bold text-lg leading-tight" style="
-            text-shadow: 0 0 5px #fff, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00, 0 0 98px #ff0000;
-            ">
+    <div class="flex flex-col
+    w-auto h-auto
+    rounded-lg
+    p-1
+    ">
+        {% if not company %}
+        <span class="text-center font-Monserrat text-white font-bold text-lg leading-tight" style="
+    text-shadow: 0 0 5px #fff, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+    ">
             {% translate 'user_home_greeting' %}
         </span>
+        {% endif %}
     </div>
 </section>
+
 {% endblock %}
-
-

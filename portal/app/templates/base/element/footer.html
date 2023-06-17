@@ -15,10 +15,13 @@
             dark:bg-[#1E2023]
             dark:text-sky-100
             ">
-
     <span class="text-xs">&copy; 2023 AVS Group</span>
     <ul class="flex justify-end space-x-2 text-xs">
+        {% if company %}
+        <span class="place-self-center">{{ company}}</span>
+        {% else %}
         <li><a href="{% url 'about-us' %}" class="hover:cursor-pointer">{{ translated_about|upper }}</a></li>
         <li><a href="{% url 'contact-us' %}" class="hover:cursor-pointer">{{ translated_contact|upper }}</a></li>
+        {% endif %}
     </ul>
 </div>

@@ -34,7 +34,7 @@ msgstr "Contact"
 
 #: app/templates/home.html:12
 msgid "associated_shops_card_text_title"
-msgstr "Associated Shops"
+msgstr "Asociated Stores"
 
 #: app/templates/home.html:16
 msgid "associated_shops_card_text"
@@ -51,7 +51,7 @@ msgstr "Login with Google"
 
 #: app/templates/home.html:38
 msgid "carriers_card_text_title"
-msgstr "Carriers"
+msgstr "Transport Commpanies"
 
 #: app/templates/home.html:42
 msgid "carriers_card_text"
@@ -66,7 +66,7 @@ msgstr ""
 
 #: app/templates/home.html:67
 msgid "i_am_associated_shops_button"
-msgstr "Associated Shops"
+msgstr "Shops"
 
 #: app/templates/home.html:71
 msgid "i_am_carriers_button"
