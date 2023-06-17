@@ -1301,6 +1301,11 @@ video {
     margin-right: 6rem;
   }
 
+  .md\:mx-36 {
+    margin-left: 9rem;
+    margin-right: 9rem;
+  }
+
   .md\:mb-12 {
     margin-bottom: 3rem;
   }
