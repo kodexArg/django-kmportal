@@ -4,13 +4,26 @@
 
 
 {% block content %}
-{% module_title_component 'user_home_welcome' %}
-<div class="fixed top-0 bottom-0 left-0 right-0 bg-cover bg-center w-full h-full z-[-999];"
+<div class="-z-50 fixed top-0 bottom-0 left-0 right-0 bg-cover bg-center w-full h-full"
     style="background-image: url('{% static 'videos_background/mountains.jpg' %}');">
 </div>
-<section class="pt-24 md:pt-10 w-auto flex flex-col mx-11 md:mx-20 rounded-md justify-center drop-shadow-lg">
-    <article class="w-full p-2 mt-6 flex-grow pb-11 text-white rounded-md text-sm text-justify">
-        {% translate 'user_home_greeting' %}
-    </article>
+<section class="grid
+                place-items-center h-screen
+                mx-16 md:mx-24
+                px-2
+                ">
+    <div class="flex
+                w-auto h-auto
+                rounded-lg
+                p-1
+                ">
+        <span class="neon text-center font-Monserrat text-white font-bold text-lg" style="
+            text-shadow: 0 0 5px #fff, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+            ">
+            {% translate 'user_home_greeting' %}
+        </span>
+    </div>
 </section>
 {% endblock %}
+
+

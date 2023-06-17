@@ -116,13 +116,12 @@ msgstr "Caminhões"
 
 #: app/templates/user_home.html:12
 msgid "user_home_welcome"
-msgstr "Bem-vindo ao Portal&nbsp;KM&nbsp;1151"
+msgstr "Bem-vindo&nbsp;ao<br>Portal&nbsp;KM&nbsp;1151"
 
 #: app/templates/user_home.html:17
 msgid "user_home_greeting"
 msgstr ""
 "👋 Olá e bem-vinde ao Portal KM 1151! Estamos verificando alguns detalhes 🕵️ "
-"para que você possa entrar. Enquanto isso, relaxe e aproveite a magnífica "
-"vista da montanha 😜...🙏. Em breve, você terá acesso a todas as maravilhosas "
-"ferramentas e benefícios que preparamos para você. Se tiver alguma dúvida, "
-"não hesite em nos contactar. Estamos aqui para ajudar! 🤗"
+"para que você possa entrar. Em breve, você terá acesso a todas as "
+"maravilhosas ferramentas e benefícios que preparamos para você. Se tiver "
+"alguma dúvida, não hesite em nos contactar. Estamos aqui para ajudar! 🤗"

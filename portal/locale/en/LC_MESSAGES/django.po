@@ -114,13 +114,12 @@ msgstr "Trucks"
 
 #: app/templates/user_home.html:12
 msgid "user_home_welcome"
-msgstr "Welcome to Portal&nbsp;KM&nbsp;1151"
+msgstr "Welcome&nbsp;to<br>Portal&nbsp;KM&nbsp;1151"
 
 #: app/templates/user_home.html:17
 msgid "user_home_greeting"
 msgstr ""
 "👋 Hello and welcome to the Portal KM 1151! We're just checking a few details"
-" 🕵️ so you can log in. In the meantime, sit back and enjoy the magnificent "
-"mountain view 😜...🙏. You'll soon have access to all the wonderful tools and "
-"benefits we've prepared for you. If you have any questions, please don't "
-"hesitate to contact us. We're here to help! 🤗"
+" 🕵️ so you can log in. You'll soon have access to all the wonderful tools "
+"and benefits we've prepared for you. If you have any questions, please don't"
+" hesitate to contact us. We're here to help! 🤗"

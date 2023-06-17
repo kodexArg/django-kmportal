@@ -7,11 +7,11 @@ register = template.Library()
 
 TAILWIND_TOP_VALUE = {
     "1": "top-[0.5rem]",
-    "2": "top-[5.5rem]",
-    "3": "top-[9rem]",
-    "4": "top-[12.5rem]",
-    "5": "top-[16rem]",
-    "6": "top-[19.5rem]",
+    "2": "top-[7rem]",
+    "3": "top-[11.5rem]",
+    "4": "top-[16rem]",
+    "5": "top-[20.5rem]",
+    "6": "top-[25rem]",
 }
 
 

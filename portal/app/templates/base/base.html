@@ -16,7 +16,9 @@
 <body class="flex flex-col bg-gradient-to-b from-sky-200 to-transparent min-h-screen">
     <header class="fixed w-full z-50 bg-gradient-to-b from-sky-200 to-transparent flex-shrink-0">
         <!-- NAVBAR -->
+        {% block navbar %}
         {% include 'base/element/navbar.html' %}
+        {% endblock %}
     </header>
 
     <main role="main" class="flex flex-col flex-grow">

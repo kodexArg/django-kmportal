@@ -5,19 +5,6 @@ module.exports = {
     "../../portal/app/templatetags/*.py",
   ],
   theme: {
-    fontSize: {
-      'tiny': '.25rem',
-      'xs': '.5rem',
-      'sm': '.75rem',
-      'base': '1rem',
-      'lg': '1.125rem',
-      'xl': '1.25rem',
-      '2xl': '1.5rem',
-      '3xl': '1.875rem',
-      '4xl': '2.25rem',
-      '5xl': '3rem',
-      '6xl': '4rem',
-    },
     extend: {
       aspectRatio: {
         'fibbo-up': '1.618', //golden ratio'
@@ -30,6 +17,7 @@ module.exports = {
         'quicksand': ['Quicksand', 'Rubik', 'sans-serif'],
         'rubik': ['Rubik', 'Quicksand', 'sans-serif'],
         'Roboto': ['Roboto', 'Quicksand', 'sans-serif'],
+        'Monserrat': ['Monserrat', 'Quicksand', 'sans-serif'],
       },
       colors: {
         'pantone307c': 'rgb(0, 105, 166)',
@@ -41,7 +29,6 @@ module.exports = {
       aspectRatio: false,
     },
     plugins: [
-      require('@marcoguidara/tailwindcss-quick-center'), // center-flex, center-...
       require('@tailwindcss/forms'),
       require('@tailwindcss/aspect-ratio'),
       require('@tailwindcss/container-queries'), // how to use: https://github.com/tailwindlabs/tailwindcss-container-queries

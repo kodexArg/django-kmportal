@@ -3,6 +3,8 @@
 {% block title %}{% translate "company_page_title" %}{% endblock %}
 
 
+{% block navbar %}{% include 'base/element/component_navbar.html' %}{% endblock %}
+
 {% block content %}
 {% module_title_component 'company_details' %}
 <section id="Company" class="mt-24 mx-12 md:mx-10">
