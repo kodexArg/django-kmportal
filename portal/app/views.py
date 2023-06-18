@@ -1,4 +1,4 @@
-from loguru import logger as log
+from loguru import logger
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
@@ -6,8 +6,9 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views import View
 from django.views.generic import TemplateView
+from app.forms import CreateDriverForm, UpdateDriverForm, DeleteDriverForm
 
-from app.models import CompanySocialAccount
+from app.models import CompanySocialAccount, Drivers
 
 
 class CustomTemplateView(TemplateView):
@@ -46,7 +47,7 @@ class CustomTemplateView(TemplateView):
         return context
 
 
-
+### UNAUTHORIZED PAGES ###
 class HomeView(CustomTemplateView):
     template_name = "home.html"
 
@@ -81,6 +82,21 @@ class CompanyView(CustomTemplateView):
     template_name = "modules/company.html"
 
     def dispatch(self, request, *args, **kwargs):
+        """overriding dispatch
+        - If the user isn't authenticated, it doesn't do any of these checks and
+        the request is dispatched normally.
+        - If the user is authenticated, the method tries to get a social_account
+        that's associated with this use.
+           = Then it tries to get a CompanySocialAccount that's associated with
+           the social_account.
+           = If the CompanySocialAccount doesn't exist or the associated company
+           field in company_social_account is None, it will redirect the user to
+           the "user_home" page.
+
+         If everything is fine (i.e., the user is authenticated, the
+         CompanySocialAccount exists and the associated company field is not None),
+         it continues to dispatch the request normally.
+        """
         if self.request.user.is_authenticated:
             try:
                 social_account = self.request.user.socialaccount_set.get(
@@ -95,6 +111,46 @@ class CompanyView(CustomTemplateView):
                 return redirect("user_home")
         return super().dispatch(request, *args, **kwargs)
 
+    def post(self, request, *args, **kwargs):
+        """Multi Forms handler
+        update form for each field then create to add new fields
+        'from_type' is a hidden field to swtich from update to create form
+        """
+
+        # Create form
+        form_type = request.POST.get("form_type")
+        if form_type == "create_driver":
+            form = CreateDriverForm(request.POST)
+            if form.is_valid():
+                driver = form.save(commit=False)
+                driver.company = self.get_company(request.user, self.provider_name)
+                driver.save()
+                return redirect("company")
+            else:
+                logger.error(form.errors)
+            logger.info(request.POST)
+
+        # Update form
+        elif form_type == "update_driver":
+            driver_id = request.POST.get("driver_id")
+            driver = Drivers.objects.get(id=driver_id)
+            form = UpdateDriverForm(request.POST, instance=driver)
+            if form.is_valid():
+                form.save()
+                return redirect("company")
+            else:
+                logger.error(form.errors)
+
+            logger.info(request.POST)
+
+        # Delete form
+        elif form_type == "delete_driver":
+            driver_id = request.POST.get("driver_id")
+            driver = Drivers.objects.get(id=driver_id)
+            driver.delete()
+
+        return self.get(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
@@ -105,6 +161,12 @@ class CompanyView(CustomTemplateView):
                 social_account=social_account
             )
             context["company"] = company_social_account.company
+            context["drivers"] = Drivers.objects.filter(
+                company=company_social_account.company
+            )
+            context["create_form"] = CreateDriverForm(prefix="create")
+            context["update_form"] = UpdateDriverForm(prefix="update")
+            context["delete_form"] = DeleteDriverForm(prefix="delete")
         return context
 
 

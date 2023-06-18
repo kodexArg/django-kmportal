@@ -37,6 +37,7 @@ def menu_button_component(context, pos, side, icon="", size="small", url="#", st
     if not os.path.isfile(f"static/svg/{icon}.svg"):
         icon = "question"  # TODO: Replace question with a known good icon
     user = context["request"].user  # Get the user object from the context
+    
     return {
         "icon": icon,
         "size": size,
@@ -46,3 +47,55 @@ def menu_button_component(context, pos, side, icon="", size="small", url="#", st
         "style": style,
         "user": user,  # Pass the user object to the template
     }
+
+
+@register.simple_tag()
+def input_field_component(label, name, type="text", value="", style="", required=True):
+    required_html = "required" if required else ""
+    html = f"""
+        <div class="flex justify-between items-center">
+            <label
+                class="text-xs text-pantone7689c w-1/3 align-baseline text-left"
+                >{ label }</label>
+            <input
+                class="border rounded p-1 w-2/3 text-sm font-rubik"
+                type="{ type }" 
+                name="{ name }" 
+                placeholder="{ label }"
+                value="{ value }"
+                { required_html }
+                >
+        </div>
+    """
+    return mark_safe(html)    
+
+
+@register.simple_tag()
+def checkbox_component(label, name, checked=False):
+    checked_html = "checked" if checked else ""
+    html = f"""
+        <div class="flex w-full space-x-2 items-center">
+            <input
+                class="border rounded p-1"
+                type="checkbox" 
+                name="{ name }" 
+                { checked_html }
+                >
+            <label
+                class="text-xs text-pantone7689c w-1/3 align-baseline text-left"
+                >{ label }</label>
+        </div>
+    """
+    return mark_safe(html)
+
+
+@register.simple_tag()
+def rbutton_component(caption, bg="bg-pantone7689c", fg="text-white", size=""):
+    """Rounded button component"""
+    html = f"""
+        <button type="submit" class="{size} rounded-full px-4 py-1 {bg} {fg} self-end font-quicksand font-bold text-sm">
+            {caption}
+        </button>
+    """
+    return mark_safe(html)
+
