@@ -53,10 +53,10 @@ urlpatterns += i18n_patterns(
     
     # Modules Pages
     path("company/", CompanyView.as_view(), name="company"),
+    path("vehicles/", VehiclesView.as_view(), name="vehicles"),
     path("drivers/", UnderConstructionView.as_view(), name="drivers"),
     path("orders/", UnderConstructionView.as_view(), name="orders"),
     path("tickets/", UnderConstructionView.as_view(), name="tickets"),
-    path("vehicles/", VehiclesView.as_view(), name="vehicles"),
     path("cashtransfer/", UnderConstructionView.as_view(), name="cashtransfer"),
 )
 

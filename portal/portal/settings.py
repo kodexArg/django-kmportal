@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -113,7 +114,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 SOCIAL_ACCOUNT_ADAPTER = "app.adapters.CustomAdapter"
 
 
@@ -124,6 +124,8 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
 STATIC_ROOT = BASE_DIR.parent / "local-cdn" / "static"  # stored for production
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 # Default primary key field type
@@ -136,6 +138,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 
 INSTALLED_APPS += [
+    "whitenoise.runserver_nostatic",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -193,3 +196,6 @@ LANGUAGES = [
     ("pt", "Portuguêse"),
 ]
 
+
+## DEBUG
+# LIVERELOAD_HOST = '0.0.0.0'

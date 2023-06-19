@@ -1,5 +1,5 @@
 from django import forms
-from .models import Drivers
+from .models import Drivers, Tractors, Trailers
 
 
 # Company Details Forms
@@ -30,3 +30,14 @@ class UpdateDriverForm(forms.ModelForm):
 
 class DeleteDriverForm(forms.Form):
     id = forms.IntegerField()
+
+class TractorForm(forms.ModelForm):
+    class Meta:
+        model = Tractors
+        fields = ["domain"]
+    
+class TrailerForm(forms.ModelForm):
+    class Meta:
+        model = Trailers
+        fields = ["domain"]
+
