@@ -113,5 +113,15 @@
     "en": "Cash Transfer",
     "es": "Transferencia de efectivo",
     "pt": "Transferência de dinheiro"
+  },
+  "vehicle_page_title": {
+    "en": "Tractors and Trailers",
+    "es": "Tractores y Acoplados",
+    "pt": "Tratores e Reboques"
+  },
+  "vehicle_title": {
+    "en": "Tractors and Trailers",
+    "es": "Tractores y Acoplados",
+    "pt": "Tratores e Reboques"
   }
 }

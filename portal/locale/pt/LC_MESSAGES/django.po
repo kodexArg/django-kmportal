@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-06 21:49+0000\n"
+"POT-Creation-Date: 2023-06-19 13:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,9 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/templates/about_us.html:3 app/templates/base/element/navbar.html:55
-#: app/templates/contact_us.html:3 app/templates/home.html:3
-#: app/templates/under_construction.html:3 app/templates/user_home.html:3
+#: app/templates/about_us.html:3 app/templates/contact_us.html:3
+#: app/templates/home.html:3 app/templates/under_construction.html:3
+#: app/templates/user_home.html:3
 msgid "t_page_title"
 msgstr "Portal&nbsp;KM&nbsp;1151"
 
@@ -32,11 +32,19 @@ msgstr "Nossa Empresa"
 msgid "t_contact"
 msgstr "Contato"
 
-#: app/templates/home.html:12
+#: app/templates/components/google_button.html:12
+msgid "t_login_with_google"
+msgstr "Entrar com Google"
+
+#: app/templates/components/welcome_card.html:6
 msgid "associated_shops_card_text_title"
 msgstr "Lojas Associadas"
 
-#: app/templates/home.html:16
+#: app/templates/components/welcome_card.html:8
+msgid "carriers_card_text_title"
+msgstr "Empresas de Transporte "
+
+#: app/templates/components/welcome_card.html:13
 msgid "associated_shops_card_text"
 msgstr ""
 "Bem-vindo às nossas Lojas Associadas! Estamos emocionados por você estar "
@@ -46,15 +54,7 @@ msgstr ""
 "acesse as oportunidades que estão te esperando. Estamos ansiosos para tê-lo "
 "conosco!"
 
-#: app/templates/home.html:29 app/templates/home.html:55
-msgid "t_login_with_google"
-msgstr "Entrar com Google"
-
-#: app/templates/home.html:38
-msgid "carriers_card_text_title"
-msgstr "Empresas de Transporte "
-
-#: app/templates/home.html:42
+#: app/templates/components/welcome_card.html:15
 msgid "carriers_card_text"
 msgstr ""
 "Bem-vindo às Lojas Associadas do Parador KM 1151! Este é um espaço único "
@@ -66,11 +66,11 @@ msgstr ""
 "facilitar sua operação diária. Esperamos que sua experiência conosco seja "
 "excepcional!"
 
-#: app/templates/home.html:67
+#: app/templates/home.html:25
 msgid "i_am_associated_shops_button"
 msgstr "Lojas"
 
-#: app/templates/home.html:71
+#: app/templates/home.html:29
 msgid "i_am_carriers_button"
 msgstr "Operadora"
 
@@ -82,25 +82,21 @@ msgstr "Transferência de dinheiro"
 msgid "company_page_title"
 msgstr "Empresa"
 
-#: app/templates/modules/company.html:7
+#: app/templates/modules/company.html:9
 msgid "company_details"
 msgstr "Detalhes da Companhia"
 
-#: app/templates/modules/company.html:12
+#: app/templates/modules/company.html:16
 msgid "company_name"
 msgstr "Empresa"
 
-#: app/templates/modules/company.html:18
+#: app/templates/modules/company.html:22
 msgid "company_fantasy_name"
 msgstr "Fantasia"
 
-#: app/templates/modules/company.html:24
+#: app/templates/modules/company.html:28
 msgid "company_cuit"
 msgstr "CNPJ"
-
-#: app/templates/modules/drivers.html:3
-msgid "drivers_page_title"
-msgstr "Motoristas"
 
 #: app/templates/modules/orders.html:3
 msgid "orders_page_title"
@@ -111,14 +107,15 @@ msgid "tickets_page_title"
 msgstr "Sistema de Suporte"
 
 #: app/templates/modules/vehicles.html:3
-msgid "vehicles_page_title"
-msgstr "Caminhões"
+msgid "vehicle_page_title"
+msgstr "Tratores e Reboques"
 
-#: app/templates/user_home.html:12
-msgid "user_home_welcome"
-msgstr "Bem-vindo&nbsp;ao<br>Portal&nbsp;KM&nbsp;1151"
+#: app/templates/modules/vehicles.html:9
+#: app/templates/modules/vehicles.html:12
+msgid "vehicle_title"
+msgstr "Tratores e Reboques"
 
-#: app/templates/user_home.html:17
+#: app/templates/user_home.html:26
 msgid "user_home_greeting"
 msgstr ""
 "👋 Olá e bem-vinde ao Portal KM 1151! Estamos verificando alguns detalhes 🕵️ "

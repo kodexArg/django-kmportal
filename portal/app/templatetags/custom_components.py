@@ -99,3 +99,14 @@ def rbutton_component(caption, bg="bg-pantone7689c", fg="text-white", size=""):
     """
     return mark_safe(html)
 
+
+@register.simple_tag()
+def wrapper_component(html):
+    """Wrapper component"""
+    html = f"""
+        <div class="flex flex-col items-center bg-red-500">
+            {html}
+        </div>
+    """
+    
+    return mark_safe(html)
