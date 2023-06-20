@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 13:29+0000\n"
+"POT-Creation-Date: 2023-06-19 20:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,7 +78,7 @@ msgstr "Operadora"
 msgid "cashtransfer_page_title"
 msgstr "Transferência de dinheiro"
 
-#: app/templates/modules/company.html:3
+#: app/templates/modules/company.html:3 app/templates/modules/orders.html:3
 msgid "company_page_title"
 msgstr "Empresa"
 
@@ -98,9 +98,9 @@ msgstr "Fantasia"
 msgid "company_cuit"
 msgstr "CNPJ"
 
-#: app/templates/modules/orders.html:3
-msgid "orders_page_title"
-msgstr "Pedidos de Carga"
+#: app/templates/modules/orders.html:9
+msgid "fuel_orders"
+msgstr "Ordes de Reabastecimento"
 
 #: app/templates/modules/tickets.html:3
 msgid "tickets_page_title"
@@ -110,10 +110,17 @@ msgstr "Sistema de Suporte"
 msgid "vehicle_page_title"
 msgstr "Tratores e Reboques"
 
-#: app/templates/modules/vehicles.html:9
-#: app/templates/modules/vehicles.html:12
+#: app/templates/modules/vehicles.html:8
 msgid "vehicle_title"
 msgstr "Tratores e Reboques"
+
+#: app/templates/modules/vehicles.html:19
+msgid "Tractors"
+msgstr "Tratores"
+
+#: app/templates/modules/vehicles.html:57
+msgid "Trailers"
+msgstr "Semi-reboques"
 
 #: app/templates/user_home.html:26
 msgid "user_home_greeting"
@@ -122,3 +129,6 @@ msgstr ""
 "para que você possa entrar. Em breve, você terá acesso a todas as "
 "maravilhosas ferramentas e benefícios que preparamos para você. Se tiver "
 "alguma dúvida, não hesite em nos contactar. Estamos aqui para ajudar! 🤗"
+
+#~ msgid "orders_page_title"
+#~ msgstr "Pedidos de Carga"

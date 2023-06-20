@@ -1,4 +1,5 @@
 from loguru import logger
+import json
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
@@ -12,9 +13,10 @@ from app.forms import (
     DeleteDriverForm,
     TractorForm,
     TrailerForm,
+    FuelOrderForm,
 )
 
-from app.models import CompanySocialAccount, Drivers, Tractors, Trailers
+from app.models import CompanySocialAccount, Drivers, Tractors, Trailers, FuelOrders
 
 
 class CustomTemplateView(TemplateView):
@@ -39,7 +41,7 @@ class CustomTemplateView(TemplateView):
             user.socialaccount_set.model.DoesNotExist,
             CompanySocialAccount.DoesNotExist,
         ):
-            print("Company does not exist")
+            logger.info("Company does not exist")
             return None
 
     # Context data getter
@@ -88,21 +90,7 @@ class CompanyView(CustomTemplateView):
     template_name = "modules/company.html"
 
     def dispatch(self, request, *args, **kwargs):
-        """overriding dispatch
-        - If the user isn't authenticated, it doesn't do any of these checks and
-        the request is dispatched normally.
-        - If the user is authenticated, the method tries to get a social_account
-        that's associated with this use.
-           = Then it tries to get a CompanySocialAccount that's associated with
-           the social_account.
-           = If the CompanySocialAccount doesn't exist or the associated company
-           field in company_social_account is None, it will redirect the user to
-           the "user_home" page.
-
-         If everything is fine (i.e., the user is authenticated, the
-         CompanySocialAccount exists and the associated company field is not None),
-         it continues to dispatch the request normally.
-        """
+        """overriding dispatch method"""
         if self.request.user.is_authenticated:
             try:
                 social_account = self.request.user.socialaccount_set.get(
@@ -159,27 +147,18 @@ class CompanyView(CustomTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.user.is_authenticated:
-            social_account = self.request.user.socialaccount_set.get(
-                provider=self.provider_name
-            )
-            company_social_account = CompanySocialAccount.objects.get(
-                social_account=social_account
-            )
-            context["company"] = company_social_account.company
-            context["drivers"] = Drivers.objects.filter(
-                company=company_social_account.company
-            )
-            context["create_form"] = CreateDriverForm(prefix="create")
-            context["update_form"] = UpdateDriverForm(prefix="update")
-            context["delete_form"] = DeleteDriverForm(prefix="delete")
+        company = context.get('company')
+        if company is not None:
+            context["drivers"] = Drivers.objects.filter(company=company)
+        context["create_form"] = CreateDriverForm(prefix="create")
+        context["update_form"] = UpdateDriverForm(prefix="update")
+        context["delete_form"] = DeleteDriverForm(prefix="delete")
         return context
 
 
 # Vehicles #
 @method_decorator(login_required, name="dispatch")
 class VehiclesView(CustomTemplateView):
-    logger.debug('VehicleView hit')
     template_name = "modules/vehicles.html"
 
     def post(self, request, *args, **kwargs):
@@ -191,7 +170,7 @@ class VehiclesView(CustomTemplateView):
             if form.is_valid():
                 tractor = form.save(commit=False)
                 tractor.company = self.get_company(request.user, self.provider_name)
-                tractor.domain 
+                tractor.domain
                 tractor.save()
                 return redirect("vehicles")
             else:
@@ -238,30 +217,28 @@ class VehiclesView(CustomTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.user.is_authenticated:
-            social_account = self.request.user.socialaccount_set.get(
-                provider=self.provider_name
-            )
-            company_social_account = CompanySocialAccount.objects.get(
-                social_account=social_account
-            )
-            context["company"] = company_social_account.company
-            context["tractors"] = Tractors.objects.filter(
-                company=company_social_account.company
-            )
-            context["trailers"] = Trailers.objects.filter(
-                company=company_social_account.company
-            )
-            context["create_tractor_form"] = TractorForm(prefix="create")
-            context["update_tractor_form"] = TractorForm(prefix="update")
-            context["create_trailer_form"] = TrailerForm(prefix="create")
-            context["update_trailer_form"] = TrailerForm(prefix="update")
+        company = context.get('company')
+        if company is not None:
+            context["tractors"] = Tractors.objects.filter(company=company)
+            context["trailers"] = Trailers.objects.filter(company=company)
+        context["create_tractor_form"] = TractorForm(prefix="create")
+        context["update_tractor_form"] = TractorForm(prefix="update")
+        context["create_trailer_form"] = TrailerForm(prefix="create")
+        context["update_trailer_form"] = TrailerForm(prefix="update")
         return context
 
 
+# Orders #
 @method_decorator(login_required, name="dispatch")
 class OrdersView(CustomTemplateView):
     template_name = "modules/orders.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context['orders'] = FuelOrders.objects.get()
+
+        return context
 
 
 @method_decorator(login_required, name="dispatch")

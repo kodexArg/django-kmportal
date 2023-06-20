@@ -83,7 +83,7 @@
     "es": "👋 ¡Hola y bienvenide al Portal KM 1151! Estamos revisando algunos detalles 🕵️ para que puedas ingresar. Pronto tendrás acceso a todas las maravillosas herramientas y beneficios que hemos preparado para ti. Si tienes alguna pregunta, no dudes en contactarnos. ¡Estamos aquí para ayudarte! 🤗",
     "en": "👋 Hello and welcome to the Portal KM 1151! We're just checking a few details 🕵️ so you can log in. You'll soon have access to all the wonderful tools and benefits we've prepared for you. If you have any questions, please don't hesitate to contact us. We're here to help! 🤗",
     "pt": "👋 Olá e bem-vinde ao Portal KM 1151! Estamos verificando alguns detalhes 🕵️ para que você possa entrar. Em breve, você terá acesso a todas as maravilhosas ferramentas e benefícios que preparamos para você. Se tiver alguma dúvida, não hesite em nos contactar. Estamos aqui para ajudar! 🤗"
- },
+  },
   "register_button": {
     "es": "Registrarse",
     "en": "Register",
@@ -123,5 +123,20 @@
     "en": "Tractors and Trailers",
     "es": "Tractores y Acoplados",
     "pt": "Tratores e Reboques"
+  },
+  "fuel_orders": {
+    "en": "Refueling Orders",
+    "es": "Órdenes de Carga",
+    "pt": "Ordes de Reabastecimento"
+  },
+  "Trailers": {
+    "en": "Trailers",
+    "es": "Semi-remolques",
+    "pt": "Semi-reboques"
+  },
+  "Tractors": {
+    "en": "Tractors",
+    "es": "Tractors",
+    "pt": "Tratores"
   }
 }

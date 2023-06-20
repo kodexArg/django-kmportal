@@ -1,3 +1,4 @@
+from loguru import logger
 from django import template
 from django.utils.safestring import mark_safe
 import os
@@ -37,7 +38,7 @@ def menu_button_component(context, pos, side, icon="", size="small", url="#", st
     if not os.path.isfile(f"static/svg/{icon}.svg"):
         icon = "question"  # TODO: Replace question with a known good icon
     user = context["request"].user  # Get the user object from the context
-    
+
     return {
         "icon": icon,
         "size": size,
@@ -47,6 +48,13 @@ def menu_button_component(context, pos, side, icon="", size="small", url="#", st
         "style": style,
         "user": user,  # Pass the user object to the template
     }
+
+
+@register.inclusion_tag("components/order_row.html", takes_context=True)
+def order_row_component(context):
+    user = context["request"].user
+    logger.debug(context)
+    return {"user": user} 
 
 
 @register.simple_tag()
@@ -67,7 +75,7 @@ def input_field_component(label, name, type="text", value="", style="", required
                 >
         </div>
     """
-    return mark_safe(html)    
+    return mark_safe(html)
 
 
 @register.simple_tag()
@@ -108,5 +116,5 @@ def wrapper_component(html):
             {html}
         </div>
     """
-    
+
     return mark_safe(html)

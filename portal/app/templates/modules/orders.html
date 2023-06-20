@@ -1,10 +1,20 @@
 {% extends "base/base.html" %}
-{% load static i18n socialaccount %}
-{% block title %}{% translate "orders_page_title" %}{% endblock %}
+{% load static i18n socialaccount custom_components %}
+{% block title %}{% translate "company_page_title" %}{% endblock %}
 
+
+{% block navbar %}{% include 'base/element/navbar_components.html' with icon='fuel' %}{% endblock %}
 
 {% block content %}
+{% translate 'fuel_orders' as translated_title %}
+{% module_title_component translated_title %}
 
-<h3>Orders</h3>
+<section id="orders" class="mx-2 md:mx-10 mt-24 pt-4">
 
+    <!-- Orders List -->
+    {% for order in orders %}
+    
+    {% endfor %}
+
+</section>
 {% endblock %}

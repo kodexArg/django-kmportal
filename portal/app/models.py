@@ -1,4 +1,5 @@
 import secrets
+from datetime import datetime, timedelta
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
@@ -143,23 +144,23 @@ class FuelOrders(models.Model):
 
     order_date = models.DateField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
-    requested_date = models.DateField()
-    operation_code = models.CharField(max_length=6, unique=True)
+    requested_date = models.DateField(auto_now_add=True)
+    operation_code = models.CharField(max_length=6, unique=True, blank=True, null=True)
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
-    expiration_date = models.DateField()
+    expiration_date = models.DateField(default=datetime.now() + timedelta(days=7))
     driver = models.ForeignKey(Drivers, on_delete=models.PROTECT)
     tractor_plate = models.ForeignKey(Tractors, on_delete=models.PROTECT)
     trailer_plate = models.ForeignKey(Trailers, on_delete=models.PROTECT)
     tractor_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES)
     backpack_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES)
     chamber_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES)
-    tractor_liters = models.PositiveIntegerField()
-    backpack_liters = models.PositiveIntegerField()
-    chamber_liters = models.PositiveIntegerField()
+    tractor_liters = models.PositiveIntegerField(blank=True, null=True)  # leave blank untill filled
+    backpack_liters = models.PositiveIntegerField(blank=True, null=True)  # leave blank untill filled
+    chamber_liters = models.PositiveIntegerField(blank=True, null=True)  # leave blank untill filled
     # -1 means not required (full)
-    tractor_liters_to_load = models.IntegerField(default=-1)
-    backpack_liters_to_load = models.IntegerField(default=-1)
-    chamber_liters_to_load = models.IntegerField(default=-1)
+    tractor_liters_to_load = models.IntegerField(default=-1)  # show MAX on -1 and NO on 0
+    backpack_liters_to_load = models.IntegerField(default=-1)  # show MAX on -1 and NO on 0
+    chamber_liters_to_load = models.IntegerField(default=-1)  # show MAX on -1 and NO on 0
 
     requires_odometer = models.BooleanField(default=False)
     requires_kilometers = models.BooleanField(default=False)

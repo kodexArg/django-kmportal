@@ -1,7 +1,70 @@
-    <svg class="h-6 w-6 rounded-full m-1 mr-auto text-white" fill="none" stroke="currentColor"
-      viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="12" stroke-width="1" fill="white"></circle>
-      <path d="M5 8H18" stroke-width="1.25" stroke-linecap="round" stroke="#09406e"></path>
-      <path d="M5 12H18" stroke-width="1.25" stroke-linecap="round" stroke="#09406e"></path>
-      <path d="M5 16H18" stroke-width="1.25" stroke-linecap="round" stroke="#09406e"></path>
-    </svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   class="h-6 w-6 rounded-full m-1 mr-auto text-white"
+   fill="none"
+   stroke="currentColor"
+   viewBox="0 0 25 25"
+   version="1.1"
+   id="svg884"
+   sodipodi:docname="sandwich.svg"
+   width="25"
+   height="25"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs888" />
+  <sodipodi:namedview
+     id="namedview886"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="10.958333"
+     inkscape:cx="-5.5209125"
+     inkscape:cy="12.86692"
+     inkscape:window-width="1360"
+     inkscape:window-height="705"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg884" />
+  <circle
+     cx="12.5"
+     cy="12.5"
+     r="12"
+     stroke-width="1"
+     fill="white"
+     id="circle876"
+     style="fill:none;stroke:#ffffff" />
+  <path
+     d="m 5.5,8.5 h 13"
+     stroke-width="1.25"
+     stroke-linecap="round"
+     stroke="#09406e"
+     id="path878"
+     style="fill:none;stroke:#ffffff" />
+  <path
+     d="m 5.5,12.5 h 13"
+     stroke-width="1.25"
+     stroke-linecap="round"
+     stroke="#09406e"
+     id="path880"
+     style="fill:none;stroke:#ffffff" />
+  <path
+     d="m 5.5,16.5 h 13"
+     stroke-width="1.25"
+     stroke-linecap="round"
+     stroke="#09406e"
+     id="path882"
+     style="fill:none;stroke:#ffffff" />
+</svg>
