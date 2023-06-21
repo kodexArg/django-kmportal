@@ -1,0 +1,104 @@
+{% load static i18n %}
+
+<!-- Orders List -->
+<article class="flex flex-col pb-2">
+    <div class="
+    {% if order.is_finished %}
+    bg-pantone7472c
+    {% elif order.is_canceled %}
+    bg-gray-500
+    {% elif order.is_blocked %}
+    bg-pantone307c
+    {% else  %}
+    bg-pantone7689c
+    {% endif %}
+    h-10 rounded-full flex flex-nowrap p-1
+    ">
+        <!-- HEAD -->
+        <div class="h-full aspect-fibbo-up rounded-l-full grid place-items-center">
+            <span class="text-xxs font-Roboto text-white">
+                {% if order.is_finished %}
+                finished
+                {% elif order.is_canceled %}
+                canceled
+                {% elif order.is_blocked %}
+                refueling! 
+                {% else %}
+                on transit
+                {% endif %}
+            </span>
+        </div>
+        <!-- MIDDLE ONE (plates and name)-->
+        <div class="flex-grow flex flex-col">
+            <!-- UP -->
+            <div class="min-w-max h-full bg-sky-100 flex space-x-1 pl-1">
+                <span class="bg-black text-white font-bold font-mono text-xxs px-1 mt-0.5 leading-0">{{ order.tractor_plate }}</span>
+                <span class="bg-black text-white font-bold font-mono text-xxs px-1 mt-0.5 leading-0 hidden sm:block">{{ order.trailer_plate }}</span>
+            </div>
+            <!-- DW -->
+            <div class="min-w-max h-full bg-sky-100 flex space-x-1 pl-1 flex-nowrap">
+                <span class="text-gray-800 font-mono text-xxs flex pt-[2px]" style="white-space: nowrap;">
+                    <p class="block sm:hidden leading-none">{{ order.driver|truncatechars:12 }}</p>
+                    <p class="hidden sm:block leading-none">{{ order.driver }}</p>
+                </span>
+            </div>
+        </div>
+        <!-- MIIDDLE SECOND-->
+        <div class="flex-grow-0 w-12">
+            <div class="bg-sky-100 flex flex-col w-full h-full">
+                <span class="text-end font-mono text-xxs px-0.5 leading-0 {% if order.requires_odometer %} text-black {% else %} text-gray-400 {% endif %}">odo</span>
+                <span class="text-end font-mono text-xxs px-0.5 leading-0 {% if order.requires_kilometers %} text-black {% else %} text-gray-400 {% endif %}">km</span>
+            </div>
+        </div>
+        <!-- MIDDLE THREE (fuel) -->
+        <div class="w-32 flex-grow-0 flex-shrink-0 flex flex-col">
+            <div class="h-full space-x-1 ml-1 flex">
+                <!-- UP -->
+                <div class="w-1/3 h-full bg-white flex justify-between text-xxs pt-[1px]">
+                    <img style="background-color:{{ order.tractor_fuel_type_color }};" class="h-5 aspect-fibbo-up" src="{% static 'svg/fuel_tractor.svg' %}" alt="" />
+                </div>
+                <div class="w-1/3 h-full bg-white flex justify-between text-xxs p-[1px]">
+                    <img style="background-color:{{ order.backpack_fuel_type_color }};" class="h-5 aspect-fibbo-up" src="{% static 'svg/fuel_chamber.svg' %}" alt="" />
+                </div>
+                <div class="w-1/3 h-full bg-white flex justify-between text-xxs p-[1px]">
+                    <img style="background-color:{{ order.chamber_fuel_type_color }};" class="h-5 aspect-fibbo-up" src="{% static 'svg/fuel_backpack.svg' %}" alt="" />
+                </div>
+            </div>
+            <div class="h-full space-x-1 ml-1 flex">
+                <!-- DW -->
+                <div class="w-1/3 h-full bg-white text-xxs leading-0 font-mono font-bold flex justify-center">
+                    {% if order.tractor_liters_to_load == -1 %}
+                    <span class="text-xxxs text-green-900">MAX</span>
+                    {% elif order.tractor_liters_to_load == 0 %}
+                    <span class="text-xxxs text-gray-300"></span>
+                    {% else %}
+                    <span class="text-xxxs">{{ order.tractor_liters_to_load }}</span>
+                    {% endif %}
+                </div>
+                <div class="w-1/3 h-full bg-white text-xxs leading-0 font-mono font-bold flex justify-center">
+                    {% if order.backpack_liters_to_load == -1 %}
+                    <span class="text-xxxs text-green-900">MAX</span>
+                    {% elif order.backpack_liters_to_load == 0 %}
+                    <span class="text-xxxs text-gray-300"></span>
+                    {% else %}
+                    <span class="text-xxxs">{{ order.backpack_liters_to_load }}</span>
+                    {% endif %}
+                </div>
+                <div class="w-1/3 h-full bg-white text-xxs leading-0 font-mono font-bold flex justify-center">
+                    {% if order.chamber_liters_to_load == -1 %}
+                    <span class="text-xxxs text-green-900">MAX</span>
+                    {% elif order.chamber_liters_to_load == 0 %}
+                    <span class="text-xxxs text-gray-300"></span>
+                    {% else %}
+                    <span class="text-xxxs">{{ order.chamber_liters_to_load }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="h-full aspect-square flex ml-1">
+            <div class="h-full aspect-square rounded-full">
+                <img class="w-full h-full" src="{% static 'svg/sandwich.svg' %}" />
+            </div>
+        </div>
+    </div>
+</article>

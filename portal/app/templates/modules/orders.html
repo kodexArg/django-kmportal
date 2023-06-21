@@ -10,11 +10,9 @@
 {% module_title_component translated_title %}
 
 <section id="orders" class="mx-2 md:mx-10 mt-24 pt-4">
-
     <!-- Orders List -->
-    {% for order in orders %}
-    
+    {% for order in fuel_orders %}
+    {% fuel_order_row_component order %}
     {% endfor %}
-
 </section>
 {% endblock %}

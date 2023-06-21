@@ -50,23 +50,30 @@ def menu_button_component(context, pos, side, icon="", size="small", url="#", st
     }
 
 
-@register.inclusion_tag("components/order_row.html", takes_context=True)
-def order_row_component(context):
+@register.inclusion_tag("components/fuel_order_row.html", takes_context=True)
+def fuel_order_row_component(context, order):
     user = context["request"].user
-    logger.debug(context)
-    return {"user": user} 
+    return {"user": user, "order": order}
 
 
 @register.simple_tag()
-def input_field_component(label, name, type="text", value="", style="", required=True):
+def input_field_component(
+    label,
+    name,
+    type="text",
+    value="",
+    label_size="w-1/3",
+    size="w-2/3",
+    required=True,
+):
     required_html = "required" if required else ""
     html = f"""
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between space-x-1 items-center">
             <label
-                class="text-xs text-pantone7689c w-1/3 align-baseline text-left"
+                class="text-xs text-pantone7689c {label_size} align-baseline text-left"
                 >{ label }</label>
             <input
-                class="border rounded p-1 w-2/3 text-sm font-rubik"
+                class="border rounded p-1 {size} text-sm font-rubik"
                 type="{ type }" 
                 name="{ name }" 
                 placeholder="{ label }"
@@ -101,20 +108,8 @@ def checkbox_component(label, name, checked=False):
 def rbutton_component(caption, bg="bg-pantone7689c", fg="text-white", size=""):
     """Rounded button component"""
     html = f"""
-        <button type="submit" class="{size} rounded-full px-4 py-1 {bg} {fg} self-end font-quicksand font-bold text-sm">
+        <button type="submit" class="{size} whitespace-nowrap rounded-full px-3 py-1 {bg} {fg} self-end font-quicksand font-bold text-sm">
             {caption}
         </button>
     """
-    return mark_safe(html)
-
-
-@register.simple_tag()
-def wrapper_component(html):
-    """Wrapper component"""
-    html = f"""
-        <div class="flex flex-col items-center bg-red-500">
-            {html}
-        </div>
-    """
-
     return mark_safe(html)

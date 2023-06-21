@@ -122,7 +122,6 @@ class CompanyView(CustomTemplateView):
                 return redirect("company")
             else:
                 logger.error(form.errors)
-            logger.info(request.POST)
 
         # Update form
         elif form_type == "update_driver":
@@ -134,8 +133,6 @@ class CompanyView(CustomTemplateView):
                 return redirect("company")
             else:
                 logger.error(form.errors)
-
-            logger.info(request.POST)
 
         # Delete form
         elif form_type == "delete_driver":
@@ -175,7 +172,6 @@ class VehiclesView(CustomTemplateView):
                 return redirect("vehicles")
             else:
                 logger.error(form.errors)
-            logger.info(request.POST)
 
         elif form_type == "update_tractor":
             tractor_id = request.POST.get("tractor_id")
@@ -187,8 +183,6 @@ class VehiclesView(CustomTemplateView):
             else:
                 logger.error(form.errors)
 
-            logger.info(request.POST)
-
         # Create and update form for trailers
         elif form_type == "create_trailer":
             form = TrailerForm(request.POST)
@@ -199,7 +193,6 @@ class VehiclesView(CustomTemplateView):
                 return redirect("vehicles")
             else:
                 logger.error(form.errors)
-            logger.info(request.POST)
 
         elif form_type == "update_trailer":
             trailer_id = request.POST.get("trailer_id")
@@ -211,7 +204,6 @@ class VehiclesView(CustomTemplateView):
             else:
                 logger.error(form.errors)
 
-            logger.info(request.POST)
 
         return self.get(request, *args, **kwargs)
 
@@ -235,9 +227,9 @@ class OrdersView(CustomTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.user.is_authenticated:
-            context['orders'] = FuelOrders.objects.get()
-
+        company = context.get('company')
+        if company is not None:
+            context['fuel_orders'] = FuelOrders.objects.filter(company=company)
         return context
 
 

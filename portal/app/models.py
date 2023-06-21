@@ -142,31 +142,58 @@ class FuelOrders(models.Model):
         (2, "Agreed"),
     ]
 
+    color_map = {
+        "infinia_diesel": "#1E40AF",
+        "infinia": "#1212FF",
+        "diesel_500": "#FF4500",
+        "super": "#F2F200"
+    }
+
+    fuel_type_map = {
+            "infinia_diesel": "Inf. D.",
+            "infinia": "Infinia",
+            "diesel_500": "D. 500",
+            "super": "Super",
+    }
+
+
+    operation_code = models.CharField(max_length=6, unique=True, blank=True, null=True)
+
     order_date = models.DateField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
     requested_date = models.DateField(auto_now_add=True)
-    operation_code = models.CharField(max_length=6, unique=True, blank=True, null=True)
-    company = models.ForeignKey(Company, on_delete=models.PROTECT)
     expiration_date = models.DateField(default=datetime.now() + timedelta(days=7))
+    
+    company = models.ForeignKey(Company, on_delete=models.PROTECT)
     driver = models.ForeignKey(Drivers, on_delete=models.PROTECT)
+    
     tractor_plate = models.ForeignKey(Tractors, on_delete=models.PROTECT)
-    trailer_plate = models.ForeignKey(Trailers, on_delete=models.PROTECT)
-    tractor_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES)
-    backpack_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES)
-    chamber_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES)
+    trailer_plate = models.ForeignKey(Trailers, on_delete=models.PROTECT, blank=True, null=True)
+    
+    tractor_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True)
+    backpack_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True)
+    chamber_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True)
+    
     tractor_liters = models.PositiveIntegerField(blank=True, null=True)  # leave blank untill filled
     backpack_liters = models.PositiveIntegerField(blank=True, null=True)  # leave blank untill filled
     chamber_liters = models.PositiveIntegerField(blank=True, null=True)  # leave blank untill filled
-    # -1 means not required (full)
+
     tractor_liters_to_load = models.IntegerField(default=-1)  # show MAX on -1 and NO on 0
     backpack_liters_to_load = models.IntegerField(default=-1)  # show MAX on -1 and NO on 0
     chamber_liters_to_load = models.IntegerField(default=-1)  # show MAX on -1 and NO on 0
 
     requires_odometer = models.BooleanField(default=False)
     requires_kilometers = models.BooleanField(default=False)
-    is_blocked = models.BooleanField(default=False)
-    comments = models.TextField(blank=True, null=True)
+
+    is_blocked = models.BooleanField(default=False)  # because it has been attended
+    is_canceled = models.BooleanField(default=False)  # because there's an error or user action
+    is_finished = models.BooleanField(default=False)  # because it's been attended and it's been filled
+
+    cancel_reason = models.TextField(blank=True, null=True)  # because there's an error or user action
+    
     in_agreement = models.IntegerField(choices=AGREEMENT_CHOICES, default=0)
+
+    comments = models.TextField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -179,6 +206,30 @@ class FuelOrders(models.Model):
 
     def get_total_liters(self):
         return self.tractor_liters + self.backpack_liters + self.chamber_liters
+
+    @property
+    def short_tractor_fuel_type(self):
+        return self.fuel_type_map.get(self.tractor_fuel_type, "")
+
+    @property
+    def tractor_fuel_type_color(self):
+        return self.color_map.get(self.tractor_fuel_type, "")
+
+    @property
+    def short_backpack_fuel_type(self):
+        return self.fuel_type_map.get(self.backpack_fuel_type, "")
+
+    @property
+    def backpack_fuel_type_color(self):
+        return self.color_map.get(self.backpack_fuel_type, "")
+
+    @property
+    def short_chamber_fuel_type(self):
+        return self.fuel_type_map.get(self.chamber_fuel_type, "")
+
+    @property
+    def chamber_fuel_type_color(self):
+        return self.color_map.get(self.chamber_fuel_type, "")
 
     def __str__(self):
         return self.operation_code

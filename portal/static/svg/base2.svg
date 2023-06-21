@@ -6,7 +6,7 @@
    viewBox="0 0 25 15"
    version="1.1"
    id="svg884"
-   sodipodi:docname="fuel_chamber.svg"
+   sodipodi:docname="base2.svg"
    width="25"
    height="15"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
@@ -194,5 +194,13 @@
      height="4.0641556"
      x="10.640566"
      y="9.7913103"
+     ry="0.53855699" />
+  <rect
+     style="fill:#ffffff;stroke:#000000;stroke-width:0.5;stroke-miterlimit:10"
+     id="rect1858-3-7-5"
+     width="7.218751"
+     height="3.0625"
+     x="0.6767503"
+     y="6.0088692"
      ry="0.53855699" />
 </svg>
