@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 20:09+0000\n"
+"POT-Creation-Date: 2023-06-21 22:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,6 +31,22 @@ msgstr "Nossa Empresa"
 #: app/templates/base/element/footer.html:3
 msgid "t_contact"
 msgstr "Contato"
+
+#: app/templates/components/fuel_order_row.html:21
+msgid "finished"
+msgstr "concluído"
+
+#: app/templates/components/fuel_order_row.html:23
+msgid "canceled"
+msgstr "cancelado"
+
+#: app/templates/components/fuel_order_row.html:25
+msgid "refueling"
+msgstr "no sítio!"
+
+#: app/templates/components/fuel_order_row.html:27
+msgid "on_transit"
+msgstr "em rota"
 
 #: app/templates/components/google_button.html:12
 msgid "t_login_with_google"

@@ -138,5 +138,25 @@
     "en": "Tractors",
     "es": "Tractors",
     "pt": "Tratores"
+  },
+  "finished": {
+    "en": "finished",
+    "es": "finalizado",
+    "pt": "concluído"
+  },
+  "canceled": {
+    "en": "canceled",
+    "es": "cancelado",
+    "pt": "cancelado"
+  },
+   "on_transit": {
+    "en": "on transit",
+    "es": "en tránsito",
+    "pt": "em rota"
+  },
+ "refueling": {
+    "en": "refueling!",
+    "es": "cargando!",
+    "pt": "no sítio!"
   }
 }

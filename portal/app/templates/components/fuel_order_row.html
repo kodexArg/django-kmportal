@@ -6,7 +6,7 @@
     {% if order.is_finished %}
     bg-pantone7472c
     {% elif order.is_canceled %}
-    bg-gray-500
+    bg-gray-400
     {% elif order.is_blocked %}
     bg-pantone307c
     {% else  %}
@@ -18,13 +18,13 @@
         <div class="h-full aspect-fibbo-up rounded-l-full grid place-items-center">
             <span class="text-xxs font-Roboto text-white">
                 {% if order.is_finished %}
-                finished
+                {% translate 'finished' %}
                 {% elif order.is_canceled %}
-                canceled
+                {% translate 'canceled' %}
                 {% elif order.is_blocked %}
-                refueling! 
+                {% translate 'refueling' %}
                 {% else %}
-                on transit
+                {% translate 'on_transit' %}
                 {% endif %}
             </span>
         </div>

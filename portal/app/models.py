@@ -4,6 +4,7 @@ from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from allauth.socialaccount.models import SocialAccount
+from django.db.models import Case, When, Value, IntegerField
 
 
 # Create your models here.
@@ -124,9 +125,26 @@ class Trailers(models.Model):
     def __str__(self):
         return self.domain
 
+from django.db.models import Case, When, Value, IntegerField, Manager
+
+class FuelOrdersManager(Manager):
+    def get_queryset(self):
+        return super().get_queryset().annotate(
+            custom_sort_order=Case(
+                When(is_blocked=True, is_canceled=False, is_finished=False, then=Value(1)),
+                When(is_canceled=False, is_finished=False, then=Value(2)),
+                When(is_canceled=True, then=Value(4)),
+                When(is_finished=True, then=Value(4)),
+                default=Value(3),
+                output_field=IntegerField(),
+            )
+        ).order_by('custom_sort_order', '-modified_date')
 
 class FuelOrders(models.Model):
-    """Core Table of the refueling Workflow: STEP 1"""
+    """Core Table of the refueling Workflow
+    this models uses a custom manager FuelOrdersManager
+    """
+    objects = FuelOrdersManager()
 
     # Typo Comb choices
     FUEL_TYPE_CHOICES = [
@@ -234,6 +252,9 @@ class FuelOrders(models.Model):
     def __str__(self):
         return self.operation_code
 
+    class Meta:
+        verbose_name = 'Fuel Order'
+        verbose_name_plural = 'Fuel Orders'
 
 class Refuelings(models.Model):
     """Core Table of the refueling Workflow: STEP 2"""
