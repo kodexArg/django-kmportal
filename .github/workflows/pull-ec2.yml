@@ -20,6 +20,6 @@ jobs:
         script: |
           # add log line
           cd /home/ubuntu/logs/
-          echo "$(date) - Deploy triggered by ${GITHUB_ACTOR} on commit ${GITHUB_SHA} of ${GITHUB_REPOSITORY}" >> /home/ubuntu/logs/django-kmportal.log
+          echo "$(date) - Deploy triggered by ${{ GITHUB_ACTOR }} on commit ${{ GITHUB_SHA }} of ${{ GITHUB_REPOSITORY }}" >> /home/ubuntu/logs/django-kmportal.log
 
           
