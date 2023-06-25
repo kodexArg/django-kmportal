@@ -19,7 +19,14 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           # add log line
-          cd /home/ubuntu/logs/
           echo "$(date) - Deploy triggered by ${{ github.actor }} on commit ${{ github.sha }} of ${{ github.repository }}" >> /home/ubuntu/logs/django-kmportal.log
+
+          # update the repo
+          cd /home/ubuntu/django-kmportal/
+          git pull origin main
+
+          # add log line
+          echo "$(date) - Update completed :)\n" >> /home/ubuntu/logs/django-kmportal.log
+
 
           
