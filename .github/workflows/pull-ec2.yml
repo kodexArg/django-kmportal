@@ -18,11 +18,8 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          cd /path/to/your/project
-          git pull origin main
-          source venv/bin/activate
-          pip install -r requirements.txt
-          python manage.py makemigrations
-          python manage.py migrate
-          pkill -f "gunicorn"  # or whatever server you're using
-          nohup gunicorn yourproject.wsgi &
+          # add log line
+          cd /home/ubuntu/logs/
+          echo "$(date) - Deploy triggered by ${GITHUB_ACTOR} on commit ${GITHUB_SHA} of ${GITHUB_REPOSITORY}" >> /home/ubuntu/logs/django-kmportal.log
+
+          
