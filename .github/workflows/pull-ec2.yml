@@ -26,11 +26,11 @@ jobs:
           git pull origin main
 
           # update pip packages
-          pip install --upgrade pip 
-          pip install -r requirements.txt
+          echo "---- $(date) ----" >> /home/ubuntu/logs/pip.log
+          pip install --upgrade pip >> /home/ubuntu/logs/pip.log 2>&1
+          pip install -r requirements.txt >> /home/ubuntu/logs/pip.log 2>&1
+          echo "---- $(date) ----" >> /home/ubuntu/logs/pip.log
 
           # add log line
           echo "$(date) - Update completed :)" >> /home/ubuntu/logs/django-kmportal.log
 
-
-          
