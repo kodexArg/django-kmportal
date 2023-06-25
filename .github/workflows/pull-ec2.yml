@@ -1,4 +1,4 @@
-name: Deploy to EC2
+name: djang-kmportal Deploy to EC2
 on:
   push:
     branches:
@@ -24,6 +24,9 @@ jobs:
           # update the repo
           cd /home/ubuntu/django-kmportal/
           git pull origin main
+
+          # update pip packages
+          pip install --upgrade pip && pip install -r requirements.txt
 
           # add log line
           echo "$(date) - Update completed :)\n" >> /home/ubuntu/logs/django-kmportal.log
