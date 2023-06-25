@@ -1,5 +1,5 @@
 # KM 1151 Enterprise Portal
-This is a Django project for a Fuel Station Enterprise website, which includes a main homepage, a minimalistic nav-bar, and user authentication. The site uses a MySQL Docker database in development, and will eventually move to RDS AWS database in production. The project is designed to be basic but professional-looking, and uses ~~Bootstrap 5~~ **Materialize** for styling.
+This is a Django project for a Fuel Station Enterprise website, which includes a main homepage, a minimalistic nav-bar, and user authentication. The site uses a MySQL Docker database in development, and will eventually move to RDS AWS database in production. The project is designed to be basic but professional-looking, and uses ~~Bootstrap 5~~ **Tailwind** for styling.
 ## Disclaimer
 ### Language
 Although this site is written in English but it will be implemented in Argentina, having **Spanish** as main language (and probably Portuguese and English in the future). For this reason, dictionaries labeled as dialog{} will be used within the code (hard-coded) to alleviate the use of any brave person who wants to take advantage of it in another language.
