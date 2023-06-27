@@ -31,6 +31,24 @@ jobs:
           pip install -r requirements.txt >> /home/ubuntu/logs/pip.log 2>&1
           echo "---- $(date) ----" >> /home/ubuntu/logs/pip.log
 
+          # makemigrations and migrate
+          echo "---- $(date) ----" >> /home/ubuntu/logs/migrations.log
+          python3 portal/manage.py makemigrations >> /home/ubuntu/logs/migrations.log 2>&1
+          python3 portal/manage.py migrate >> /home/ubuntu/logs/migrations.log 2>&1
+
           # add log line
           echo "$(date) - Update completed :)" >> /home/ubuntu/logs/django-kmportal.log
 
+    - name: Restart script in tmux session
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          # stop running session if exists
+          tmux kill-session -t django-kmportal || true
+          
+          # start new session
+          cd /home/ubuntu/django-kmportal/
+          tmux new-session -d -s django-kmportal './portal/runserver.sh'

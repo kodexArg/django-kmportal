@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET-KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 
@@ -159,9 +159,8 @@ SOCIAL_ACCOUNT_PROVIDERS = {
     }
 }
 
-# Lol... wtf... I hate you allauth
+# Lol... wtf... I hate you allauth. This can be found in the database.
 SITE_ID = 3
-# SITE_ID = 4
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
