@@ -40,16 +40,13 @@ jobs:
           # add log line
           echo "$(date) - Update completed :)" >> /home/ubuntu/logs/django-kmportal.log
 
-    - name: Restart script in tmux session
+    - name: Restart Gunicorn service
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          # stop running session if exists
-          tmux kill-session -t django-kmportal || true
-          
-          # start new session
-          cd /home/ubuntu/django-kmportal/portal/
-          tmux new-session -d -s django-kmportal './runserver.sh' \; split-window -v 'cd portal && bash'
+          # stop and start gunicorn service
+          sudo systemctl stop gunicorn
+          sudo systemctl start gunicorn

@@ -1,6 +1,5 @@
 # KM 1151 Enterprise Portal
 This Django-based Fuel Station Enterprise website features a homepage, a minimalistic navbar, and user authentication. The site utilizes an RDS AWS database in the production environment and is styled using **Tailwind**.
-## Disclaimer
 ### Language
 Although this site is written in English but it will be implemented in Argentina, having **Spanish** as main language (and probably Portuguese and English as alt languages). For this reason, dictionaries labeled as dialog{} will be used within the code (hard-coded) to alleviate the use of any brave person who wants to take advantage of it in another language.
 ### Current state of the project
@@ -137,3 +136,32 @@ __Fill in the following details:__
 - Secret Key: Enter your Secret Key. (This can also be obtained from the Google Cloud Console)
 - After entering these details, click on "Save".
 Now, your Django admin site is configured and ready to handle authentication using Google
+
+
+### ToDo-cument:
+- nginx installation on prod
+- gunicorn installation on prod
+- don't forget to open ports in aws security group
+```
+sudo apt install gunicorn nginx
+cd /home/ubuntu/django-kmportal/
+```
+test:
+```
+gunicorn portal.wsgi:application --bind 0.0.0.0:8000
+```
+create service:
+```
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/django-kmportal
+ExecStart=/usr/bin/gunicorn3 portal.wsgi:application --bind 0.0.0.0:8080
+
+[Install]
+WantedBy=multi-user.target
+```
