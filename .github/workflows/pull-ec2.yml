@@ -23,7 +23,8 @@ jobs:
 
           # update the repo
           cd /home/ubuntu/django-kmportal/
-          git pull origin main
+          git fetch origin main
+          git reset --hard origin/main
 
           # update pip packages
           echo "---- $(date) ----" > /home/ubuntu/logs/pip.log
@@ -51,4 +52,4 @@ jobs:
           
           # start new session
           cd /home/ubuntu/django-kmportal/portal/
-          tmux new-session -d -s django-kmportal '.runserver.sh'
+          tmux new-session -d -s django-kmportal './runserver.sh'
