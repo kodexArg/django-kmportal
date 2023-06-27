@@ -137,31 +137,16 @@ __Fill in the following details:__
 - After entering these details, click on "Save".
 Now, your Django admin site is configured and ready to handle authentication using Google
 
-
 ### ToDo-cument:
+you can stop reading from now on... No, seriously, this is garbage, i'm not even sure if I'm going to use it:
 - nginx installation on prod
 - gunicorn installation on prod
-- don't forget to open ports in aws security group
+- open ports in aws security group
 ```
 sudo apt install gunicorn nginx
 cd /home/ubuntu/django-kmportal/
 ```
 test:
 ```
-gunicorn portal.wsgi:application --bind 0.0.0.0:8000
-```
-create service:
-```
-[Unit]
-Description=gunicorn daemon
-After=network.target
-
-[Service]
-User=ubuntu
-Group=www-data
-WorkingDirectory=/home/ubuntu/django-kmportal
-ExecStart=/usr/bin/gunicorn3 portal.wsgi:application --bind 0.0.0.0:8080
-
-[Install]
-WantedBy=multi-user.target
+gunicorn portal.wsgi:application --bind 0.0.0.0:8080
 ```
