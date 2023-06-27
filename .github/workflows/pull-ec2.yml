@@ -45,7 +45,7 @@ jobs:
           # add log line
           echo "$(date) - Update completed :)" >> /home/ubuntu/logs/django-kmportal.log
 
-    - name: Restart script in tmux session
+    - name: Restart gunicorn in tmux session
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_HOST }}
@@ -55,7 +55,11 @@ jobs:
           # stop running session if exists
           tmux kill-session -t django-kmportal || true
           
+          # kill any process using port 8080
+          sudo fuser -k 8080/tcp
+          
           # start new session
           cd /home/ubuntu/django-kmportal/portal/
-          tmux new-session -d -s django-kmportal './runserver.sh' \; split-window -v 'cd portal && bash'
+          tmux new-session -d -s django-kmportal 'gunicorn portal.wsgi:application --bind 0.0.0.0:8080' \; split-window -v 'bash'
+
 
