@@ -52,4 +52,4 @@ jobs:
           
           # start new session
           cd /home/ubuntu/django-kmportal/portal/
-          tmux new-session -d -s django-kmportal './runserver.sh'
+          tmux new-session -d -s django-kmportal './runserver.sh' \; split-window -v 'cd portal && bash'
