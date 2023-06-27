@@ -50,5 +50,5 @@ jobs:
           tmux kill-session -t django-kmportal || true
           
           # start new session
-          cd /home/ubuntu/django-kmportal/
-          tmux new-session -d -s django-kmportal './portal/runserver.sh'
+          cd /home/ubuntu/django-kmportal/portal/
+          tmux new-session -d -s django-kmportal '.runserver.sh'
