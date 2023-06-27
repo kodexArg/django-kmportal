@@ -39,13 +39,9 @@ jobs:
 
           # collect static files
           echo "---- $(date) ----" >> /home/ubuntu/logs/collectstatic.log
+          sudo chown -R ubuntu: /home/ubuntu/django-kmportal/local-cdn/static/
           python3 portal/manage.py collectstatic --no-input >> /home/ubuntu/logs/collectstatic.log 2>&1
-
-          # change owner of the static files
-          sudo chown -R www-data:www-data /home/ubuntu/django-kmportal/local-cdn/static/
-
-          # restart nginx
-          sudo systemctl reload nginx
+          sudo chown -R www-data: /home/ubuntu/django-kmportal/local-cdn/static/
 
           # add log line
           echo "$(date) - Update completed :)" >> /home/ubuntu/logs/django-kmportal.log
