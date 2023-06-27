@@ -30,7 +30,6 @@ jobs:
           echo "---- $(date) ----" > /home/ubuntu/logs/pip.log
           pip install --upgrade pip >> /home/ubuntu/logs/pip.log 2>&1
           pip install -r requirements.txt >> /home/ubuntu/logs/pip.log 2>&1
-          echo "---- $(date) ----" >> /home/ubuntu/logs/pip.log
 
           # makemigrations and migrate
           echo "---- $(date) ----" >> /home/ubuntu/logs/migrations.log
@@ -38,7 +37,7 @@ jobs:
           python3 portal/manage.py migrate >> /home/ubuntu/logs/migrations.log 2>&1
 
           # collect static files
-          echo "---- $(date) ----" >> /home/ubuntu/logs/collectstatic.log
+          echo "---- $(date) ----" > /home/ubuntu/logs/collectstatic.log
           sudo chown -R ubuntu: /home/ubuntu/django-kmportal/local-cdn/static/
           python3 portal/manage.py collectstatic --no-input >> /home/ubuntu/logs/collectstatic.log 2>&1
           sudo chown -R www-data: /home/ubuntu/django-kmportal/local-cdn/static/
