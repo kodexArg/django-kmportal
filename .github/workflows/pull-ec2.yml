@@ -37,6 +37,13 @@ jobs:
           python3 portal/manage.py makemigrations >> /home/ubuntu/logs/migrations.log 2>&1
           python3 portal/manage.py migrate >> /home/ubuntu/logs/migrations.log 2>&1
 
+          # collect static files
+          echo "---- $(date) ----" >> /home/ubuntu/logs/collectstatic.log
+          python3 portal/manage.py collectstatic --no-input >> /home/ubuntu/logs/collectstatic.log 2>&1
+
+          # change owner of the static files
+          sudo chown -R www-data:www-data /home/ubuntu/local-cdn/static/
+
           # add log line
           echo "$(date) - Update completed :)" >> /home/ubuntu/logs/django-kmportal.log
 
@@ -53,3 +60,4 @@ jobs:
           # start new session
           cd /home/ubuntu/django-kmportal/portal/
           tmux new-session -d -s django-kmportal './runserver.sh' \; split-window -v 'cd portal && bash'
+
