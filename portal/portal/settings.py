@@ -160,7 +160,7 @@ SOCIAL_ACCOUNT_PROVIDERS = {
 }
 
 # Lol... wtf... I hate you allauth. This can be found in the database.
-SITE_ID = 3
+SITE_ID = os.environ.get("SITE_ID")
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
