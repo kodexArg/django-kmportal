@@ -150,3 +150,23 @@ test:
 ```
 gunicorn portal.wsgi:application --bind 0.0.0.0:8080
 ```.
+
+current nginx confguration (where are the logs you ...)
+```
+server {
+    listen 80;
+    server_name km1151.duckdns.org; # Replace with your domain or IP addres
+
+    location ^/static/ {
+            autoindex on;
+            alias /home/ubuntu/django-kmportal/local-cdn/static/;
+        }
+
+    location / {
+            proxy_pass http://localhost:8080;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $host;
+            proxy_redirect off;
+        }
+}
+```
