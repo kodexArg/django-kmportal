@@ -170,3 +170,5 @@ server {
         }
 }
 ```.
+
+And I really should be reading this https://flowbite.com/docs/getting-started/django/

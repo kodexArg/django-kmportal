@@ -149,14 +149,29 @@
     "es": "cancelado",
     "pt": "cancelado"
   },
-   "on_transit": {
+  "on_transit": {
     "en": "on transit",
     "es": "en tránsito",
     "pt": "em rota"
   },
- "refueling": {
-    "en": "refueling!",
-    "es": "cargando!",
-    "pt": "no sítio!"
-  }
+  "new_order": {
+    "en": "Load Order",
+    "es": "",
+    "pt": ""
+  },
+  "edit_order": {
+    "en": "",
+    "es": "",
+    "pt": ""
+  },
+  "Legend": {
+    "en": "Legend",
+    "es": "Leyenda",
+    "pt": ""
+  },
+  "Actions": {
+    "en": "Actions",
+    "es": "Acciones",
+    "pt": ""
+  },
 }

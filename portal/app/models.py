@@ -161,10 +161,10 @@ class FuelOrders(models.Model):
     ]
 
     color_map = {
-        "infinia_diesel": "#1E40AF",
-        "infinia": "#1212FF",
-        "diesel_500": "#FF4500",
-        "super": "#F2F200"
+        "infinia_diesel": "#225722",
+        "diesel_500": "#1453FF",
+        "infinia": "#FF4500",
+        "super": "#ffa500"
     }
 
     fuel_type_map = {

@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "../../portal/**/*.{html,js}",
     "../../portal/app/templatetags/*.py",
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     fontSize: {
@@ -45,6 +46,7 @@ module.exports = {
       require('@tailwindcss/forms'),
       require('@tailwindcss/aspect-ratio'),
       require('@tailwindcss/container-queries'), // how to use: https://github.com/tailwindlabs/tailwindcss-container-queries
+      require('flowbite/plugin')
     ],
   },
 }
