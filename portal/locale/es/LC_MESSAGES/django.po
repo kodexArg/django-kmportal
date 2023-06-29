@@ -24,11 +24,11 @@ msgstr ""
 msgid "t_page_title"
 msgstr "Portal&nbsp;KM&nbsp;1151"
 
-#: app/templates/base/element/footer.html:2
+#: app/templates/base/footer.html:2
 msgid "t_about"
 msgstr "Nuestra Empresa"
 
-#: app/templates/base/element/footer.html:3
+#: app/templates/base/footer.html:3
 msgid "t_contact"
 msgstr "Contacto"
 
