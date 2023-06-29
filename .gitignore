@@ -26,3 +26,4 @@ local-cdn/
 # Paperwork
 **/paperwork/
 # extras/tailwind/node_modules/
+**/node_modules/

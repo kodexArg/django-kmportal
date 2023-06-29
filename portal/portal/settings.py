@@ -42,13 +42,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "livereload",
+    "tailwind",
+    "theme",
+    "django_browser_reload", #reloader
     "app",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware", #reloader
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -56,7 +59,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.locale.LocaleMiddleware",
-    "livereload.middleware.LiveReloadScript",
 ]
 
 ROOT_URLCONF = "portal.urls"
@@ -195,6 +197,12 @@ LANGUAGES = [
     ("pt", "Portuguêse"),
 ]
 
-
+# TAILWIND and RELOADER
+TAILWIND_APP_NAME = 'theme'
+    
+INTERNAL_IPS = [
+    "127.0.0.1",
+]   
+    
 ## DEBUG
 # LIVERELOAD_HOST = '0.0.0.0'

@@ -1,4 +1,4 @@
-{% load static %}
+{% load static tailwind_tags %}
 
 <!DOCTYPE html>
 <html lang="es">
@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title%}{% endblock %}</title>
     <link rel="icon" href="{% static 'favicon.ico' %}">
+    {% tailwind_css %}
     {% include "base/element/cdn.html" %}
     {% block styles %}{% endblock %}
 </head>

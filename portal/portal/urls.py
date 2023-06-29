@@ -50,8 +50,9 @@ urlpatterns += i18n_patterns(
     path("contact_us/", ContactUsView.as_view(), name="contact-us"),
     path("user_home/", UserHomeView.as_view(), name="user_home"),
     path('logout/', LogoutView.as_view(), name='logout'),
-    
+
     # Modules Pages
+    path("__reload__/", include("django_browser_reload.urls")),
     path("company/", CompanyView.as_view(), name="company"),
     path("vehicles/", VehiclesView.as_view(), name="vehicles"),
     path("orders/", OrdersView.as_view(), name="orders"),
