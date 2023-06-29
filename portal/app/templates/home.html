@@ -21,23 +21,21 @@
   {% if not user.is_authenticated %}
   <div class="flex justify-center space-x-0">
     <button id="associated_shops-button" onclick="showCard('associated_shops')"
-      class="bg-sky-200 hover:bg-pantone307c text-pantone307c hover:text-white text-sm font-bold m-0 p-2 rounded-l-full">
+      class="bg-sky-200 hover:bg-pantone307c text-pantone307c hover:text-white text-sm font-bold py-2 px-4 rounded-l-full">
       {% translate 'i_am_associated_shops_button' %}
     </button>
     <button id="carriers-button" onclick="showCard('carriers')"
-      class="bg-sky-200 hover:bg-pantone307c text-pantone307c hover:text-white text-sm font-bold m-0 p-2 rounded-r-full">
+      class="bg-sky-200 hover:bg-pantone307c text-pantone307c hover:text-white text-sm font-bold py-2 px-4 rounded-r-full">
       {% translate 'i_am_carriers_button' %}
     </button>
   </div>
   {% endif %}
 </div>
 
-<video class="fixed top-0 bottom-0 left-0 right-0 p-0 m-0 object-cover w-full h-full z-[-999]" 
-  id="video" autoplay loop muted playsinline> {# autoplay commented!!!!!!!! #}
+<video class="fixed top-0 bottom-0 left-0 right-0 p-0 m-0 object-cover w-full h-full z-[-999]" id="video" autoplay loop muted playsinline> {# autoplay commented!!!!!!!! #}
   <source src="{% static 'videos_background/vid_bg.mp4' %}" type="video/mp4">
 </video>
-<img class="fixed top-0 bottom-0 left-0 right-0 p-0 m-0 object-cover w-full h-full z-[-9999]"
-  src="{% static 'videos_background/video_placeholder.png' %}" alt="Video Placeholder">
+<img class="fixed top-0 bottom-0 left-0 right-0 p-0 m-0 object-cover w-full h-full z-[-9999]" src="{% static 'videos_background/video_placeholder.png' %}" alt="Video Placeholder">
 {% endblock %}
 
 
