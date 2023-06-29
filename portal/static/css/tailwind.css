@@ -805,7 +805,7 @@ video {
   aspect-ratio: 1.618;
 }
 
-.aspect-square {
+.aspect-1 {
   aspect-ratio: 1 / 1;
 }
 

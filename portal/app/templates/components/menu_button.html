@@ -7,7 +7,7 @@
             {{ pos }}
             {% if side == 'left' %}left-0{% else %}right-0{% endif %}
             {% if size == 'small' %}h-16{% else %}h-24{% endif %}
-            aspect-square md:aspect-fibbo-fwd
+            aspect-1 md:aspect-fibbo-fwd
             bg-pantone307c 
             rounded-{% if side == 'left' %}r{% else %}l{% endif %}-full
             flex {% if side == 'left' %}justify-end{% else %}justify-start{% endif %}
@@ -42,7 +42,7 @@
             <input name="language" type="hidden" value="es">
             {% endif %}
             <button type="submit" form="language-form-{{ LANGUAGE_CODE }}"
-                class="aspect-square border-2 border-white h-full bg-no-repeat bg-cover rounded-full"
+                class="h-full aspect-1 border-2 border-white bg-no-repeat bg-cover rounded-full"
                 style="background-image: url({% static 'svg/languages/'|add:LANGUAGE_CODE|add:'.svg' %});"
                 aria-label="Change Language">
             </button>
@@ -50,7 +50,7 @@
 
         {% else %}
         <!-- normal button -->
-        <img class="p-1 aspect-square h-full rounded-full" src="{% static 'svg/'|add:icon|add:'.svg' %}" />
+        <img class="p-1 aspect-1 h-full rounded-full" src="{% static 'svg/'|add:icon|add:'.svg' %}" />
         {% endif %}
 
     </div>

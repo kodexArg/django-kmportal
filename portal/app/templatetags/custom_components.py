@@ -136,7 +136,7 @@ def fueltank_component(fuel):
     }
     
     html = f"""
-    <article class="flex flex-col items-center justify-center w-full aspect-square">
+    <article class="flex flex-col items-center justify-center w-full aspect-1">
         <svg fill="{ color_map.get(fuel) }" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
