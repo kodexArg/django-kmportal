@@ -50,8 +50,8 @@ def menu_button_component(context, pos, side, icon="", size="small", url="#", st
     }
 
 
-@register.inclusion_tag("components/fuel_order_row.html", takes_context=True)
-def fuel_order_row_component(context, order):
+@register.inclusion_tag("components/row_fuelorder.html", takes_context=True)
+def row_fuelorder_component(context, order):
     user = context["request"].user
     return {"user": user, "order": order}
 

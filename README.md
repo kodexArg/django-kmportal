@@ -1,5 +1,5 @@
 # KM 1151 Enterprise Portal
-This Django-based Fuel Station Enterprise website features a homepage, a minimalistic navbar, and user authentication. The site utilizes an RDS AWS database in the production environment and is styled using **Tailwind**.
+This Django-based Fuel Station Enterprise website features a homepage, a minimalistic navbar, and user authentication. The site utilizes an RDS AWS database in the production environment and is styled using __**Tailwind**__ **Flowbite**!.
 ### Language
 Although this site is written in English but it will be implemented in Argentina, having **Spanish** as main language (and probably Portuguese and English as alt languages). For this reason, dictionaries labeled as dialog{} will be used within the code (hard-coded) to alleviate the use of any brave person who wants to take advantage of it in another language.
 ### Current state of the project
@@ -48,17 +48,16 @@ Although this site is written in English but it will be implemented in Argentina
 
 This project utilizes the following primary packages and libraries:
 
-- Django: A high-level Python web framework that allows for clean, rapid development.
+- **Django**: A high-level Python web framework that allows for clean, rapid development.
 - mysqlclient: A Python DB API-2.0 compliant interface to MySQL.
 - python-dotenv: A package that makes it easy to work with environment variables, particularly useful for handling application secrets.
-- django-allauth: A comprehensive Django package that handles user authentication, including social login with OAuth providers.
+- **django-allauth**: A comprehensive Django package that handles user authentication, including social login with OAuth providers.
 - pytest: A robust Python testing framework, making it easy to write simple and scalable test cases.
 - gunicorn: A Python WSGI HTTP Server for UNIX.
 - whitenoise: A library for simplified static file serving for Python web apps.
 - loguru: A library that provides a straightforward and powerful logging for Python.
-- beautifulsoup4: A library for pulling data out of HTML and XML files, useful in web scraping.
-- Django-livereload-server: A Django app that integrates livereload with the Django development server.
 - Pillow: A Python Imaging Library, handy for adding image processing capabilities to your Python interpreter.
+- **django-tailwind** with **Flowbite**. A perfect pairing for Django, especially in this project that relies on components (template tags)... And no, I'm not going to admit that I don't get along with javascript and I'm always looking for ways to avoid it. Fallacies...
 
 Please note that the specific packages and libraries required for your project may vary based on the features and functionalities you choose to implement.
 

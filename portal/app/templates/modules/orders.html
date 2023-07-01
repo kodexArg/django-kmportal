@@ -10,16 +10,16 @@
 {% module_title_component translated_title %}
 
 <section id="header" class="mt-20 w-full flex flex-col">
-    <!-- Legend and buttons -->
 
+    <!-- Orders List -->
     <article id="orders" class="mx-2 md:mx-10 pt-4 overflow-y-auto">
-        <!-- Orders List -->
         {% for order in fuel_orders %}
-        {% fuel_order_row_component order %}
+        {% row_fuelorder_component order %}
         {% endfor %}
     </article>
 
-    <legend class="fixed bottom-0 w-fit ml-1 mb-8 flex flex-col grow-0 p-1 items-center bg-sky-900 rounded-xl shadow-lg drop-shadow-lg">
+    <!-- Legends -->
+    <legend id="legend_id" x-data="{ open: true }" x-show="open" @click="open = false" class="cursor-not-allowed fixed bottom-0 right-0 w-fit mr-2 mb-8 flex flex-col grow-0 p-1 items-center bg-sky-900 rounded-xl shadow-lg drop-shadow-lg">
         <div class="font-quicksand font-bold text-xxs text-center text-sky-100">
             {% translate 'Legend' %}
         </div>
@@ -30,13 +30,7 @@
             <div class="w-6 aspect-1 bg-sky-100 rounded">{% fueltank_component fuel="super" %}</div>
         </div>
     </legend>
-
+    
 </section>
 {% endblock %}
 
-
-
-<div class="m-2 h-6 asepect-fibbo-up flex">
-    <div class="bg-sky-900 w-full h-full rounded-lg px-2 py-1 font-rubik text-xxs text-white">{% translate 'new_order' %}
-    </div>
-</div>

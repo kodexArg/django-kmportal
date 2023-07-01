@@ -32,19 +32,19 @@ msgstr "Our Company"
 msgid "t_contact"
 msgstr "Contact"
 
-#: app/templates/components/fuel_order_row.html:21
+#: app/templates/components/row_fuelorder.html:21
 msgid "finished"
 msgstr "finished"
 
-#: app/templates/components/fuel_order_row.html:23
+#: app/templates/components/row_fuelorder.html:23
 msgid "canceled"
 msgstr "canceled"
 
-#: app/templates/components/fuel_order_row.html:25
+#: app/templates/components/row_fuelorder.html:25
 msgid "refueling"
 msgstr "refueling!"
 
-#: app/templates/components/fuel_order_row.html:27
+#: app/templates/components/row_fuelorder.html:27
 msgid "on_transit"
 msgstr "on transit"
 
