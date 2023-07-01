@@ -107,21 +107,23 @@
         </div>
     </div>
 
-    <!-- TOGGLE -->
-    <div id="row-toggle-body-{{ order.id }}" ariai-labelledby="row-toggle-heading-{{ order.id }}" class="hidden">
+    <!-- Actions -->
+    <menu id="row-toggle-body-{{ order.id }}" ariai-labelledby="row-toggle-heading-{{ order.id }}" class="hidden">
         <div class="rounded-b-2xl flex flex-nowrap p-1 ml-14 mr-5">
             <div class="w-full h-full flex justify-end">
+
                 <button
-                    class="flex items-center justify-center w-24 px-2 py-1 rounded-l-2xl font-rubik font-bold text-sm text-red-300 {% if order.is_finished %}bg-pantone7472c{% elif order.is_canceled %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else  %}bg-pantone7689c{% endif %}">
+                    class="flex items-center justify-center px-2 py-1 rounded-l-2xl font-rubik font-bold text-red-300 text-sm {% if order.is_finished %}bg-pantone7472c{% elif order.is_canceled %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else  %}bg-pantone7689c{% endif %}">
                     <div class="h-4 aspect-1 mr-1 flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    {% translate 'delete' %}
+                    {% translate 'cancel' %}
                 </button>
+
                 <button
-                    class="flex items-center justify-center w-24 px-2 py-1 font-rubik font-bold text-sm text-white {% if order.is_finished %}bg-pantone7472c{% elif order.is_canceled %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else  %}bg-pantone7689c{% endif %}">
+                    class="flex items-center justify-center px-2 py-1 font-rubik font-bold text-sm text-white {% if order.is_finished %}bg-pantone7472c{% elif order.is_canceled %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else  %}bg-pantone7689c{% endif %}">
                     <div class="h-4 aspect-1 mr-1 flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -129,18 +131,10 @@
                     </div>
                     {% translate 'schedule' %}
                 </button>
-                <button
-                    class="flex items-center justify-center w-24 px-2 py-1 font-rubik font-bold text-sm text-white {% if order.is_finished %}bg-pantone7472c{% elif order.is_canceled %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else  %}bg-pantone7689c{% endif %}">
-                    <div class="h-4 aspect-1 mr-1 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                        </svg>
-                    </div>
-                    {% translate 'modify' %}
-                </button>
-                <button
-                    class="flex items-center justify-center w-24 px-2 py-1 rounded-r-2xl font-rubik font-bold text-sm text-white {% if order.is_finished %}bg-pantone7472c{% elif order.is_canceled %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else  %}bg-pantone7689c{% endif %}">
+
+                <!-- View button -->
+                <button data-modal-target="row-view-{{ order.id }}" data-modal-toggle="row-view-{{ order.id }}"
+                    class="flex items-center justify-center px-2 py-1 rounded-r-2xl font-rubik font-bold text-sm text-white {% if order.is_finished %}bg-pantone7472c{% elif order.is_canceled %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else  %}bg-pantone7689c{% endif %}">
                     <div class="h-4 aspect-1 mr-1 flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -152,5 +146,103 @@
                 </button>
             </div>
         </div>
+    </menu>
+
+    <!-- View Popup Modal-->
+    <div id="row-view-{{ order.id }}" tabindex="-1" aria-hidden="true" class="hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal drop-shadow-2xl">
+        <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+            <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-3">
+
+                <!-- Modal header -->
+                <div class="flex justify-between mb-4 rounded-t sm:mb-5">
+                    <div class="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
+                        <h3>Fuel Order #{{ order.operation_code }}</h3>
+                        <div class="text-sm mx-2">
+                            {% if order.is_finished %}
+                            <span class="text-green-500">Finished</span>
+                            {% elif order.is_canceled %}
+                            <span class="text-red-500">Canceled</span>
+                            {% elif order.is_blocked %}
+                            <span class="text-orange-500">Blocked</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-toggle="row-view-{{ order.id }}">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+
+                <!-- Image Placeholder -->
+                <div>
+                    <div class="w-40 h-40 mx-auto rounded-md border-2 border-pantone307c">
+                        <img src="{% url 'get_qr' operation_code=order.operation_code %}" alt="QR Code">
+                    </div>
+                </div>
+
+                <!-- Modal content -->
+                <div class="mt-6">
+                    <dl class="space-y-4 overflow-y-auto max-h-52">
+                        <!-- Order Information -->
+                        <div>
+                            <dt class="text-md font-semibold text-sky-900 dark:text-gray-900">Order Information</dt>
+                            <dd>
+                                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">Creation date:</span>
+                                <span class="text-sm text-gray-900 dark:text-gray-900">{{ order.order_date }}</span>
+                            </dd>
+                            <dd>
+                                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">Last Modification:</span>
+                                <span class="text-sm text-gray-900 dark:text-gray-900">{{ order.modified_date }}</span>
+                            </dd>
+                            <dd>
+                                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">Driver:</span>
+                                <span class="text-sm text-gray-900 dark:text-gray-900">{{ order.driver }}</span>
+                            </dd>
+                        </div>
+
+                        <!-- Vehicle Information -->
+                        <div>
+                            <dt class="text-md font-semibold text-sky-900 dark:text-gray-900">Vehicle Information</dt>
+                            <dd>
+                                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">Tractor plate:</span>
+                                <span class="text-sm text-gray-900 dark:text-gray-900">{{ order.tractor_plate }}</span>
+                            </dd>
+                            <dd>
+                                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">Trailer plate:</span>
+                                <span class="text-sm text-gray-900 dark:text-gray-900">{{ order.trailer_plate }}</span>
+                            </dd>
+                        </div>
+
+                        <!-- Fuel Order -->
+                        <div>
+                            <dt class="text-md font-semibold text-sky-900 dark:text-gray-900">Fuel Order</dt>
+                            <dd>
+                                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">Tractor:</span>
+                                <span class="text-sm text-gray-900 dark:text-gray-900">{{ order.tractor_liters }} liters of {{ order.tractor_fuel_type }}</span>
+                            </dd>
+                            <dd>
+                                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">Trailer:</span>
+                                <span class="text-sm text-gray-900 dark:text-gray-900">{{ order.trailer_liters_to_load }} liters of {{ order.backpack_fuel_type }}</span>
+                            </dd>
+                            <dd>
+                                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">Chamber:</span>
+                                <span class="text-sm text-gray-900 dark:text-gray-900">{{ order.chamber_liters_to_load }} liters of {{ order.chamber_fuel_type }}</span>
+                            </dd>
+                        </div>
+
+                    </dl>
+                </div>
+                <!-- end modal -->
+
+
+            </div>
+        </div>
     </div>
+
 </article>

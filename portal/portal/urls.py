@@ -34,6 +34,7 @@ from app.views import (
     CashTransferView,
     LogoutView,
     UnderConstructionView,
+    get_qr,
 )
 
 urlpatterns = [
@@ -41,7 +42,9 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
     path("accounts/", include("allauth.urls")),
     path("login/", LoginView.as_view(), name="login"),
-    path("under_construction/", UnderConstructionView.as_view(), name="under_construction")
+    path("under_construction/", UnderConstructionView.as_view(), name="under_construction"),
+    path('qr/<str:operation_code>/', get_qr, name='get_qr'),
+
 ]
 
 urlpatterns += i18n_patterns(

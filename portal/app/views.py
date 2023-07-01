@@ -1,7 +1,11 @@
 from loguru import logger
 import json
+import qrcode
+import qrcode.image.svg
+from io import BytesIO
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
@@ -144,7 +148,7 @@ class CompanyView(CustomTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        company = context.get('company')
+        company = context.get("company")
         if company is not None:
             context["drivers"] = Drivers.objects.filter(company=company)
         context["create_form"] = CreateDriverForm(prefix="create")
@@ -204,12 +208,11 @@ class VehiclesView(CustomTemplateView):
             else:
                 logger.error(form.errors)
 
-
         return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        company = context.get('company')
+        company = context.get("company")
         if company is not None:
             context["tractors"] = Tractors.objects.filter(company=company)
             context["trailers"] = Trailers.objects.filter(company=company)
@@ -227,9 +230,9 @@ class OrdersView(CustomTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        company = context.get('company')
+        company = context.get("company")
         if company is not None:
-            context['fuel_orders'] = FuelOrders.objects.filter(company=company)
+            context["fuel_orders"] = FuelOrders.objects.filter(company=company)
         return context
 
 
@@ -254,3 +257,29 @@ def get_provider_id(user, provider_name):
         return social_account.get_provider().id
     except user.socialaccount_set.model.DoesNotExist:
         return None
+
+
+def get_qr(request, operation_code):
+    """get qr svg from the operation_code as a string to include in the response"""
+    svg_image = generate_qr_code_svg(operation_code)
+    response = HttpResponse(svg_image, content_type="image/svg+xml")
+    response["Content-Disposition"] = 'attachment; filename="qrcode.svg"'
+    return response
+
+
+def generate_qr_code_svg(text):
+    """returns a QR as a svg string from a given text"""
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=100,
+        border=4,
+    )
+    qr.add_data(text)
+    qr.make(fit=True)
+    factory = qrcode.image.svg.SvgImage
+    svg_img = qr.make_image(image_factory=factory)
+    svg_stream = BytesIO()
+    svg_img.save(svg_stream)
+    svg_string = svg_stream.getvalue().decode("utf-8")
+    return svg_string

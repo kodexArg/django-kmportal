@@ -9,8 +9,9 @@
 {% translate 'fuel_orders' as translated_title %}
 {% module_title_component translated_title %}
 
-<section id="header" class="mt-20 w-full flex flex-col">
+<div class="h-24 w-full"></div>
 
+<section class="w-full flex flex-col">
     <!-- Orders List -->
     <article id="orders" class="mx-2 md:mx-10 pt-4 overflow-y-auto">
         {% for order in fuel_orders %}
@@ -19,7 +20,8 @@
     </article>
 
     <!-- Legends -->
-    <legend id="legend_id" x-data="{ open: true }" x-show="open" @click="open = false" class="cursor-not-allowed fixed bottom-0 right-0 w-fit mr-2 mb-8 flex flex-col grow-0 p-1 items-center bg-sky-900 rounded-xl shadow-lg drop-shadow-lg">
+    <legend id="legend_id" x-data="{ open: true }" x-show="open" @click="open = false"
+        class="cursor-not-allowed fixed bottom-0 right-0 w-fit mr-2 mb-8 flex flex-col grow-0 p-1 items-center bg-sky-900 rounded-xl shadow-lg drop-shadow-lg">
         <div class="font-quicksand font-bold text-xxs text-center text-sky-100">
             {% translate 'Legend' %}
         </div>
@@ -30,7 +32,5 @@
             <div class="w-6 aspect-1 bg-sky-100 rounded">{% fueltank_component fuel="super" %}</div>
         </div>
     </legend>
-    
 </section>
 {% endblock %}
-

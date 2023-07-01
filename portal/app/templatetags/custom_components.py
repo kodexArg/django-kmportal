@@ -16,6 +16,18 @@ TAILWIND_TOP_VALUE = {
 }
 
 
+@register.inclusion_tag("components/std_button.html", takes_context=True)
+def std_button_component(context, text, color="bg-pantone7689c", url="#", svg=None, is_left=False, is_right=False):
+    return {
+        "text": text,
+        "color": color,
+        "svg": svg,
+        "url": url,
+        "is_left": is_left,
+        "is_right": is_right,
+    }
+
+
 @register.inclusion_tag("components/welcome_card.html")
 def welcome_card_component(choice):
     return {"choice": choice}
@@ -117,10 +129,10 @@ def rbutton_component(caption, bg="bg-pantone7689c", fg="text-white", size=""):
 
 @register.simple_tag()
 def fueltank_component(fuel):
-    """ Returns a colored icon with gray text.
-    long_fuel names and color_map should be checked in models.py 
+    """Returns a colored icon with gray text.
+    long_fuel names and color_map should be checked in models.py
     """
-    
+
     color_map = {
         "infinia_diesel": "#225722",
         "diesel_500": "#1453FF",
@@ -134,7 +146,7 @@ def fueltank_component(fuel):
         "diesel_500": "Diesel 500",
         "super": "Super",
     }
-    
+
     html = f"""
     <article class="flex flex-col items-center justify-center w-full aspect-1">
         <svg fill="{ color_map.get(fuel) }" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -151,5 +163,5 @@ def fueltank_component(fuel):
         </div>
     </article>
     """
-    
+
     return mark_safe(html)
