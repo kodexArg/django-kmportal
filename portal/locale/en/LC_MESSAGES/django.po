@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 22:32+0000\n"
+"POT-Creation-Date: 2023-07-02 22:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,25 +32,87 @@ msgstr "Our Company"
 msgid "t_contact"
 msgstr "Contact"
 
-#: app/templates/components/row_fuelorder.html:21
-msgid "finished"
-msgstr "finished"
-
-#: app/templates/components/row_fuelorder.html:23
-msgid "canceled"
-msgstr "canceled"
-
-#: app/templates/components/row_fuelorder.html:25
-msgid "refueling"
-msgstr "refueling!"
-
-#: app/templates/components/row_fuelorder.html:27
-msgid "on_transit"
-msgstr "on transit"
-
 #: app/templates/components/google_button.html:12
 msgid "t_login_with_google"
 msgstr "Login with Google"
+
+#: app/templates/components/row_fuelorder/buttons.html:19
+msgid "cancel"
+msgstr "Cancel"
+
+#: app/templates/components/row_fuelorder/buttons.html:30
+msgid "schedule"
+msgstr "Schedule"
+
+#: app/templates/components/row_fuelorder/buttons.html:43
+msgid "view"
+msgstr "View"
+
+#: app/templates/components/row_fuelorder/popup.html:15
+#: app/templates/components/row_fuelorder/row.html:21
+msgid "finished"
+msgstr "finished"
+
+#: app/templates/components/row_fuelorder/popup.html:17
+#: app/templates/components/row_fuelorder/row.html:23
+msgid "canceled"
+msgstr "canceled"
+
+#: app/templates/components/row_fuelorder/popup.html:19
+msgid "blocked"
+msgstr "bloqued"
+
+#: app/templates/components/row_fuelorder/popup.html:46
+msgid "order_information"
+msgstr "Order Information"
+
+#: app/templates/components/row_fuelorder/popup.html:48
+msgid "creation_date"
+msgstr "Creation Date"
+
+#: app/templates/components/row_fuelorder/popup.html:52
+msgid "last_modification"
+msgstr "Last Modification"
+
+#: app/templates/components/row_fuelorder/popup.html:56
+msgid "driver"
+msgstr "Driver"
+
+#: app/templates/components/row_fuelorder/popup.html:63
+msgid "vehicle_information"
+msgstr "Vehicle Information"
+
+#: app/templates/components/row_fuelorder/popup.html:65
+msgid "tractor_plate"
+msgstr "Tractor Plate"
+
+#: app/templates/components/row_fuelorder/popup.html:69
+msgid "trailer_plate"
+msgstr "Trailer Plate"
+
+#: app/templates/components/row_fuelorder/popup.html:76
+msgid "fuel_order"
+msgstr "Fuel Order"
+
+#: app/templates/components/row_fuelorder/popup.html:78
+msgid "tractor"
+msgstr "Tractor"
+
+#: app/templates/components/row_fuelorder/popup.html:82
+msgid "backpack"
+msgstr "Backpack"
+
+#: app/templates/components/row_fuelorder/popup.html:86
+msgid "chamber"
+msgstr "Chamber"
+
+#: app/templates/components/row_fuelorder/row.html:25
+msgid "refueling"
+msgstr "Refueling"
+
+#: app/templates/components/row_fuelorder/row.html:27
+msgid "on_transit"
+msgstr "on transit"
 
 #: app/templates/components/welcome_card.html:6
 msgid "associated_shops_card_text_title"
@@ -80,11 +142,11 @@ msgstr ""
 " services ranging from internet to restrooms, all to facilitate your daily "
 "operation. We hope your experience with us is exceptional!"
 
-#: app/templates/home.html:25
+#: app/templates/home.html:27
 msgid "i_am_associated_shops_button"
 msgstr "Shops"
 
-#: app/templates/home.html:29
+#: app/templates/home.html:31
 msgid "i_am_carriers_button"
 msgstr "Carrier"
 
@@ -116,6 +178,10 @@ msgstr "RUT"
 msgid "fuel_orders"
 msgstr "Refueling Orders"
 
+#: app/templates/modules/orders.html:26
+msgid "Legend"
+msgstr "Legend"
+
 #: app/templates/modules/tickets.html:3
 msgid "tickets_page_title"
 msgstr "Helpdesk System"
@@ -143,6 +209,3 @@ msgstr ""
 " 🕵️ so you can log in. You'll soon have access to all the wonderful tools "
 "and benefits we've prepared for you. If you have any questions, please don't"
 " hesitate to contact us. We're here to help! 🤗"
-
-#~ msgid "orders_page_title"
-#~ msgstr "Fuel Load Orders"

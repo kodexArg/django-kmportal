@@ -1,6 +1,7 @@
 import secrets
 from datetime import datetime, timedelta
 from django.db import models
+from django.db.models import Case, When, Value, IntegerField, Manager
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from allauth.socialaccount.models import SocialAccount
@@ -125,7 +126,6 @@ class Trailers(models.Model):
     def __str__(self):
         return self.domain
 
-from django.db.models import Case, When, Value, IntegerField, Manager
 
 class FuelOrdersManager(Manager):
     def get_queryset(self):
@@ -249,12 +249,41 @@ class FuelOrders(models.Model):
     def chamber_fuel_type_color(self):
         return self.color_map.get(self.chamber_fuel_type, "")
 
+    @property
+    def formated_tractor_liters_to_load_of(self):
+        if self.tractor_liters_to_load == 0:
+            return "no"
+        elif self.tractor_liters_to_load == -1:
+            return "max"
+        else:
+            return f"{ self.tractor_liters_to_load } "
+
+    @property
+    def formated_backpack_liters_to_load_of(self):
+        if self.backpack_liters_to_load == 0:
+            return "no"
+        elif self.backpack_liters_to_load == -1:
+            return "max"
+        else:
+            return f"{ self.backpack_liters_to_load } "
+
+    @property
+    def formated_chamber_liters_to_load_of(self):
+        if self.chamber_liters_to_load == 0:
+            return "no"
+        elif self.chamber_liters_to_load == -1:
+            return "ma"
+        else:
+            return f"{ self.chamber_liters_to_load } "
+
+
     def __str__(self):
         return self.operation_code
 
     class Meta:
         verbose_name = 'Fuel Order'
         verbose_name_plural = 'Fuel Orders'
+
 
 class Refuelings(models.Model):
     """Core Table of the refueling Workflow: STEP 2"""

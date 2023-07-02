@@ -81,6 +81,11 @@ def row_fuelorder_popup_component(context, order):
     return {"order": order}
 
 
+@register.inclusion_tag("components/row_fuelorder/row.html", takes_context=True)
+def row_fuelorder_row_component(context, order):
+    return {"order": order}
+
+
 @register.inclusion_tag("components/row_fuelorder/buttons.html", takes_context=True)
 def row_fuelorder_buttons_component(context, order):
     return {"order": order}
