@@ -60,6 +60,6 @@ jobs:
           
           # start new session
           cd /home/ubuntu/django-kmportal/portal/
-          tmux new-session -d -s django-kmportal 'gunicorn portal.wsgi:application --bind 0.0.0.0:8080' \; split-window -v 'bash'
+          tmux new-session -d -s django-kmportal 'gunicorn portal.wsgi:application --bind 0.0.0.0:8080 --workers 4' \; split-window -v 'bash'
 
 
