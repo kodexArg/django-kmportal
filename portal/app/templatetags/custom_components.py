@@ -17,7 +17,15 @@ TAILWIND_TOP_VALUE = {
 
 
 @register.inclusion_tag("components/std_button.html", takes_context=True)
-def std_button_component(context, text, color="bg-pantone7689c", url="#", svg=None, is_left=False, is_right=False):
+def std_button_component(
+    context,
+    text,
+    color="bg-pantone7689c",
+    url="#",
+    svg=None,
+    is_left=False,
+    is_right=False,
+):
     return {
         "text": text,
         "color": color,
@@ -62,10 +70,20 @@ def menu_button_component(context, pos, side, icon="", size="small", url="#", st
     }
 
 
-@register.inclusion_tag("components/row_fuelorder.html", takes_context=True)
+@register.inclusion_tag("components/row_fuelorder/main.html", takes_context=True)
 def row_fuelorder_component(context, order):
     user = context["request"].user
     return {"user": user, "order": order}
+
+
+@register.inclusion_tag("components/row_fuelorder/popup.html", takes_context=True)
+def row_fuelorder_popup_component(context, order):
+    return {"order": order}
+
+
+@register.inclusion_tag("components/row_fuelorder/buttons.html", takes_context=True)
+def row_fuelorder_buttons_component(context, order):
+    return {"order": order}
 
 
 @register.simple_tag()
