@@ -27,8 +27,8 @@ class CustomTemplateView(TemplateView):
     """Used instead of TemplateView to add a custom context_data method"""
 
     provider_name = "Google"
-
     # context["provider_id"]
+
     def get_provider_id(self, user, provider_name):
         try:
             social_account = user.socialaccount_set.get(provider=provider_name)
@@ -111,7 +111,7 @@ class CompanyView(CustomTemplateView):
 
     def post(self, request, *args, **kwargs):
         """Multi Forms handler
-        update form for each field then create to add new fields
+        update form for each field then create a form to add new fields
         'from_type' is a hidden field to swtich from update to create form
         """
 
@@ -127,6 +127,7 @@ class CompanyView(CustomTemplateView):
             else:
                 logger.error(form.errors)
 
+
         # Update form
         elif form_type == "update_driver":
             driver_id = request.POST.get("driver_id")
@@ -138,6 +139,7 @@ class CompanyView(CustomTemplateView):
             else:
                 logger.error(form.errors)
 
+
         # Delete form
         elif form_type == "delete_driver":
             driver_id = request.POST.get("driver_id")
@@ -145,6 +147,7 @@ class CompanyView(CustomTemplateView):
             driver.delete()
 
         return self.get(request, *args, **kwargs)
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
