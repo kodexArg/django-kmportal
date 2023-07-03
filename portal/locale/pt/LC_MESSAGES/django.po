@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 22:06+0000\n"
+"POT-Creation-Date: 2023-07-03 00:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,9 +180,13 @@ msgstr "CNPJ"
 msgid "fuel_orders"
 msgstr "Ordes de Reabastecimento"
 
-#: app/templates/modules/orders.html:26
+#: app/templates/modules/orders.html:33
 msgid "Legend"
 msgstr "Legenda"
+
+#: app/templates/modules/orders.html:49
+msgid "new_order"
+msgstr "Ordem de Carga"
 
 #: app/templates/modules/tickets.html:3
 msgid "tickets_page_title"

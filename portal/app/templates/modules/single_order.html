@@ -1,0 +1,92 @@
+{% extends "base/base.html" %}
+{% load static i18n socialaccount custom_components %}
+{% block title %}{% translate "company_page_title" %}{% endblock %}
+
+
+{% block navbar %}{% include 'base/navbar_components.html' with icon='fuel' %}{% endblock %}
+
+{% block content %}
+{% translate 'fuel_orders' as translated_title %}
+{% module_title_component translated_title %}
+
+<div class="h-24 w-full"><!-- top margin --></div>
+
+<form method="post" enctype="multipart/form-data" action="{% url 'orders' %}">
+    {% csrf_token %}
+    <div>
+        <label for="id_requested_date">Requested Date:</label>
+        {{ form.requested_date }}
+    </div>
+    <div>
+        <label for="id_driver">Driver:</label>
+        {{ form.driver }}
+    </div>
+    <div>
+        <label for="id_tractor_plate">Tractor Plate:</label>
+        {{ form.tractor_plate }}
+    </div>
+    <div>
+        <label for="id_trailer_plate">Trailer Plate:</label>
+        {{ form.trailer_plate }}
+    </div>
+    <div>
+        <label>Tractor Fuel:</label>
+        <div>
+            <label for="id_tractor_liters">Liters:</label>
+            {{ form.tractor_liters }}
+        </div>
+        <div>
+            <label for="id_tractor_fuel_type">Fuel Type:</label>
+            {{ form.tractor_fuel_type }}
+        </div>
+    </div>
+    <div>
+        <label>Backpack Fuel:</label>
+        <div>
+            <label for="id_backpack_liters">Liters:</label>
+            {{ form.backpack_liters }}
+        </div>
+        <div>
+            <label for="id_backpack_fuel_type">Fuel Type:</label>
+            {{ form.backpack_fuel_type }}
+        </div>
+    </div>
+    <div>
+        <label>Chamber Fuel:</label>
+        <div>
+            <label for="id_chamber_liters">Liters:</label>
+            {{ form.chamber_liters }}
+        </div>
+        <div>
+            <label for="id_chamber_fuel_type">Fuel Type:</label>
+            {{ form.chamber_fuel_type }}
+        </div>
+    </div>
+    <div>
+        <label for="id_tractor_liters_to_load">Tractor Liters to Load:</label>
+        {{ form.tractor_liters_to_load }}
+    </div>
+    <div>
+        <label for="id_backpack_liters_to_load">Backpack Liters to Load:</label>
+        {{ form.backpack_liters_to_load }}
+    </div>
+    <div>
+        <label for="id_chamber_liters_to_load">Chamber Liters to Load:</label>
+        {{ form.chamber_liters_to_load }}
+    </div>
+    <div>
+        <label for="id_requires_kilometers">Requires Kilometers:</label>
+        {{ form.requires_kilometers }}
+    </div>
+    <div>
+        <label for="id_requires_fuel_types">Requires Fuel Types:</label>
+        {{ form.requires_fuel_types }}
+    </div>
+    <div>
+        <label for="id_notes">Notes:</label>
+        {{ form.notes }}
+    </div>
+    <button type="submit">Submit</button>
+</form>
+<div class="h-10"></div>
+{% endblock %}

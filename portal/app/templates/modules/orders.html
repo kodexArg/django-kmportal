@@ -9,7 +9,7 @@
 {% translate 'fuel_orders' as translated_title %}
 {% module_title_component translated_title %}
 
-<div class="h-24 w-full"></div>
+<div class="h-24 w-full"><!-- top margin --></div>
 
 <section class="w-full flex flex-col">
     <!-- Orders List -->
@@ -20,17 +20,46 @@
     </article>
 
     <!-- Legends -->
-    <legend id="legend_id" x-data="{ open: true }" x-show="open" @click="open = false"
-        class="cursor-not-allowed fixed bottom-0 right-0 w-fit mr-2 mb-8 flex flex-col grow-0 p-1 items-center bg-sky-900 rounded-xl shadow-lg drop-shadow-lg">
-        <div class="font-quicksand font-bold text-xxs text-center text-sky-100">
-            {% translate 'Legend' %}
-        </div>
-        <div class="flex p-1 justify-end space-x-1 rounded-lg">
-            <div class="w-6 aspect-1 bg-sky-100 rounded">{% fueltank_component fuel="infinia_diesel" %}</div>
-            <div class="w-6 aspect-1 bg-sky-100 rounded">{% fueltank_component fuel="diesel_500" %}</div>
-            <div class="w-6 aspect-1 bg-sky-100 rounded">{% fueltank_component fuel="infinia" %}</div>
-            <div class="w-6 aspect-1 bg-sky-100 rounded">{% fueltank_component fuel="super" %}</div>
-        </div>
-    </legend>
+<div class="h-10"></div>
 </section>
+
+<menu data-dial-init class="fixed flex flex-col justify-center items-center bottom-11 w-screen z-50 group">
+    <div id="speed-dial-menu" class="flex flex-col justify-end hidden py-1 mb-4 space-y-2 rounded-lg shadow-sm dark:border-gray-600 dark:bg-gray-700">
+        <ul class="text-sm text-gray-500 dark:text-gray-300 flex flex-col items-center">
+            <li>
+                <legend id="legend_id" x-data="{ open: true }" x-show="open" @click="open = false"
+                    class="cursor-not-allowed w-fit flex flex-col grow-0 items-center bg-pantone307c border-2 border-white rounded-xl shadow-lg drop-shadow-lg p-2 m-1">
+                    <div class="font-quicksand font-bold text-xs text-center text-sky-100">
+                        {% translate 'Legend' %}
+                    </div>
+                    <div class="flex p-1 justify-end space-x-1 rounded-lg">
+                        <div class="w-6 aspect-1 bg-sky-100 rounded">{% fueltank_component fuel="infinia_diesel" %}</div>
+                        <div class="w-6 aspect-1 bg-sky-100 rounded">{% fueltank_component fuel="diesel_500" %}</div>
+                        <div class="w-6 aspect-1 bg-sky-100 rounded">{% fueltank_component fuel="infinia" %}</div>
+                        <div class="w-6 aspect-1 bg-sky-100 rounded">{% fueltank_component fuel="super" %}</div>
+                    </div>
+                </legend>
+            </li>
+            <li>
+                <a href="{% url 'new_order' %}"
+                    class="flex rounded-full justify-center items-center space-x-2 px-2 py-1 text-white hover:bg-gray-100 dark:hover:bg-gray-600 hover:text-gray-900 dark:hover:text-white bg-pantone7472c border-white border-2 shadow-lg drop-shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="text-sm font-bold font-rubik">{% translate 'new_order' %}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <button type="button" data-dial-toggle="speed-dial-menu" aria-controls="speed-dial-menu" aria-expanded="false"
+        class="flex p-1 m-1 items-center justify-center text-white bg-pantone307c rounded-full w-14 h-14 hover:bg-pantone307c dark:bg-pantone7689c dark:hover:bg-sky-700 focus:ring-4 focus:ring-sky-300 focus:outline-none dark:focus:ring-pantone7472c">
+        <img class="w-full h-full" src="{% static 'svg/sandwich.svg' %}" />
+        <span class="sr-only">Open actions menu</span>
+    </button>
+
+</menu>
+
+
+
 {% endblock %}

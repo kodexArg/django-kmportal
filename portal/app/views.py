@@ -48,6 +48,18 @@ class CustomTemplateView(TemplateView):
             logger.info("Company does not exist")
             return None
 
+    def get_company_id(self, user, provider_name):
+        try:
+            social_account = user.socialaccount_set.get(provider=provider_name)
+            company_social_account = CompanySocialAccount.objects.get(social_account=social_account)
+            return company_social_account.company.id
+        except (
+            user.socialaccount_set.model.DoesNotExist,
+            CompanySocialAccount.DoesNotExist,
+        ):
+            logger.info("Company does not exist")
+            return None
+
     # Context data getter
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -88,6 +100,31 @@ class UserHomeView(CustomTemplateView):
 
 
 ### MODULES ###
+# Create Fuel Orders #
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import FuelOrderForm
+
+
+@method_decorator(login_required, name="dispatch")
+class SingleOrderView(CustomTemplateView):
+    """Add new or edit order by order_id. Used along with OrdersView"""
+
+    template_name = "modules/single_order.html"
+
+    def get_context_data(self, order_id=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if order_id:
+            # Editing an existing order
+            fuel_order = get_object_or_404(FuelOrders, id=order_id)
+            form = FuelOrderForm(instance=fuel_order)
+        else:
+            # Creating a new order
+            form = FuelOrderForm()
+
+        context["form"] = form
+        return context
+
+
 # Company #
 @method_decorator(login_required, name="dispatch")
 class CompanyView(CustomTemplateView):
@@ -127,7 +164,6 @@ class CompanyView(CustomTemplateView):
             else:
                 logger.error(form.errors)
 
-
         # Update form
         elif form_type == "update_driver":
             driver_id = request.POST.get("driver_id")
@@ -139,7 +175,6 @@ class CompanyView(CustomTemplateView):
             else:
                 logger.error(form.errors)
 
-
         # Delete form
         elif form_type == "delete_driver":
             driver_id = request.POST.get("driver_id")
@@ -147,7 +182,6 @@ class CompanyView(CustomTemplateView):
             driver.delete()
 
         return self.get(request, *args, **kwargs)
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -167,6 +201,7 @@ class VehiclesView(CustomTemplateView):
 
     def post(self, request, *args, **kwargs):
         # Create and update form for tractors
+        
         form_type = request.POST.get("form_type")
         logger.debug(form_type)
         if form_type == "create_tractor":
@@ -174,7 +209,7 @@ class VehiclesView(CustomTemplateView):
             if form.is_valid():
                 tractor = form.save(commit=False)
                 tractor.company = self.get_company(request.user, self.provider_name)
-                tractor.domain
+                tractor.domain  #?
                 tractor.save()
                 return redirect("vehicles")
             else:
@@ -230,6 +265,25 @@ class VehiclesView(CustomTemplateView):
 @method_decorator(login_required, name="dispatch")
 class OrdersView(CustomTemplateView):
     template_name = "modules/orders.html"
+
+    def post(self, request, *args, **kwargs):
+        # Create and update form for Orders
+
+        form = FuelOrderForm(request.POST)
+        logger.debug(f"{self.get_company(request.user, self.provider_name)}")
+        logger.debug(f"{self.get_company_id(request.user, self.provider_name)}")
+        
+        if form.is_valid():
+            fuel_order = form.save(commit=False)
+            fuel_order.save()
+            return redirect("orders")  # Redirect to the fuel orders page
+        else:
+            logger.error(form.errors)
+
+        # If the form is invalid, re-render the template with the form and display the errors
+        context = self.get_context_data(**kwargs)
+        context["form"] = form
+        return render(request, self.template_name, context)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

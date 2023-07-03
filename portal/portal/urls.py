@@ -27,13 +27,14 @@ from app.views import (
     AboutUsView,
     UserHomeView,
     CompanyView,
-    OrdersView,
     TicketsView,
     VehiclesView,
     ContactUsView,
     CashTransferView,
     LogoutView,
     UnderConstructionView,
+    OrdersView,
+    SingleOrderView,
     get_qr,
 )
 
@@ -61,6 +62,8 @@ urlpatterns += i18n_patterns(
     path("company/", CompanyView.as_view(), name="company"),
     path("vehicles/", VehiclesView.as_view(), name="vehicles"),
     path("orders/", OrdersView.as_view(), name="orders"),
+    path("orders/new/", SingleOrderView.as_view(), name="new_order"),
+    path("orders/<int:order_id>/edit/", SingleOrderView.as_view(), name="edit_order"), 
     path("tickets/", UnderConstructionView.as_view(), name="tickets"),
     path("cashtransfer/", UnderConstructionView.as_view(), name="cashtransfer"),
 )

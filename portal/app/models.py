@@ -181,6 +181,9 @@ class FuelOrders(models.Model):
     modified_date = models.DateField(auto_now=True)
     requested_date = models.DateField(auto_now_add=True)
     expiration_date = models.DateField(default=datetime.now() + timedelta(days=7))
+
+    user_creator = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='fuel_orders_created', blank=True, null=True)
+    user_lastmod = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='fuel_orders_modified', blank=True, null=True)
     
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     driver = models.ForeignKey(Drivers, on_delete=models.PROTECT)
@@ -214,17 +217,46 @@ class FuelOrders(models.Model):
     comments = models.TextField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        if not self.pk:
+
+        if not self.pk:  #this is a new record
             self.operation_code = secrets.token_hex(3)
             while FuelOrders.objects.filter(
                 operation_code=self.operation_code
             ).exists():
                 self.operation_code = secrets.token_hex(3)
+
+            if hasattr(self, 'user_creator') and self.user_creator is None:
+                self.user_creator = self._get_current_user()
+
+            if hasattr(self, 'company') and self.company is None:
+                self.company = self._get_user_company()
+
+        else:  # this is an edition
+            if hasattr(self, 'user_lastmod'):
+                self.user_lastmod = self._get_current_user()
+
         super().save(*args, **kwargs)
 
     def get_total_liters(self):
         return self.tractor_liters + self.backpack_liters + self.chamber_liters
 
+    def _get_current_user(self):
+        # Get the current authenticated user using Django-Allauth
+        try:
+            social_account = SocialAccount.objects.get(user=self.request.user)
+            return social_account.user
+        except (AttributeError, SocialAccount.DoesNotExist):
+            return None
+
+    def _get_user_company(self):
+        # Get the user's company based on the SocialAccount
+        try:
+            social_account = SocialAccount.objects.get(user=self.request.user)
+            company_social_account = CompanySocialAccount.objects.get(social_account=social_account)
+            return company_social_account.company
+        except (AttributeError, SocialAccount.DoesNotExist, CompanySocialAccount.DoesNotExist):
+            return None
+        
     @property
     def short_tractor_fuel_type(self):
         return self.fuel_type_map.get(self.tractor_fuel_type, "")
