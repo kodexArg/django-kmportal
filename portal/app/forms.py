@@ -52,22 +52,12 @@ class DateSelectWidget(forms.MultiWidget):
 
 
 class FuelOrderForm(forms.ModelForm):
-    requested_date = forms.DateField(
-        label="Requested Date",
-        widget=DateSelectWidget
-    )
-
-    expiration_date = forms.DateField(
-        label="Expiration Date",
-        widget=DateSelectWidget
-    )
-
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.fields["company"].required = False
         self.fields["expiration_date"].required = False
+        self.fields["requested_date"].required = False
         self.fields["in_agreement"].required = False
 
         self.fields["requested_date"].initial = (timezone.now())

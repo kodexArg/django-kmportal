@@ -119,22 +119,70 @@ class OrdersView(CustomTemplateView):
         if form.is_valid():
             fuel_order = form.save(commit=False)
             fuel_order.company = self.get_company(request.user, self.provider_name)
+
+            # Check if all liters values are zero
+            if all(tank == 0 for tank in [fuel_order.tractor_liters, fuel_order.backpack_liters, fuel_order.chamber_liters]):
+                form.add_error(None, "All liters values cannot be zero.")
+                logger.error("All liters values are zero.")
+                context = self.get_context_data(**kwargs)
+                context["form"] = form
+                return render(request, self.template_name, context)
+
+            # Check if a non-zero liters value has a fuel_type field with a value different from empty
+            if fuel_order.tractor_liters != None and not fuel_order.tractor_fuel_type:
+                logger.debug(fuel_order.tractor_liters)
+                form.add_error(
+                    "tractor_fuel_type",
+                    "Fuel type is required for non-zero liters value.",
+                )
+                logger.error("Fuel type is missing for non-zero tractor liters value.")
+                context = self.get_context_data(**kwargs)
+                context["form"] = form
+                return render(request, self.template_name, context)
+
+            # Repeat the same checks for backpack_liters and chamber_liters if needed
+            if fuel_order.backpack_liters != None and not fuel_order.backpack_fuel_type:
+                form.add_error(
+                    "backpack_fuel_type",
+                    "Fuel type is required for non-zero liters value.",
+                )
+                import pdb; pdb.set_trace()
+                logger.error("Fuel type is missing for non-zero backpack liters value.")
+                context = self.get_context_data(**kwargs)
+                context["form"] = form
+                return render(request, self.template_name, context)
+
+            if fuel_order.chamber_liters != None and not fuel_order.chamber_fuel_type:
+                form.add_error(
+                    "chamber_fuel_type",
+                    "Fuel type is required for non-zero liters value.",
+                )
+                logger.error("Fuel type is missing for non-zero chamber liters value.")
+                context = self.get_context_data(**kwargs)
+                context["form"] = form
+                return render(request, self.template_name, context)
+
+            # Check if the order is canceled
+            if fuel_order.is_canceled:
+                form.add_error(None, "Order cannot be canceled.")
+                logger.error("Order cannot be canceled.")
+                context = self.get_context_data(**kwargs)
+                context["form"] = form
+                return render(request, self.template_name, context)
+
+            logger.info("Saving order")
             fuel_order.save()
-            return redirect("orders")  # Redirect to the fuel orders page
-        else:
-            logger.error(form.errors)
+
+            return redirect("orders")
+
+        logger.error(form.errors)
+        logger.error("Form is not valid")
 
         # If the form is invalid, re-render the template with the form and display the errors
         context = self.get_context_data(**kwargs)
         context["form"] = form
         return render(request, self.template_name, context)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        company = context.get("company")
-        if company is not None:
-            context["fuel_orders"] = FuelOrders.objects.filter(company=company)
-        return context
 
 
 @method_decorator(login_required, name="dispatch")
@@ -156,28 +204,28 @@ class SingleOrderView(CustomTemplateView):
         context["form"] = form
         return context
 
+
 @method_decorator(login_required, name="dispatch")
 class CancelOrderView(RedirectView):
-    pattern_name = 'orders'  # redirect for
-  
+    pattern_name = "orders"  # redirect for
+
     def post(self, request, order_id, *args, **kwargs):
         # Get the FuelOrders record with the given order_id
         fuel_order = get_object_or_404(FuelOrders, id=order_id)
 
         # Check the action type
-        action = request.POST.get('action')
-        if action == 'cancel':
+        action = request.POST.get("action")
+        if action == "cancel":
             logger.info("Cancelling order")
             fuel_order.is_canceled = True
             fuel_order.save()
-        elif action == 'delete':
+        elif action == "delete":
             logger.info("Deleting order")
             fuel_order.delete()  # Permanently delete the order
             logger.info("Order deleted")
 
         # Redirect the user back to the orders page
         return super().post(request, *args, **kwargs)
-
 
 
 # Company #

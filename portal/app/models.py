@@ -304,7 +304,7 @@ class FuelOrders(models.Model):
         if self.chamber_liters_to_load == 0:
             return "no"
         elif self.chamber_liters_to_load == -1:
-            return "ma"
+            return "max"
         else:
             return f"{ self.chamber_liters_to_load } "
 
