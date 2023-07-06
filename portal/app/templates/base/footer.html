@@ -15,7 +15,14 @@
             dark:bg-[#1E2023]
             dark:text-sky-100
             ">
-    <span class="text-xs">&copy; 2023 AVS Group</span>
+
+    <div class="text-xs flex space-x-2 content-between">
+        <div>&copy; 2023 AVS Group</div>
+        {% if company %}
+        <div>{% translate 'time' %}:</div>
+        <div id="clock"></div>
+        {% endif %}
+    </div>
     <ul class="flex justify-end space-x-2 text-xs">
         {% if company %}
         <span class="place-self-center">{{ company}}</span>
@@ -25,3 +32,40 @@
         {% endif %}
     </ul>
 </div>
+
+{% block scripts %}
+<script>
+
+    function updateClock(serverTimeDifference) {
+        const clockElement = document.getElementById('clock');
+
+        const clientTime = new Date();
+        const adjustedTime = new Date(clientTime.getTime() + serverTimeDifference);
+
+        const hours = adjustedTime.getHours().toString().padStart(2, '0');
+        const minutes = adjustedTime.getMinutes().toString().padStart(2, '0');
+        const seconds = adjustedTime.getSeconds().toString().padStart(2, '0');
+        const clockText = `${hours}:${minutes}:${seconds}`;
+        clockElement.textContent = clockText;
+    }
+
+    function startClock(serverTimeDifference) {
+        setInterval(() => {
+            updateClock(serverTimeDifference);
+        }, 1000);
+    }
+
+    fetch('/get-server-time')
+        .then(response => response.json())
+        .then(data => {
+            const serverTime = new Date(data.server_time);
+            const clientTime = new Date();
+            const serverTimeDifference = serverTime.getTime() - clientTime.getTime();
+            startClock(serverTimeDifference);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+</script>
+{% endblock %}

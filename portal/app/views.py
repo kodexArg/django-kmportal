@@ -1,16 +1,16 @@
-from loguru import logger
 import json
 import qrcode
 import qrcode.image.svg
+from loguru import logger
 from io import BytesIO
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 from app.forms import (
     CreateDriverForm,
     UpdateDriverForm,
@@ -19,7 +19,6 @@ from app.forms import (
     TrailerForm,
     FuelOrderForm,
 )
-
 from app.models import CompanySocialAccount, Drivers, Tractors, Trailers, FuelOrders
 
 
@@ -51,7 +50,9 @@ class CustomTemplateView(TemplateView):
     def get_company_id(self, user, provider_name):
         try:
             social_account = user.socialaccount_set.get(provider=provider_name)
-            company_social_account = CompanySocialAccount.objects.get(social_account=social_account)
+            company_social_account = CompanySocialAccount.objects.get(
+                social_account=social_account
+            )
             return company_social_account.company.id
         except (
             user.socialaccount_set.model.DoesNotExist,
@@ -105,6 +106,37 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import FuelOrderForm
 
 
+# Orders #
+@method_decorator(login_required, name="dispatch")
+class OrdersView(CustomTemplateView):
+    template_name = "modules/orders.html"
+
+    def post(self, request, *args, **kwargs):
+        # Create and update form for Orders
+
+        form = FuelOrderForm(request.POST)
+
+        if form.is_valid():
+            fuel_order = form.save(commit=False)
+            fuel_order.company = self.get_company(request.user, self.provider_name)
+            fuel_order.save()
+            return redirect("orders")  # Redirect to the fuel orders page
+        else:
+            logger.error(form.errors)
+
+        # If the form is invalid, re-render the template with the form and display the errors
+        context = self.get_context_data(**kwargs)
+        context["form"] = form
+        return render(request, self.template_name, context)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        company = context.get("company")
+        if company is not None:
+            context["fuel_orders"] = FuelOrders.objects.filter(company=company)
+        return context
+
+
 @method_decorator(login_required, name="dispatch")
 class SingleOrderView(CustomTemplateView):
     """Add new or edit order by order_id. Used along with OrdersView"""
@@ -123,6 +155,29 @@ class SingleOrderView(CustomTemplateView):
 
         context["form"] = form
         return context
+
+@method_decorator(login_required, name="dispatch")
+class CancelOrderView(RedirectView):
+    pattern_name = 'orders'  # redirect for
+  
+    def post(self, request, order_id, *args, **kwargs):
+        # Get the FuelOrders record with the given order_id
+        fuel_order = get_object_or_404(FuelOrders, id=order_id)
+
+        # Check the action type
+        action = request.POST.get('action')
+        if action == 'cancel':
+            logger.info("Cancelling order")
+            fuel_order.is_canceled = True
+            fuel_order.save()
+        elif action == 'delete':
+            logger.info("Deleting order")
+            fuel_order.delete()  # Permanently delete the order
+            logger.info("Order deleted")
+
+        # Redirect the user back to the orders page
+        return super().post(request, *args, **kwargs)
+
 
 
 # Company #
@@ -201,7 +256,7 @@ class VehiclesView(CustomTemplateView):
 
     def post(self, request, *args, **kwargs):
         # Create and update form for tractors
-        
+
         form_type = request.POST.get("form_type")
         logger.debug(form_type)
         if form_type == "create_tractor":
@@ -209,7 +264,7 @@ class VehiclesView(CustomTemplateView):
             if form.is_valid():
                 tractor = form.save(commit=False)
                 tractor.company = self.get_company(request.user, self.provider_name)
-                tractor.domain  #?
+                tractor.domain  # ?
                 tractor.save()
                 return redirect("vehicles")
             else:
@@ -258,38 +313,6 @@ class VehiclesView(CustomTemplateView):
         context["update_tractor_form"] = TractorForm(prefix="update")
         context["create_trailer_form"] = TrailerForm(prefix="create")
         context["update_trailer_form"] = TrailerForm(prefix="update")
-        return context
-
-
-# Orders #
-@method_decorator(login_required, name="dispatch")
-class OrdersView(CustomTemplateView):
-    template_name = "modules/orders.html"
-
-    def post(self, request, *args, **kwargs):
-        # Create and update form for Orders
-
-        form = FuelOrderForm(request.POST)
-        logger.debug(f"{self.get_company(request.user, self.provider_name)}")
-        logger.debug(f"{self.get_company_id(request.user, self.provider_name)}")
-        
-        if form.is_valid():
-            fuel_order = form.save(commit=False)
-            fuel_order.save()
-            return redirect("orders")  # Redirect to the fuel orders page
-        else:
-            logger.error(form.errors)
-
-        # If the form is invalid, re-render the template with the form and display the errors
-        context = self.get_context_data(**kwargs)
-        context["form"] = form
-        return render(request, self.template_name, context)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        company = context.get("company")
-        if company is not None:
-            context["fuel_orders"] = FuelOrders.objects.filter(company=company)
         return context
 
 

@@ -179,7 +179,7 @@ class FuelOrders(models.Model):
 
     order_date = models.DateField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
-    requested_date = models.DateField(auto_now_add=True)
+    requested_date = models.DateField(default=datetime.now())
     expiration_date = models.DateField(default=datetime.now() + timedelta(days=7))
 
     user_creator = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='fuel_orders_created', blank=True, null=True)
@@ -199,9 +199,9 @@ class FuelOrders(models.Model):
     backpack_liters = models.PositiveIntegerField(blank=True, null=True)  # leave blank untill filled
     chamber_liters = models.PositiveIntegerField(blank=True, null=True)  # leave blank untill filled
 
-    tractor_liters_to_load = models.IntegerField(default=-1)  # show MAX on -1 and NO on 0
-    backpack_liters_to_load = models.IntegerField(default=-1)  # show MAX on -1 and NO on 0
-    chamber_liters_to_load = models.IntegerField(default=-1)  # show MAX on -1 and NO on 0
+    tractor_liters_to_load = models.IntegerField(default=0)  # show MAX on -1 and NO on 0
+    backpack_liters_to_load = models.IntegerField(default=0)  # show MAX on -1 and NO on 0
+    chamber_liters_to_load = models.IntegerField(default=0)  # show MAX on -1 and NO on 0
 
     requires_odometer = models.BooleanField(default=False)
     requires_kilometers = models.BooleanField(default=False)

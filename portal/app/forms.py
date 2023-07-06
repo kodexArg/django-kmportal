@@ -1,38 +1,148 @@
+from datetime import date, timedelta
 from django import forms
+from django.utils import timezone
 from .models import FuelOrders, Drivers, Tractors, Trailers
+from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
+
+
+class DateSelectWidget(forms.MultiWidget):
+    def __init__(self, attrs=None):
+        day_choices = [(str(day), str(day).zfill(2)) for day in range(1, 32)]
+        month_choices = [
+            ("01", _("January")),
+            ("02", _("February")),
+            ("03", _("March")),
+            ("04", _("April")),
+            ("05", _("May")),
+            ("06", _("June")),
+            ("07", _("July")),
+            ("08", _("August")),
+            ("09", _("September")),
+            ("10", _("October")),
+            ("11", _("November")),
+            ("12", _("December")),
+        ]
+        year_choices = [(str(year), str(year)) for year in range(timezone.now().year, timezone.now().year + 2)]
+
+        widgets = [
+            forms.Select(choices=day_choices),
+            forms.Select(choices=month_choices),
+            forms.Select(choices=year_choices),
+        ]
+
+        super().__init__(widgets, attrs)
+
+    def decompress(self, value):
+        if value:
+            return [str(value.day), str(value.month).zfill(2), str(value.year)]
+        return [None, None, None]
+
+    def value_from_datadict(self, data, files, name):
+        day, month, year = [widget.value_from_datadict(data, files, f"{name}_{i}") for i, widget in enumerate(self.widgets)]
+        if all(val is not None for val in [day, month, year]):
+            try:
+                return date(int(year), int(month), int(day))
+            except ValueError:
+                pass
+        return None
+
+    def format_output(self, rendered_widgets):
+        return " / ".join(rendered_widgets)
 
 
 class FuelOrderForm(forms.ModelForm):
+    requested_date = forms.DateField(
+        label="Requested Date",
+        widget=DateSelectWidget
+    )
+
+    expiration_date = forms.DateField(
+        label="Expiration Date",
+        widget=DateSelectWidget
+    )
+
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['company'].required = False
-        self.fields['expiration_date'].required = False
-        self.fields['in_agreement'].required = False
 
-    def clean_company(self):
-        company = self.cleaned_data.get('company')
-        if not company:
-            raise forms.ValidationError("Company is required.")
-        return company
+        self.fields["company"].required = False
+        self.fields["expiration_date"].required = False
+        self.fields["in_agreement"].required = False
 
-    def clean(self):
-        cleaned_data = super().clean()
-        expiration_date = cleaned_data.get('expiration_date')
-        in_agreement = cleaned_data.get('in_agreement')
+        self.fields["requested_date"].initial = (timezone.now())
+        self.fields["expiration_date"].initial = (timezone.now() + timedelta(days=3)).date()
 
-        # Handle the validation for 'expiration_date' and 'in_agreement'
-        # based on your requirements
-        if not expiration_date:
-            raise forms.ValidationError("Expiration date is required.")
-        if not in_agreement:
-            raise forms.ValidationError("In agreement field is required.")
 
-        return cleaned_data
-    
+        fields_default_classes = """
+                bg-sky-100
+                border 
+                border-sky-500 
+                text-gray-900 
+                text-sm
+                rounded-lg 
+                focus:ring-blue-500 
+                focus:border-blue-500 
+                block
+                w-full 
+                px-2 py-1
+                mb-0.5
+                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+            """
+        labels_default_classes = """
+                font-rubik
+                text-sm
+                text-sky-900
+                dark:text-gray-300
+                placeholder-gray-400
+                """
+
+        for _, field in self.fields.items():
+            # Appply global field classes
+            field.widget.attrs["class"] = fields_default_classes
+
+            # Apply global label classes
+            if field.label:
+                field.widget.attrs["placeholder"] = field.label
+                field.widget.attrs["aria-label"] = field.label
+                field.label = mark_safe(
+                    f'<span class="{labels_default_classes}">{field.label}</span>'
+                )
+
+        ## Customizations
+
+        # Booleans
+        for field in ["requires_odometer", "requires_kilometers"]:
+            self.fields[field].widget.attrs["class"] += "w-1"
+
+        self.fields["tractor_liters_to_load"].initial = 0
+        self.fields["backpack_liters_to_load"].initial = 0
+        self.fields["chamber_liters_to_load"].initial = 0
+
+    CHOICES = (
+        ("-1", "MAX"),
+        ("0", "NO"),
+        *[(str(x), str(x) + " Liters") for x in range(50, 1001, 50)],
+    )
+
+    tractor_liters_to_load = forms.ChoiceField(
+        choices=CHOICES,
+        label="Tractor Liters to Load",
+    )
+
+    backpack_liters_to_load = forms.ChoiceField(
+        choices=CHOICES,
+        label="Backpack Liters to Load",
+    )
+
+    chamber_liters_to_load = forms.ChoiceField(
+        choices=CHOICES,
+        label="Chamber Liters to Load",
+    )
+
     class Meta:
         model = FuelOrders
         exclude = ["operation_code"]
-
 
 
 class CreateDriverForm(forms.ModelForm):
@@ -73,4 +183,3 @@ class TrailerForm(forms.ModelForm):
     class Meta:
         model = Trailers
         fields = ["domain"]
-

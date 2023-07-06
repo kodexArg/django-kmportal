@@ -2,7 +2,7 @@ from loguru import logger
 from django import template
 from django.utils.safestring import mark_safe
 import os
-
+from django.utils.translation import gettext as _
 
 register = template.Library()
 
@@ -140,11 +140,13 @@ def checkbox_component(label, name, checked=False):
 
 
 @register.simple_tag()
-def rbutton_component(caption, bg="bg-pantone7689c", fg="text-white", size=""):
+def rbutton_component(caption, bg="bg-pantone7689c", fg="text-white", size="", name="action", value="none"):
     """Rounded button component"""
+    translated_caption = _(caption)  # Translate the caption using gettext
+
     html = f"""
-        <button type="submit" class="{size} whitespace-nowrap rounded-full px-3 py-1 {bg} {fg} self-end font-quicksand font-bold text-sm">
-            {caption}
+        <button type="submit" name="{name}" value="{value}" class="{size} whitespace-nowrap rounded-full px-3 py-1 {bg} {fg} self-end font-quicksand font-bold text-sm">
+            {translated_caption}
         </button>
     """
     return mark_safe(html)
