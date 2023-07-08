@@ -4,7 +4,9 @@ from django.utils import timezone
 from .models import FuelOrders, Drivers, Tractors, Trailers
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
+import logging
 
+logger = logging.getLogger(__name__)
 
 class DateSelectWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
@@ -49,21 +51,20 @@ class DateSelectWidget(forms.MultiWidget):
 
     def format_output(self, rendered_widgets):
         return " / ".join(rendered_widgets)
+    
+    def save(self, commit=True):
+        try:
+            return super().save(commit)
+        except Exception as e:
+            logger.exception("Error occurred while saving fuel order:")
+            raise
 
 
 class FuelOrderForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields["company"].required = False
-        self.fields["expiration_date"].required = False
-        self.fields["requested_date"].required = False
-        self.fields["in_agreement"].required = False
-
-        self.fields["requested_date"].initial = (timezone.now())
-        self.fields["expiration_date"].initial = (timezone.now() + timedelta(days=3)).date()
-
-
+        ## Format classes
         fields_default_classes = """
                 bg-sky-100
                 border 
@@ -88,10 +89,8 @@ class FuelOrderForm(forms.ModelForm):
                 """
 
         for _, field in self.fields.items():
-            # Appply global field classes
             field.widget.attrs["class"] = fields_default_classes
 
-            # Apply global label classes
             if field.label:
                 field.widget.attrs["placeholder"] = field.label
                 field.widget.attrs["aria-label"] = field.label
@@ -100,7 +99,6 @@ class FuelOrderForm(forms.ModelForm):
                 )
 
         ## Customizations
-
         # Booleans
         for field in ["requires_odometer", "requires_kilometers"]:
             self.fields[field].widget.attrs["class"] += "w-1"
@@ -109,6 +107,7 @@ class FuelOrderForm(forms.ModelForm):
         self.fields["backpack_liters_to_load"].initial = 0
         self.fields["chamber_liters_to_load"].initial = 0
 
+        # Date
     CHOICES = (
         ("-1", "MAX"),
         ("0", "NO"),
@@ -130,9 +129,16 @@ class FuelOrderForm(forms.ModelForm):
         label="Chamber Liters to Load",
     )
 
+    def save(self, commit=True):
+        try:
+            return super().save(commit)
+        except Exception as e:
+            logger.exception("Error occurred while saving fuel order:")
+            raise
+
     class Meta:
         model = FuelOrders
-        exclude = ["operation_code"]
+        exclude = ["company", "operation_code", "in_agreement", "requested_date", "expiration_date"]
 
 
 class CreateDriverForm(forms.ModelForm):

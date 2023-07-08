@@ -101,27 +101,34 @@ class UserHomeView(CustomTemplateView):
 
 
 ### MODULES ###
-# Create Fuel Orders #
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import FuelOrderForm
-
-
-# Orders #
+# Fuel Orders #
 @method_decorator(login_required, name="dispatch")
-class OrdersView(CustomTemplateView):
+class FuelOrderListView(CustomTemplateView):
     template_name = "modules/orders.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        company = context.get("company")
+        if company is not None:
+            context["fuel_orders"] = FuelOrders.objects.filter(company=company)
+        return context
+
+
     def post(self, request, *args, **kwargs):
-        # Create and update form for Orders
-
         form = FuelOrderForm(request.POST)
-
         if form.is_valid():
             fuel_order = form.save(commit=False)
             fuel_order.company = self.get_company(request.user, self.provider_name)
 
             # Check if all liters values are zero
-            if all(tank == 0 for tank in [fuel_order.tractor_liters, fuel_order.backpack_liters, fuel_order.chamber_liters]):
+            if all(
+                tank == 0
+                for tank in [
+                    fuel_order.tractor_liters,
+                    fuel_order.backpack_liters,
+                    fuel_order.chamber_liters,
+                ]
+            ):
                 form.add_error(None, "All liters values cannot be zero.")
                 logger.error("All liters values are zero.")
                 context = self.get_context_data(**kwargs)
@@ -130,7 +137,6 @@ class OrdersView(CustomTemplateView):
 
             # Check if a non-zero liters value has a fuel_type field with a value different from empty
             if fuel_order.tractor_liters != None and not fuel_order.tractor_fuel_type:
-                logger.debug(fuel_order.tractor_liters)
                 form.add_error(
                     "tractor_fuel_type",
                     "Fuel type is required for non-zero liters value.",
@@ -146,7 +152,6 @@ class OrdersView(CustomTemplateView):
                     "backpack_fuel_type",
                     "Fuel type is required for non-zero liters value.",
                 )
-                import pdb; pdb.set_trace()
                 logger.error("Fuel type is missing for non-zero backpack liters value.")
                 context = self.get_context_data(**kwargs)
                 context["form"] = form
@@ -170,9 +175,7 @@ class OrdersView(CustomTemplateView):
                 context["form"] = form
                 return render(request, self.template_name, context)
 
-            logger.info("Saving order")
             fuel_order.save()
-
             return redirect("orders")
 
         logger.error(form.errors)
@@ -184,21 +187,18 @@ class OrdersView(CustomTemplateView):
         return render(request, self.template_name, context)
 
 
-
 @method_decorator(login_required, name="dispatch")
-class SingleOrderView(CustomTemplateView):
-    """Add new or edit order by order_id. Used along with OrdersView"""
+class FuelOrderViewNewOrEdit(CustomTemplateView):
+    """Add new or edit order by order_id. Used along with FuelOrderListView"""
 
     template_name = "modules/single_order.html"
 
     def get_context_data(self, order_id=None, **kwargs):
         context = super().get_context_data(**kwargs)
         if order_id:
-            # Editing an existing order
             fuel_order = get_object_or_404(FuelOrders, id=order_id)
             form = FuelOrderForm(instance=fuel_order)
         else:
-            # Creating a new order
             form = FuelOrderForm()
 
         context["form"] = form
@@ -206,7 +206,7 @@ class SingleOrderView(CustomTemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class CancelOrderView(RedirectView):
+class FuelOrderViewCancel(RedirectView):
     pattern_name = "orders"  # redirect for
 
     def post(self, request, order_id, *args, **kwargs):
@@ -306,7 +306,6 @@ class VehiclesView(CustomTemplateView):
         # Create and update form for tractors
 
         form_type = request.POST.get("form_type")
-        logger.debug(form_type)
         if form_type == "create_tractor":
             form = TractorForm(request.POST)
             if form.is_valid():
@@ -381,7 +380,6 @@ def get_provider_id(user, provider_name):
     """
     try:
         social_account = user.socialaccount_set.get(provider=provider_name)
-        logger.debug(type(social_account.get_provider().id))
         return social_account.get_provider().id
     except user.socialaccount_set.model.DoesNotExist:
         return None
