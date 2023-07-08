@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-03 00:39+0000\n"
+"POT-Creation-Date: 2023-07-08 23:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,54 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/forms.py:17
+msgid "January"
+msgstr "January"
+
+#: app/forms.py:18
+msgid "February"
+msgstr "February"
+
+#: app/forms.py:19
+msgid "March"
+msgstr "March"
+
+#: app/forms.py:20
+msgid "April"
+msgstr "April"
+
+#: app/forms.py:21
+msgid "May"
+msgstr "May"
+
+#: app/forms.py:22
+msgid "June"
+msgstr "June"
+
+#: app/forms.py:23
+msgid "July"
+msgstr "July"
+
+#: app/forms.py:24
+msgid "August"
+msgstr "August"
+
+#: app/forms.py:25
+msgid "September"
+msgstr "September"
+
+#: app/forms.py:26
+msgid "October"
+msgstr "October"
+
+#: app/forms.py:27
+msgid "November"
+msgstr "November"
+
+#: app/forms.py:28
+msgid "December"
+msgstr "December"
 
 #: app/templates/about_us.html:3 app/templates/contact_us.html:3
 #: app/templates/home.html:3 app/templates/under_construction.html:3
@@ -32,19 +80,27 @@ msgstr "Our Company"
 msgid "t_contact"
 msgstr "Contact"
 
+#: app/templates/base/footer.html:22
+msgid "time"
+msgstr "Time"
+
 #: app/templates/components/google_button.html:12
 msgid "t_login_with_google"
 msgstr "Login with Google"
+
+#: app/templates/components/row_fuelorder/buttons.html:17
+msgid "continue"
+msgstr "Continue"
 
 #: app/templates/components/row_fuelorder/buttons.html:19
 msgid "cancel"
 msgstr "Cancel"
 
-#: app/templates/components/row_fuelorder/buttons.html:30
+#: app/templates/components/row_fuelorder/buttons.html:31
 msgid "schedule"
 msgstr "Schedule"
 
-#: app/templates/components/row_fuelorder/buttons.html:43
+#: app/templates/components/row_fuelorder/buttons.html:44
 msgid "view"
 msgstr "View"
 
@@ -63,6 +119,7 @@ msgid "blocked"
 msgstr "bloqued"
 
 #: app/templates/components/row_fuelorder/popup.html:46
+#: app/templates/modules/single_order.html:17
 msgid "order_information"
 msgstr "Order Information"
 
@@ -75,6 +132,7 @@ msgid "last_modification"
 msgstr "Last Modification"
 
 #: app/templates/components/row_fuelorder/popup.html:56
+#: app/templates/modules/company.html:37
 msgid "driver"
 msgstr "Driver"
 
@@ -91,18 +149,22 @@ msgid "trailer_plate"
 msgstr "Trailer Plate"
 
 #: app/templates/components/row_fuelorder/popup.html:76
+#: app/templates/modules/single_order.html:38
 msgid "fuel_order"
 msgstr "Fuel Order"
 
 #: app/templates/components/row_fuelorder/popup.html:78
+#: app/templates/modules/single_order.html:42
 msgid "tractor"
 msgstr "Tractor"
 
 #: app/templates/components/row_fuelorder/popup.html:82
+#: app/templates/modules/single_order.html:45
 msgid "backpack"
 msgstr "Backpack"
 
 #: app/templates/components/row_fuelorder/popup.html:86
+#: app/templates/modules/single_order.html:48
 msgid "chamber"
 msgstr "Chamber"
 
@@ -155,10 +217,11 @@ msgid "cashtransfer_page_title"
 msgstr "Cash Transfer"
 
 #: app/templates/modules/company.html:3 app/templates/modules/orders.html:3
+#: app/templates/modules/single_order.html:3
 msgid "company_page_title"
 msgstr "Company"
 
-#: app/templates/modules/company.html:9
+#: app/templates/modules/company.html:8
 msgid "company_details"
 msgstr "Company Details"
 
@@ -175,14 +238,19 @@ msgid "company_cuit"
 msgstr "RUT"
 
 #: app/templates/modules/orders.html:9
+#: app/templates/modules/single_order.html:8
 msgid "fuel_orders"
 msgstr "Refueling Orders"
 
-#: app/templates/modules/orders.html:33
+#: app/templates/modules/orders.html:39
 msgid "Legend"
 msgstr "Legend"
 
-#: app/templates/modules/orders.html:49
+#: app/templates/modules/single_order.html:75
+msgid "new"
+msgstr "New"
+
+#: app/templates/modules/single_order.html:75
 msgid "new_order"
 msgstr "Load Order"
 
@@ -198,11 +266,15 @@ msgstr "Tractors and Trailers"
 msgid "vehicle_title"
 msgstr "Tractors and Trailers"
 
-#: app/templates/modules/vehicles.html:19
+#: app/templates/modules/vehicles.html:14
+msgid "tractors_and_trailers_subtitle"
+msgstr "These are the authorized vehicles for fuel loading operations."
+
+#: app/templates/modules/vehicles.html:20
 msgid "Tractors"
 msgstr "Tractors"
 
-#: app/templates/modules/vehicles.html:57
+#: app/templates/modules/vehicles.html:58
 msgid "Trailers"
 msgstr "Trailers"
 
@@ -213,3 +285,27 @@ msgstr ""
 " 🕵️ so you can log in. You'll soon have access to all the wonderful tools "
 "and benefits we've prepared for you. If you have any questions, please don't"
 " hesitate to contact us. We're here to help! 🤗"
+
+msgid "drivers_page_title"
+msgstr "Drivers"
+
+msgid "orders_page_title"
+msgstr "Fuel Load Orders"
+
+msgid "vehicles_page_title"
+msgstr "Trucks"
+
+msgid "user_home_welcome"
+msgstr "Welcome&nbsp;to<br>Portal&nbsp;KM&nbsp;1151"
+
+msgid "register_button"
+msgstr "Register"
+
+msgid "edit_order"
+msgstr "Edit Order"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "update"
+msgstr "update"

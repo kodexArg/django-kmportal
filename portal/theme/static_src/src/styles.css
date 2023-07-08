@@ -1,3 +1,74 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Form classes */
+
+.tw-label {
+    @apply tracking-wide font-rubik text-sm text-left whitespace-nowrap;
+    @apply placeholder-gray-300 text-pantone307c;
+}
+
+.tw-rbutton {
+    @apply self-end w-fit h-fit rounded-full px-4 py-2 drop-shadow-md;
+    @apply lowercase tracking-wide font-rubik font-bold text-sm whitespace-nowrap;
+    @apply transition duration-150 ease-in-out;
+    @apply hover:bg-opacity-75 hover:drop-shadow-none hover:translate-x-0.5 hover:translate-y-0.5;
+}
+
+.tw-field {
+    @apply w-full h-fit py-1 px-2 mb-0.5 rounded-lg border border-sky-500;
+    @apply focus:text-sky-900;
+}
+
+.tw-input-field {
+    @apply tracking-tight font-rubik whitespace-nowrap text-pantone7689c;
+}
+
+.tw-checkbox-field {
+    @apply inline-flex mr-2 w-2 aspect-1 checked:bg-pantone307c;
+}
+/* End */
+
+/* Cards */
+.tw-loop-container {
+    @apply flex flex-wrap mt-2;
+}
+
+
+.tw-loop-element { 
+    @apply h-full w-fit sm:w-72 flex text-center border border-pantone7689c p-4 m-2 rounded-lg bg-sky-200 shadow-md;
+    @apply hover:bg-opacity-75;
+}
+
+.tw-loop-form {
+    @apply flex flex-col w-full space-y-2;
+}
+/* End */
+
+/* Main Buttons Position Classes */
+.tw-position-1 {
+    @apply top-[0.5rem];
+}
+
+.tw-position-2 {
+    @apply top-[7rem];
+}
+
+.tw-position-3 {
+    @apply top-[11.5rem];
+}
+
+.tw-position-4 {
+    @apply top-[16rem];
+}
+
+.tw-position-5 {
+    @apply top-[20.5rem];
+}
+
+.tw-position-6 {
+    @apply top-[25rem];
+}
+
+/* End */

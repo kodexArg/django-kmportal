@@ -6,21 +6,12 @@ from django.utils.translation import gettext as _
 
 register = template.Library()
 
-TAILWIND_TOP_VALUE = {
-    "1": "top-[0.5rem]",
-    "2": "top-[7rem]",
-    "3": "top-[11.5rem]",
-    "4": "top-[16rem]",
-    "5": "top-[20.5rem]",
-    "6": "top-[25rem]",
-}
-
 
 @register.inclusion_tag("components/std_button.html", takes_context=True)
 def std_button_component(
     context,
     text,
-    color="bg-pantone7689c",
+    color="bg-pantone307c",
     url="#",
     svg=None,
     is_left=False,
@@ -28,7 +19,7 @@ def std_button_component(
 ):
     return {
         "text": text,
-        "color": color,
+        "color": "bg-red-800",
         "svg": svg,
         "url": url,
         "is_left": is_left,
@@ -54,7 +45,6 @@ def module_title_component(title):
 @register.inclusion_tag("components/menu_button.html", takes_context=True)
 def menu_button_component(context, pos, side, icon="", size="small", url="#", style=""):
     """Each menu button including Icons, Flags and avatars"""
-    top = TAILWIND_TOP_VALUE[pos]
     if not os.path.isfile(f"static/svg/{icon}.svg"):
         icon = "question"  # TODO: Replace question with a known good icon
     user = context["request"].user  # Get the user object from the context
@@ -62,7 +52,7 @@ def menu_button_component(context, pos, side, icon="", size="small", url="#", st
     return {
         "icon": icon,
         "size": size,
-        "pos": top,
+        "pos": f"tw-position-{pos}",  # this is a custom classe in styles.css
         "side": side,
         "url": url,
         "style": style,
@@ -92,28 +82,17 @@ def row_fuelorder_buttons_component(context, order):
 
 
 @register.simple_tag()
-def input_field_component(
-    label,
-    name,
-    type="text",
-    value="",
-    label_size="w-1/3",
-    size="w-2/3",
-    required=True,
-):
-    required_html = "required" if required else ""
+def input_field_component(name, value="", required=True):
+    label = _(name)
     html = f"""
-        <div class="flex justify-between space-x-1 items-center">
-            <label
-                class="text-xs text-pantone7689c {label_size} align-baseline text-left"
-                >{ label }</label>
+        <div class="grid grid-cols-3 gap-2 items-center">
+            <label class="tw-label">{ label }:</label>
             <input
-                class="border rounded p-1 {size} text-sm font-rubik"
-                type="{ type }" 
+                class="col-span-2 tw-field tw-input-field"
                 name="{ name }" 
                 placeholder="{ label }"
                 value="{ value }"
-                { required_html }
+                { "required" if required else "" }
                 >
         </div>
     """
@@ -121,32 +100,35 @@ def input_field_component(
 
 
 @register.simple_tag()
-def checkbox_component(label, name, checked=False):
+def checkbox_component(name, checked=False):
+    label = _(name)
     checked_html = "checked" if checked else ""
     html = f"""
-        <div class="flex w-full space-x-2 items-center">
+        <div class="flex">
             <input
-                class="border rounded p-1"
+                class="tw-field tw-checkbox-field"
                 type="checkbox" 
                 name="{ name }" 
                 { checked_html }
                 >
-            <label
-                class="text-xs text-pantone7689c w-1/3 align-baseline text-left"
-                >{ label }</label>
+            <label class="tw-label">{ label }</label>
         </div>
     """
     return mark_safe(html)
 
 
 @register.simple_tag()
-def rbutton_component(caption, bg="bg-pantone7689c", fg="text-white", size="", name="action", value="none"):
+def rbutton_component(
+    caption, bg="bg-pantone307c", fg="text-white", size="", name="action", value="none"
+):
     """Rounded button component"""
-    translated_caption = _(caption)  # Translate the caption using gettext
+    translated_caption = _(caption)
 
     html = f"""
-        <button type="submit" name="{name}" value="{value}" class="{size} whitespace-nowrap rounded-full px-3 py-1 {bg} {fg} self-end font-quicksand font-bold text-sm">
-            {translated_caption}
+        <button type="submit" name="{name}" value="{value}" class="tw-rbutton {size} {bg} {fg}">
+            <div class="flex items-center h-full justify-center">
+                {translated_caption}
+            </div>
         </button>
     """
     return mark_safe(html)

@@ -136,7 +136,7 @@
   },
   "Tractors": {
     "en": "Tractors",
-    "es": "Tractors",
+    "es": "Tractores",
     "pt": "Tratores"
   },
   "finished": {
@@ -253,5 +253,90 @@
     "en": "bloqued",
     "es": "bloqueado",
     "pt": "bloqueado"
+  },
+  "tractors_and_trailers_subtitle": {
+    "en": "These are the authorized vehicles for fuel loading operations.",
+    "es": "Estos son los vehículos autorizados para las operaciones de carga de combustible.",
+    "pt": "Estes são os veículos autorizados para as operações de carga de combustível."
+  },
+  "January": {
+    "en": "January",
+    "es": "Enero",
+    "pt": "Janeiro"
+  },
+  "February": {
+    "en": "February",
+    "es": "Febrero",
+    "pt": "Fevereiro"
+  },
+  "March": {
+    "en": "March",
+    "es": "Marzo",
+    "pt": "Março"
+  },
+  "April": {
+    "en": "April",
+    "es": "Abril",
+    "pt": "Abril"
+  },
+  "May": {
+    "en": "May",
+    "es": "Mayo",
+    "pt": "Maio"
+  },
+  "June": {
+    "en": "June",
+    "es": "Junio",
+    "pt": "Junho"
+  },
+  "July": {
+    "en": "July",
+    "es": "Julio",
+    "pt": "Julho"
+  },
+  "August": {
+    "en": "August",
+    "es": "Agosto",
+    "pt": "Agosto"
+  },
+  "September": {
+    "en": "September",
+    "es": "Septiembre",
+    "pt": "Setembro"
+  },
+  "October": {
+    "en": "October",
+    "es": "Octubre",
+    "pt": "Outubro"
+  },
+  "November": {
+    "en": "November",
+    "es": "Noviembre",
+    "pt": "Novembro"
+  },
+  "December": {
+    "en": "December",
+    "es": "Diciembre",
+    "pt": "Dezembro"
+  },
+  "continue": {
+    "en": "Continue",
+    "es": "Continuar",
+    "pt": "Continuar"
+  },
+  "new": {
+    "en": "New",
+    "es": "Nuevo",
+    "pt": "Novo"
+  },
+  "time": {
+    "en": "Time",
+    "es": "Tiempo",
+    "pt": "Tempo"
+  },
+  "update": {
+    "en": "update",
+    "es": "actualizar",
+    "pt": "atualizar"
   }
 }

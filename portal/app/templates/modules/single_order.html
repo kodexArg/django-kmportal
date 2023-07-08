@@ -2,85 +2,85 @@
 {% load static i18n socialaccount custom_components %}
 {% block title %}{% translate "company_page_title" %}{% endblock %}
 
-
 {% block navbar %}{% include 'base/navbar_components.html' with icon='fuel' %}{% endblock %}
 
 {% block content %}
 {% translate 'fuel_orders' as translated_title %}
 {% module_title_component translated_title %}
 
-<div class="h-24 w-full"><!-- top margin --></div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/datepicker.min.js"></script>
-
-<form method="post" enctype="multipart/form-data" action="{% url 'orders' %}">
-    {% csrf_token %}
-    <div class="flex w-full h-full px-2 sm:px-10 justify-center">
-        <div class="grid grid-cols-2 gap-2 justify-start w-screen max-w-sm px-4">
-            <div class="col-span-2 mt-8">
-                <span class="font-rubik text-lg font-bold text-pantone7472c">{% translate 'order_information' %}</span>
-            </div>
-            <div class="col-span-2">
-                {{ form.driver.label }}
-                {{ form.driver}}
-            </div>
-            <div>
-                {{ form.tractor_plate.label }}
-                {{ form.tractor_plate }}
-            </div>
-            <div>
-                {{ form.trailer_plate.label }}
-                {{ form.trailer_plate }}
-            </div>
-            <div class="flex space-x-2 items-center justify-center">
-                <div>{{ form.requires_odometer }}</div> {{ form.requires_odometer.label }}
-            </div>
-            <div class="flex space-x-2 items-center justify-center">
-                <div>{{ form.requires_kilometers }}</div> {{ form.requires_kilometers.label }}
-            </div>
-            <div class="col-span-2 mt-8">
-                <span class="font-rubik text-lg font-bold text-pantone7472c">{% translate 'fuel_order' %}</span>
-            </div>
-            <div class="col-span-2 grid grid-cols-3 gap-2">
-                <div class="text-center -mb-2 font-rubik text-sm text-sky-900 dark:text-gray-300 placeholder-gray-400">
-                    {% translate 'tractor' %}
+<section id="SingleFuelOrder" class="mx-12 md:mx-10">
+    <form method="post" enctype="multipart/form-data" action="{% url 'orders' %}">
+        {% csrf_token %}
+        <div class="flex w-full h-full px-2 sm:px-10 justify-center">
+            <div class="grid grid-cols-2 gap-2 justify-start w-screen max-w-sm px-4">
+                <div class="col-span-2 mt-8">
+                    <span class="font-rubik text-lg font-bold text-pantone7472c">{% translate 'order_information' %}</span>
                 </div>
-                <div class="text-center -mb-2 font-rubik text-sm text-sky-900 dark:text-gray-300 placeholder-gray-400">
-                    {% translate 'backpack' %}
-                </div>
-                <div class="text-center -mb-2 font-rubik text-sm text-sky-900 dark:text-gray-300 placeholder-gray-400">
-                    {% translate 'chamber' %}
+                <div class="col-span-2">
+                    {{ form.driver.label }}
+                    {{ form.driver}}
                 </div>
                 <div>
-                    {{ form.tractor_fuel_type }}
+                    {{ form.tractor_plate.label }}
+                    {{ form.tractor_plate }}
                 </div>
                 <div>
-                    {{ form.backpack_fuel_type }}
+                    {{ form.trailer_plate.label }}
+                    {{ form.trailer_plate }}
                 </div>
-                <div>
-                    {{ form.chamber_fuel_type }}
+                <div class="flex space-x-2 items-center justify-center">
+                    <div>{{ form.requires_odometer }}</div> {{ form.requires_odometer.label }}
                 </div>
-                <div>
-                    {{ form.tractor_liters_to_load }}
+                <div class="flex space-x-2 items-center justify-center">
+                    <div>{{ form.requires_kilometers }}</div> {{ form.requires_kilometers.label }}
                 </div>
-                <div>
-                    {{ form.backpack_liters_to_load }}
+                <div class="col-span-2 mt-8">
+                    <span class="font-rubik text-lg font-bold text-pantone7472c">{% translate 'fuel_order' %}</span>
                 </div>
-                <div>
-                    {{ form.chamber_liters_to_load }}
+                <div class="col-span-2 grid grid-cols-3 gap-2">
+                    <div class="text-center -mb-2 font-rubik text-sm text-sky-900 dark:text-gray-300 placeholder-gray-400">
+                        {% translate 'tractor' %}
+                    </div>
+                    <div class="text-center -mb-2 font-rubik text-sm text-sky-900 dark:text-gray-300 placeholder-gray-400">
+                        {% translate 'backpack' %}
+                    </div>
+                    <div class="text-center -mb-2 font-rubik text-sm text-sky-900 dark:text-gray-300 placeholder-gray-400">
+                        {% translate 'chamber' %}
+                    </div>
+                    <div>
+                        {{ form.tractor_fuel_type }}
+                    </div>
+                    <div>
+                        {{ form.backpack_fuel_type }}
+                    </div>
+                    <div>
+                        {{ form.chamber_fuel_type }}
+                    </div>
+                    <div>
+                        {{ form.tractor_liters_to_load }}
+                    </div>
+                    <div>
+                        {{ form.backpack_liters_to_load }}
+                    </div>
+                    <div>
+                        {{ form.chamber_liters_to_load }}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <menu class="fixed bottom-10 w-full flex justify-center  drop-shadow-lg">
-        <div class="col-span2 bg-pantone307c p-0.5 rounded-full w-fit h-fit">
-            <div class="border-2 border-sky-200 p-0.5 rounded-full flex justify-center items-center">
-                <button class="flex w-fit px-4 py-2 rounded-full bg-pantone307c text-white font-rubik font-bold lowercase text-center" type="submit">
-                    {% translate 'new' %} {% translate 'new_order' %}
-                </button>
+        <menu class="fixed bottom-10 w-full flex justify-center  drop-shadow-lg">
+            <div class="col-span2 bg-pantone307c p-0.5 rounded-full w-fit h-fit">
+                <div class="border-2 border-sky-200 p-0.5 rounded-full flex justify-center items-center">
+                    <button class="flex w-fit px-4 py-2 rounded-full bg-pantone307c text-white font-rubik font-bold lowercase text-center" type="submit">
+                        {% translate 'new' %} {% translate 'new_order' %}
+                    </button>
+                </div>
             </div>
-        </div>
-    </menu>
-</form>
-<div class="h-10"><!-- bottom margin --></div>
+        </menu>
+    </form>
+</section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/datepicker.min.js"></script>
 {% endblock %}

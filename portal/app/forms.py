@@ -4,6 +4,8 @@ from django.utils import timezone
 from .models import FuelOrders, Drivers, Tractors, Trailers
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
+from django.forms import BooleanField, Select
+
 import logging
 
 logger = logging.getLogger(__name__)
@@ -63,45 +65,22 @@ class DateSelectWidget(forms.MultiWidget):
 class FuelOrderForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        ## Format classes
-        fields_default_classes = """
-                bg-sky-100
-                border 
-                border-sky-500 
-                text-gray-900 
-                text-sm
-                rounded-lg 
-                focus:ring-blue-500 
-                focus:border-blue-500 
-                block
-                w-full 
-                px-2 py-1
-                mb-0.5
-                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
-            """
-        labels_default_classes = """
-                font-rubik
-                text-sm
-                text-sky-900
-                dark:text-gray-300
-                placeholder-gray-400
-                """
-
         for _, field in self.fields.items():
-            field.widget.attrs["class"] = fields_default_classes
+            field.widget.attrs["class"] = "tw-field"
+
+            if isinstance(field, BooleanField):
+                field.widget.attrs["class"] += " tw-checkbox-field"
+            else:
+                field.widget.attrs["class"] += " tw-input-field"
 
             if field.label:
                 field.widget.attrs["placeholder"] = field.label
                 field.widget.attrs["aria-label"] = field.label
                 field.label = mark_safe(
-                    f'<span class="{labels_default_classes}">{field.label}</span>'
+                    f'<span class="tw-label">{field.label}</span>'
                 )
 
         ## Customizations
-        # Booleans
-        for field in ["requires_odometer", "requires_kilometers"]:
-            self.fields[field].widget.attrs["class"] += "w-1"
 
         self.fields["tractor_liters_to_load"].initial = 0
         self.fields["backpack_liters_to_load"].initial = 0
