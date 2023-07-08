@@ -9,7 +9,7 @@
 {% translate 'fuel_orders' as translated_title %}
 {% module_title_component translated_title %}
 
-<div class="h-24 w-full"></div>
+<div class="h-20 w-full"></div>
 
 <section class="w-full flex flex-col">
     <!-- Orders List -->
@@ -19,18 +19,54 @@
         {% endfor %}
     </article>
 
-    <!-- Legends -->
-    <legend id="legend_id" x-data="{ open: true }" x-show="open" @click="open = false"
-        class="cursor-not-allowed fixed bottom-0 right-0 w-fit mr-2 mb-8 flex flex-col grow-0 p-1 items-center bg-sky-900 rounded-xl shadow-lg drop-shadow-lg">
-        <div class="font-quicksand font-bold text-xxs text-center text-sky-100">
-            {% translate 'Legend' %}
-        </div>
-        <div class="flex p-1 justify-end space-x-1 rounded-lg">
-            <div class="w-6 aspect-1 bg-sky-100 rounded">{% fueltank_component fuel="infinia_diesel" %}</div>
-            <div class="w-6 aspect-1 bg-sky-100 rounded">{% fueltank_component fuel="diesel_500" %}</div>
-            <div class="w-6 aspect-1 bg-sky-100 rounded">{% fueltank_component fuel="infinia" %}</div>
-            <div class="w-6 aspect-1 bg-sky-100 rounded">{% fueltank_component fuel="super" %}</div>
-        </div>
-    </legend>
+    <div class="h-10"></div>
 </section>
+
+<menu class="fixed bottom-10 w-full flex justify-center  drop-shadow-lg">
+    <div class="bg-pantone307c p-0.5 rounded-full">
+        <div class="border-2 border-sky-200 p-0.5 rounded-full flex justify-center items-center">
+            <div class="text-sky-200 font-bold flex justify-center items-center h-16 w-16">
+                <a href="">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                        <path fill-rule="evenodd"
+                            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-4.28 9.22a.75.75 0 000 1.06l3 3a.75.75 0 101.06-1.06l-1.72-1.72h5.69a.75.75 0 000-1.5h-5.69l1.72-1.72a.75.75 0 00-1.06-1.06l-3 3z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+            <legend class="w-fit flex items-center">
+                <div class="transform -rotate-90 -mx-3 font-quicksand font-bold text-xxs text-sky-200 leading-none text-justify">
+                    {% translate 'Legend' %}
+                </div>
+                <div class="flex p-1 justify-end space-x-1 rounded-lg">
+                    <div class="w-6 aspect-1 bg-sky-200 rounded">{% fueltank_component fuel="infinia_diesel" %}</div>
+                    <div class="w-6 aspect-1 bg-sky-200 rounded">{% fueltank_component fuel="diesel_500" %}</div>
+                    <div class="w-6 aspect-1 bg-sky-200 rounded">{% fueltank_component fuel="infinia" %}</div>
+                    <div class="w-6 aspect-1 bg-sky-200 rounded">{% fueltank_component fuel="super" %}</div>
+                </div>
+            </legend>
+
+            <div class="text-sky-200 font-bold flex justify-center items-center h-16 w-16">
+                <a href="{% url 'new_order' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                        <path fill-rule="evenodd"
+                            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+            <div class="text-sky-200 font-bold flex justify-center items-center h-16 w-16 -ml-4">
+                <a href="">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                        <path fill-rule="evenodd"
+                            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</menu>
+
+
 {% endblock %}

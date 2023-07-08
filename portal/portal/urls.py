@@ -27,13 +27,13 @@ from app.views import (
     AboutUsView,
     UserHomeView,
     CompanyView,
-    OrdersView,
-    TicketsView,
-    VehiclesView,
     ContactUsView,
-    CashTransferView,
     LogoutView,
     UnderConstructionView,
+    FuelOrderListView,
+    FuelOrderViewCancel,
+    FuelOrderViewNewOrEdit,
+    VehiclesView,
     get_qr,
 )
 
@@ -42,9 +42,12 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
     path("accounts/", include("allauth.urls")),
     path("login/", LoginView.as_view(), name="login"),
-    path("under_construction/", UnderConstructionView.as_view(), name="under_construction"),
-    path('qr/<str:operation_code>/', get_qr, name='get_qr'),
-
+    path(
+        "under_construction/",
+        UnderConstructionView.as_view(),
+        name="under_construction",
+    ),
+    path("qr/<str:operation_code>/", get_qr, name="get_qr"),
 ]
 
 urlpatterns += i18n_patterns(
@@ -52,13 +55,15 @@ urlpatterns += i18n_patterns(
     path("about_us/", AboutUsView.as_view(), name="about-us"),
     path("contact_us/", ContactUsView.as_view(), name="contact-us"),
     path("user_home/", UserHomeView.as_view(), name="user_home"),
-    path('logout/', LogoutView.as_view(), name='logout'),
-
+    path("logout/", LogoutView.as_view(), name="logout"),
     # Modules Pages
     path("__reload__/", include("django_browser_reload.urls")),
     path("company/", CompanyView.as_view(), name="company"),
     path("vehicles/", VehiclesView.as_view(), name="vehicles"),
-    path("orders/", OrdersView.as_view(), name="orders"),
+    path("orders/", FuelOrderListView.as_view(), name="orders"),
+    path("orders/new/", FuelOrderViewNewOrEdit.as_view(), name="new_order"),
+    path("orders/<int:order_id>/edit/", FuelOrderViewNewOrEdit.as_view(), name="edit_order"), 
+    path("orders/<int:order_id>/cancel/", FuelOrderViewCancel.as_view(), name="cancel_order"), 
     path("tickets/", UnderConstructionView.as_view(), name="tickets"),
     path("cashtransfer/", UnderConstructionView.as_view(), name="cashtransfer"),
 )

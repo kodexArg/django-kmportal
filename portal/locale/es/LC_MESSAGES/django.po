@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 22:32+0000\n"
+"POT-Creation-Date: 2023-07-03 00:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,25 +32,87 @@ msgstr "Nuestra Empresa"
 msgid "t_contact"
 msgstr "Contacto"
 
-#: app/templates/components/row_fuelorder.html:21
-msgid "finished"
-msgstr "finalizado"
-
-#: app/templates/components/row_fuelorder.html:23
-msgid "canceled"
-msgstr "cancelado"
-
-#: app/templates/components/row_fuelorder.html:25
-msgid "refueling"
-msgstr "cargando!"
-
-#: app/templates/components/row_fuelorder.html:27
-msgid "on_transit"
-msgstr "en tránsito"
-
 #: app/templates/components/google_button.html:12
 msgid "t_login_with_google"
 msgstr "Ingresar con Google"
+
+#: app/templates/components/row_fuelorder/buttons.html:19
+msgid "cancel"
+msgstr "Cancelar"
+
+#: app/templates/components/row_fuelorder/buttons.html:30
+msgid "schedule"
+msgstr "Programar"
+
+#: app/templates/components/row_fuelorder/buttons.html:43
+msgid "view"
+msgstr "Ver"
+
+#: app/templates/components/row_fuelorder/popup.html:15
+#: app/templates/components/row_fuelorder/row.html:21
+msgid "finished"
+msgstr "finalizado"
+
+#: app/templates/components/row_fuelorder/popup.html:17
+#: app/templates/components/row_fuelorder/row.html:23
+msgid "canceled"
+msgstr "cancelado"
+
+#: app/templates/components/row_fuelorder/popup.html:19
+msgid "blocked"
+msgstr "bloqueado"
+
+#: app/templates/components/row_fuelorder/popup.html:46
+msgid "order_information"
+msgstr "Información del Pedido"
+
+#: app/templates/components/row_fuelorder/popup.html:48
+msgid "creation_date"
+msgstr "Fecha de Creación"
+
+#: app/templates/components/row_fuelorder/popup.html:52
+msgid "last_modification"
+msgstr "Última Modificación"
+
+#: app/templates/components/row_fuelorder/popup.html:56
+msgid "driver"
+msgstr "Conductor"
+
+#: app/templates/components/row_fuelorder/popup.html:63
+msgid "vehicle_information"
+msgstr "Información del Vehículo"
+
+#: app/templates/components/row_fuelorder/popup.html:65
+msgid "tractor_plate"
+msgstr "Placa del Tractor"
+
+#: app/templates/components/row_fuelorder/popup.html:69
+msgid "trailer_plate"
+msgstr "Placa del Remolque"
+
+#: app/templates/components/row_fuelorder/popup.html:76
+msgid "fuel_order"
+msgstr "Pedido de Combustible"
+
+#: app/templates/components/row_fuelorder/popup.html:78
+msgid "tractor"
+msgstr "Tractor"
+
+#: app/templates/components/row_fuelorder/popup.html:82
+msgid "backpack"
+msgstr "Mochila"
+
+#: app/templates/components/row_fuelorder/popup.html:86
+msgid "chamber"
+msgstr "Cámara"
+
+#: app/templates/components/row_fuelorder/row.html:25
+msgid "refueling"
+msgstr "Repostaje"
+
+#: app/templates/components/row_fuelorder/row.html:27
+msgid "on_transit"
+msgstr "en tránsito"
 
 #: app/templates/components/welcome_card.html:6
 msgid "associated_shops_card_text_title"
@@ -82,11 +144,11 @@ msgstr ""
 "sanitarios, todo para facilitar su operación diaria. ¡Esperamos que su "
 "experiencia sea excepcional con nosotros!"
 
-#: app/templates/home.html:25
+#: app/templates/home.html:27
 msgid "i_am_associated_shops_button"
 msgstr "Tiendas"
 
-#: app/templates/home.html:29
+#: app/templates/home.html:31
 msgid "i_am_carriers_button"
 msgstr "Transportista"
 
@@ -118,6 +180,14 @@ msgstr "CUIT"
 msgid "fuel_orders"
 msgstr "Órdenes de Carga"
 
+#: app/templates/modules/orders.html:33
+msgid "Legend"
+msgstr "Leyenda"
+
+#: app/templates/modules/orders.html:49
+msgid "new_order"
+msgstr "Orden de Carga"
+
 #: app/templates/modules/tickets.html:3
 msgid "tickets_page_title"
 msgstr "Sistema de Ayuda"
@@ -145,6 +215,3 @@ msgstr ""
 "🕵️ para que puedas ingresar. Pronto tendrás acceso a todas las maravillosas "
 "herramientas y beneficios que hemos preparado para ti. Si tienes alguna "
 "pregunta, no dudes en contactarnos. ¡Estamos aquí para ayudarte! 🤗"
-
-#~ msgid "orders_page_title"
-#~ msgstr "Pedidos de Carga"

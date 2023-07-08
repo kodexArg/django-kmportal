@@ -1,10 +1,14 @@
 import secrets
 from datetime import datetime, timedelta
 from django.db import models
+from django.db.models import Case, When, Value, IntegerField, Manager
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from allauth.socialaccount.models import SocialAccount
 from django.db.models import Case, When, Value, IntegerField
+from django.utils.timezone import now
+import logging
+logger = logging.getLogger(__name__)
 
 
 # Create your models here.
@@ -125,7 +129,6 @@ class Trailers(models.Model):
     def __str__(self):
         return self.domain
 
-from django.db.models import Case, When, Value, IntegerField, Manager
 
 class FuelOrdersManager(Manager):
     def get_queryset(self):
@@ -179,8 +182,11 @@ class FuelOrders(models.Model):
 
     order_date = models.DateField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
-    requested_date = models.DateField(auto_now_add=True)
-    expiration_date = models.DateField(default=datetime.now() + timedelta(days=7))
+    requested_date = models.DateField(default=now)
+    expiration_date = models.DateField(default=now() + timedelta(days=7))
+
+    user_creator = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='fuel_orders_created', blank=True, null=True)
+    user_lastmod = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='fuel_orders_modified', blank=True, null=True)
     
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     driver = models.ForeignKey(Drivers, on_delete=models.PROTECT)
@@ -196,9 +202,9 @@ class FuelOrders(models.Model):
     backpack_liters = models.PositiveIntegerField(blank=True, null=True)  # leave blank untill filled
     chamber_liters = models.PositiveIntegerField(blank=True, null=True)  # leave blank untill filled
 
-    tractor_liters_to_load = models.IntegerField(default=-1)  # show MAX on -1 and NO on 0
-    backpack_liters_to_load = models.IntegerField(default=-1)  # show MAX on -1 and NO on 0
-    chamber_liters_to_load = models.IntegerField(default=-1)  # show MAX on -1 and NO on 0
+    tractor_liters_to_load = models.IntegerField(default=0)  # show MAX on -1 and NO on 0
+    backpack_liters_to_load = models.IntegerField(default=0)  # show MAX on -1 and NO on 0
+    chamber_liters_to_load = models.IntegerField(default=0)  # show MAX on -1 and NO on 0
 
     requires_odometer = models.BooleanField(default=False)
     requires_kilometers = models.BooleanField(default=False)
@@ -208,23 +214,64 @@ class FuelOrders(models.Model):
     is_finished = models.BooleanField(default=False)  # because it's been attended and it's been filled
 
     cancel_reason = models.TextField(blank=True, null=True)  # because there's an error or user action
-    
     in_agreement = models.IntegerField(choices=AGREEMENT_CHOICES, default=0)
 
     comments = models.TextField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        if not self.pk:
-            self.operation_code = secrets.token_hex(3)
-            while FuelOrders.objects.filter(
-                operation_code=self.operation_code
-            ).exists():
+        """ This save method accept some missing fields:
+        ["requested_date", "expiration_date", "in_agreement"]
+        """
+        
+        try:
+            if not self.pk:  #this is a new record
                 self.operation_code = secrets.token_hex(3)
+                while FuelOrders.objects.filter(
+                    operation_code=self.operation_code
+                ).exists():
+                    self.operation_code = secrets.token_hex(3)
+
+                if hasattr(self, 'user_creator') and self.user_creator is None:
+                    self.user_creator = self._get_current_user()
+
+                if hasattr(self, 'company') and self.company is None:
+                    self.company = self._get_user_company()
+                
+                if not self.requested_date:
+                    self.requested_date = now()
+                
+                if not self.expiration_date:
+                    self.expiration_date = now() + timedelta(days=7)
+
+            else:  # this is an edition
+                if hasattr(self, 'user_lastmod'):
+                    self.user_lastmod = self._get_current_user()
+        except Exception as e:
+            logger.error(f"Error on saving fuel order: {e}")
+        
+        
         super().save(*args, **kwargs)
 
     def get_total_liters(self):
         return self.tractor_liters + self.backpack_liters + self.chamber_liters
 
+    def _get_current_user(self):
+        # Get the current authenticated user using Django-Allauth
+        try:
+            social_account = SocialAccount.objects.get(user=self.request.user)
+            return social_account.user
+        except (AttributeError, SocialAccount.DoesNotExist):
+            return None
+
+    def _get_user_company(self):
+        # Get the user's company based on the SocialAccount
+        try:
+            social_account = SocialAccount.objects.get(user=self.request.user)
+            company_social_account = CompanySocialAccount.objects.get(social_account=social_account)
+            return company_social_account.company
+        except (AttributeError, SocialAccount.DoesNotExist, CompanySocialAccount.DoesNotExist):
+            return None
+        
     @property
     def short_tractor_fuel_type(self):
         return self.fuel_type_map.get(self.tractor_fuel_type, "")
@@ -249,12 +296,40 @@ class FuelOrders(models.Model):
     def chamber_fuel_type_color(self):
         return self.color_map.get(self.chamber_fuel_type, "")
 
+    @property
+    def formated_tractor_liters_to_load_of(self):
+        if self.tractor_liters_to_load == 0:
+            return "no"
+        elif self.tractor_liters_to_load == -1:
+            return "max"
+        else:
+            return f"{ self.tractor_liters_to_load } "
+
+    @property
+    def formated_backpack_liters_to_load_of(self):
+        if self.backpack_liters_to_load == 0:
+            return "no"
+        elif self.backpack_liters_to_load == -1:
+            return "max"
+        else:
+            return f"{ self.backpack_liters_to_load } "
+
+    @property
+    def formated_chamber_liters_to_load_of(self):
+        if self.chamber_liters_to_load == 0:
+            return "no"
+        elif self.chamber_liters_to_load == -1:
+            return "max"
+        else:
+            return f"{ self.chamber_liters_to_load } "
+
     def __str__(self):
         return self.operation_code
 
     class Meta:
         verbose_name = 'Fuel Order'
         verbose_name_plural = 'Fuel Orders'
+
 
 class Refuelings(models.Model):
     """Core Table of the refueling Workflow: STEP 2"""

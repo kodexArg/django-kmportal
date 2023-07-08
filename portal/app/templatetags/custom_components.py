@@ -2,7 +2,7 @@ from loguru import logger
 from django import template
 from django.utils.safestring import mark_safe
 import os
-
+from django.utils.translation import gettext as _
 
 register = template.Library()
 
@@ -17,7 +17,15 @@ TAILWIND_TOP_VALUE = {
 
 
 @register.inclusion_tag("components/std_button.html", takes_context=True)
-def std_button_component(context, text, color="bg-pantone7689c", url="#", svg=None, is_left=False, is_right=False):
+def std_button_component(
+    context,
+    text,
+    color="bg-pantone7689c",
+    url="#",
+    svg=None,
+    is_left=False,
+    is_right=False,
+):
     return {
         "text": text,
         "color": color,
@@ -62,10 +70,25 @@ def menu_button_component(context, pos, side, icon="", size="small", url="#", st
     }
 
 
-@register.inclusion_tag("components/row_fuelorder.html", takes_context=True)
+@register.inclusion_tag("components/row_fuelorder/main.html", takes_context=True)
 def row_fuelorder_component(context, order):
     user = context["request"].user
     return {"user": user, "order": order}
+
+
+@register.inclusion_tag("components/row_fuelorder/popup.html", takes_context=True)
+def row_fuelorder_popup_component(context, order):
+    return {"order": order}
+
+
+@register.inclusion_tag("components/row_fuelorder/row.html", takes_context=True)
+def row_fuelorder_row_component(context, order):
+    return {"order": order}
+
+
+@register.inclusion_tag("components/row_fuelorder/buttons.html", takes_context=True)
+def row_fuelorder_buttons_component(context, order):
+    return {"order": order}
 
 
 @register.simple_tag()
@@ -117,11 +140,13 @@ def checkbox_component(label, name, checked=False):
 
 
 @register.simple_tag()
-def rbutton_component(caption, bg="bg-pantone7689c", fg="text-white", size=""):
+def rbutton_component(caption, bg="bg-pantone7689c", fg="text-white", size="", name="action", value="none"):
     """Rounded button component"""
+    translated_caption = _(caption)  # Translate the caption using gettext
+
     html = f"""
-        <button type="submit" class="{size} whitespace-nowrap rounded-full px-3 py-1 {bg} {fg} self-end font-quicksand font-bold text-sm">
-            {caption}
+        <button type="submit" name="{name}" value="{value}" class="{size} whitespace-nowrap rounded-full px-3 py-1 {bg} {fg} self-end font-quicksand font-bold text-sm">
+            {translated_caption}
         </button>
     """
     return mark_safe(html)

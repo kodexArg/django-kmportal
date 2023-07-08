@@ -1,0 +1,48 @@
+{% load static i18n custom_components %}
+
+<!-- Actions -->
+<menu id="row-toggle-body-{{ order.id }}" ariai-labelledby="row-toggle-heading-{{ order.id }}" class="hidden">
+    <div class="flex flex-nowrap p-1">
+        <div class="w-full flex">
+
+            <!-- cancel button -->
+                <button data-modal-target="row-cancel-{{ order.id }}" data-modal-toggle="row-cancel-{{ order.id }}"
+                    class="flex flex-col px-2 items-center justify-center font-rubik font-bold text-red-300 text-xxs leading-none {% if order.is_finished %}bg-pantone7472c{% elif order.is_canceled %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else  %}bg-pantone7689c{% endif %}">
+                    <div class="flex flex-col">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    {% if order.is_canceled %}
+                    {% translate 'continue' %}
+                    {% else %}
+                    {% translate 'cancel' %}
+                    {% endif %}
+                </button>
+
+            <!-- Schedule button -->
+            <button
+                class="flex flex-col px-2 items-center justify-center font-rubik font-bold text-xxs leading-none text-white {% if order.is_finished %}bg-pantone7472c{% elif order.is_canceled %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else  %}bg-pantone7689c{% endif %}">
+                <div class="flex flex-col">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                {% translate 'schedule' %}
+            </button>
+
+            <!-- View button -->
+            <button data-modal-target="row-view-{{ order.id }}" data-modal-toggle="row-view-{{ order.id }}"
+                class="flex flex-col px-2 items-center justify-center font-rubik font-bold text-xxs leading-none text-white {% if order.is_finished %}bg-pantone7472c{% elif order.is_canceled %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else  %}bg-pantone7689c{% endif %}">
+                <div class="flex flex-col">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </div>
+                {% translate 'view' %}
+            </button>
+        </div>
+    </div>
+</menu>

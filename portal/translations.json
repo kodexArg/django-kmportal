@@ -156,22 +156,102 @@
   },
   "new_order": {
     "en": "Load Order",
-    "es": "",
-    "pt": ""
+    "es": "Orden de Carga",
+    "pt": "Ordem de Carga"
   },
   "edit_order": {
-    "en": "",
-    "es": "",
-    "pt": ""
+    "en": "Edit Order",
+    "es": "Editar Orden",
+    "pt": "Editar Ordem"
   },
   "Legend": {
     "en": "Legend",
     "es": "Leyenda",
-    "pt": ""
+    "pt": "Legenda"
   },
   "Actions": {
     "en": "Actions",
     "es": "Acciones",
-    "pt": ""
+    "pt": "Ações"
   },
+  "tractor": {
+    "en": "Tractor",
+    "es": "Tractor",
+    "pt": "Trator"
+  },
+  "backpack": {
+    "en": "Backpack",
+    "es": "Mochila",
+    "pt": "Mochila"
+  },
+  "chamber": {
+    "en": "Chamber",
+    "es": "Cámara",
+    "pt": "Câmara"
+  },
+  "cancel": {
+    "en": "Cancel",
+    "es": "Cancelar",
+    "pt": "Cancelar"
+  },
+  "view": {
+    "en": "View",
+    "es": "Ver",
+    "pt": "Ver"
+  },
+  "refueling": {
+    "en": "Refueling",
+    "es": "Repostaje",
+    "pt": "Abastecimento"
+  },
+  "schedule": {
+    "en": "Schedule",
+    "es": "Programar",
+    "pt": "Agendar"
+  },
+  "order_information": {
+    "en": "Order Information",
+    "es": "Información del Pedido",
+    "pt": "Informações do Pedido"
+  },
+  "creation_date": {
+    "en": "Creation Date",
+    "es": "Fecha de Creación",
+    "pt": "Data de Criação"
+  },
+  "last_modification": {
+    "en": "Last Modification",
+    "es": "Última Modificación",
+    "pt": "Última Modificação"
+  },
+  "driver": {
+    "en": "Driver",
+    "es": "Conductor",
+    "pt": "Motorista"
+  },
+  "vehicle_information": {
+    "en": "Vehicle Information",
+    "es": "Información del Vehículo",
+    "pt": "Informações do Veículo"
+  },
+  "tractor_plate": {
+    "en": "Tractor Plate",
+    "es": "Placa del Tractor",
+    "pt": "Placa do Trator"
+  },
+  "trailer_plate": {
+    "en": "Trailer Plate",
+    "es": "Placa del Remolque",
+    "pt": "Placa do Reboque"
+  },
+  "fuel_order": {
+    "en": "Fuel Order",
+    "es": "Pedido de Combustible",
+    "pt": "Pedido de Combustível"
+  },
+  "blocked": {
+    "en": "bloqued",
+    "es": "bloqueado",
+    "pt": "bloqueado"
+  }
 }
