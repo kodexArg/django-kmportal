@@ -3,17 +3,16 @@
 
 <nav class="fixed top-0">
     
-    
     {% if user.is_authenticated %}
     <!-- left buttons -->
-    {% menu_button_component pos="1" side="left" url="home" icon="my-company-logo" %}
+    {% menu_button_component pos="1" side="left" url="user_home" icon="my-company-logo" %}
     
     <!-- right buttons -->
-    {% menu_button_component pos="1" side="right" url="user_home" icon=icon %}
+    {% menu_button_component pos="1" side="right" icon=icon %}
     
     {% else %}
     <!-- Not a registered user -->
-    {% menu_button_component pos="1" size="large" side="left" url="home" icon="my-company-logo" %}
+    {% menu_button_component pos="1" size="large" side="left" url="user_home" icon="my-company-logo" %}
     {% menu_button_component pos="1" side="right" style="flag" size="large" %}
 
     {% endif %}
