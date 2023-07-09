@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 05:06+0000\n"
+"POT-Creation-Date: 2023-07-09 05:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -155,7 +155,7 @@ msgid "blocked"
 msgstr "bloqued"
 
 #: app/templates/components/row_fuelorder/popup.html:46
-#: app/templates/modules/single_order.html:17
+#: app/templates/modules/single_order.html:20
 msgid "order_information"
 msgstr "Order Information"
 
@@ -185,22 +185,22 @@ msgid "trailer_plate"
 msgstr "Trailer Plate"
 
 #: app/templates/components/row_fuelorder/popup.html:76
-#: app/templates/modules/single_order.html:38
+#: app/templates/modules/single_order.html:41
 msgid "fuel_order"
 msgstr "Fuel Order"
 
 #: app/templates/components/row_fuelorder/popup.html:78
-#: app/templates/modules/single_order.html:42
+#: app/templates/modules/single_order.html:45
 msgid "tractor"
 msgstr "Tractor"
 
 #: app/templates/components/row_fuelorder/popup.html:82
-#: app/templates/modules/single_order.html:45
+#: app/templates/modules/single_order.html:48
 msgid "backpack"
 msgstr "Backpack"
 
 #: app/templates/components/row_fuelorder/popup.html:86
-#: app/templates/modules/single_order.html:48
+#: app/templates/modules/single_order.html:51
 msgid "chamber"
 msgstr "Chamber"
 
@@ -290,11 +290,18 @@ msgstr "Refueling Orders"
 msgid "Legend"
 msgstr "Legend"
 
-#: app/templates/modules/single_order.html:75
+#: app/templates/modules/single_order.html:13
+msgid "fuel_order_instruction"
+msgstr ""
+"Please carefully review your fuel order. The beach operator will load the "
+"fuel type and quantities you specify. Review the order again once it has "
+"been entered on the next screen."
+
+#: app/templates/modules/single_order.html:78
 msgid "new"
 msgstr "New"
 
-#: app/templates/modules/single_order.html:75
+#: app/templates/modules/single_order.html:78
 msgid "new_order"
 msgstr "Load Order"
 
