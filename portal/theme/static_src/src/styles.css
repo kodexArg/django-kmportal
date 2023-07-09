@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 /* Form classes */
-
 .tw-label {
     @apply tracking-wide font-rubik text-sm text-left whitespace-nowrap;
     @apply placeholder-gray-300 text-pantone307c;
@@ -29,6 +28,14 @@
     @apply inline-flex mr-2 w-2 aspect-1 checked:bg-pantone307c;
 }
 /* End */
+
+/* Generic and containers */
+.tw-bigform {
+    @apply flex flex-col w-full h-full px-2 sm:px-10 justify-center overflow-y-auto border border-pantone307c;
+}
+
+/* End */
+
 
 /* Cards */
 .tw-loop-container {
@@ -70,5 +77,4 @@
 .tw-position-6 {
     @apply top-[25rem];
 }
-
 /* End */
