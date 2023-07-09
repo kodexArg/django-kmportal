@@ -105,7 +105,7 @@
                 <!-- Modal header -->
                 <div class="flex justify-between mb-4 rounded-t sm:mb-5">
                     <div class="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
-                        <h3>Cancel Confirmation</h3>
+                        {% translate 'dlg_cancel_confirm_title' %}
                     </div>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex dark:hover:bg-gray-600 dark:hover:text-white"
@@ -121,7 +121,7 @@
                 </div>
                 <!-- Modal content -->
                 <div class="mt-6">
-                    <p>Are you sure you want to cancel this order?</p>
+                    <p>{% translate 'dlg_cancel_confirm' %}</p>
                     <div class="modal-actions">
                         {% rbutton_component value="delete" caption="btn_delete" %}
                         {% rbutton_component value="cancel" caption="btn_cancel" %}

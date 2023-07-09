@@ -1,3 +1,4 @@
+from loguru import logger
 import secrets
 from datetime import datetime, timedelta
 from django.db import models
@@ -7,8 +8,7 @@ from django.contrib.auth.models import User
 from allauth.socialaccount.models import SocialAccount
 from django.db.models import Case, When, Value, IntegerField
 from django.utils.timezone import now
-import logging
-logger = logging.getLogger(__name__)
+from django.utils.translation import gettext as _
 
 
 # Create your models here.
@@ -68,7 +68,7 @@ class Company(models.Model):
         return self.fantasy_name
     
     class Meta:
-        verbose_name_plural = "Companies"
+        verbose_name_plural = _("Companies")
 
 
 class CompanySocialAccount(models.Model):
@@ -83,15 +83,15 @@ class CompanySocialAccount(models.Model):
     )
     
     def __str__(self):
-        return f"{self.social_account.extra_data['name']} -> {self.company}"
+        return f"{self.social_account.extra_data['name']} → {self.company}"
 
 
 class Drivers(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    identification_type = models.CharField(max_length=50, default="DNI")
-    identification_number = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=255, verbose_name=_("first_name"))
+    last_name = models.CharField(max_length=255, verbose_name=_("last_name"))
+    identification_type = models.CharField(max_length=50, default=_("identification_type"))
+    identification_number = models.CharField(max_length=50, verbose_name=_("identification_number"))
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
 
@@ -106,7 +106,7 @@ class Drivers(models.Model):
 
 class Tractors(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    domain = models.CharField(max_length=255)
+    domain = models.CharField(max_length=15, verbose_name=_("domain"))
     is_active = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
@@ -119,7 +119,7 @@ class Tractors(models.Model):
 
 class Trailers(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    domain = models.CharField(max_length=255)
+    domain = models.CharField(max_length=15, verbose_name=_("domain"))
     is_active = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
@@ -158,9 +158,9 @@ class FuelOrders(models.Model):
     ]
 
     AGREEMENT_CHOICES = [
-        (0, "No agreement"),
-        (1, "Under negotiation"),
-        (2, "Agreed"),
+        (0, _("no_agreement")),
+        (1, _("under_negotiation")),
+        (2, _("agreed")),
     ]
 
     color_map = {
@@ -191,32 +191,38 @@ class FuelOrders(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     driver = models.ForeignKey(Drivers, on_delete=models.PROTECT)
     
-    tractor_plate = models.ForeignKey(Tractors, on_delete=models.PROTECT)
-    trailer_plate = models.ForeignKey(Trailers, on_delete=models.PROTECT, blank=True, null=True)
+    tractor_plate = models.ForeignKey(Tractors, on_delete=models.PROTECT, verbose_name="tractor_plate")
+    trailer_plate = models.ForeignKey(Trailers, on_delete=models.PROTECT, blank=True, null=True, verbose_name="trailer_plate")
+   
+    tractor_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True, verbose_name="tractor_fuel_type")
+    backpack_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True, verbose_name="backpack_fuel_type")
+    chamber_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True, verbose_name="chamber_fuel_type")
     
-    tractor_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True)
-    backpack_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True)
-    chamber_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True)
-    
-    tractor_liters = models.PositiveIntegerField(blank=True, null=True)  # leave blank untill filled
-    backpack_liters = models.PositiveIntegerField(blank=True, null=True)  # leave blank untill filled
-    chamber_liters = models.PositiveIntegerField(blank=True, null=True)  # leave blank untill filled
+    tractor_liters = models.PositiveIntegerField(blank=True, null=True, verbose_name="tractor_liters")  # leave blank until filled
+    backpack_liters = models.PositiveIntegerField(blank=True, null=True, verbose_name="backpack_liters")  # leave blank until filled
+    chamber_liters = models.PositiveIntegerField(blank=True, null=True, verbose_name="chamber_liters")  # leave blank until filled
 
-    tractor_liters_to_load = models.IntegerField(default=0)  # show MAX on -1 and NO on 0
-    backpack_liters_to_load = models.IntegerField(default=0)  # show MAX on -1 and NO on 0
-    chamber_liters_to_load = models.IntegerField(default=0)  # show MAX on -1 and NO on 0
+    tractor_liters_to_load = models.IntegerField(default=0, verbose_name="tractor_liters_to_load")  # show MAX on -1 and NO on 0
+    backpack_liters_to_load = models.IntegerField(default=0, verbose_name="backpack_liters_to_load")  # show MAX on -1 and NO on 0
+    chamber_liters_to_load = models.IntegerField(default=0, verbose_name="chamber_liters_to_load")  # show MAX on -1 and NO on 0
 
-    requires_odometer = models.BooleanField(default=False)
-    requires_kilometers = models.BooleanField(default=False)
+    requires_odometer = models.BooleanField(default=False, verbose_name="requires_odometer")
+    requires_kilometers = models.BooleanField(default=False, verbose_name="requires_kilometers")
 
-    is_blocked = models.BooleanField(default=False)  # because it has been attended
-    is_canceled = models.BooleanField(default=False)  # because there's an error or user action
-    is_finished = models.BooleanField(default=False)  # because it's been attended and it's been filled
+    is_blocked = models.BooleanField(default=False, verbose_name="is_blocked")  # because it has been attended
+    is_canceled = models.BooleanField(default=False, verbose_name="is_canceled")  # because there's an error or user action
+    is_finished = models.BooleanField(default=False, verbose_name="is_finished")  # because it's been attended and it's been filled
 
-    cancel_reason = models.TextField(blank=True, null=True)  # because there's an error or user action
-    in_agreement = models.IntegerField(choices=AGREEMENT_CHOICES, default=0)
+    cancel_reason = models.TextField(blank=True, null=True, verbose_name="cancel_reason")  # because there's an error or user action
+    AGREEMENT_CHOICES = [
+        (0, "no_agreement"),
+        (1, "under_negotiation"),
+        (2, "agreed"),
+    ]
+    in_agreement = models.IntegerField(choices=AGREEMENT_CHOICES, default=0, verbose_name="in_agreement")
 
-    comments = models.TextField(blank=True, null=True)
+    comments = models.TextField(blank=True, null=True, verbose_name="comments")
+
 
     def save(self, *args, **kwargs):
         """ This save method accept some missing fields:

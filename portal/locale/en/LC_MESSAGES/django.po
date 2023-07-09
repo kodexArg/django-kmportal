@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-08 23:37+0000\n"
+"POT-Creation-Date: 2023-07-09 05:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,53 +18,89 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/forms.py:17
+#: app/forms.py:16
 msgid "January"
 msgstr "January"
 
-#: app/forms.py:18
+#: app/forms.py:17
 msgid "February"
 msgstr "February"
 
-#: app/forms.py:19
+#: app/forms.py:18
 msgid "March"
 msgstr "March"
 
-#: app/forms.py:20
+#: app/forms.py:19
 msgid "April"
 msgstr "April"
 
-#: app/forms.py:21
+#: app/forms.py:20
 msgid "May"
 msgstr "May"
 
-#: app/forms.py:22
+#: app/forms.py:21
 msgid "June"
 msgstr "June"
 
-#: app/forms.py:23
+#: app/forms.py:22
 msgid "July"
 msgstr "July"
 
-#: app/forms.py:24
+#: app/forms.py:23
 msgid "August"
 msgstr "August"
 
-#: app/forms.py:25
+#: app/forms.py:24
 msgid "September"
 msgstr "September"
 
-#: app/forms.py:26
+#: app/forms.py:25
 msgid "October"
 msgstr "October"
 
-#: app/forms.py:27
+#: app/forms.py:26
 msgid "November"
 msgstr "November"
 
-#: app/forms.py:28
+#: app/forms.py:27
 msgid "December"
 msgstr "December"
+
+#: app/models.py:71
+msgid "Companies"
+msgstr ""
+
+#: app/models.py:91
+msgid "first_name"
+msgstr "First Name"
+
+#: app/models.py:92
+msgid "last_name"
+msgstr "Last Name"
+
+#: app/models.py:93
+msgid "identification_type"
+msgstr "ID Type"
+
+#: app/models.py:94
+msgid "identification_number"
+msgstr "ID N°"
+
+#: app/models.py:109 app/models.py:122
+msgid "domain"
+msgstr "Domain"
+
+#: app/models.py:161
+msgid "no_agreement"
+msgstr "No agreement"
+
+#: app/models.py:162
+msgid "under_negotiation"
+msgstr "Under negotiation"
+
+#: app/models.py:163
+msgid "agreed"
+msgstr "Agreed"
 
 #: app/templates/about_us.html:3 app/templates/contact_us.html:3
 #: app/templates/home.html:3 app/templates/under_construction.html:3
@@ -168,6 +204,14 @@ msgstr "Backpack"
 msgid "chamber"
 msgstr "Chamber"
 
+#: app/templates/components/row_fuelorder/popup.html:108
+msgid "dlg_cancel_confirm_title"
+msgstr "Cancel Confirmation"
+
+#: app/templates/components/row_fuelorder/popup.html:124
+msgid "dlg_cancel_confirm"
+msgstr "Are you sure you want to cancel this order?"
+
 #: app/templates/components/row_fuelorder/row.html:25
 msgid "refueling"
 msgstr "Refueling"
@@ -182,7 +226,7 @@ msgstr "Asociated Stores"
 
 #: app/templates/components/welcome_card.html:8
 msgid "carriers_card_text_title"
-msgstr "Transport Commpanies"
+msgstr "Transport Companies"
 
 #: app/templates/components/welcome_card.html:13
 msgid "associated_shops_card_text"
@@ -309,3 +353,27 @@ msgstr "Actions"
 
 msgid "update"
 msgstr "update"
+
+msgid "is_active"
+msgstr "Active"
+
+msgid "btn_delete"
+msgstr "Delete"
+
+msgid "btn_cancel"
+msgstr "Cancel"
+
+msgid "btn_skip"
+msgstr "Skip"
+
+msgid "requires_odometer"
+msgstr "Requires Odometer"
+
+msgid "requires_kilometers"
+msgstr "Requires Kilometers"
+
+msgid "add_trailer"
+msgstr "Add Trailer"
+
+msgid "add_tractor"
+msgstr "Add Tractor"

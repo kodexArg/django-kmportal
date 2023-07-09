@@ -3,12 +3,11 @@ from django import forms
 from django.utils import timezone
 from .models import FuelOrders, Drivers, Tractors, Trailers
 from django.utils.safestring import mark_safe
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
 from django.forms import BooleanField, Select
+from django.core.exceptions import ValidationError
+from loguru import logger
 
-import logging
-
-logger = logging.getLogger(__name__)
 
 class DateSelectWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
@@ -27,7 +26,10 @@ class DateSelectWidget(forms.MultiWidget):
             ("11", _("November")),
             ("12", _("December")),
         ]
-        year_choices = [(str(year), str(year)) for year in range(timezone.now().year, timezone.now().year + 2)]
+        year_choices = [
+            (str(year), str(year))
+            for year in range(timezone.now().year, timezone.now().year + 2)
+        ]
 
         widgets = [
             forms.Select(choices=day_choices),
@@ -43,7 +45,10 @@ class DateSelectWidget(forms.MultiWidget):
         return [None, None, None]
 
     def value_from_datadict(self, data, files, name):
-        day, month, year = [widget.value_from_datadict(data, files, f"{name}_{i}") for i, widget in enumerate(self.widgets)]
+        day, month, year = [
+            widget.value_from_datadict(data, files, f"{name}_{i}")
+            for i, widget in enumerate(self.widgets)
+        ]
         if all(val is not None for val in [day, month, year]):
             try:
                 return date(int(year), int(month), int(day))
@@ -53,7 +58,7 @@ class DateSelectWidget(forms.MultiWidget):
 
     def format_output(self, rendered_widgets):
         return " / ".join(rendered_widgets)
-    
+
     def save(self, commit=True):
         try:
             return super().save(commit)
@@ -63,34 +68,10 @@ class DateSelectWidget(forms.MultiWidget):
 
 
 class FuelOrderForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for _, field in self.fields.items():
-            field.widget.attrs["class"] = "tw-field"
-
-            if isinstance(field, BooleanField):
-                field.widget.attrs["class"] += " tw-checkbox-field"
-            else:
-                field.widget.attrs["class"] += " tw-input-field"
-
-            if field.label:
-                field.widget.attrs["placeholder"] = field.label
-                field.widget.attrs["aria-label"] = field.label
-                field.label = mark_safe(
-                    f'<span class="tw-label">{field.label}</span>'
-                )
-
-        ## Customizations
-
-        self.fields["tractor_liters_to_load"].initial = 0
-        self.fields["backpack_liters_to_load"].initial = 0
-        self.fields["chamber_liters_to_load"].initial = 0
-
-        # Date
     CHOICES = (
         ("-1", "MAX"),
         ("0", "NO"),
-        *[(str(x), str(x) + " Liters") for x in range(50, 1001, 50)],
+        *[(str(x), str(x) + " L.") for x in range(50, 1001, 50)],
     )
 
     tractor_liters_to_load = forms.ChoiceField(
@@ -108,16 +89,60 @@ class FuelOrderForm(forms.ModelForm):
         label="Chamber Liters to Load",
     )
 
-    def save(self, commit=True):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            # apply custom tailwind classes for fields
+            field.widget.attrs["class"] = "tw-field"
+            if isinstance(field, BooleanField):
+                field.widget.attrs["class"] += " tw-checkbox-field"
+            else:
+                field.widget.attrs["class"] += " tw-input-field"
+
+            # label tranlation:
+            if field.label:
+                field.widget.attrs["placeholder"] = str(field.label)
+                field.widget.attrs["aria-label"] = str(field.label)
+                translated_label = _(str(field.label).replace(" ", "_").lower())
+                try:
+                    field.label = mark_safe(
+                        f'<span class="tw-label">{translated_label}</span>'
+                    )
+                except KeyError:
+                    field.label = mark_safe(
+                        f'<span class="tw-label">{str(field.label)}</span>'
+                    )
+                    logger.error(f"failing translation for {field.label}")
+
+        # Customizations
+        self.fields["tractor_liters_to_load"].initial = 0
+        self.fields["backpack_liters_to_load"].initial = 0
+        self.fields["chamber_liters_to_load"].initial = 0
+
+        ## Customizations
+
+        self.fields["tractor_liters_to_load"].initial = 0
+        self.fields["backpack_liters_to_load"].initial = 0
+        self.fields["chamber_liters_to_load"].initial = 0
+
+    def save(self, *args, **kwargs):
         try:
-            return super().save(commit)
-        except Exception as e:
+            return super().save(*args, **kwargs)
+        except ValidationError as e:
             logger.exception("Error occurred while saving fuel order:")
             raise
 
     class Meta:
         model = FuelOrders
-        exclude = ["company", "operation_code", "in_agreement", "requested_date", "expiration_date"]
+        fields = '__all__'
+        exclude = [
+            "company",
+            "operation_code",
+            "in_agreement",
+            "requested_date",
+            "expiration_date",
+        ]
 
 
 class CreateDriverForm(forms.ModelForm):

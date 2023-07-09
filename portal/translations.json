@@ -56,7 +56,7 @@
   },
   "carriers_card_text_title": {
     "es": "Empresas de Transporte",
-    "en": "Transport Commpanies",
+    "en": "Transport Companies",
     "pt": "Empresas de Transporte "
   },
   "carriers_card_text": {
@@ -338,5 +338,95 @@
     "en": "update",
     "es": "actualizar",
     "pt": "atualizar"
+  },
+  "first_name": {
+    "es": "Nombre",
+    "en": "First Name",
+    "pt": "Nome"
+  },
+  "last_name": {
+    "es": "Apellido",
+    "en": "Last Name",
+    "pt": "Sobrenome"
+  },
+  "identification_type": {
+    "es": "Tipo de ID",
+    "en": "ID Type",
+    "pt": "Tipo de ID"
+  },
+  "identification_number": {
+    "es": "N° de ID",
+    "en": "ID N°",
+    "pt": "N° de ID"
+  },
+  "is_active": {
+    "es": "Activo",
+    "en": "Active",
+    "pt": "Ativo"
+  },
+  "btn_delete": {
+    "es": "Eliminar",
+    "en": "Delete",
+    "pt": "Excluir"
+  },
+  "btn_cancel": {
+    "es": "Cancelar",
+    "en": "Cancel",
+    "pt": "Cancelar"
+  },
+  "btn_skip": {
+    "es": "Omitir",
+    "en": "Skip",
+    "pt": "Pular"
+  },
+  "dlg_cancel_confirm": {
+    "es": "¿Estás seguro de que quieres cancelar este pedido?",
+    "en": "Are you sure you want to cancel this order?",
+    "pt": "Tem certeza de que deseja cancelar este pedido?"
+  },
+  "dlg_cancel_confirm_title": {
+    "es": "Confirmación de Cancelación",
+    "en": "Cancel Confirmation",
+    "pt": "Confirmação de Cancelamento"
+  },
+  "domain": {
+    "es": "Dominio",
+    "en": "Domain",
+    "pt": "Domínio"
+  },
+  "no_agreement": {
+    "es": "Sin acuerdo",
+    "en": "No agreement",
+    "pt": "Sem acordo"
+  },
+  "under_negotiation": {
+    "es": "En negociación",
+    "en": "Under negotiation",
+    "pt": "Em negociação"
+  },
+  "agreed": {
+    "es": "Acordado",
+    "en": "Agreed",
+    "pt": "Acordado"
+  },
+  "requires_odometer": {
+    "en": "Requires Odometer",
+    "es": "Requiere Odómetro",
+    "pt": "Requer Odômetro"
+  },
+  "requires_kilometers": {
+    "en": "Requires Kilometers",
+    "es": "Requiere Kilómetros",
+    "pt": "Requer Quilômetros"
+  },
+  "add_trailer": {
+    "en": "Add Trailer",
+    "es": "Agregar Remolque",
+    "pt": "Adicionar Reboque"
+  },
+  "add_tractor": {
+    "en": "Add Tractor",
+    "es": "Agregar Tractor",
+    "pt": "Adicionar Trator"
   }
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-08 23:37+0000\n"
+"POT-Creation-Date: 2023-07-09 05:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,53 +18,89 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/forms.py:17
+#: app/forms.py:16
 msgid "January"
 msgstr "Enero"
 
-#: app/forms.py:18
+#: app/forms.py:17
 msgid "February"
 msgstr "Febrero"
 
-#: app/forms.py:19
+#: app/forms.py:18
 msgid "March"
 msgstr "Marzo"
 
-#: app/forms.py:20
+#: app/forms.py:19
 msgid "April"
 msgstr "Abril"
 
-#: app/forms.py:21
+#: app/forms.py:20
 msgid "May"
 msgstr "Mayo"
 
-#: app/forms.py:22
+#: app/forms.py:21
 msgid "June"
 msgstr "Junio"
 
-#: app/forms.py:23
+#: app/forms.py:22
 msgid "July"
 msgstr "Julio"
 
-#: app/forms.py:24
+#: app/forms.py:23
 msgid "August"
 msgstr "Agosto"
 
-#: app/forms.py:25
+#: app/forms.py:24
 msgid "September"
 msgstr "Septiembre"
 
-#: app/forms.py:26
+#: app/forms.py:25
 msgid "October"
 msgstr "Octubre"
 
-#: app/forms.py:27
+#: app/forms.py:26
 msgid "November"
 msgstr "Noviembre"
 
-#: app/forms.py:28
+#: app/forms.py:27
 msgid "December"
 msgstr "Diciembre"
+
+#: app/models.py:71
+msgid "Companies"
+msgstr ""
+
+#: app/models.py:91
+msgid "first_name"
+msgstr "Nombre"
+
+#: app/models.py:92
+msgid "last_name"
+msgstr "Apellido"
+
+#: app/models.py:93
+msgid "identification_type"
+msgstr "Tipo de ID"
+
+#: app/models.py:94
+msgid "identification_number"
+msgstr "N° de ID"
+
+#: app/models.py:109 app/models.py:122
+msgid "domain"
+msgstr "Dominio"
+
+#: app/models.py:161
+msgid "no_agreement"
+msgstr "Sin acuerdo"
+
+#: app/models.py:162
+msgid "under_negotiation"
+msgstr "En negociación"
+
+#: app/models.py:163
+msgid "agreed"
+msgstr "Acordado"
 
 #: app/templates/about_us.html:3 app/templates/contact_us.html:3
 #: app/templates/home.html:3 app/templates/under_construction.html:3
@@ -167,6 +203,14 @@ msgstr "Mochila"
 #: app/templates/modules/single_order.html:48
 msgid "chamber"
 msgstr "Cámara"
+
+#: app/templates/components/row_fuelorder/popup.html:108
+msgid "dlg_cancel_confirm_title"
+msgstr "Confirmación de Cancelación"
+
+#: app/templates/components/row_fuelorder/popup.html:124
+msgid "dlg_cancel_confirm"
+msgstr "¿Estás seguro de que quieres cancelar este pedido?"
 
 #: app/templates/components/row_fuelorder/row.html:25
 msgid "refueling"
@@ -313,3 +357,27 @@ msgstr "Acciones"
 
 msgid "update"
 msgstr "actualizar"
+
+msgid "is_active"
+msgstr "Activo"
+
+msgid "btn_delete"
+msgstr "Eliminar"
+
+msgid "btn_cancel"
+msgstr "Cancelar"
+
+msgid "btn_skip"
+msgstr "Omitir"
+
+msgid "requires_odometer"
+msgstr "Requiere Odómetro"
+
+msgid "requires_kilometers"
+msgstr "Requiere Kilómetros"
+
+msgid "add_trailer"
+msgstr "Agregar Remolque"
+
+msgid "add_tractor"
+msgstr "Agregar Tractor"
