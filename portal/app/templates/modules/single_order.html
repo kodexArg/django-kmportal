@@ -8,17 +8,14 @@
 {% translate 'fuel_orders' as translated_title %}
 {% module_title_component translated_title %}
 
-<section id="SingleFuelOrder" class="mx-12 md:mx-10">
+<section id="SingleFuelOrder" class="mx-6 md:mx-10">
     <article class="flex flex-col pt-4 pb-2 mt-24">
         <p class="text-pantone7689c text-justify">{% translate 'fuel_order_instruction' %}</p>
     </article>
     <form method="post" enctype="multipart/form-data" action="{% url 'orders' %}">
         {% csrf_token %}
         <div class="tw-bigform">
-            <div class="grid grid-cols-2 gap-2 justify-start w-screen max-w-sm px-4">
-                <div class="col-span-2 mt-8">
-                    <span class="font-rubik text-lg font-bold text-pantone7472c">{% translate 'order_information' %}</span>
-                </div>
+            <div class="grid grid-cols-2 gap-1 sm:gap-2 justify-start w-fit">
                 <div class="col-span-2">
                     {{ form.driver.label }}
                     {{ form.driver}}
@@ -31,23 +28,26 @@
                     {{ form.trailer_plate.label }}
                     {{ form.trailer_plate }}
                 </div>
-                <div class="flex space-x-2 items-center justify-center">
-                    <div>{{ form.requires_odometer }}</div> {{ form.requires_odometer.label }}
-                </div>
-                <div class="flex space-x-2 items-center justify-center">
-                    <div>{{ form.requires_kilometers }}</div> {{ form.requires_kilometers.label }}
+                <div class="col-span-2 flex flex-col items-start ml-6">
+                    <div class="flex space-x-2 items-center justify-center">
+                        <div>{{ form.requires_odometer }}</div> {{ form.requires_odometer.label }}
+                    </div>
+                    <div class="flex space-x-2 items-center justify-center">
+                        <div>{{ form.requires_kilometers }}</div> {{ form.requires_kilometers.label }}
+                    </div>
+
                 </div>
                 <div class="col-span-2 mt-8">
                     <span class="font-rubik text-lg font-bold text-pantone7472c">{% translate 'fuel_order' %}</span>
                 </div>
-                <div class="col-span-2 grid grid-cols-3 gap-2">
-                    <div class="text-center -mb-2 font-rubik text-sm text-sky-900 dark:text-gray-300 placeholder-gray-400">
+                <div class="col-span-2 grid grid-cols-3 gap-x-1 gap-y-0.5">
+                    <div class="tw-label justify-center flex">
                         {% translate 'tractor' %}
                     </div>
-                    <div class="text-center -mb-2 font-rubik text-sm text-sky-900 dark:text-gray-300 placeholder-gray-400">
+                    <div class="tw-label justify-center flex">
                         {% translate 'backpack' %}
                     </div>
-                    <div class="text-center -mb-2 font-rubik text-sm text-sky-900 dark:text-gray-300 placeholder-gray-400">
+                    <div class="tw-label justify-center flex">
                         {% translate 'chamber' %}
                     </div>
                     <div>
@@ -70,18 +70,16 @@
                     </div>
                 </div>
             </div>
-            <div class="z-50 h-28 bg-red-500">
-            </div>
-        </div>
-        <menu class="fixed bottom-10 w-full flex justify-center  drop-shadow-lg">
-            <div class="col-span2 bg-pantone307c p-0.5 rounded-full w-fit h-fit">
-                <div class="border-2 border-sky-200 p-0.5 rounded-full flex justify-center items-center">
-                    <button class="flex w-fit px-4 py-2 rounded-full bg-pantone307c text-white font-rubik font-bold lowercase text-center" type="submit">
-                        {% translate 'new' %} {% translate 'new_order' %}
-                    </button>
+            <menu class="w-full p-6 flex justify-center drop-shadow-lg">
+                <div class="col-span2 bg-pantone307c p-0.5 rounded-full w-fit h-fit">
+                    <div class="border-2 border-sky-200 p-0.5 rounded-full flex justify-center items-center">
+                        <button class="flex w-fit px-4 py-2 rounded-full bg-pantone307c text-white font-rubik font-bold lowercase text-center" type="submit">
+                            {% translate 'new' %} {% translate 'new_order' %}
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </menu>
+            </menu>
+        </div>
     </form>
 </section>
 {% endblock %}

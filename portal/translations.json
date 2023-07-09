@@ -326,8 +326,8 @@
   },
   "new": {
     "en": "New",
-    "es": "Nuevo",
-    "pt": "Novo"
+    "es": "Nueva",
+    "pt": "Nova"
   },
   "time": {
     "en": "Time",
@@ -430,8 +430,8 @@
     "pt": "Adicionar Trator"
   },
   "fuel_order_instruction": {
-    "en": "Please carefully review your fuel order. The beach operator will load the fuel type and quantities you specify. Review the order again once it has been entered on the next screen.",
-    "es": "Por favor revise cuidadosamente su pedido de combustible. El operador de playa cargará el tipo de combustible y las cantidades que Ud. indique. Revise nuevamente la orden una vez realizada el alta, en la siguiente pantalla.",
-    "pt": "Por favor, revise cuidadosamente o seu pedido de combustível. O operador da praia carregará o tipo de combustível e as quantidades que você especificar. Revise o pedido novamente após ser inserido na próxima tela."
+    "en": "Please carefully review your fuel order. The pump operator will load the fuel type and quantities you specify. Review the order again once it has been entered on the next screen.",
+    "es": "Por favor revise cuidadosamente su pedido de combustible. El operador cargará el tipo de combustible y las cantidades que Ud. indique. Revise nuevamente la orden una vez realizada el alta, en la siguiente pantalla.",
+    "pt": "Por favor, revise cuidadosamente o seu pedido de combustível. O operador carregará o tipo de combustível e as quantidades que você especificar. Revise o pedido novamente após ser inserido na próxima tela."
   }
 }

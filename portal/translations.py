@@ -4,6 +4,7 @@ import json
 import subprocess
 from loguru import logger
 import sys
+import shutil
 
 BASE_DIR = "locale/{}/LC_MESSAGES/"
 LANGUAGES = ["en", "es", "pt"]
@@ -17,6 +18,8 @@ def load_translations(file_path):
 
 
 def delete_files(language):
+
+
     po_path = os.path.join(BASE_DIR.format(language), PO_FILENAME)
     mo_path = os.path.join(BASE_DIR.format(language), MO_FILENAME)
 
@@ -113,8 +116,10 @@ def main():
     translations = load_translations("translations.json")
 
     # clean the .mo and .po files
-    for language in LANGUAGES:
-        delete_files(language)
+    confirm = input(f"Delete old files? (y/n): ")
+    if confirm.lower() == "y":
+        for language in LANGUAGES:
+            delete_files(language)
     run_makemessages()
 
     # process the .po files

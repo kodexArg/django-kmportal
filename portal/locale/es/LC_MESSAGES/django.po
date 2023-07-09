@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 05:22+0000\n"
+"POT-Creation-Date: 2023-07-09 06:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -155,7 +155,6 @@ msgid "blocked"
 msgstr "bloqueado"
 
 #: app/templates/components/row_fuelorder/popup.html:46
-#: app/templates/modules/single_order.html:20
 msgid "order_information"
 msgstr "Información del Pedido"
 
@@ -185,22 +184,22 @@ msgid "trailer_plate"
 msgstr "Placa del Remolque"
 
 #: app/templates/components/row_fuelorder/popup.html:76
-#: app/templates/modules/single_order.html:41
+#: app/templates/modules/single_order.html:38
 msgid "fuel_order"
 msgstr "Pedido de Combustible"
 
 #: app/templates/components/row_fuelorder/popup.html:78
-#: app/templates/modules/single_order.html:45
+#: app/templates/modules/single_order.html:42
 msgid "tractor"
 msgstr "Tractor"
 
 #: app/templates/components/row_fuelorder/popup.html:82
-#: app/templates/modules/single_order.html:48
+#: app/templates/modules/single_order.html:45
 msgid "backpack"
 msgstr "Mochila"
 
 #: app/templates/components/row_fuelorder/popup.html:86
-#: app/templates/modules/single_order.html:51
+#: app/templates/modules/single_order.html:48
 msgid "chamber"
 msgstr "Cámara"
 
@@ -295,16 +294,15 @@ msgstr "Leyenda"
 #: app/templates/modules/single_order.html:13
 msgid "fuel_order_instruction"
 msgstr ""
-"Por favor revise cuidadosamente su pedido de combustible. El operador de "
-"playa cargará el tipo de combustible y las cantidades que Ud. indique. "
-"Revise nuevamente la orden una vez realizada el alta, en la siguiente "
-"pantalla."
+"Por favor revise cuidadosamente su pedido de combustible. El operador "
+"cargará el tipo de combustible y las cantidades que Ud. indique. Revise "
+"nuevamente la orden una vez realizada el alta, en la siguiente pantalla."
 
-#: app/templates/modules/single_order.html:78
+#: app/templates/modules/single_order.html:74
 msgid "new"
-msgstr "Nuevo"
+msgstr "Nueva"
 
-#: app/templates/modules/single_order.html:78
+#: app/templates/modules/single_order.html:74
 msgid "new_order"
 msgstr "Orden de Carga"
 

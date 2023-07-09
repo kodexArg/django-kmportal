@@ -8,7 +8,7 @@
 {% translate 'vehicle_title' as translated_title %}
 {% module_title_component translated_title %}
 
-<section id="Vehicles" class="mx-12 md:mx-10">
+<section id="Vehicles" class="mx-6 md:mx-10">
     <!-- Header -->
     <article class="flex flex-col pt-4 pb-2 mt-24">
         <p class="text-pantone7689c">{% translate 'tractors_and_trailers_subtitle' %}</p>
@@ -29,7 +29,7 @@
                     {% csrf_token %}
                     {% input_field_component name="domain" value=tractor.domain %}
 
-                    <div class="flex flex-col justify-end">
+                    <div class="flex flex-col justify-end pt-2">
                         <input type="hidden" name="tractor_id" value="{{ tractor.id }}">
                         {% rbutton_component caption="update" %}
                     </div>
@@ -44,7 +44,7 @@
                     {% csrf_token %}
                     {% input_field_component name="domain" %}
 
-                    <div class="flex flex-col justify-end">
+                    <div class="flex flex-col justify-end pt-2">
                         {% rbutton_component caption="add_tractor" bg="bg-pantone7472c"%}
                     </div>
                 </form>
@@ -67,7 +67,7 @@
                     {% csrf_token %}
                     {% input_field_component name="domain" value=trailer.domain %}
 
-                    <div class="flex flex-col justify-end">
+                    <div class="flex flex-col justify-end pt-2">
                         <input type="hidden" name="trailer_id" value="{{ trailer.id }}">
                         {% rbutton_component caption="update" %}
                     </div>
@@ -82,7 +82,7 @@
                     {% csrf_token %}
                     {% input_field_component name="domain" %}
 
-                    <div class="flex flex-col justify-end">
+                    <div class="flex flex-col justify-end pt-2">
                         {% rbutton_component caption="add_trailer" bg="bg-pantone7472c"%}
                     </div>
                 </form>

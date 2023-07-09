@@ -6,6 +6,7 @@
 .tw-label {
     @apply tracking-wide font-rubik text-sm text-left whitespace-nowrap;
     @apply placeholder-gray-300 text-pantone307c;
+    @apply leading-none;
 }
 
 .tw-rbutton {
@@ -27,11 +28,15 @@
 .tw-checkbox-field {
     @apply inline-flex mr-2 w-2 aspect-1 checked:bg-pantone307c;
 }
+
 /* End */
 
 /* Generic and containers */
 .tw-bigform {
-    @apply flex flex-col w-full h-full px-2 sm:px-10 justify-center overflow-y-auto border border-pantone307c;
+    @apply h-full w-fit sm:w-72 flex flex-col;
+    @apply border border-pantone7689c rounded-lg bg-sky-200 shadow-md drop-shadow-md;
+    @apply hover:bg-opacity-75;
+    @apply mt-6 mb-14 p-4;
 }
 
 /* End */
@@ -43,14 +48,15 @@
 }
 
 
-.tw-loop-element { 
-    @apply h-full w-fit sm:w-72 flex text-center border border-pantone7689c p-4 m-2 rounded-lg bg-sky-200 shadow-md;
+.tw-loop-element {
+    @apply h-full w-fit sm:w-72 flex text-center border border-pantone7689c p-4 m-2 rounded-lg bg-sky-200 shadow-md drop-shadow-md;
     @apply hover:bg-opacity-75;
 }
 
 .tw-loop-form {
     @apply flex flex-col w-full space-y-2;
 }
+
 /* End */
 
 /* Main Buttons Position Classes */
@@ -77,4 +83,5 @@
 .tw-position-6 {
     @apply top-[25rem];
 }
+
 /* End */
