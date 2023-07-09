@@ -1285,11 +1285,6 @@ input:checked + .toggle-bg {
   margin-right: -0.75rem;
 }
 
-.mx-12 {
-  margin-left: 3rem;
-  margin-right: 3rem;
-}
-
 .mx-16 {
   margin-left: 4rem;
   margin-right: 4rem;
@@ -1308,11 +1303,6 @@ input:checked + .toggle-bg {
 .mx-6 {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-}
-
-.mx-8 {
-  margin-left: 2rem;
-  margin-right: 2rem;
 }
 
 .mx-auto {
@@ -2158,14 +2148,6 @@ input:checked + .toggle-bg {
   padding-top: 2px;
 }
 
-.pt-8 {
-  padding-top: 2rem;
-}
-
-.pt-5 {
-  padding-top: 1.25rem;
-}
-
 .text-center {
   text-align: center;
 }
@@ -2558,20 +2540,13 @@ input:checked + .toggle-bg {
 /* Generic and containers */
 
 .tw-bigform {
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   height: 100%;
-  width: -moz-fit-content;
-  width: fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
   flex-direction: column;
-}
-
-@media (min-width: 640px) {
-  .tw-bigform {
-    width: 18rem;
-  }
-}
-
-.tw-bigform {
   border-radius: 0.5rem;
   border-width: 1px;
   --tw-border-opacity: 1;
@@ -2597,7 +2572,7 @@ input:checked + .toggle-bg {
 
 /* End */
 
-/* Cards */
+/* Cards (vehicle, company)*/
 
 .tw-loop-container {
   margin-top: 0.5rem;
@@ -2884,6 +2859,10 @@ input:checked + .toggle-bg {
     margin-bottom: 1.25rem;
   }
 
+  .sm\:ml-0 {
+    margin-left: 0px;
+  }
+
   .sm\:block {
     display: block;
   }
@@ -2896,8 +2875,18 @@ input:checked + .toggle-bg {
     width: 18rem;
   }
 
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+
   .sm\:gap-2 {
     gap: 0.5rem;
+  }
+
+  .sm\:space-x-4 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .sm\:p-3 {

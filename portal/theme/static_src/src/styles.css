@@ -33,7 +33,7 @@
 
 /* Generic and containers */
 .tw-bigform {
-    @apply h-full w-fit sm:w-72 flex flex-col;
+    @apply h-full max-w-fit flex flex-col mx-auto;
     @apply border border-pantone7689c rounded-lg bg-sky-200 shadow-md drop-shadow-md;
     @apply hover:bg-opacity-75;
     @apply mt-6 mb-14 p-4;
@@ -42,7 +42,7 @@
 /* End */
 
 
-/* Cards */
+/* Cards (vehicle, company)*/
 .tw-loop-container {
     @apply flex flex-wrap mt-2;
 }
