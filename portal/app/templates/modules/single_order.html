@@ -9,6 +9,9 @@
 {% module_title_component translated_title %}
 
 <section id="SingleFuelOrder" class="mx-12 md:mx-10">
+    <article class="flex flex-col pt-4 pb-2 mt-24">
+        <p class="text-pantone7689c">{% translate 'fuel_order_instruction' %}</p>
+    </article>
     <form method="post" enctype="multipart/form-data" action="{% url 'orders' %}">
         {% csrf_token %}
         <div class="flex w-full h-full px-2 sm:px-10 justify-center">
