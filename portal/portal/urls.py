@@ -42,14 +42,18 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
     path("accounts/", include("allauth.urls")),
     path("login/", LoginView.as_view(), name="login"),
-    path(
-        "under_construction/",
-        UnderConstructionView.as_view(),
-        name="under_construction",
-    ),
+    path("under_construction/", UnderConstructionView.as_view(), name="under_construction"),
     path("qr/<str:operation_code>/", get_qr, name="get_qr"),
 ]
 
+
+# API Rest Framework
+urlpatterns += [
+    # path("api/", include("app.api.urls")),
+]
+
+
+# Internationalization
 urlpatterns += i18n_patterns(
     path("", HomeView.as_view(), name="home"),
     path("about_us/", AboutUsView.as_view(), name="about-us"),
@@ -62,11 +66,12 @@ urlpatterns += i18n_patterns(
     path("vehicles/", VehiclesView.as_view(), name="vehicles"),
     path("orders/", FuelOrderListView.as_view(), name="orders"),
     path("orders/new/", FuelOrderViewNewOrEdit.as_view(), name="new_order"),
-    path("orders/<int:order_id>/edit/", FuelOrderViewNewOrEdit.as_view(), name="edit_order"), 
-    path("orders/<int:order_id>/cancel/", FuelOrderViewCancel.as_view(), name="cancel_order"), 
+    path("orders/<int:order_id>/edit/", FuelOrderViewNewOrEdit.as_view(), name="edit_order"),
+    path("orders/<int:order_id>/cancel/", FuelOrderViewCancel.as_view(), name="cancel_order"),
     path("tickets/", UnderConstructionView.as_view(), name="tickets"),
     path("cashtransfer/", UnderConstructionView.as_view(), name="cashtransfer"),
 )
+
 
 if settings.DEBUG:
     from django.conf.urls.static import static

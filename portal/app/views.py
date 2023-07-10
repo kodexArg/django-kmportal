@@ -50,9 +50,7 @@ class CustomTemplateView(TemplateView):
     def get_company_id(self, user, provider_name):
         try:
             social_account = user.socialaccount_set.get(provider=provider_name)
-            company_social_account = CompanySocialAccount.objects.get(
-                social_account=social_account
-            )
+            company_social_account = CompanySocialAccount.objects.get(social_account=social_account)
             return company_social_account.company.id
         except (
             user.socialaccount_set.model.DoesNotExist,
@@ -65,9 +63,7 @@ class CustomTemplateView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
-            context["provider_id"] = self.get_provider_id(
-                self.request.user, self.provider_name
-            )
+            context["provider_id"] = self.get_provider_id(self.request.user, self.provider_name)
             context["company"] = self.get_company(self.request.user, self.provider_name)
         return context
 
@@ -113,7 +109,6 @@ class FuelOrderListView(CustomTemplateView):
             context["fuel_orders"] = FuelOrders.objects.filter(company=company)
         return context
 
-
     def post(self, request, *args, **kwargs):
         form = FuelOrderForm(request.POST)
         if form.is_valid():
@@ -121,14 +116,7 @@ class FuelOrderListView(CustomTemplateView):
             fuel_order.company = self.get_company(request.user, self.provider_name)
 
             # Check if all liters values are zero
-            if all(
-                tank == 0
-                for tank in [
-                    fuel_order.tractor_liters,
-                    fuel_order.backpack_liters,
-                    fuel_order.chamber_liters,
-                ]
-            ):
+            if all(tank == -1 for tank in [fuel_order.tractor_liters,fuel_order.backpack_liters,fuel_order.chamber_liters,]):
                 form.add_error(None, "All liters values cannot be zero.")
                 logger.error("All liters values are zero.")
                 context = self.get_context_data(**kwargs)
@@ -237,12 +225,8 @@ class CompanyView(CustomTemplateView):
         """overriding dispatch method"""
         if self.request.user.is_authenticated:
             try:
-                social_account = self.request.user.socialaccount_set.get(
-                    provider=self.provider_name
-                )
-                company_social_account = CompanySocialAccount.objects.get(
-                    social_account=social_account
-                )
+                social_account = self.request.user.socialaccount_set.get(provider=self.provider_name)
+                company_social_account = CompanySocialAccount.objects.get(social_account=social_account)
                 if company_social_account.company is None:
                     return redirect("user_home")
             except CompanySocialAccount.DoesNotExist:
