@@ -147,7 +147,7 @@
 <form action="{% url 'cancel_order' order.id %}" method="post">
     {% csrf_token %}
     <div id="row-cancel-{{ order.id }}" tabindex="-1" aria-hidden="true"
-        class="hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal drop-shadow-2xl">
+        class="hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 h-modal drop-shadow-2xl">
         <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
             <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-3">
                 <!-- Modal header -->
