@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-16 15:20+0000\n"
+"POT-Creation-Date: 2023-07-16 23:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,39 +66,39 @@ msgstr "Noviembre"
 msgid "December"
 msgstr "Diciembre"
 
-#: app/models.py:74
+#: app/models.py:72
 msgid "Companies"
 msgstr ""
 
-#: app/models.py:94
+#: app/models.py:92
 msgid "first_name"
 msgstr "Nombre"
 
-#: app/models.py:95
+#: app/models.py:93
 msgid "last_name"
 msgstr "Apellido"
 
-#: app/models.py:96
+#: app/models.py:94
 msgid "identification_type"
 msgstr "Tipo de ID"
 
-#: app/models.py:97
+#: app/models.py:95
 msgid "identification_number"
 msgstr "N° de ID"
 
-#: app/models.py:112 app/models.py:125
+#: app/models.py:110 app/models.py:123
 msgid "domain"
 msgstr "Dominio"
 
-#: app/models.py:165
+#: app/models.py:163
 msgid "no_agreement"
 msgstr "Sin acuerdo"
 
-#: app/models.py:166
+#: app/models.py:164
 msgid "under_negotiation"
 msgstr "En negociación"
 
-#: app/models.py:167
+#: app/models.py:165
 msgid "agreed"
 msgstr "Acordado"
 
@@ -145,12 +145,12 @@ msgid "view"
 msgstr "Ver"
 
 #: app/templates/components/row_fuelorder/row.html:21
-#: app/templates/modules/orders.html:147
+#: app/templates/modules/orders.html:207
 msgid "finished"
 msgstr "finalizado"
 
 #: app/templates/components/row_fuelorder/row.html:23
-#: app/templates/modules/orders.html:151
+#: app/templates/modules/orders.html:211
 msgid "canceled"
 msgstr "cancelado"
 
@@ -161,6 +161,14 @@ msgstr "Repostaje"
 #: app/templates/components/row_fuelorder/row.html:27
 msgid "on_transit"
 msgstr "en tránsito"
+
+#: app/templates/components/row_fuelorder/row.html:57
+msgid "from"
+msgstr "de"
+
+#: app/templates/components/row_fuelorder/row.html:58
+msgid "to"
+msgstr "hasta"
 
 #: app/templates/components/welcome_card.html:6
 msgid "associated_shops_card_text_title"
@@ -225,7 +233,7 @@ msgstr "Fantasía"
 msgid "company_cuit"
 msgstr "CUIT"
 
-#: app/templates/modules/company.html:37
+#: app/templates/modules/company.html:37 app/templates/modules/orders.html:80
 msgid "driver"
 msgstr "Conductor"
 
@@ -241,19 +249,59 @@ msgstr ""
 "cancelada, la orden puede activarse nuevamente, pero al ser eliminada se "
 "perderá definitivamente."
 
-#: app/templates/modules/orders.html:52
-msgid "dlg_view_confirm"
-msgstr ""
+#: app/templates/modules/orders.html:50 app/templates/modules/orders.html:100
+#: app/templates/modules/single_order.html:41
+msgid "fuel_order"
+msgstr "Pedido de Combustible"
 
-#: app/templates/modules/orders.html:85
+#: app/templates/modules/orders.html:70
+msgid "order_information"
+msgstr "Información del Pedido"
+
+#: app/templates/modules/orders.html:72
+msgid "creation_date"
+msgstr "Fecha de Creación"
+
+#: app/templates/modules/orders.html:76
+msgid "last_modification"
+msgstr "Última Modificación"
+
+#: app/templates/modules/orders.html:87
+msgid "vehicle_information"
+msgstr "Información del Vehículo"
+
+#: app/templates/modules/orders.html:89
+msgid "tractor_plate"
+msgstr "Placa del Tractor"
+
+#: app/templates/modules/orders.html:93
+msgid "trailer_plate"
+msgstr "Placa del Remolque"
+
+#: app/templates/modules/orders.html:102
+#: app/templates/modules/single_order.html:45
+msgid "tractor"
+msgstr "Tractor"
+
+#: app/templates/modules/orders.html:106
+#: app/templates/modules/single_order.html:48
+msgid "backpack"
+msgstr "Mochila"
+
+#: app/templates/modules/orders.html:110
+#: app/templates/modules/single_order.html:51
+msgid "chamber"
+msgstr "Cámara"
+
+#: app/templates/modules/orders.html:145
 msgid "btn_continue"
 msgstr "Continuar"
 
-#: app/templates/modules/orders.html:87
+#: app/templates/modules/orders.html:147
 msgid "btn_cancel"
 msgstr "Cancelar (pausar) la orden"
 
-#: app/templates/modules/orders.html:155
+#: app/templates/modules/orders.html:215
 msgid "blocked"
 msgstr "bloqueado"
 
@@ -263,22 +311,6 @@ msgstr ""
 "Por favor revise cuidadosamente su pedido de combustible. El operador "
 "cargará el tipo de combustible y las cantidades que Ud. indique. Revise "
 "nuevamente la orden una vez realizada el alta, en la siguiente pantalla."
-
-#: app/templates/modules/single_order.html:41
-msgid "fuel_order"
-msgstr "Pedido de Combustible"
-
-#: app/templates/modules/single_order.html:45
-msgid "tractor"
-msgstr "Tractor"
-
-#: app/templates/modules/single_order.html:48
-msgid "backpack"
-msgstr "Mochila"
-
-#: app/templates/modules/single_order.html:51
-msgid "chamber"
-msgstr "Cámara"
 
 #: app/templates/modules/single_order.html:77
 msgid "new"
@@ -346,24 +378,6 @@ msgstr "Editar Orden"
 
 msgid "Actions"
 msgstr "Acciones"
-
-msgid "order_information"
-msgstr "Información del Pedido"
-
-msgid "creation_date"
-msgstr "Fecha de Creación"
-
-msgid "last_modification"
-msgstr "Última Modificación"
-
-msgid "vehicle_information"
-msgstr "Información del Vehículo"
-
-msgid "tractor_plate"
-msgstr "Placa del Tractor"
-
-msgid "trailer_plate"
-msgstr "Placa del Remolque"
 
 msgid "update"
 msgstr "actualizar"

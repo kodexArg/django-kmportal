@@ -34,8 +34,14 @@
             <div class="flex-grow flex flex-col">
                 <!-- Plates -->
                 <div class="min-w-max h-full bg-sky-100 flex space-x-1 pl-0.5">
-                    <span class="bg-black text-white font-bold font-mono text-xxs px-1 mt-0.5 leading-4">{{ order.tractor_plate }}</span>
-                    {% if order.trailer_plate %}<span class="bg-black text-white font-bold font-mono text-xxs px-1 mt-0.5 leading-4 hidden sm:block">{{ order.trailer_plate }}</span>{% endif %}
+                    <span class="bg-black text-white font-bold font-mono text-xxs px-1 mt-0.5 leading-4">
+                        {{ order.tractor_plate }}
+                    </span>
+                    {% if order.trailer_plate %}
+                    <span class="bg-black text-white font-bold font-mono text-xxs px-1 mt-0.5 leading-4 hidden sm:block">
+                        {{ order.trailer_plate }}
+                    </span>
+                    {% endif %}
                 </div>
                 <!-- Driver -->
                 <div class="min-w-max h-full bg-sky-100 flex space-x-1 pl-0.5 flex-nowrap">
@@ -45,7 +51,13 @@
                     </span>
                 </div>
             </div>
-            <div class="flex-grow-0 w-">
+            <div class="flex-grow-0 flex ">
+                <div class="bg-sky-100 h-full justify-end text-end w-full">
+                    <div class="flex flex-col opacity-0 md:opacity-100">
+                        <span class="whitespace-nowrap text-xxs text-gray-400">{% translate 'from' %}: {{ order.requested_date }} &nbsp;</span>
+                        <span class="whitespace-nowrap text-xxs text-gray-400">{% translate 'to' %}: {{ order.expiration_date }} &nbsp;</span>
+                    </div>
+                </div>
                 <!-- odo & km -->
                 <div class="bg-sky-100 flex flex-col w-full h-full">
                     <span class="text-end font-mono text-xxs px-0.5 leading-0 {% if order.requires_odometer %} text-black {% else %} text-gray-400 {% endif %}">odo</span>
@@ -102,21 +114,15 @@
         </div>
 
         <!-- Sandwitch -->
-        <div 
-            id="accordion-flush" 
-            data-accordion="collapse"
+        <div id="accordion-flush" data-accordion="collapse"
             data-active-classes="transform duration-100 rotate-90 {% if order.is_finished %}bg-pantone7472c{% elif order.is_canceled %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else %}bg-pantone7689c{% endif %}">
-            <button 
-                class="h-full aspect-1 flex ml-1 rounded-full"
-                data-accordion-target="#row-toggle-body-{{ order.id }}"
-                aria-expanded="false"
-                >
+            <button class="h-full aspect-1 flex ml-1 rounded-full" data-accordion-target="#row-toggle-body-{{ order.id }}" aria-expanded="false">
                 <div class="h-full aspect-1 rounded-full">
                     <img class="w-full h-full" src="{% static 'svg/sandwich.svg' %}" />
                 </div>
             </button>
         </div>
     </div>
-        
+
 
 </article>

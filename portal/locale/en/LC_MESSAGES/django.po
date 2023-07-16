@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-16 15:20+0000\n"
+"POT-Creation-Date: 2023-07-16 23:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,39 +66,39 @@ msgstr "November"
 msgid "December"
 msgstr "December"
 
-#: app/models.py:74
+#: app/models.py:72
 msgid "Companies"
 msgstr ""
 
-#: app/models.py:94
+#: app/models.py:92
 msgid "first_name"
 msgstr "First Name"
 
-#: app/models.py:95
+#: app/models.py:93
 msgid "last_name"
 msgstr "Last Name"
 
-#: app/models.py:96
+#: app/models.py:94
 msgid "identification_type"
 msgstr "ID Type"
 
-#: app/models.py:97
+#: app/models.py:95
 msgid "identification_number"
 msgstr "ID N°"
 
-#: app/models.py:112 app/models.py:125
+#: app/models.py:110 app/models.py:123
 msgid "domain"
 msgstr "Domain"
 
-#: app/models.py:165
+#: app/models.py:163
 msgid "no_agreement"
 msgstr "No agreement"
 
-#: app/models.py:166
+#: app/models.py:164
 msgid "under_negotiation"
 msgstr "Under negotiation"
 
-#: app/models.py:167
+#: app/models.py:165
 msgid "agreed"
 msgstr "Agreed"
 
@@ -145,12 +145,12 @@ msgid "view"
 msgstr "View"
 
 #: app/templates/components/row_fuelorder/row.html:21
-#: app/templates/modules/orders.html:147
+#: app/templates/modules/orders.html:207
 msgid "finished"
 msgstr "finished"
 
 #: app/templates/components/row_fuelorder/row.html:23
-#: app/templates/modules/orders.html:151
+#: app/templates/modules/orders.html:211
 msgid "canceled"
 msgstr "canceled"
 
@@ -161,6 +161,14 @@ msgstr "Refueling"
 #: app/templates/components/row_fuelorder/row.html:27
 msgid "on_transit"
 msgstr "on transit"
+
+#: app/templates/components/row_fuelorder/row.html:57
+msgid "from"
+msgstr "from"
+
+#: app/templates/components/row_fuelorder/row.html:58
+msgid "to"
+msgstr "to"
 
 #: app/templates/components/welcome_card.html:6
 msgid "associated_shops_card_text_title"
@@ -223,7 +231,7 @@ msgstr "Trading"
 msgid "company_cuit"
 msgstr "RUT"
 
-#: app/templates/modules/company.html:37
+#: app/templates/modules/company.html:37 app/templates/modules/orders.html:80
 msgid "driver"
 msgstr "Driver"
 
@@ -239,19 +247,59 @@ msgstr ""
 "canceled, the order can be activated again, but if it's deleted, it will be "
 "permanently lost."
 
-#: app/templates/modules/orders.html:52
-msgid "dlg_view_confirm"
-msgstr ""
+#: app/templates/modules/orders.html:50 app/templates/modules/orders.html:100
+#: app/templates/modules/single_order.html:41
+msgid "fuel_order"
+msgstr "Fuel Order"
 
-#: app/templates/modules/orders.html:85
+#: app/templates/modules/orders.html:70
+msgid "order_information"
+msgstr "Order Information"
+
+#: app/templates/modules/orders.html:72
+msgid "creation_date"
+msgstr "Creation Date"
+
+#: app/templates/modules/orders.html:76
+msgid "last_modification"
+msgstr "Last Modification"
+
+#: app/templates/modules/orders.html:87
+msgid "vehicle_information"
+msgstr "Vehicle Information"
+
+#: app/templates/modules/orders.html:89
+msgid "tractor_plate"
+msgstr "Tractor Plate"
+
+#: app/templates/modules/orders.html:93
+msgid "trailer_plate"
+msgstr "Trailer Plate"
+
+#: app/templates/modules/orders.html:102
+#: app/templates/modules/single_order.html:45
+msgid "tractor"
+msgstr "Tractor"
+
+#: app/templates/modules/orders.html:106
+#: app/templates/modules/single_order.html:48
+msgid "backpack"
+msgstr "Backpack"
+
+#: app/templates/modules/orders.html:110
+#: app/templates/modules/single_order.html:51
+msgid "chamber"
+msgstr "Chamber"
+
+#: app/templates/modules/orders.html:145
 msgid "btn_continue"
 msgstr "Continue"
 
-#: app/templates/modules/orders.html:87
+#: app/templates/modules/orders.html:147
 msgid "btn_cancel"
 msgstr "Cancel (pause) the order"
 
-#: app/templates/modules/orders.html:155
+#: app/templates/modules/orders.html:215
 msgid "blocked"
 msgstr "bloqued"
 
@@ -261,22 +309,6 @@ msgstr ""
 "Please carefully review your fuel order. The pump operator will load the "
 "fuel type and quantities you specify. Review the order again once it has "
 "been entered on the next screen."
-
-#: app/templates/modules/single_order.html:41
-msgid "fuel_order"
-msgstr "Fuel Order"
-
-#: app/templates/modules/single_order.html:45
-msgid "tractor"
-msgstr "Tractor"
-
-#: app/templates/modules/single_order.html:48
-msgid "backpack"
-msgstr "Backpack"
-
-#: app/templates/modules/single_order.html:51
-msgid "chamber"
-msgstr "Chamber"
 
 #: app/templates/modules/single_order.html:77
 msgid "new"
@@ -342,24 +374,6 @@ msgstr "Edit Order"
 
 msgid "Actions"
 msgstr "Actions"
-
-msgid "order_information"
-msgstr "Order Information"
-
-msgid "creation_date"
-msgstr "Creation Date"
-
-msgid "last_modification"
-msgstr "Last Modification"
-
-msgid "vehicle_information"
-msgstr "Vehicle Information"
-
-msgid "tractor_plate"
-msgstr "Tractor Plate"
-
-msgid "trailer_plate"
-msgstr "Trailer Plate"
 
 msgid "update"
 msgstr "update"
