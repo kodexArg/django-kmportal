@@ -1,47 +1,13 @@
+import os
 from loguru import logger
 from django import template
 from django.utils.safestring import mark_safe
-import os
 from django.utils.translation import gettext as _
 
 register = template.Library()
 
 
-@register.inclusion_tag("components/std_button.html", takes_context=True)
-def std_button_component(
-    context,
-    text,
-    color="bg-pantone307c",
-    url="#",
-    svg=None,
-    is_left=False,
-    is_right=False,
-):
-    return {
-        "text": text,
-        "color": "bg-red-800",
-        "svg": svg,
-        "url": url,
-        "is_left": is_left,
-        "is_right": is_right,
-    }
-
-
-@register.inclusion_tag("components/welcome_card.html")
-def welcome_card_component(choice):
-    return {"choice": choice}
-
-
-@register.inclusion_tag("components/google_button.html")
-def google_button_component():
-    return {}
-
-
-@register.inclusion_tag("components/module_title.html")
-def module_title_component(title):
-    return {"title": title}
-
-
+## All half-rounded buttons of the main screen
 @register.inclusion_tag("components/menu_button.html", takes_context=True)
 def menu_button_component(context, pos, side, icon="", size="small", url="#", style=""):
     """Each menu button including Icons, Flags and avatars"""
@@ -60,86 +26,59 @@ def menu_button_component(context, pos, side, icon="", size="small", url="#", st
     }
 
 
+## Popup with Goggle button to join the site
+@register.inclusion_tag("components/welcome_card.html")
+def welcome_card_component(choice):
+    return {"choice": choice}
+
+
+## Google button
+@register.inclusion_tag("components/google_button.html")
+def google_button_component():
+    return {}
+
+
+## Module title in Quicksand font
+@register.inclusion_tag("components/module_title.html")
+def module_title_component(title):
+    return {"title": title}
+
+
+# FUEL ORDERS
+## Fuel Order: Main component (to group them all)
 @register.inclusion_tag("components/row_fuelorder/main.html", takes_context=True)
 def row_fuelorder_component(context, order):
     user = context["request"].user
     return {"user": user, "order": order}
 
 
-@register.inclusion_tag("components/row_fuelorder/popup.html", takes_context=True)
-def row_fuelorder_popup_component(context, order):
-    return {"order": order}
-
-
+## Fuel Order: Row design
 @register.inclusion_tag("components/row_fuelorder/row.html", takes_context=True)
 def row_fuelorder_row_component(context, order):
     return {"order": order}
 
 
+## Fuel Order: Tailing Buttons of each row
 @register.inclusion_tag("components/row_fuelorder/buttons.html", takes_context=True)
 def row_fuelorder_buttons_component(context, order):
     return {"order": order}
 
 
-@register.simple_tag()
-def input_field_component(name, value="", required=True):
-    label = _(name)
-    html = f"""
-        <div class="grid grid-cols-3 gap-2 items-center">
-            <label class="tw-label">{ label }:</label>
-            <input
-                class="col-span-2 tw-field tw-input-field"
-                name="{ name }" 
-                placeholder="{ label }"
-                value="{ value }"
-                { "required" if required else "" }
-                >
-        </div>
-    """
-    return mark_safe(html)
+## Fuel Order: Popup - Cancel or Delete Order
+@register.inclusion_tag("components/row_fuelorder/popup_delete_or_cancel.html", takes_context=True)
+def popup_delete_or_cancel_component(context, order):
+    return {"order": order}
 
 
-@register.simple_tag()
-def checkbox_component(name, checked=False):
-    label = _(name)
-    checked_html = "checked" if checked else ""
-    html = f"""
-        <div class="flex">
-            <input
-                class="tw-field tw-checkbox-field"
-                type="checkbox" 
-                name="{ name }" 
-                { checked_html }
-                >
-            <label class="tw-label">{ label }</label>
-        </div>
-    """
-    return mark_safe(html)
+## Fuel Order: Legendary Buttons
+@register.inclusion_tag("components/legendary_buttons.html")
+def legendary_buttons_component():
+    return
 
 
-@register.simple_tag()
-def rbutton_component(
-    caption, bg="bg-pantone307c", fg="text-white", size="", name="action", value="none"
-):
-    """Rounded button component"""
-    translated_caption = _(caption)
-
-    html = f"""
-        <button type="submit" name="{name}" value="{value}" class="tw-rbutton {size} {bg} {fg}">
-            <div class="flex items-center h-full justify-center">
-                {translated_caption}
-            </div>
-        </button>
-    """
-    return mark_safe(html)
-
-
+## Fuel Order: Truck's icons with different fuel colors
 @register.simple_tag()
 def fueltank_component(fuel):
-    """Returns a colored icon with gray text.
-    long_fuel names and color_map should be checked in models.py
-    """
-
     color_map = {
         "infinia_diesel": "#225722",
         "diesel_500": "#1453FF",
@@ -172,3 +111,61 @@ def fueltank_component(fuel):
     """
 
     return mark_safe(html)
+
+
+# FORMS COMOPNENTS
+## Form component: Input Field
+@register.simple_tag()
+def input_field_component(name, value="", required=True):
+    label = _(name)
+    html = f"""
+        <div class="grid grid-cols-3 gap-2 items-center">
+            <label class="tw-label">{ label }:</label>
+            <input
+                class="col-span-2 tw-field tw-input-field"
+                name="{ name }" 
+                placeholder="{ label }"
+                value="{ value }"
+                { "required" if required else "" }
+                >
+        </div>
+    """
+    return mark_safe(html)
+
+
+## Form component: Checkbox
+@register.simple_tag()
+def checkbox_component(name, checked=False):
+    label = _(name)
+    checked_html = "checked" if checked else ""
+    html = f"""
+        <div class="flex">
+            <input
+                class="tw-field tw-checkbox-field"
+                type="checkbox" 
+                name="{ name }" 
+                { checked_html }
+                >
+            <label class="tw-label">{ label }</label>
+        </div>
+    """
+    return mark_safe(html)
+
+
+## From component: 
+@register.simple_tag()
+def rbutton_component(
+    caption, bg="bg-pantone307c", fg="text-white", size="", name="action", value="none"
+):
+    """Rounded button component"""
+    translated_caption = _(caption)
+
+    html = f"""
+        <button type="submit" name="{name}" value="{value}" class="tw-rbutton {size} {bg} {fg}">
+            <div class="flex items-center h-full justify-center">
+                <p>{translated_caption}</p>
+            </div>
+        </button>
+    """
+    return mark_safe(html)
+

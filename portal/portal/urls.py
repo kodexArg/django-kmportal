@@ -33,8 +33,10 @@ from app.views import (
     FuelOrderListView,
     FuelOrderViewCancel,
     FuelOrderViewNewOrEdit,
+    FuelOrderDataView,
     VehiclesView,
     get_qr,
+    get_server_time,
 )
 
 urlpatterns = [
@@ -43,7 +45,11 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("login/", LoginView.as_view(), name="login"),
     path("under_construction/", UnderConstructionView.as_view(), name="under_construction"),
-    path("qr/<str:operation_code>/", get_qr, name="get_qr"),
+    path('get_qr/<int:order_id>/', views.get_qr, name='get_qr'),
+    path('get-server-time/', get_server_time, name='get-server-time'),
+    path('orders/<int:order_id>/data/', FuelOrderDataView.as_view(), name='order_data'),
+    path("orders/<int:order_id>/cancel/", FuelOrderViewCancel.as_view(), name="cancel_order"),
+
 ]
 
 
@@ -65,9 +71,9 @@ urlpatterns += i18n_patterns(
     path("company/", CompanyView.as_view(), name="company"),
     path("vehicles/", VehiclesView.as_view(), name="vehicles"),
     path("orders/", FuelOrderListView.as_view(), name="orders"),
+    
     path("orders/new/", FuelOrderViewNewOrEdit.as_view(), name="new_order"),
     path("orders/<int:order_id>/edit/", FuelOrderViewNewOrEdit.as_view(), name="edit_order"),
-    path("orders/<int:order_id>/cancel/", FuelOrderViewCancel.as_view(), name="cancel_order"),
     path("tickets/", UnderConstructionView.as_view(), name="tickets"),
     path("cashtransfer/", UnderConstructionView.as_view(), name="cashtransfer"),
 )

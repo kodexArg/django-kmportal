@@ -190,8 +190,8 @@
     "pt": "Câmara"
   },
   "cancel": {
-    "en": "Cancel",
     "es": "Cancelar",
+    "en": "Cancel",
     "pt": "Cancelar"
   },
   "view": {
@@ -369,10 +369,15 @@
     "en": "Delete",
     "pt": "Excluir"
   },
+  "btn_continue": {
+    "es": "Continuar",
+    "en": "Continue",
+    "pt": "Continuar"
+  },
   "btn_cancel": {
-    "es": "Cancelar",
-    "en": "Cancel",
-    "pt": "Cancelar"
+    "en": "Cancel (pause) the order",
+    "es": "Cancelar (pausar) la orden",
+    "pt": "Cancelar (pausar) o pedido"
   },
   "btn_skip": {
     "es": "Omitir",
@@ -380,9 +385,9 @@
     "pt": "Pular"
   },
   "dlg_cancel_confirm": {
-    "es": "¿Estás seguro de que quieres cancelar este pedido?",
-    "en": "Are you sure you want to cancel this order?",
-    "pt": "Tem certeza de que deseja cancelar este pedido?"
+    "es": "¿Está seguro que desea cambiar el estado de la orden? Mientras esté cancelada, la orden puede activarse nuevamente, pero al ser eliminada se perderá definitivamente.",
+    "en": "Are you sure you want to change the status of the order? While it's canceled, the order can be activated again, but if it's deleted, it will be permanently lost.",
+    "pt": "Tem certeza de que deseja alterar o status do pedido? Enquanto estiver cancelado, o pedido pode ser ativado novamente, mas se for excluído, será definitivamente perdido."
   },
   "dlg_cancel_confirm_title": {
     "es": "Confirmación de Cancelación",

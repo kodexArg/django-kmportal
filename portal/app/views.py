@@ -1,12 +1,12 @@
-import json
 import qrcode
 import qrcode.image.svg
 from loguru import logger
 from io import BytesIO
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views import View
@@ -195,7 +195,7 @@ class FuelOrderViewNewOrEdit(CustomTemplateView):
 
 @method_decorator(login_required, name="dispatch")
 class FuelOrderViewCancel(RedirectView):
-    pattern_name = "orders"  # redirect for
+    pattern_name = "orders"  # redirect to this after cancel or delete
 
     def post(self, request, order_id, *args, **kwargs):
         # Get the FuelOrders record with the given order_id
@@ -205,15 +205,40 @@ class FuelOrderViewCancel(RedirectView):
         action = request.POST.get("action")
         if action == "cancel":
             logger.info("Cancelling order")
-            fuel_order.is_canceled = True
+            fuel_order.is_canceled = not fuel_order.is_canceled 
             fuel_order.save()
         elif action == "delete":
             logger.info("Deleting order")
             fuel_order.delete()  # Permanently delete the order
             logger.info("Order deleted")
 
-        # Redirect the user back to the orders page
-        return super().post(request, *args, **kwargs)
+        return JsonResponse({"result": "success"})
+
+
+class FuelOrderDataView(View):
+    """ Return a JSon object with the data for a single order.
+    Used along with FuelOrderListView
+    """
+
+    def get(self, request, *args, **kwargs):
+        order_id = kwargs.get('order_id')
+        fuel_order = get_object_or_404(FuelOrders, id=order_id)
+        data = {
+            'operation_code': fuel_order.operation_code,
+            'user_creator': str(fuel_order.user_creator),
+            'is_blocked': fuel_order.is_blocked,
+            'is_canceled': fuel_order.is_canceled,
+            'is_finished': fuel_order.is_finished,
+            'order_date': fuel_order.order_date.isoformat(),
+            'modified_date': fuel_order.modified_date.isoformat(),
+            'driver': str(fuel_order.driver),
+            'tractor_plate': str(fuel_order.tractor_plate),
+            'trailer_plate': str(fuel_order.trailer_plate),
+            'formated_tractor_liters_to_load_of': fuel_order.tractor_liters_to_load,
+            'formated_backpack_liters_to_load_of': fuel_order.backpack_liters_to_load,
+            'formated_chamber_liters_to_load_of': fuel_order.chamber_liters_to_load,
+        }
+        return JsonResponse(data)
 
 
 # Company #
@@ -369,12 +394,15 @@ def get_provider_id(user, provider_name):
         return None
 
 
-def get_qr(request, operation_code):
-    """get qr svg from the operation_code as a string to include in the response"""
+def get_qr(request, order_id):
+    """get qr svg from the operation_code of a FuelOrder to include in the response"""
+    fuel_order = get_object_or_404(FuelOrders, id=order_id)
+    operation_code = fuel_order.operation_code
     svg_image = generate_qr_code_svg(operation_code)
     response = HttpResponse(svg_image, content_type="image/svg+xml")
     response["Content-Disposition"] = 'attachment; filename="qrcode.svg"'
     return response
+
 
 
 def generate_qr_code_svg(text):
@@ -393,3 +421,8 @@ def generate_qr_code_svg(text):
     svg_img.save(svg_stream)
     svg_string = svg_stream.getvalue().decode("utf-8")
     return svg_string
+
+
+def get_server_time(request):
+    now = timezone.now()
+    return JsonResponse({'server_time': now.isoformat()})

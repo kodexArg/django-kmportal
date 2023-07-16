@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 07:49+0000\n"
+"POT-Creation-Date: 2023-07-16 15:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,39 +66,39 @@ msgstr "November"
 msgid "December"
 msgstr "December"
 
-#: app/models.py:71
+#: app/models.py:74
 msgid "Companies"
 msgstr ""
 
-#: app/models.py:91
+#: app/models.py:94
 msgid "first_name"
 msgstr "First Name"
 
-#: app/models.py:92
+#: app/models.py:95
 msgid "last_name"
 msgstr "Last Name"
 
-#: app/models.py:93
+#: app/models.py:96
 msgid "identification_type"
 msgstr "ID Type"
 
-#: app/models.py:94
+#: app/models.py:97
 msgid "identification_number"
 msgstr "ID N°"
 
-#: app/models.py:109 app/models.py:122
+#: app/models.py:112 app/models.py:125
 msgid "domain"
 msgstr "Domain"
 
-#: app/models.py:161
+#: app/models.py:165
 msgid "no_agreement"
 msgstr "No agreement"
 
-#: app/models.py:162
+#: app/models.py:166
 msgid "under_negotiation"
 msgstr "Under negotiation"
 
-#: app/models.py:163
+#: app/models.py:167
 msgid "agreed"
 msgstr "Agreed"
 
@@ -124,112 +124,35 @@ msgstr "Time"
 msgid "t_login_with_google"
 msgstr "Login with Google"
 
-#: app/templates/components/row_fuelorder/buttons.html:17
+#: app/templates/components/legendary_buttons.html:17
+msgid "Legend"
+msgstr "Legend"
+
+#: app/templates/components/row_fuelorder/buttons.html:19
 msgid "continue"
 msgstr "Continue"
 
-#: app/templates/components/row_fuelorder/buttons.html:19
+#: app/templates/components/row_fuelorder/buttons.html:21
 msgid "cancel"
 msgstr "Cancel"
 
-#: app/templates/components/row_fuelorder/buttons.html:31
+#: app/templates/components/row_fuelorder/buttons.html:34
 msgid "schedule"
 msgstr "Schedule"
 
-#: app/templates/components/row_fuelorder/buttons.html:44
+#: app/templates/components/row_fuelorder/buttons.html:46
 msgid "view"
 msgstr "View"
 
-#: app/templates/components/row_fuelorder/popup.html:10
-msgid "Schedule"
-msgstr ""
-
-#: app/templates/components/row_fuelorder/popup.html:27
-msgid "requested_date"
-msgstr ""
-
-#: app/templates/components/row_fuelorder/popup.html:32
-msgid "expiration_date"
-msgstr ""
-
-#: app/templates/components/row_fuelorder/popup.html:38
-msgid "Submit"
-msgstr ""
-
-#: app/templates/components/row_fuelorder/popup.html:41
-msgid "Cancel"
-msgstr ""
-
-#: app/templates/components/row_fuelorder/popup.html:64
 #: app/templates/components/row_fuelorder/row.html:21
+#: app/templates/modules/orders.html:147
 msgid "finished"
 msgstr "finished"
 
-#: app/templates/components/row_fuelorder/popup.html:66
 #: app/templates/components/row_fuelorder/row.html:23
+#: app/templates/modules/orders.html:151
 msgid "canceled"
 msgstr "canceled"
-
-#: app/templates/components/row_fuelorder/popup.html:68
-msgid "blocked"
-msgstr "bloqued"
-
-#: app/templates/components/row_fuelorder/popup.html:95
-msgid "order_information"
-msgstr "Order Information"
-
-#: app/templates/components/row_fuelorder/popup.html:97
-msgid "creation_date"
-msgstr "Creation Date"
-
-#: app/templates/components/row_fuelorder/popup.html:101
-msgid "last_modification"
-msgstr "Last Modification"
-
-#: app/templates/components/row_fuelorder/popup.html:105
-#: app/templates/modules/company.html:37
-msgid "driver"
-msgstr "Driver"
-
-#: app/templates/components/row_fuelorder/popup.html:112
-msgid "vehicle_information"
-msgstr "Vehicle Information"
-
-#: app/templates/components/row_fuelorder/popup.html:114
-msgid "tractor_plate"
-msgstr "Tractor Plate"
-
-#: app/templates/components/row_fuelorder/popup.html:118
-msgid "trailer_plate"
-msgstr "Trailer Plate"
-
-#: app/templates/components/row_fuelorder/popup.html:125
-#: app/templates/modules/single_order.html:41
-msgid "fuel_order"
-msgstr "Fuel Order"
-
-#: app/templates/components/row_fuelorder/popup.html:127
-#: app/templates/modules/single_order.html:45
-msgid "tractor"
-msgstr "Tractor"
-
-#: app/templates/components/row_fuelorder/popup.html:131
-#: app/templates/modules/single_order.html:48
-msgid "backpack"
-msgstr "Backpack"
-
-#: app/templates/components/row_fuelorder/popup.html:135
-#: app/templates/modules/single_order.html:51
-msgid "chamber"
-msgstr "Chamber"
-
-#: app/templates/components/row_fuelorder/popup.html:156
-msgid "dlg_cancel_confirm_title"
-msgstr "Cancel Confirmation"
-
-#: app/templates/components/row_fuelorder/popup.html:171
-msgid "dlg_cancel_confirm"
-msgstr "Are you sure you want to cancel this order?"
 
 #: app/templates/components/row_fuelorder/row.html:25
 msgid "refueling"
@@ -300,14 +223,37 @@ msgstr "Trading"
 msgid "company_cuit"
 msgstr "RUT"
 
-#: app/templates/modules/orders.html:9
+#: app/templates/modules/company.html:37
+msgid "driver"
+msgstr "Driver"
+
+#: app/templates/modules/orders.html:10
 #: app/templates/modules/single_order.html:8
 msgid "fuel_orders"
 msgstr "Refueling Orders"
 
-#: app/templates/modules/orders.html:39
-msgid "Legend"
-msgstr "Legend"
+#: app/templates/modules/orders.html:34
+msgid "dlg_cancel_confirm"
+msgstr ""
+"Are you sure you want to change the status of the order? While it's "
+"canceled, the order can be activated again, but if it's deleted, it will be "
+"permanently lost."
+
+#: app/templates/modules/orders.html:52
+msgid "dlg_view_confirm"
+msgstr ""
+
+#: app/templates/modules/orders.html:85
+msgid "btn_continue"
+msgstr "Continue"
+
+#: app/templates/modules/orders.html:87
+msgid "btn_cancel"
+msgstr "Cancel (pause) the order"
+
+#: app/templates/modules/orders.html:155
+msgid "blocked"
+msgstr "bloqued"
 
 #: app/templates/modules/single_order.html:13
 msgid "fuel_order_instruction"
@@ -315,6 +261,22 @@ msgstr ""
 "Please carefully review your fuel order. The pump operator will load the "
 "fuel type and quantities you specify. Review the order again once it has "
 "been entered on the next screen."
+
+#: app/templates/modules/single_order.html:41
+msgid "fuel_order"
+msgstr "Fuel Order"
+
+#: app/templates/modules/single_order.html:45
+msgid "tractor"
+msgstr "Tractor"
+
+#: app/templates/modules/single_order.html:48
+msgid "backpack"
+msgstr "Backpack"
+
+#: app/templates/modules/single_order.html:51
+msgid "chamber"
+msgstr "Chamber"
 
 #: app/templates/modules/single_order.html:77
 msgid "new"
@@ -325,8 +287,8 @@ msgid "new_order"
 msgstr "Load Order"
 
 #: app/templates/modules/single_order.html:84
-msgid "skip"
-msgstr ""
+msgid "btn_skip"
+msgstr "Skip"
 
 #: app/templates/modules/tickets.html:3
 msgid "tickets_page_title"
@@ -381,6 +343,24 @@ msgstr "Edit Order"
 msgid "Actions"
 msgstr "Actions"
 
+msgid "order_information"
+msgstr "Order Information"
+
+msgid "creation_date"
+msgstr "Creation Date"
+
+msgid "last_modification"
+msgstr "Last Modification"
+
+msgid "vehicle_information"
+msgstr "Vehicle Information"
+
+msgid "tractor_plate"
+msgstr "Tractor Plate"
+
+msgid "trailer_plate"
+msgstr "Trailer Plate"
+
 msgid "update"
 msgstr "update"
 
@@ -390,11 +370,8 @@ msgstr "Active"
 msgid "btn_delete"
 msgstr "Delete"
 
-msgid "btn_cancel"
-msgstr "Cancel"
-
-msgid "btn_skip"
-msgstr "Skip"
+msgid "dlg_cancel_confirm_title"
+msgstr "Cancel Confirmation"
 
 msgid "requires_odometer"
 msgstr "Requires Odometer"

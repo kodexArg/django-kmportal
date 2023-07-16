@@ -5,6 +5,7 @@
 
 {% block navbar %}{% include 'base/navbar_components.html' with icon='fuel' %}{% endblock %}
 
+
 {% block content %}
 {% translate 'fuel_orders' as translated_title %}
 {% module_title_component translated_title %}
@@ -12,62 +13,256 @@
 <div class="h-24 w-full"></div>
 
 <section class="w-full flex flex-col">
-    <!-- Orders List -->
-    <article id="orders" class="mx-2 md:mx-10 pt-4 overflow-y-auto">
-        {% for order in fuel_orders %}
-        {% row_fuelorder_component order %}
-        {% endfor %}
-    </article>
-
-    <div class="h-10"></div>
+  <!-- Orders List -->
+  <article id="orders" class="mx-2 md:mx-10 pt-4 overflow-y-auto">
+    {% for order in fuel_orders %}
+    {% row_fuelorder_component order %}
+    {% endfor %}
+  </article>
+  <div class="h-32"><!-- bottom margin --></div>
 </section>
 
-<menu class="fixed bottom-10 w-full flex justify-center  drop-shadow-lg">
-    <div class="bg-pantone307c p-0.5 rounded-full">
-        <div class="border-2 border-sky-200 p-0.5 rounded-full flex justify-center items-center">
-            <div class="text-sky-200 font-bold flex justify-center items-center h-16 w-16">
-                <a href="">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
-                        <path fill-rule="evenodd"
-                            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-4.28 9.22a.75.75 0 000 1.06l3 3a.75.75 0 101.06-1.06l-1.72-1.72h5.69a.75.75 0 000-1.5h-5.69l1.72-1.72a.75.75 0 00-1.06-1.06l-3 3z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
-            <legend class="w-fit flex items-center">
-                <div class="transform -rotate-90 -mx-3 font-quicksand font-bold text-xxs text-sky-200 leading-none text-justify">
-                    {% translate 'Legend' %}
-                </div>
-                <div class="flex p-1 justify-end space-x-1 rounded-lg">
-                    <div class="w-6 aspect-1 bg-sky-200 rounded">{% fueltank_component fuel="infinia_diesel" %}</div>
-                    <div class="w-6 aspect-1 bg-sky-200 rounded">{% fueltank_component fuel="diesel_500" %}</div>
-                    <div class="w-6 aspect-1 bg-sky-200 rounded">{% fueltank_component fuel="infinia" %}</div>
-                    <div class="w-6 aspect-1 bg-sky-200 rounded">{% fueltank_component fuel="super" %}</div>
-                </div>
-            </legend>
+{% legendary_buttons_component %}
 
-            <div class="text-sky-200 font-bold flex justify-center items-center h-16 w-16">
-                <a href="{% url 'new_order' %}">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
-                        <path fill-rule="evenodd"
-                            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
-            <div class="text-sky-200 font-bold flex justify-center items-center h-16 w-16 -ml-4">
-                <a href="">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
-                        <path fill-rule="evenodd"
-                            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
+<!-- Modal Cancel -->
+<div id="cancel-modal" class="fixed pointer-events-none z-40 left-0 top-0 flex items-center justify-center w-full h-full opacity-0 invisible transition-opacity duration-300 bg-sky-200 bg-opacity-50">
+  <div class="relative bg-white rounded-lg shadow-lg w-11/12 md:max-w-2xl m-6 pointer-events-auto">
+    <div class="px-4 text-right"><button id="cancel-modal-close" class="text-3xl font-semibold hover:text-gray-700">×</button></div>
+    <form id="cancel-form" action="" method="post">
+      {% csrf_token %}
+      <div class="p-4">
+        <p>{% translate 'dlg_cancel_confirm' %}</p>
+      </div>
+      <div class="p-4 flex space-x-3 justify-end">
+        {% rbutton_component value="delete" bg="bg-red-500" caption="btn_delete" %}
+        {% rbutton_component value="cancel" caption="btn_cancel" %}
+        {% rbutton_component caption="btn_skip" %}
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal View -->
+<div id="view-modal" class="fixed opacity-0 invisible z-40 left-0 top-0 bottom-0 flex items-center justify-center w-full transition-opacity duration-300 bg-sky-200 bg-opacity-50">
+  <div class="relative bg-white rounded-lg shadow-lg pointer-events-auto w-11/12 h-2/3 flex flex-col">
+    <div class="flex justify-between">
+      <div class="flex justify-start">
+        <div class="p-4 text-lg font-bold">{% translate 'fuel_order' %}</div>
+        <div class="p-4 text-xs self-center" id="order-status-text">
+          <p></p>
         </div>
+      </div>
+      <div class="px-4 text-righ rounded-full"><button id="view-modal-close" class="text-3xl font-semibold hover:text-gray-700">×</button></div>
     </div>
-</menu>
+    <div class="flex flex-col overflow-y-auto">
+      <!-- QR -->
+      <div class="p-4 flex flex-col justify-center items-center">
+        <div id="qr_image" class="w-40 h-40 mx-auto rounded-md border-2 border-pantone307c">
+          <img src="" alt="QR Code">
+          <p class="text-xl font-quicksand leading-tight font-bold text-center"></p>
+        </div>
+      </div>
+      <!-- Body -->
+      <div class="m-4 flex justify-center">
+        <dl class="w-fit grid grid-cols-1 md:grid-cols-3 md:space-x-4">
+          <!-- Order Information -->
+          <div>
+            <dt class="mt-4 text-md font-semibold text-sky-900 dark:text-gray-900">{% translate 'order_information' %}</dt>
+            <dd>
+              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'creation_date' %}:</span>
+              <span id="order_date" class="text-sm text-gray-900 dark:text-gray-900"></span>
+            </dd>
+            <dd>
+              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'last_modification' %}:</span>
+              <span id="modified_date" class="text-sm text-gray-900 dark:text-gray-900"></span>
+            </dd>
+            <dd>
+              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'driver' %}:</span>
+              <span id="driver" class="text-sm text-gray-900 dark:text-gray-900"></span>
+            </dd>
+          </div>
 
-<div class="h-24"><!-- bottom margin --></div>
+          <!-- Vehicle Information -->
+          <div>
+            <dt class="mt-4 text-md font-semibold text-sky-900 dark:text-gray-900">{% translate 'vehicle_information' %}</dt>
+            <dd>
+              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'tractor_plate' %}:</span>
+              <span id="tractor_plate" class="text-sm text-gray-900 dark:text-gray-900"></span>
+            </dd>
+            <dd>
+              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'trailer_plate' %}:</span>
+              <span id="trailer_plate" class="text-sm text-gray-900 dark:text-gray-900"></span>
+            </dd>
+          </div>
 
+          <!-- Fuel Order -->
+          <div>
+            <dt class="mt-4 text-md font-semibold text-sky-900 dark:text-gray-900">{% translate 'fuel_order' %}</dt>
+            <dd>
+              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'tractor' %}:</span>
+              <span id="formated_tractor_liters_to_load_of" class="text-sm text-gray-900 dark:text-gray-900"></span>
+            </dd>
+            <dd>
+              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'backpack' %}:</span>
+              <span id="formated_backpack_liters_to_load_of" class="text-sm text-gray-900 dark:text-gray-900"></span>
+            </dd>
+            <dd>
+              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'chamber' %}:</span>
+              <span id="formated_chamber_liters_to_load_of" class="text-sm text-gray-900 dark:text-gray-900"></span>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+    <div class="h-6"></div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+<script type="text/javascript">
+  $(document).ready(function () {
+    const cancelModal = $('#cancel-modal');
+    const viewModal = $('#view-modal');
+    const cancelCloseModal = $('#cancel-modal-close');
+    const viewCloseModal = $('#view-modal-close');
+    const formCancel = $('#cancel-form');
+    let orderId;
+
+    // Cancel order functionality
+    $('[id^="cancel-button-"]').click(function () {
+      orderId = $(this).data('order-id');
+
+      $.ajax({
+        url: `/orders/${orderId}/data/`,
+        type: 'GET',
+        success: function (data) {
+          // Check if the order is already canceled
+          if (data.is_canceled) {
+            $('button[value="cancel"]').find('p').text('{% translate "btn_continue" %}');
+          } else {
+            $('button[value="cancel"]').find('p').text('{% translate "btn_cancel" %}');
+          }
+
+          // Modify the form action attribute
+          formCancel.attr('action', `/orders/${orderId}/cancel/`);
+
+          // Display the modal
+          cancelModal.toggleClass('opacity-0 invisible pointer-events-none');
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.error('Error occurred while retrieving order data:', errorThrown);
+        }
+      });
+    });
+
+    // Close Cancel Modal
+    cancelCloseModal.click(function () {
+      cancelModal.addClass('opacity-0 invisible pointer-events-none');
+    });
+
+    // Listen for form submit
+    formCancel.on('submit', function (e) {
+      e.preventDefault();  // prevent the form from submitting normally
+
+      // get the value of the action
+      let action = $(this).find('button[type="submit"]:focus').val();
+
+      let data = {
+        'csrfmiddlewaretoken': $(this).find('input[name="csrfmiddlewaretoken"]').val(),
+        'action': action,
+      };
+
+      $.ajax({
+        url: `/orders/${orderId}/cancel/`,
+        type: 'POST',
+        data: data,
+        success: function (response) {
+          console.log('Response from server: ', response);
+          if (response.result == "success") {
+            cancelModal.addClass('opacity-0 invisible pointer-events-none');
+            location.reload();
+          }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.error('Error occurred while trying to cancel/delete order:', errorThrown);
+        }
+      });
+    });
+
+    // View order functionality
+    $('[id^="view-button-"]').click(function () {
+      orderId = $(this).data('order-id');
+
+      $.ajax({
+        url: `/orders/${orderId}/data/`,
+        type: 'GET',
+        success: function (data) {
+          // Update the order status text based on the order data
+          let statusTextElement = $('#order-status-text');
+          if (data.is_finished) {
+            statusTextElement.text('{% translate "finished" %}');
+            statusTextElement.removeClass('text-red-500 text-orange-500');
+            statusTextElement.addClass('text-green-500');
+          } else if (data.is_canceled) {
+            statusTextElement.text('{% translate "canceled" %}');
+            statusTextElement.removeClass('text-green-500 text-orange-500');
+            statusTextElement.addClass('text-red-500');
+          } else if (data.is_blocked) {
+            statusTextElement.text('{% translate "blocked" %}');
+            statusTextElement.removeClass('text-green-500 text-red-500');
+            statusTextElement.addClass('text-orange-500');
+          } else {
+            statusTextElement.text('')
+          }
+
+          // This approach generates a URL with order_id as 0 and then replaces '0' with the actual orderId
+          // because { % url.. % } line is generated serverside, and the javascript replaces it when the orderId variable
+          // is ready.
+          $('#qr_image img').attr('src', "{% url 'get_qr' order_id=0 %}".replace('0', orderId));
+          $('#qr_image p').text(data.operation_code.toUpperCase());
+
+          // Fill in the rest of the fields in the view modal
+          $('#order_date').text(data.order_date);
+          $('#modified_date').text(data.modified_date);
+          $('#driver').text(data.driver);
+          $('#tractor_plate').text(data.tractor_plate);
+          $('#trailer_plate').text(data.trailer_plate);
+          $('#formated_tractor_liters_to_load_of').text(data.formated_tractor_liters_to_load_of == 0 ? 'NO' : data.formated_tractor_liters_to_load_of == -1 ? 'MAX' : data.formated_tractor_liters_to_load_of);
+
+          $('#formated_backpack_liters_to_load_of').text(data.formated_backpack_liters_to_load_of == 0 ? 'NO' : data.formated_backpack_liters_to_load_of == -1 ? 'MAX' : data.formated_backpack_liters_to_load_of);
+          
+          $('#formated_chamber_liters_to_load_of').text(data.formated_chamber_liters_to_load_of == 0 ? 'NO' : data.formated_chamber_liters_to_load_of == -1 ? 'MAX' : data.formated_chamber_liters_to_load_of);
+          
+
+          viewModal.toggleClass('opacity-0 invisible pointer-events-none');
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.error('Error occurred while retrieving order data:', errorThrown);
+        }
+      });
+    });
+
+
+
+    // Close View Modal
+    viewCloseModal.click(function () {
+      viewModal.addClass('opacity-0 invisible pointer-events-none');
+    });
+
+    // Close modals on outside click
+    $(window).click(function (event) {
+      if (event.target == cancelModal[0]) {
+        cancelModal.addClass('opacity-0 invisible pointer-events-none');
+      } else if (event.target == viewModal[0]) {
+        viewModal.addClass('opacity-0 invisible pointer-events-none');
+      }
+    });
+
+  });
+
+</script>
 {% endblock %}
