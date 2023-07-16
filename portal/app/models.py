@@ -1,6 +1,6 @@
 from loguru import logger
 import secrets
-from datetime import datetime, timedelta
+from datetime import timedelta
 from django.db import models
 from django.db.models import Case, When, Value, IntegerField, Manager
 from django.core.exceptions import ObjectDoesNotExist
@@ -9,6 +9,7 @@ from allauth.socialaccount.models import SocialAccount
 from django.db.models import Case, When, Value, IntegerField
 from django.utils.timezone import now
 from django.utils.translation import gettext as _
+from django.shortcuts import get_object_or_404
 
 
 # Create your models here.
@@ -141,7 +142,8 @@ class FuelOrdersManager(Manager):
                 default=Value(3),
                 output_field=IntegerField(),
             )
-        ).order_by('custom_sort_order', '-modified_date')
+        ).order_by('custom_sort_order', '-requested_date')
+
 
 class FuelOrders(models.Model):
     """Core Table of the refueling Workflow
@@ -179,6 +181,7 @@ class FuelOrders(models.Model):
 
 
     operation_code = models.CharField(max_length=6, unique=True, blank=True, null=True)
+
 
     order_date = models.DateField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)

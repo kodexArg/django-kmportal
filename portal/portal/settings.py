@@ -29,13 +29,10 @@ SECRET_KEY = os.environ.get("SECRET-KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if os.environ.get("DEBUG")=="False" else True
 
-print(f"DEBUG -> {DEBUG}")
 
 ALLOWED_HOSTS = ["*"]
 
-
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.sites",
