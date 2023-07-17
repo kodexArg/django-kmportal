@@ -54,16 +54,16 @@
     "en": "Login with Google",
     "pt": "Entrar com Google"
   },
-  "carriers_card_text_title": {
-    "es": "Empresas de Transporte",
-    "en": "Transport Companies",
-    "pt": "Empresas de Transporte "
+  "carriers_card_text_title":{
+    "es": "¡Bienvenido, transportista!",
+    "en": "Welcome, Carrier!",
+    "pt": "Bem vindo transportador!"
   },
   "carriers_card_text": {
-    "es": "¡Bienvenido a las Tiendas Asociadas del Parador KM 1151! Este es un espacio único donde los negocios prosperan en el corazón de la montaña entre Mendoza y Chile. Nos alegra mucho tenerles con nosotros y les invitamos a iniciar sesión con Google para mantener una comunicación fluida y estar al día con las novedades del Parador y la Estación de Servicios KM 1151. Aquí, ustedes tienen la ventaja de contar con servicios que van desde internet hasta sanitarios, todo para facilitar su operación diaria. ¡Esperamos que su experiencia sea excepcional con nosotros!",
-    "en": "Welcome to the Associated Shops at Parador KM 1151! This is a unique space where businesses thrive in the heart of the mountain between Mendoza and Chile. We're thrilled to have you with us and invite you to log in with Google to enhance communication and stay updated with the latest news from the Parador and the KM 1151 Service Station. Here, you have the advantage of services ranging from internet to restrooms, all to facilitate your daily operation. We hope your experience with us is exceptional!",
-    "pt": "Bem-vindo às Lojas Associadas do Parador KM 1151! Este é um espaço único onde os negócios prosperam no coração da montanha entre Mendoza e Chile. Estamos emocionados por tê-los conosco e convidamos você a fazer login com o Google para melhorar a comunicação e manter-se atualizado com as últimas notícias do Parador e da Estação de Serviços KM 1151. Aqui, você tem a vantagem de serviços que vão desde internet até sanitários, tudo para facilitar sua operação diária. Esperamos que sua experiência conosco seja excepcional!"
-  },
+    "es": "¡Bienvenido a nuestro portal B2B, diseñado especialmente para ti! 🚚 Si eres un coordinador de logística o propietario, estás en el lugar correcto. Aquí podrás seguir el paso de tus vehículos por nuestra estación de servicio <b>Portal KM 1151</b>. \n\nCon nosotros, podrás generar fácilmente <b>Órdenes de Carga de Combustible</b>, asegurando que tus camiones reciban la carga 🛢️ que el empleado autorice.\n\nAdemás, nuestro sistema te permitirá autorizar envíos de dinero a tus choferes mediante 'CashTransfer', que recibirán el dinero en Uspallata. 💸 \n\nEste portal será tu punto de entrada para todas las novedades del sitio. \n\n¡Estamos emocionados de tenerte con nosotros! 🥳",
+    "en": "Welcome to our B2B portal, specially designed for you! 🚚 If you're a logistics coordinator or owner, you're in the right place. Here you can track the progress of your vehicles through our service station, the <b>Portal KM 1151</b>. \n\nWith us, you'll be able to easily generate <b>Fuel Loading Orders</b>, ensuring that your trucks receive the fuel load  authorized by the employee.\n\nIn addition, our system will allow you to authorize money transfers to your drivers through 'CashTransfer', who will receive the money in Uspallata. 💸 \n\nThis portal will be your gateway for all site updates. \n\nWe're excited to have you with us! 🥳",
+    "pt": "Bem-vindo ao nosso portal B2B, projetado especialmente para você! 🚚 Se você é um coordenador de logística ou proprietário, está no lugar certo. Aqui você pode acompanhar o progresso de seus veículos em nossa estação de serviço, o <b>Portal KM 1151</b>. \n\nConosco, você poderá gerar facilmente <b>Ordens de Carregamento de Combustível</b>, garantindo que seus caminhões recebam a carga 🛢️ autorizada pelo empregado.\n\nAlém disso, nosso sistema permitirá que você autorize transferências de dinheiro para seus motoristas através do 'CashTransfer', que receberão o dinheiro em Uspallata. 💸 \n\nEste portal será o seu ponto de entrada para todas as novidades do site. \n\nEstamos animados para tê-lo conosco! 🥳"
+ },
   "i_am_associated_shops_button": {
     "es": "Tiendas",
     "en": "Shops",
@@ -438,5 +438,20 @@
     "en": "Please carefully review your fuel order. The pump operator will load the fuel type and quantities you specify. Review the order again once it has been entered on the next screen.",
     "es": "Por favor revise cuidadosamente su pedido de combustible. El operador cargará el tipo de combustible y las cantidades que Ud. indique. Revise nuevamente la orden una vez realizada el alta, en la siguiente pantalla.",
     "pt": "Por favor, revise cuidadosamente o seu pedido de combustível. O operador carregará o tipo de combustível e as quantidades que você especificar. Revise o pedido novamente após ser inserido na próxima tela."
+  },
+  "from": {
+    "en": "from",
+    "es": "de",
+    "pt": "de"
+  },
+  "to": {
+    "en": "to",
+    "es": "hasta",
+    "pt": "para"
+  },
+  "let_me_in": {
+    "en": "Register as a Carrier",
+    "es": "Registro como Transportista",
+    "pt": "Registro como Transportador"
   }
 }

@@ -142,7 +142,7 @@ class FuelOrdersManager(Manager):
                 default=Value(3),
                 output_field=IntegerField(),
             )
-        ).order_by('custom_sort_order', '-requested_date')
+        ).order_by('-requested_date', 'custom_sort_order')
 
 
 class FuelOrders(models.Model):

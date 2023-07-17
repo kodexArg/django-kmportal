@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-16 15:20+0000\n"
+"POT-Creation-Date: 2023-07-17 01:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,39 +66,39 @@ msgstr "Novembro"
 msgid "December"
 msgstr "Dezembro"
 
-#: app/models.py:74
+#: app/models.py:72
 msgid "Companies"
 msgstr ""
 
-#: app/models.py:94
+#: app/models.py:92
 msgid "first_name"
 msgstr "Nome"
 
-#: app/models.py:95
+#: app/models.py:93
 msgid "last_name"
 msgstr "Sobrenome"
 
-#: app/models.py:96
+#: app/models.py:94
 msgid "identification_type"
 msgstr "Tipo de ID"
 
-#: app/models.py:97
+#: app/models.py:95
 msgid "identification_number"
 msgstr "N° de ID"
 
-#: app/models.py:112 app/models.py:125
+#: app/models.py:110 app/models.py:123
 msgid "domain"
 msgstr "Domínio"
 
-#: app/models.py:165
+#: app/models.py:163
 msgid "no_agreement"
 msgstr "Sem acordo"
 
-#: app/models.py:166
+#: app/models.py:164
 msgid "under_negotiation"
 msgstr "Em negociação"
 
-#: app/models.py:167
+#: app/models.py:165
 msgid "agreed"
 msgstr "Acordado"
 
@@ -145,12 +145,12 @@ msgid "view"
 msgstr "Ver"
 
 #: app/templates/components/row_fuelorder/row.html:21
-#: app/templates/modules/orders.html:147
+#: app/templates/modules/orders.html:207
 msgid "finished"
 msgstr "concluído"
 
 #: app/templates/components/row_fuelorder/row.html:23
-#: app/templates/modules/orders.html:151
+#: app/templates/modules/orders.html:211
 msgid "canceled"
 msgstr "cancelado"
 
@@ -162,13 +162,21 @@ msgstr "Abastecimento"
 msgid "on_transit"
 msgstr "em rota"
 
+#: app/templates/components/row_fuelorder/row.html:57
+msgid "from"
+msgstr "de"
+
+#: app/templates/components/row_fuelorder/row.html:58
+msgid "to"
+msgstr "para"
+
 #: app/templates/components/welcome_card.html:6
 msgid "associated_shops_card_text_title"
 msgstr "Lojas Associadas"
 
 #: app/templates/components/welcome_card.html:8
 msgid "carriers_card_text_title"
-msgstr "Empresas de Transporte "
+msgstr "Bem vindo transportador!"
 
 #: app/templates/components/welcome_card.html:13
 msgid "associated_shops_card_text"
@@ -183,22 +191,19 @@ msgstr ""
 #: app/templates/components/welcome_card.html:15
 msgid "carriers_card_text"
 msgstr ""
-"Bem-vindo às Lojas Associadas do Parador KM 1151! Este é um espaço único "
-"onde os negócios prosperam no coração da montanha entre Mendoza e Chile. "
-"Estamos emocionados por tê-los conosco e convidamos você a fazer login com o"
-" Google para melhorar a comunicação e manter-se atualizado com as últimas "
-"notícias do Parador e da Estação de Serviços KM 1151. Aqui, você tem a "
-"vantagem de serviços que vão desde internet até sanitários, tudo para "
-"facilitar sua operação diária. Esperamos que sua experiência conosco seja "
-"excepcional!"
+"Bem-vindo ao nosso portal B2B, projetado especialmente para você! 🚚 Se você é um coordenador de logística ou proprietário, está no lugar certo. Aqui você pode acompanhar o progresso de seus veículos em nossa estação de serviço, o <b>Portal KM 1151</b>. \n"
+"\n"
+"Conosco, você poderá gerar facilmente <b>Ordens de Carregamento de Combustível</b>, garantindo que seus caminhões recebam a carga 🛢️ autorizada pelo empregado.\n"
+"\n"
+"Além disso, nosso sistema permitirá que você autorize transferências de dinheiro para seus motoristas através do 'CashTransfer', que receberão o dinheiro em Uspallata. 💸 \n"
+"\n"
+"Este portal será o seu ponto de entrada para todas as novidades do site. \n"
+"\n"
+"Estamos animados para tê-lo conosco! 🥳"
 
 #: app/templates/home.html:27
-msgid "i_am_associated_shops_button"
-msgstr "Lojas"
-
-#: app/templates/home.html:31
-msgid "i_am_carriers_button"
-msgstr "Operadora"
+msgid "let_me_in"
+msgstr "Registro como Transportador"
 
 #: app/templates/modules/cashtransfer.html:3
 msgid "cashtransfer_page_title"
@@ -225,7 +230,7 @@ msgstr "Fantasia"
 msgid "company_cuit"
 msgstr "CNPJ"
 
-#: app/templates/modules/company.html:37
+#: app/templates/modules/company.html:37 app/templates/modules/orders.html:80
 msgid "driver"
 msgstr "Motorista"
 
@@ -241,19 +246,59 @@ msgstr ""
 "cancelado, o pedido pode ser ativado novamente, mas se for excluído, será "
 "definitivamente perdido."
 
-#: app/templates/modules/orders.html:52
-msgid "dlg_view_confirm"
-msgstr ""
+#: app/templates/modules/orders.html:50 app/templates/modules/orders.html:100
+#: app/templates/modules/single_order.html:41
+msgid "fuel_order"
+msgstr "Pedido de Combustível"
 
-#: app/templates/modules/orders.html:85
+#: app/templates/modules/orders.html:70
+msgid "order_information"
+msgstr "Informações do Pedido"
+
+#: app/templates/modules/orders.html:72
+msgid "creation_date"
+msgstr "Data de Criação"
+
+#: app/templates/modules/orders.html:76
+msgid "last_modification"
+msgstr "Última Modificação"
+
+#: app/templates/modules/orders.html:87
+msgid "vehicle_information"
+msgstr "Informações do Veículo"
+
+#: app/templates/modules/orders.html:89
+msgid "tractor_plate"
+msgstr "Placa do Trator"
+
+#: app/templates/modules/orders.html:93
+msgid "trailer_plate"
+msgstr "Placa do Reboque"
+
+#: app/templates/modules/orders.html:102
+#: app/templates/modules/single_order.html:45
+msgid "tractor"
+msgstr "Trator"
+
+#: app/templates/modules/orders.html:106
+#: app/templates/modules/single_order.html:48
+msgid "backpack"
+msgstr "Mochila"
+
+#: app/templates/modules/orders.html:110
+#: app/templates/modules/single_order.html:51
+msgid "chamber"
+msgstr "Câmara"
+
+#: app/templates/modules/orders.html:145
 msgid "btn_continue"
 msgstr "Continuar"
 
-#: app/templates/modules/orders.html:87
+#: app/templates/modules/orders.html:147
 msgid "btn_cancel"
 msgstr "Cancelar (pausar) o pedido"
 
-#: app/templates/modules/orders.html:155
+#: app/templates/modules/orders.html:215
 msgid "blocked"
 msgstr "bloqueado"
 
@@ -263,22 +308,6 @@ msgstr ""
 "Por favor, revise cuidadosamente o seu pedido de combustível. O operador "
 "carregará o tipo de combustível e as quantidades que você especificar. "
 "Revise o pedido novamente após ser inserido na próxima tela."
-
-#: app/templates/modules/single_order.html:41
-msgid "fuel_order"
-msgstr "Pedido de Combustível"
-
-#: app/templates/modules/single_order.html:45
-msgid "tractor"
-msgstr "Trator"
-
-#: app/templates/modules/single_order.html:48
-msgid "backpack"
-msgstr "Mochila"
-
-#: app/templates/modules/single_order.html:51
-msgid "chamber"
-msgstr "Câmara"
 
 #: app/templates/modules/single_order.html:77
 msgid "new"
@@ -334,6 +363,12 @@ msgstr "Pedidos de Carga"
 msgid "vehicles_page_title"
 msgstr "Caminhões"
 
+msgid "i_am_associated_shops_button"
+msgstr "Lojas"
+
+msgid "i_am_carriers_button"
+msgstr "Operadora"
+
 msgid "user_home_welcome"
 msgstr "Bem-vindo&nbsp;ao<br>Portal&nbsp;KM&nbsp;1151"
 
@@ -345,24 +380,6 @@ msgstr "Editar Ordem"
 
 msgid "Actions"
 msgstr "Ações"
-
-msgid "order_information"
-msgstr "Informações do Pedido"
-
-msgid "creation_date"
-msgstr "Data de Criação"
-
-msgid "last_modification"
-msgstr "Última Modificação"
-
-msgid "vehicle_information"
-msgstr "Informações do Veículo"
-
-msgid "tractor_plate"
-msgstr "Placa do Trator"
-
-msgid "trailer_plate"
-msgstr "Placa do Reboque"
 
 msgid "update"
 msgstr "atualizar"
