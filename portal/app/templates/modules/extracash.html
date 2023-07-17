@@ -1,0 +1,25 @@
+{% extends "base/base.html" %}
+{% load static i18n socialaccount custom_components %}
+{% block title %}{% translate "extracash_page_title" %}{% endblock %}
+
+
+{% block navbar %}{% include 'base/navbar_components.html' with icon='fuel' %}{% endblock %}
+
+
+{% block content %}
+{% translate 'extracash' as translated_title %}
+{% module_title_component translated_title %}
+
+<div class="h-24 w-full"></div>
+
+<section class="w-full flex flex-col">
+    <!-- Orders List -->
+    <article id="orders" class="mx-2 md:mx-10 pt-4 overflow-y-auto">
+        {% for ec_order in ec_orders %}
+        {% row_fuelorder_component ec_order %}
+        {% endfor %}
+    </article>
+    <div class="h-32"><!-- bottom margin --></div>
+</section>
+
+{% endblock %}

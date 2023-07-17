@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-17 01:08+0000\n"
+"POT-Creation-Date: 2023-07-17 01:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -194,7 +194,7 @@ msgstr ""
 "\n"
 "With us, you'll be able to easily generate <b>Fuel Loading Orders</b>, ensuring that your trucks receive the fuel load  authorized by the employee.\n"
 "\n"
-"In addition, our system will allow you to authorize money transfers to your drivers through 'CashTransfer', who will receive the money in Uspallata. 💸 \n"
+"In addition, our system will allow you to authorize money transfers to your drivers through 'Extra Cash', who will receive the money in Uspallata. 💸 \n"
 "\n"
 "This portal will be your gateway for all site updates. \n"
 "\n"
@@ -203,10 +203,6 @@ msgstr ""
 #: app/templates/home.html:27
 msgid "let_me_in"
 msgstr "Register as a Carrier"
-
-#: app/templates/modules/cashtransfer.html:3
-msgid "cashtransfer_page_title"
-msgstr "Cash Transfer"
 
 #: app/templates/modules/company.html:3 app/templates/modules/orders.html:3
 #: app/templates/modules/single_order.html:3
@@ -232,6 +228,10 @@ msgstr "RUT"
 #: app/templates/modules/company.html:37 app/templates/modules/orders.html:80
 msgid "driver"
 msgstr "Driver"
+
+#: app/templates/modules/extracash.html:3
+msgid "extracash_page_title"
+msgstr "Cash Transfer"
 
 #: app/templates/modules/orders.html:10
 #: app/templates/modules/single_order.html:8

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-17 01:08+0000\n"
+"POT-Creation-Date: 2023-07-17 01:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -195,7 +195,7 @@ msgstr ""
 "\n"
 "Con nosotros, podrás generar fácilmente <b>Órdenes de Carga de Combustible</b>, asegurando que tus camiones reciban la carga 🛢️ que el empleado autorice.\n"
 "\n"
-"Además, nuestro sistema te permitirá autorizar envíos de dinero a tus choferes mediante 'CashTransfer', que recibirán el dinero en Uspallata. 💸 \n"
+"Además, nuestro sistema te permitirá autorizar envíos de dinero a tus choferes mediante 'Extra Cash', que recibirán el dinero en Uspallata. 💸 \n"
 "\n"
 "Este portal será tu punto de entrada para todas las novedades del sitio. \n"
 "\n"
@@ -204,10 +204,6 @@ msgstr ""
 #: app/templates/home.html:27
 msgid "let_me_in"
 msgstr "Registro como Transportista"
-
-#: app/templates/modules/cashtransfer.html:3
-msgid "cashtransfer_page_title"
-msgstr "Transferencia de efectivo"
 
 #: app/templates/modules/company.html:3 app/templates/modules/orders.html:3
 #: app/templates/modules/single_order.html:3
@@ -233,6 +229,10 @@ msgstr "CUIT"
 #: app/templates/modules/company.html:37 app/templates/modules/orders.html:80
 msgid "driver"
 msgstr "Conductor"
+
+#: app/templates/modules/extracash.html:3
+msgid "extracash_page_title"
+msgstr "Transferencia de efectivo"
 
 #: app/templates/modules/orders.html:10
 #: app/templates/modules/single_order.html:8

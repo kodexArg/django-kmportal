@@ -67,7 +67,7 @@ class Company(models.Model):
 
     def __str__(self):
         return self.fantasy_name
-    
+
     class Meta:
         verbose_name_plural = _("Companies")
 
@@ -79,10 +79,8 @@ class CompanySocialAccount(models.Model):
     indicated by null=True, blank=True)."""
 
     social_account = models.OneToOneField(SocialAccount, on_delete=models.CASCADE)
-    company = models.ForeignKey(
-        Company, on_delete=models.SET_NULL, null=True, blank=True
-    )
-    
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True, blank=True)
+
     def __str__(self):
         return f"{self.social_account.extra_data['name']} → {self.company}"
 
@@ -111,7 +109,7 @@ class Tractors(models.Model):
     is_active = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
-        self.domain = self.domain.upper() 
+        self.domain = self.domain.upper()
         return super().save(*args, **kwargs)
 
     def __str__(self):
@@ -124,7 +122,7 @@ class Trailers(models.Model):
     is_active = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
-        self.domain = self.domain.upper() 
+        self.domain = self.domain.upper()
         return super().save(*args, **kwargs)
 
     def __str__(self):
@@ -133,22 +131,33 @@ class Trailers(models.Model):
 
 class FuelOrdersManager(Manager):
     def get_queryset(self):
-        return super().get_queryset().annotate(
-            custom_sort_order=Case(
-                When(is_blocked=True, is_canceled=False, is_finished=False, then=Value(1)),
-                When(is_canceled=False, is_finished=False, then=Value(2)),
-                When(is_canceled=True, then=Value(4)),
-                When(is_finished=True, then=Value(4)),
-                default=Value(3),
-                output_field=IntegerField(),
+        return (
+            super()
+            .get_queryset()
+            .annotate(
+                custom_sort_order=Case(
+                    When(
+                        is_blocked=True,
+                        is_canceled=False,
+                        is_finished=False,
+                        then=Value(1),
+                    ),
+                    When(is_canceled=False, is_finished=False, then=Value(2)),
+                    When(is_canceled=True, then=Value(4)),
+                    When(is_finished=True, then=Value(4)),
+                    default=Value(3),
+                    output_field=IntegerField(),
+                )
             )
-        ).order_by('-requested_date', 'custom_sort_order')
+            .order_by("custom_sort_order", "-requested_date", "-order_date")
+        )
 
 
 class FuelOrders(models.Model):
     """Core Table of the refueling Workflow
     this models uses a custom manager FuelOrdersManager
     """
+
     objects = FuelOrdersManager()
 
     # Typo Comb choices
@@ -169,38 +178,72 @@ class FuelOrders(models.Model):
         "infinia_diesel": "#225722",
         "diesel_500": "#1453FF",
         "infinia": "#FF4500",
-        "super": "#ffa500"
+        "super": "#ffa500",
     }
 
     fuel_type_map = {
-            "infinia_diesel": "Inf. D.",
-            "infinia": "Infinia",
-            "diesel_500": "D. 500",
-            "super": "Super",
+        "infinia_diesel": "Inf. D.",
+        "infinia": "Infinia",
+        "diesel_500": "D. 500",
+        "super": "Super",
     }
 
-
     operation_code = models.CharField(max_length=6, unique=True, blank=True, null=True)
-
 
     order_date = models.DateField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
     requested_date = models.DateField(default=now)
     expiration_date = models.DateField(default=now() + timedelta(days=7))
 
-    user_creator = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='fuel_orders_created', blank=True, null=True)
-    user_lastmod = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='fuel_orders_modified', blank=True, null=True)
-    
+    user_creator = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name="fuel_orders_created",
+        blank=True,
+        null=True,
+    )
+    user_lastmod = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name="fuel_orders_modified",
+        blank=True,
+        null=True,
+    )
+
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     driver = models.ForeignKey(Drivers, on_delete=models.PROTECT)
-    
+
     tractor_plate = models.ForeignKey(Tractors, on_delete=models.PROTECT, verbose_name="tractor_plate")
-    trailer_plate = models.ForeignKey(Trailers, on_delete=models.PROTECT, blank=True, null=True, verbose_name="trailer_plate")
-   
-    tractor_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True, verbose_name="tractor_fuel_type")
-    backpack_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True, verbose_name="backpack_fuel_type")
-    chamber_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True, verbose_name="chamber_fuel_type")
-    
+    trailer_plate = models.ForeignKey(
+        Trailers,
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+        verbose_name="trailer_plate",
+    )
+
+    tractor_fuel_type = models.CharField(
+        max_length=50,
+        choices=FUEL_TYPE_CHOICES,
+        blank=True,
+        null=True,
+        verbose_name="tractor_fuel_type",
+    )
+    backpack_fuel_type = models.CharField(
+        max_length=50,
+        choices=FUEL_TYPE_CHOICES,
+        blank=True,
+        null=True,
+        verbose_name="backpack_fuel_type",
+    )
+    chamber_fuel_type = models.CharField(
+        max_length=50,
+        choices=FUEL_TYPE_CHOICES,
+        blank=True,
+        null=True,
+        verbose_name="chamber_fuel_type",
+    )
+
     tractor_liters = models.PositiveIntegerField(blank=True, null=True, verbose_name="tractor_liters")  # leave blank until filled
     backpack_liters = models.PositiveIntegerField(blank=True, null=True, verbose_name="backpack_liters")  # leave blank until filled
     chamber_liters = models.PositiveIntegerField(blank=True, null=True, verbose_name="chamber_liters")  # leave blank until filled
@@ -226,39 +269,35 @@ class FuelOrders(models.Model):
 
     comments = models.TextField(blank=True, null=True, verbose_name="comments")
 
-
     def save(self, *args, **kwargs):
-        """ This save method accept some missing fields:
+        """This save method accept some missing fields:
         ["requested_date", "expiration_date", "in_agreement"]
         """
-        
+
         try:
-            if not self.pk:  #this is a new record
+            if not self.pk:  # this is a new record
                 self.operation_code = secrets.token_hex(3)
-                while FuelOrders.objects.filter(
-                    operation_code=self.operation_code
-                ).exists():
+                while FuelOrders.objects.filter(operation_code=self.operation_code).exists():
                     self.operation_code = secrets.token_hex(3)
 
-                if hasattr(self, 'user_creator') and self.user_creator is None:
+                if hasattr(self, "user_creator") and self.user_creator is None:
                     self.user_creator = self._get_current_user()
 
-                if hasattr(self, 'company') and self.company is None:
+                if hasattr(self, "company") and self.company is None:
                     self.company = self._get_user_company()
-                
+
                 if not self.requested_date:
                     self.requested_date = now()
-                
+
                 if not self.expiration_date:
                     self.expiration_date = now() + timedelta(days=7)
 
             else:  # this is an edition
-                if hasattr(self, 'user_lastmod'):
+                if hasattr(self, "user_lastmod"):
                     self.user_lastmod = self._get_current_user()
         except Exception as e:
             logger.error(f"Error on saving fuel order: {e}")
-        
-        
+
         super().save(*args, **kwargs)
 
     def get_total_liters(self):
@@ -278,9 +317,13 @@ class FuelOrders(models.Model):
             social_account = SocialAccount.objects.get(user=self.request.user)
             company_social_account = CompanySocialAccount.objects.get(social_account=social_account)
             return company_social_account.company
-        except (AttributeError, SocialAccount.DoesNotExist, CompanySocialAccount.DoesNotExist):
+        except (
+            AttributeError,
+            SocialAccount.DoesNotExist,
+            CompanySocialAccount.DoesNotExist,
+        ):
             return None
-        
+
     @property
     def short_tractor_fuel_type(self):
         return self.fuel_type_map.get(self.tractor_fuel_type, "")
@@ -336,8 +379,8 @@ class FuelOrders(models.Model):
         return self.operation_code
 
     class Meta:
-        verbose_name = 'Fuel Order'
-        verbose_name_plural = 'Fuel Orders'
+        verbose_name = "Fuel Order"
+        verbose_name_plural = "Fuel Orders"
 
 
 class Refuelings(models.Model):
@@ -361,21 +404,13 @@ class Refuelings(models.Model):
     tractor_liters = models.PositiveIntegerField(default=0)
     backpack_liters = models.PositiveIntegerField(default=0)
     chamber_liters = models.PositiveIntegerField(default=0)
-    tractor_fuel_type = models.CharField(
-        max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES
-    )
-    backpack_fuel_type = models.CharField(
-        max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES
-    )
-    chamber_fuel_type = models.CharField(
-        max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES
-    )
+    tractor_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES)
+    backpack_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES)
+    chamber_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES)
     odometer = models.PositiveIntegerField(null=True, blank=True)
     kilometers = models.PositiveIntegerField(null=True, blank=True)
     dispatch_note_pic = models.ImageField(upload_to="operation_code/dispatch_note")
-    observation_pic = models.ImageField(
-        upload_to="operation_code/others", null=True, blank=True
-    )
+    observation_pic = models.ImageField(upload_to="operation_code/others", null=True, blank=True)
     observation = models.CharField(max_length=512, null=True, blank=True)
 
     def __str__(self):
@@ -383,3 +418,100 @@ class Refuelings(models.Model):
 
     def get_total_liters(self):
         return self.tractor_liters + self.backpack_liters + self.chamber_liters
+
+
+class ExtraCashManager(models.Manager):
+    def get_queryset(self):
+        return (
+            super()
+            .get_queryset()
+            .annotate(
+                custom_sort_order=Case(
+                    When(
+                        is_blocked=True,
+                        is_canceled=False,
+                        is_finished=False,
+                        then=Value(1),
+                    ),
+                    When(is_canceled=False, is_finished=False, then=Value(2)),
+                    When(is_canceled=True, then=Value(4)),
+                    When(is_finished=True, then=Value(4)),
+                    default=Value(3),
+                    output_field=IntegerField(),
+                )
+            )
+            .order_by("custom_sort_order", "-requested_date", "-order_date")
+        )
+
+
+class ExtraCash(models.Model):
+    """New model for the ExtraCash service"""
+
+    objects = ExtraCashManager()
+
+    AGREEMENT_CHOICES = [
+        (0, "no_agreement"),
+        (1, "under_negotiation"),
+        (2, "agreed"),
+    ]
+
+    operation_code = models.CharField(max_length=6, unique=True, blank=True, null=True)
+
+    order_date = models.DateField(auto_now_add=True)
+    modified_date = models.DateField(auto_now=True)
+    requested_date = models.DateField(default=now)
+    expiration_date = models.DateField(default=now() + timedelta(days=7))
+
+    user_creator = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name="extracash_orders_created",
+        blank=True,
+        null=True,
+    )
+    user_lastmod = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name="extracash_orders_modified",
+        blank=True,
+        null=True,
+    )
+
+    is_blocked = models.BooleanField(default=False, verbose_name="is_blocked")  # because it has been attended
+    is_canceled = models.BooleanField(default=False, verbose_name="is_canceled")  # because there's an error or user action
+    is_finished = models.BooleanField(default=False, verbose_name="is_finished")  # because it's been attended and it's been filled
+
+    cancel_reason = models.TextField(blank=True, null=True, verbose_name="cancel_reason")  # because there's an error or user action
+
+    in_agreement = models.IntegerField(choices=AGREEMENT_CHOICES, default=0, verbose_name="in_agreement")
+
+    comments = models.TextField(blank=True, null=True, verbose_name="comments")
+
+    # Method to save the model
+    # You need to replace the 'secrets' module with the appropriate key generator
+    # 'logger' should be set up to manage logging for your application
+    # '_get_current_user' and '_get_user_company' should be replaced with the appropriate user and company retrieval methods
+    def save(self, *args, **kwargs):
+        try:
+            if not self.pk:  # this is a new record
+                self.operation_code = secrets.token_hex(3)
+                while ExtraCash.objects.filter(operation_code=self.operation_code).exists():
+                    self.operation_code = secrets.token_hex(3)
+
+                if hasattr(self, "user_creator") and self.user_creator is None:
+                    self.user_creator = self._get_current_user()
+
+            else:  # this is an edition
+                if hasattr(self, "user_lastmod"):
+                    self.user_lastmod = self._get_current_user()
+        except Exception as e:
+            logger.error(f"Error on saving cash order: {e}")
+
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.operation_code
+
+    class Meta:
+        verbose_name = "ExtraCash Order"
+        verbose_name_plural = "ExtraCash Orders"
