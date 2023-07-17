@@ -1,5 +1,4 @@
-from app.forms import (CreateDriverForm, DeleteDriverForm, TractorForm,
-                       TrailerForm, UpdateDriverForm)
+from app.forms import CreateDriverForm, DeleteDriverForm, TractorForm, TrailerForm, UpdateDriverForm
 from app.models import CompanySocialAccount, Drivers, Tractors, Trailers
 from app.views.helpers import CustomTemplateView
 from django.contrib.auth.decorators import login_required

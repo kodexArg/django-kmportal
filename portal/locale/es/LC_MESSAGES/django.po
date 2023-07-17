@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-17 01:23+0000\n"
+"POT-Creation-Date: 2023-07-17 22:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,39 +66,39 @@ msgstr "Noviembre"
 msgid "December"
 msgstr "Diciembre"
 
-#: app/models.py:72
+#: app/models.py:71
 msgid "Companies"
 msgstr ""
 
-#: app/models.py:92
+#: app/models.py:89
 msgid "first_name"
 msgstr "Nombre"
 
-#: app/models.py:93
+#: app/models.py:90
 msgid "last_name"
 msgstr "Apellido"
 
-#: app/models.py:94
+#: app/models.py:91
 msgid "identification_type"
 msgstr "Tipo de ID"
 
-#: app/models.py:95
+#: app/models.py:92
 msgid "identification_number"
 msgstr "N° de ID"
 
-#: app/models.py:110 app/models.py:123
+#: app/models.py:107 app/models.py:120
 msgid "domain"
 msgstr "Dominio"
 
-#: app/models.py:163
+#: app/models.py:171
 msgid "no_agreement"
 msgstr "Sin acuerdo"
 
-#: app/models.py:164
+#: app/models.py:172
 msgid "under_negotiation"
 msgstr "En negociación"
 
-#: app/models.py:165
+#: app/models.py:173
 msgid "agreed"
 msgstr "Acordado"
 
@@ -205,7 +205,7 @@ msgstr ""
 msgid "let_me_in"
 msgstr "Registro como Transportista"
 
-#: app/templates/modules/company.html:3 app/templates/modules/orders.html:3
+#: app/templates/modules/company.html:3
 #: app/templates/modules/single_order.html:3
 msgid "company_page_title"
 msgstr "Empresa"
@@ -231,10 +231,11 @@ msgid "driver"
 msgstr "Conductor"
 
 #: app/templates/modules/extracash.html:3
-msgid "extracash_page_title"
-msgstr "Transferencia de efectivo"
+#: app/templates/modules/extracash.html:10
+msgid "extracash"
+msgstr "Extra-Cash"
 
-#: app/templates/modules/orders.html:10
+#: app/templates/modules/orders.html:3 app/templates/modules/orders.html:10
 #: app/templates/modules/single_order.html:8
 msgid "fuel_orders"
 msgstr "Órdenes de Carga"
@@ -355,53 +356,53 @@ msgstr ""
 "herramientas y beneficios que hemos preparado para ti. Si tienes alguna "
 "pregunta, no dudes en contactarnos. ¡Estamos aquí para ayudarte! 🤗"
 
-msgid "drivers_page_title"
-msgstr "Conductores"
+#~ msgid "drivers_page_title"
+#~ msgstr "Conductores"
 
-msgid "orders_page_title"
-msgstr "Pedidos de Carga"
+#~ msgid "orders_page_title"
+#~ msgstr "Pedidos de Carga"
 
-msgid "vehicles_page_title"
-msgstr "Camiones"
+#~ msgid "vehicles_page_title"
+#~ msgstr "Camiones"
 
-msgid "i_am_associated_shops_button"
-msgstr "Tiendas"
+#~ msgid "i_am_associated_shops_button"
+#~ msgstr "Tiendas"
 
-msgid "i_am_carriers_button"
-msgstr "Transportista"
+#~ msgid "i_am_carriers_button"
+#~ msgstr "Transportista"
 
-msgid "user_home_welcome"
-msgstr "Bienvenido&nbsp;a<br>Portal&nbsp;KM&nbsp;1151"
+#~ msgid "user_home_welcome"
+#~ msgstr "Bienvenido&nbsp;a<br>Portal&nbsp;KM&nbsp;1151"
 
-msgid "register_button"
-msgstr "Registrarse"
+#~ msgid "register_button"
+#~ msgstr "Registrarse"
 
-msgid "edit_order"
-msgstr "Editar Orden"
+#~ msgid "edit_order"
+#~ msgstr "Editar Orden"
 
-msgid "Actions"
-msgstr "Acciones"
+#~ msgid "Actions"
+#~ msgstr "Acciones"
 
-msgid "update"
-msgstr "actualizar"
+#~ msgid "update"
+#~ msgstr "actualizar"
 
-msgid "is_active"
-msgstr "Activo"
+#~ msgid "is_active"
+#~ msgstr "Activo"
 
-msgid "btn_delete"
-msgstr "Eliminar"
+#~ msgid "btn_delete"
+#~ msgstr "Eliminar"
 
-msgid "dlg_cancel_confirm_title"
-msgstr "Confirmación de Cancelación"
+#~ msgid "dlg_cancel_confirm_title"
+#~ msgstr "Confirmación de Cancelación"
 
-msgid "requires_odometer"
-msgstr "Requiere Odómetro"
+#~ msgid "requires_odometer"
+#~ msgstr "Requiere Odómetro"
 
-msgid "requires_kilometers"
-msgstr "Requiere Kilómetros"
+#~ msgid "requires_kilometers"
+#~ msgstr "Requiere Kilómetros"
 
-msgid "add_trailer"
-msgstr "Agregar Remolque"
+#~ msgid "add_trailer"
+#~ msgstr "Agregar Remolque"
 
-msgid "add_tractor"
-msgstr "Agregar Tractor"
+#~ msgid "add_tractor"
+#~ msgstr "Agregar Tractor"

@@ -1,14 +1,14 @@
 from allauth.account.views import LoginView
 from app.views.authorized import UserHomeView
-from app.views.fuel_orders import FuelOrderDataView, FuelOrderViewCancel, FuelOrderListView, FuelOrderViewNewOrEdit
+from app.views.fuel_orders import FuelOrderDataView, FuelOrderListView, FuelOrderViewCancel, FuelOrderViewNewOrEdit
+from app.views.extracash import ExtraCashView
 from app.views.helpers import get_qr, get_server_time
-from app.views.unauthorized import HomeView, AboutUsView, ContactUsView, UnderConstructionView, LogoutView
 from app.views.modules import CompanyView, VehiclesView
+from app.views.unauthorized import AboutUsView, ContactUsView, HomeView, LogoutView, UnderConstructionView
 from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import include, path
-
 
 # Without Internationalization
 urlpatterns = [
@@ -35,7 +35,6 @@ urlpatterns += i18n_patterns(
     path("contact_us/", ContactUsView.as_view(), name="contact-us"),
     path("user_home/", UserHomeView.as_view(), name="user_home"),
     path("logout/", LogoutView.as_view(), name="logout"),
-    # Modules Pages
     path("__reload__/", include("django_browser_reload.urls")),
     path("company/", CompanyView.as_view(), name="company"),
     path("vehicles/", VehiclesView.as_view(), name="vehicles"),
@@ -43,7 +42,7 @@ urlpatterns += i18n_patterns(
     path("orders/new/", FuelOrderViewNewOrEdit.as_view(), name="new_order"),
     path("orders/<int:order_id>/edit/", FuelOrderViewNewOrEdit.as_view(), name="edit_order"),
     path("tickets/", UnderConstructionView.as_view(), name="tickets"),
-    path("extracash/", UnderConstructionView.as_view(), name="extracash"),
+    path("extracash/", ExtraCashView.as_view(), name="extracash"),
 )
 
 if settings.DEBUG:

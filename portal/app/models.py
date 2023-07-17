@@ -148,7 +148,7 @@ class FuelOrdersManager(Manager):
                     output_field=IntegerField(),
                 )
             )
-            .order_by("custom_sort_order", "-requested_date","-id")
+            .order_by("custom_sort_order", "-requested_date", "-id")
         )
 
 
@@ -189,8 +189,8 @@ class FuelOrders(models.Model):
 
     operation_code = models.CharField(max_length=6, unique=True, blank=True, null=True)
 
-    order_date = models.DateField(auto_now_add=True)
-    modified_date = models.DateField(auto_now=True)
+    order_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
     requested_date = models.DateField(default=now)
     expiration_date = models.DateField(default=now() + timedelta(days=7))
 
@@ -259,12 +259,14 @@ class FuelOrders(models.Model):
     is_finished = models.BooleanField(default=False, verbose_name="is_finished")  # because it's been attended and it's been filled
 
     cancel_reason = models.TextField(blank=True, null=True, verbose_name="cancel_reason")  # because there's an error or user action
+    
     AGREEMENT_CHOICES = [
-        (0, "no_agreement"),
-        (1, "under_negotiation"),
-        (2, "agreed"),
+        ("under_negotiation", "Under Negotiation"),
+        ("no_agreement", "No Agreement"),
+        ("agreed", "Agreed"),
     ]
-    in_agreement = models.IntegerField(choices=AGREEMENT_CHOICES, default=0, verbose_name="in_agreement")
+
+    in_agreement = models.CharField(choices=AGREEMENT_CHOICES, default="under_negotiation", max_length=20, verbose_name="in_agreement")
 
     comments = models.TextField(blank=True, null=True, verbose_name="comments")
 
@@ -439,26 +441,26 @@ class ExtraCashManager(models.Manager):
                     output_field=IntegerField(),
                 )
             )
-            .order_by("custom_sort_order", "-requested_date","-id")
+            .order_by("custom_sort_order", "-requested_date", "-id")
         )
-
 
 class ExtraCash(models.Model):
     """New model for the ExtraCash service"""
+
     objects = ExtraCashManager()
 
     AGREEMENT_CHOICES = [
-        (0, "no_agreement"),
-        (1, "under_negotiation"),
-        (2, "agreed"),
+        ("under_negotiation", "Under Negotiation"),
+        ("no_agreement", "No Agreement"),
+        ("agreed", "Agreed"),
     ]
 
     operation_code = models.CharField(max_length=6, unique=True, blank=True, null=True)
 
-    order_date = models.DateField(auto_now_add=True)
-    modified_date = models.DateField(auto_now=True)
-    requested_date = models.DateField(default=now)
-    expiration_date = models.DateField(default=now() + timedelta(days=7))
+    order_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+    requested_date = models.DateTimeField(default=now)
+    expiration_date = models.DateTimeField(default=now() + timedelta(days=7))
 
     user_creator = models.ForeignKey(
         User,
@@ -475,20 +477,19 @@ class ExtraCash(models.Model):
         null=True,
     )
 
-    is_blocked = models.BooleanField(default=False, verbose_name="is_blocked")  # because it has been attended
-    is_canceled = models.BooleanField(default=False, verbose_name="is_canceled")  # because there's an error or user action
-    is_finished = models.BooleanField(default=False, verbose_name="is_finished")  # because it's been attended and it's been filled
+    company = models.ForeignKey(Company, on_delete=models.PROTECT)
+    driver = models.ForeignKey(Drivers, on_delete=models.PROTECT)
 
-    cancel_reason = models.TextField(blank=True, null=True, verbose_name="cancel_reason")  # because there's an error or user action
+    is_blocked = models.BooleanField(default=False, verbose_name="is_blocked")  
+    is_canceled = models.BooleanField(default=False, verbose_name="is_canceled")  
+    is_finished = models.BooleanField(default=False, verbose_name="is_finished")  
 
-    in_agreement = models.IntegerField(choices=AGREEMENT_CHOICES, default=0, verbose_name="in_agreement")
-
+    cancel_reason = models.TextField(blank=True, null=True, verbose_name="cancel_reason")  
+    in_agreement = models.CharField(choices=AGREEMENT_CHOICES, default="under_negotiation", max_length=20, verbose_name="in_agreement")
     comments = models.TextField(blank=True, null=True, verbose_name="comments")
 
-    # Method to save the model
-    # You need to replace the 'secrets' module with the appropriate key generator
-    # 'logger' should be set up to manage logging for your application
-    # '_get_current_user' and '_get_user_company' should be replaced with the appropriate user and company retrieval methods
+    cash_amount = models.PositiveIntegerField(default=0)
+
     def save(self, *args, **kwargs):
         try:
             if not self.pk:  # this is a new record

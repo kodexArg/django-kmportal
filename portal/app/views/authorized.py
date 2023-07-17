@@ -13,6 +13,4 @@ class TicketsView(CustomTemplateView):
     template_name = "modules/tickets.html"
 
 
-@method_decorator(login_required, name="dispatch")
-class ExtraCashView(CustomTemplateView):
-    template_name = "modules/extracash.html"
+

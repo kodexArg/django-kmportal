@@ -109,10 +109,10 @@
     "en": "Company Details",
     "pt": "Detalhes da Companhia"
   },
-  "extracash_page_title": {
-    "en": "Cash Transfer",
-    "es": "Transferencia de efectivo",
-    "pt": "Transferência de dinheiro"
+  "extracash": {
+    "en": "Extra-Cash",
+    "es": "Extra-Cash",
+    "pt": "Extra-Cash"
   },
   "vehicle_page_title": {
     "en": "Tractors and Trailers",
