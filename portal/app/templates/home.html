@@ -22,13 +22,9 @@
 <div class="fixed flex bottom-11 justify-center w-full">
   {% if not user.is_authenticated %}
   <div class="flex justify-center space-x-0">
-    <button id="associated_shops-button" onclick="showCard('associated_shops')"
-      class="bg-sky-200 hover:bg-pantone307c text-pantone307c hover:text-white text-sm font-bold py-2 px-4 rounded-l-full">
-      {% translate 'i_am_associated_shops_button' %}
-    </button>
     <button id="carriers-button" onclick="showCard('carriers')"
-      class="bg-sky-200 hover:bg-pantone307c text-pantone307c hover:text-white text-sm font-bold py-2 px-4 rounded-r-full">
-      {% translate 'i_am_carriers_button' %}
+      class="bg-sky-200 hover:bg-pantone307c text-pantone307c hover:text-white text-sm font-bold py-2 px-4 rounded-full">
+      {% translate 'let_me_in' %}
     </button>
   </div>
   {% endif %}

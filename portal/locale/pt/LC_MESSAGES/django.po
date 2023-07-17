@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-16 23:18+0000\n"
+"POT-Creation-Date: 2023-07-17 01:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -176,7 +176,7 @@ msgstr "Lojas Associadas"
 
 #: app/templates/components/welcome_card.html:8
 msgid "carriers_card_text_title"
-msgstr "Empresas de Transporte "
+msgstr "Bem vindo transportador!"
 
 #: app/templates/components/welcome_card.html:13
 msgid "associated_shops_card_text"
@@ -191,22 +191,19 @@ msgstr ""
 #: app/templates/components/welcome_card.html:15
 msgid "carriers_card_text"
 msgstr ""
-"Bem-vindo às Lojas Associadas do Parador KM 1151! Este é um espaço único "
-"onde os negócios prosperam no coração da montanha entre Mendoza e Chile. "
-"Estamos emocionados por tê-los conosco e convidamos você a fazer login com o"
-" Google para melhorar a comunicação e manter-se atualizado com as últimas "
-"notícias do Parador e da Estação de Serviços KM 1151. Aqui, você tem a "
-"vantagem de serviços que vão desde internet até sanitários, tudo para "
-"facilitar sua operação diária. Esperamos que sua experiência conosco seja "
-"excepcional!"
+"Bem-vindo ao nosso portal B2B, projetado especialmente para você! 🚚 Se você é um coordenador de logística ou proprietário, está no lugar certo. Aqui você pode acompanhar o progresso de seus veículos em nossa estação de serviço, o <b>Portal KM 1151</b>. \n"
+"\n"
+"Conosco, você poderá gerar facilmente <b>Ordens de Carregamento de Combustível</b>, garantindo que seus caminhões recebam a carga 🛢️ autorizada pelo empregado.\n"
+"\n"
+"Além disso, nosso sistema permitirá que você autorize transferências de dinheiro para seus motoristas através do 'CashTransfer', que receberão o dinheiro em Uspallata. 💸 \n"
+"\n"
+"Este portal será o seu ponto de entrada para todas as novidades do site. \n"
+"\n"
+"Estamos animados para tê-lo conosco! 🥳"
 
 #: app/templates/home.html:27
-msgid "i_am_associated_shops_button"
-msgstr "Lojas"
-
-#: app/templates/home.html:31
-msgid "i_am_carriers_button"
-msgstr "Operadora"
+msgid "let_me_in"
+msgstr "Registro como Transportador"
 
 #: app/templates/modules/cashtransfer.html:3
 msgid "cashtransfer_page_title"
@@ -365,6 +362,12 @@ msgstr "Pedidos de Carga"
 
 msgid "vehicles_page_title"
 msgstr "Caminhões"
+
+msgid "i_am_associated_shops_button"
+msgstr "Lojas"
+
+msgid "i_am_carriers_button"
+msgstr "Operadora"
 
 msgid "user_home_welcome"
 msgstr "Bem-vindo&nbsp;ao<br>Portal&nbsp;KM&nbsp;1151"
