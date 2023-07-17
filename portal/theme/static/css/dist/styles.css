@@ -1422,16 +1422,16 @@ input:checked + .toggle-bg {
   height: 4rem;
 }
 
-.h-2\/3 {
-  height: 66.666667%;
-}
-
 .h-20 {
   height: 5rem;
 }
 
 .h-24 {
   height: 6rem;
+}
+
+.h-3\/4 {
+  height: 75%;
 }
 
 .h-32 {
@@ -1483,21 +1483,12 @@ input:checked + .toggle-bg {
   height: 100vh;
 }
 
-.h-3\/4 {
-  height: 75%;
-}
-
 .max-h-72 {
   max-height: 18rem;
 }
 
 .min-h-screen {
   min-height: 100vh;
-}
-
-.min-h-fit {
-  min-height: -moz-fit-content;
-  min-height: fit-content;
 }
 
 .w-1\/2 {
@@ -1561,42 +1552,9 @@ input:checked + .toggle-bg {
   width: 100vw;
 }
 
-.w-5 {
-  width: 1.25rem;
-}
-
-.w-52 {
-  width: 13rem;
-}
-
-.w-9 {
-  width: 2.25rem;
-}
-
-.w-96 {
-  width: 24rem;
-}
-
-.w-56 {
-  width: 14rem;
-}
-
-.w-3 {
-  width: 0.75rem;
-}
-
-.w-36 {
-  width: 9rem;
-}
-
 .min-w-max {
   min-width: -moz-max-content;
   min-width: max-content;
-}
-
-.min-w-fit {
-  min-width: -moz-fit-content;
-  min-width: fit-content;
 }
 
 .flex-1 {
@@ -1921,11 +1879,6 @@ input:checked + .toggle-bg {
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
-
-.border-black {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .bg-\[\#4285F4\] {
@@ -2256,10 +2209,6 @@ input:checked + .toggle-bg {
 
 .text-xxxs {
   font-size: .45rem;
-}
-
-.text-4xl {
-  font-size: 2.25rem;
 }
 
 .font-bold {
@@ -2872,19 +2821,14 @@ input:checked + .toggle-bg {
   color: rgb(224 242 254 / var(--tw-text-opacity));
 }
 
-:is(.dark .dark\:text-white) {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-:is(.dark .dark\:text-gray-800) {
-  --tw-text-opacity: 1;
-  color: rgb(31 41 55 / var(--tw-text-opacity));
-}
-
 :is(.dark .dark\:text-sky-800) {
   --tw-text-opacity: 1;
   color: rgb(7 89 133 / var(--tw-text-opacity));
+}
+
+:is(.dark .dark\:text-white) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 :is(.dark .dark\:hover\:bg-blue-700:hover) {
@@ -2950,10 +2894,6 @@ input:checked + .toggle-bg {
 
   .sm\:text-4xl {
     font-size: 2.25rem;
-  }
-
-  .sm\:opacity-100 {
-    opacity: 1;
   }
 }
 
