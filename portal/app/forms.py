@@ -1,10 +1,10 @@
-from datetime import date, timedelta
+from datetime import date
 from django import forms
 from django.utils import timezone
 from .models import FuelOrders, Drivers, Tractors, Trailers
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
-from django.forms import BooleanField, Select
+from django.forms import BooleanField
 from django.core.exceptions import ValidationError
 from loguru import logger
 

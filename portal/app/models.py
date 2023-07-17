@@ -9,7 +9,6 @@ from allauth.socialaccount.models import SocialAccount
 from django.db.models import Case, When, Value, IntegerField
 from django.utils.timezone import now
 from django.utils.translation import gettext as _
-from django.shortcuts import get_object_or_404
 
 
 # Create your models here.
@@ -149,7 +148,7 @@ class FuelOrdersManager(Manager):
                     output_field=IntegerField(),
                 )
             )
-            .order_by("custom_sort_order", "-requested_date", "-order_date")
+            .order_by("custom_sort_order", "-requested_date","-id")
         )
 
 
@@ -440,13 +439,12 @@ class ExtraCashManager(models.Manager):
                     output_field=IntegerField(),
                 )
             )
-            .order_by("custom_sort_order", "-requested_date", "-order_date")
+            .order_by("custom_sort_order", "-requested_date","-id")
         )
 
 
 class ExtraCash(models.Model):
     """New model for the ExtraCash service"""
-
     objects = ExtraCashManager()
 
     AGREEMENT_CHOICES = [
