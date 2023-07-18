@@ -2,7 +2,6 @@
 {% load static i18n socialaccount custom_components %}
 {% block title %}{% translate "extracash" %}{% endblock %}
 
-
 {% block navbar %}{% include 'base/navbar_components.html' with icon='fuel' %}{% endblock %}
 
 {% block content %}
@@ -12,52 +11,21 @@
 <div class="h-24 w-full"></div>
 
 <section id="ExtraCash" class="mx-6 md:mx-10">
-    <!-- Content -->
-    <article class="flex flex-col pt-4 pb-2">
-        <h3 class="font-semibold text-white font-Roboto text-sm bg-pantone7689c rounded-full px-4">
-            {% translate 'extracash_orders' %}
-        </h3>
+    <!-- Header -->
+    <article class="flex flex-col pt-4 pb-2 mt-24">
+        <p class="text-pantone7689c">{% translate 'extracash_welcome' %}</p>
+    </article>
+    <article class="tw-loop-element">
+        <form method="post" action="{% url 'extracash' %}">
+            <!-- New ExtraCash Order -->
+            {% csrf_token %}
+            {{ form.as_p }}
 
-        <div class="tw-loop-container">
-
-            {% for extracash_order in extracash_orders %}
-            <div class="tw-loop-element">
-                <form method="post" class="tw-loop-form">
-                    <input type="hidden" name="form_type" value="update_driver">
-
-                    {% csrf_token %}
-                    {% input_field_component name="first_name" value=driver.first_name %}
-                    {% input_field_component name="last_name" value=driver.last_name %}
-                    {% input_field_component name="identification_type" value=driver.identification_type %}
-                    {% input_field_component name="identification_number" value=driver.identification_number %}
-
-                    <div class="flex justify-between items-center pt-4">
-                        {% checkbox_component name="is_active" checked=driver.is_active %}
-                        <input type="hidden" name="driver_id" value="{{ driver.id }}">
-                        {% rbutton_component caption="update" %}
-                    </div>
-                </form>
+            <div class="flex justify-end items-center pt-4">
+                <input type="submit" value="{% translate 'submit' %}">
             </div>
-            {% endfor %}
-            <div class="h-full w-fit sm:w-72 m-4 flex text-center border-2 border-pantone7689c p-4 rounded-lg bg-sky-200 shadow-md mb-10">
-                <form method="post" class="flex flex-col w-full space-y-2">
-                    <input type="hidden" name="form_type" value="create_driver">
-
-                    {% csrf_token %}
-                    {% input_field_component name="first_name" %}
-                    {% input_field_component name="last_name" %}
-                    {% input_field_component name="identification_type" value="DNI" %}
-                    {% input_field_component name="identification_number" %}
-
-                    <div class="flex justify-end items-center pt-4">
-                        {% rbutton_component caption="add_driver" bg="bg-pantone7472c"%}
-                    </div>
-                </form>
-            </div>
-        </div>
-
+        </form>
     </article>
 
 </section>
-
 {% endblock %}

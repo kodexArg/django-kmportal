@@ -444,6 +444,7 @@ class ExtraCashManager(models.Manager):
             .order_by("custom_sort_order", "-requested_date", "-id")
         )
 
+
 class ExtraCash(models.Model):
     """New model for the ExtraCash service"""
 
@@ -465,14 +466,14 @@ class ExtraCash(models.Model):
     user_creator = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
-        related_name="extracash_orders_created",
+        related_name="extracash_created",
         blank=True,
         null=True,
     )
     user_lastmod = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
-        related_name="extracash_orders_modified",
+        related_name="extracash_modified",
         blank=True,
         null=True,
     )

@@ -1,7 +1,7 @@
 from datetime import date
 from django import forms
 from django.utils import timezone
-from .models import FuelOrders, Drivers, Tractors, Trailers
+from app.models import ExtraCash, FuelOrders, Drivers, Tractors, Trailers
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 from django.forms import BooleanField
@@ -185,3 +185,58 @@ class TrailerForm(forms.ModelForm):
     class Meta:
         model = Trailers
         fields = ["domain"]
+
+
+class ExtraCashForm(forms.ModelForm):
+    CHOICES = ExtraCash.AGREEMENT_CHOICES
+
+    in_agreement = forms.ChoiceField(
+        choices=CHOICES,
+        label="In Agreement",
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            # apply custom tailwind classes for fields
+            field.widget.attrs["class"] = "tw-field"
+            if isinstance(field, BooleanField):
+                field.widget.attrs["class"] += " tw-checkbox-field"
+            else:
+                field.widget.attrs["class"] += " tw-input-field"
+
+            # label translation:
+            if field.label:
+                field.widget.attrs["placeholder"] = str(field.label)
+                field.widget.attrs["aria-label"] = str(field.label)
+                translated_label = _(str(field.label).replace(" ", "_").lower())
+                try:
+                    field.label = mark_safe(
+                        f'<span class="tw-label">{translated_label}</span>'
+                    )
+                except KeyError:
+                    field.label = mark_safe(
+                        f'<span class="tw-label">{str(field.label)}</span>'
+                    )
+                    logger.error(f"failing translation for {field.label}")
+
+        # Customizations
+        self.fields["in_agreement"].initial = "under_negotiation"
+
+    def save(self, *args, **kwargs):
+        try:
+            return super().save(*args, **kwargs)
+        except ValidationError as e:
+            logger.exception("Error occurred while saving ExtraCash order:")
+            raise
+
+    class Meta:
+        model = ExtraCash
+        fields = '__all__'
+        exclude = [
+            "operation_code",
+            "user_creator",
+            "user_lastmod",
+            "requested_date",
+            "expiration_date",
+        ]

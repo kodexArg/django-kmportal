@@ -67,8 +67,8 @@ class Migration(migrations.Migration):
                 ('comments', models.TextField(blank=True, null=True, verbose_name='comments')),
                 ('company', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='app.company')),
                 ('driver', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='app.drivers')),
-                ('user_creator', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='extracash_orders_created', to=settings.AUTH_USER_MODEL)),
-                ('user_lastmod', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='extracash_orders_modified', to=settings.AUTH_USER_MODEL)),
+                ('user_creator', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='extracash_created', to=settings.AUTH_USER_MODEL)),
+                ('user_lastmod', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='extracash_modified', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'ExtraCash Order',
