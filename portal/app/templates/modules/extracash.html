@@ -8,24 +8,50 @@
 {% translate 'extracash' as translated_title %}
 {% module_title_component translated_title %}
 
-<div class="h-24 w-full"></div>
 
-<section id="ExtraCash" class="mx-6 md:mx-10">
-    <!-- Header -->
+<section id="extracash" class="mx-6 md:mx-10">
+    <!-- header -->
     <article class="flex flex-col pt-4 pb-2 mt-24">
         <p class="text-pantone7689c">{% translate 'extracash_welcome' %}</p>
+        <p class="text-pantone7689c">{% translate 'extracash_warning' %} <a class="text-orange-400" href="http://km1151.duckdns.org">http://km1151.duckdns.org</a></p>
     </article>
     <article class="tw-loop-element">
         <form method="post" action="{% url 'extracash' %}">
-            <!-- New ExtraCash Order -->
             {% csrf_token %}
-            {{ form.as_p }}
-
+            <div class="py-2">
+                {{ form.driver.label }}
+                {{ form.driver }}
+                {% if form.driver.errors %}
+                <div class="">
+                    {{ form.driver.errors }}
+                </div>
+                {% endif %}
+            </div>
+            <div class="py-2">
+                {{ form.cash_amount.label }}
+                {{ form.cash_amount }}
+                {% if form.cash_amount.errors %}
+                <div class="">
+                    {{ form.cash_amount.errors }}
+                </div>
+                {% endif %}
+            </div>
+            <div class="py-2">
+                {{ form.cash_amount_confirm.label }}
+                {{ form.cash_amount_confirm }}
+                {% if form.cash_amount_confirm.errors %}
+                <div class="">
+                    {{ form.cash_amount_confirm.errors }}
+                </div>
+                {% endif %}
+            </div>
+            
             <div class="flex justify-end items-center pt-4">
-                <input type="submit" value="{% translate 'submit' %}">
+                {% rbutton_component caption="add_extracash" bg="bg-pantone7472c"%}
             </div>
         </form>
     </article>
-
 </section>
+
+<div class="h-24 w-full"></div>
 {% endblock %}

@@ -20,6 +20,7 @@ class ExtraCashListView(CustomTemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         company = context.get("company")
+        context['form'] = ExtraCashForm()  # Add this line
         if company is not None:
             context["extracash"] = ExtraCash.objects.filter(company=company)
         return context
@@ -38,22 +39,6 @@ class ExtraCashListView(CustomTemplateView):
         context = self.get_context_data(**kwargs)
         context["form"] = form
         return render(request, self.template_name, context)
-
-
-@method_decorator(login_required, name="dispatch")
-class ExtraCashViewNewOrEdit(CustomTemplateView):
-    template_name = "modules/single_extracash_order.html"
-
-    def get_context_data(self, order_id=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if order_id:
-            extracash_order = get_object_or_404(ExtraCash, id=order_id)
-            form = ExtraCashForm(instance=extracash_order)
-        else:
-            form = ExtraCashForm()
-
-        context["form"] = form
-        return context
 
 
 @method_decorator(login_required, name="dispatch")

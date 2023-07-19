@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-17 22:39+0000\n"
+"POT-Creation-Date: 2023-07-19 00:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,51 +18,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/forms.py:16
+#: app/forms.py:17
 msgid "January"
 msgstr "Enero"
 
-#: app/forms.py:17
+#: app/forms.py:18
 msgid "February"
 msgstr "Febrero"
 
-#: app/forms.py:18
+#: app/forms.py:19
 msgid "March"
 msgstr "Marzo"
 
-#: app/forms.py:19
+#: app/forms.py:20
 msgid "April"
 msgstr "Abril"
 
-#: app/forms.py:20
+#: app/forms.py:21
 msgid "May"
 msgstr "Mayo"
 
-#: app/forms.py:21
+#: app/forms.py:22
 msgid "June"
 msgstr "Junio"
 
-#: app/forms.py:22
+#: app/forms.py:23
 msgid "July"
 msgstr "Julio"
 
-#: app/forms.py:23
+#: app/forms.py:24
 msgid "August"
 msgstr "Agosto"
 
-#: app/forms.py:24
+#: app/forms.py:25
 msgid "September"
 msgstr "Septiembre"
 
-#: app/forms.py:25
+#: app/forms.py:26
 msgid "October"
 msgstr "Octubre"
 
-#: app/forms.py:26
+#: app/forms.py:27
 msgid "November"
 msgstr "Noviembre"
 
-#: app/forms.py:27
+#: app/forms.py:28
 msgid "December"
 msgstr "Diciembre"
 
@@ -231,9 +231,22 @@ msgid "driver"
 msgstr "Conductor"
 
 #: app/templates/modules/extracash.html:3
-#: app/templates/modules/extracash.html:10
+#: app/templates/modules/extracash.html:8
 msgid "extracash"
 msgstr "Extra-Cash"
+
+#: app/templates/modules/extracash.html:15
+msgid "extracash_welcome"
+msgstr ""
+"Bienvenido a 'ExtraCash'. Este es un servicio para retirar efectivo en "
+"nuestra estación de servicio. Una vez que se aprueba la orden, el conductor "
+"asignado puede retirar el dinero. Si por alguna razón la orden es "
+"desaprobada, haga clic en el ícono del ojo para obtener información sobre el"
+" problema."
+
+#: app/templates/modules/extracash.html:16
+msgid "extracash_warning"
+msgstr "Recuerde revisar el estado de su cuenta en el sitio:"
 
 #: app/templates/modules/orders.html:3 app/templates/modules/orders.html:10
 #: app/templates/modules/single_order.html:8
@@ -356,53 +369,62 @@ msgstr ""
 "herramientas y beneficios que hemos preparado para ti. Si tienes alguna "
 "pregunta, no dudes en contactarnos. ¡Estamos aquí para ayudarte! 🤗"
 
-#~ msgid "drivers_page_title"
-#~ msgstr "Conductores"
+msgid "drivers_page_title"
+msgstr "Conductores"
 
-#~ msgid "orders_page_title"
-#~ msgstr "Pedidos de Carga"
+msgid "orders_page_title"
+msgstr "Pedidos de Carga"
 
-#~ msgid "vehicles_page_title"
-#~ msgstr "Camiones"
+msgid "vehicles_page_title"
+msgstr "Camiones"
 
-#~ msgid "i_am_associated_shops_button"
-#~ msgstr "Tiendas"
+msgid "i_am_associated_shops_button"
+msgstr "Tiendas"
 
-#~ msgid "i_am_carriers_button"
-#~ msgstr "Transportista"
+msgid "i_am_carriers_button"
+msgstr "Transportista"
 
-#~ msgid "user_home_welcome"
-#~ msgstr "Bienvenido&nbsp;a<br>Portal&nbsp;KM&nbsp;1151"
+msgid "user_home_welcome"
+msgstr "Bienvenido&nbsp;a<br>Portal&nbsp;KM&nbsp;1151"
 
-#~ msgid "register_button"
-#~ msgstr "Registrarse"
+msgid "register_button"
+msgstr "Registrarse"
 
-#~ msgid "edit_order"
-#~ msgstr "Editar Orden"
+msgid "edit_order"
+msgstr "Editar Orden"
 
-#~ msgid "Actions"
-#~ msgstr "Acciones"
+msgid "Actions"
+msgstr "Acciones"
 
-#~ msgid "update"
-#~ msgstr "actualizar"
+msgid "update"
+msgstr "actualizar"
 
-#~ msgid "is_active"
-#~ msgstr "Activo"
+msgid "is_active"
+msgstr "Activo"
 
-#~ msgid "btn_delete"
-#~ msgstr "Eliminar"
+msgid "btn_delete"
+msgstr "Eliminar"
 
-#~ msgid "dlg_cancel_confirm_title"
-#~ msgstr "Confirmación de Cancelación"
+msgid "dlg_cancel_confirm_title"
+msgstr "Confirmación de Cancelación"
 
-#~ msgid "requires_odometer"
-#~ msgstr "Requiere Odómetro"
+msgid "requires_odometer"
+msgstr "Requiere Odómetro"
 
-#~ msgid "requires_kilometers"
-#~ msgstr "Requiere Kilómetros"
+msgid "requires_kilometers"
+msgstr "Requiere Kilómetros"
 
-#~ msgid "add_trailer"
-#~ msgstr "Agregar Remolque"
+msgid "add_trailer"
+msgstr "Agregar Remolque"
 
-#~ msgid "add_tractor"
-#~ msgstr "Agregar Tractor"
+msgid "add_tractor"
+msgstr "Agregar Tractor"
+
+msgid "requested_date"
+msgstr "Fecha Solicitada"
+
+msgid "cash_amount"
+msgstr "Cantidad en Efectivo"
+
+msgid "confirm_cash_amount"
+msgstr "Confirme la Cantidad en Efectivo"

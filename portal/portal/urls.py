@@ -1,7 +1,7 @@
 from allauth.account.views import LoginView
 from app.views.authorized import UserHomeView
 from app.views.fuel_orders import FuelOrderDataView, FuelOrderListView, FuelOrderViewCancel, FuelOrderViewNewOrEdit
-from app.views.extracash import ExtraCashDataView, ExtraCashListView, ExtraCashViewCancel, ExtraCashViewNewOrEdit
+from app.views.extracash import ExtraCashDataView, ExtraCashListView, ExtraCashViewCancel
 from app.views.helpers import get_qr, get_server_time
 from app.views.modules import CompanyView, VehiclesView
 from app.views.unauthorized import AboutUsView, ContactUsView, HomeView, LogoutView, UnderConstructionView
@@ -9,6 +9,7 @@ from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import include, path
+
 
 # Without Internationalization
 urlpatterns = [
@@ -23,7 +24,6 @@ urlpatterns = [
     path("orders/<int:order_id>/cancel/", FuelOrderViewCancel.as_view(), name="cancel_order"),
     path("extracash/<int:cash_id>/data/", ExtraCashDataView.as_view(), name="extracash_data"),
     path("extracash/<int:cash_id>/cancel/", ExtraCashViewCancel.as_view(), name="cancel_extracash"),
-
 ]
 
 # API Rest Framework
@@ -46,9 +46,6 @@ urlpatterns += i18n_patterns(
     path("orders/<int:order_id>/edit/", FuelOrderViewNewOrEdit.as_view(), name="edit_order"),
     path("tickets/", UnderConstructionView.as_view(), name="tickets"),
     path("extracash/", ExtraCashListView.as_view(), name="extracash"),
-    path("extracash/new/", ExtraCashViewNewOrEdit.as_view(), name="new_extracash"),
-    path("extracash/<int:cash_id>/edit/", ExtraCashViewNewOrEdit.as_view(), name="edit_extracash"),
-
 )
 
 if settings.DEBUG:

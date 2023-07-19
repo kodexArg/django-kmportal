@@ -259,7 +259,7 @@ class FuelOrders(models.Model):
     is_finished = models.BooleanField(default=False, verbose_name="is_finished")  # because it's been attended and it's been filled
 
     cancel_reason = models.TextField(blank=True, null=True, verbose_name="cancel_reason")  # because there's an error or user action
-    
+
     AGREEMENT_CHOICES = [
         ("under_negotiation", "Under Negotiation"),
         ("no_agreement", "No Agreement"),
@@ -460,8 +460,8 @@ class ExtraCash(models.Model):
 
     order_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
-    requested_date = models.DateTimeField(default=now)
-    expiration_date = models.DateTimeField(default=now() + timedelta(days=7))
+    requested_date = models.DateField(default=now)
+    expiration_date = models.DateField(default=now() + timedelta(days=7))
 
     user_creator = models.ForeignKey(
         User,
@@ -481,15 +481,15 @@ class ExtraCash(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     driver = models.ForeignKey(Drivers, on_delete=models.PROTECT)
 
-    is_blocked = models.BooleanField(default=False, verbose_name="is_blocked")  
-    is_canceled = models.BooleanField(default=False, verbose_name="is_canceled")  
-    is_finished = models.BooleanField(default=False, verbose_name="is_finished")  
+    is_blocked = models.BooleanField(default=False, verbose_name="is_blocked")
+    is_canceled = models.BooleanField(default=False, verbose_name="is_canceled")
+    is_finished = models.BooleanField(default=False, verbose_name="is_finished")
 
-    cancel_reason = models.TextField(blank=True, null=True, verbose_name="cancel_reason")  
+    cancel_reason = models.TextField(blank=True, null=True, verbose_name="cancel_reason")
     in_agreement = models.CharField(choices=AGREEMENT_CHOICES, default="under_negotiation", max_length=20, verbose_name="in_agreement")
     comments = models.TextField(blank=True, null=True, verbose_name="comments")
 
-    cash_amount = models.PositiveIntegerField(default=0)
+    cash_amount = models.PositiveIntegerField(verbose_name="cash_amount")
 
     def save(self, *args, **kwargs):
         try:

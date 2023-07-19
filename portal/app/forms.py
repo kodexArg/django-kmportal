@@ -1,4 +1,5 @@
 from datetime import date
+from logging import PlaceHolder
 from django import forms
 from django.utils import timezone
 from app.models import ExtraCash, FuelOrders, Drivers, Tractors, Trailers
@@ -194,17 +195,30 @@ class ExtraCashForm(forms.ModelForm):
         choices=CHOICES,
         label="In Agreement",
     )
+    cash_amount_confirm = forms.IntegerField(
+        label="confirm_cash_amount",
+        min_value=0,
+    )
+    requested_date = forms.DateField(
+        input_formats=['%d %B, %Y'], 
+        label='requested_date',
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         for field_name, field in self.fields.items():
+
             # apply custom tailwind classes for fields
             field.widget.attrs["class"] = "tw-field"
             if isinstance(field, BooleanField):
                 field.widget.attrs["class"] += " tw-checkbox-field"
             else:
                 field.widget.attrs["class"] += " tw-input-field"
-
+                
+            if field_name in ['requested_date', 'cash_amount_confirm', 'cash_amount']:
+                field.widget.attrs["class"] += " text-right"
+                
             # label translation:
             if field.label:
                 field.widget.attrs["placeholder"] = str(field.label)
@@ -220,8 +234,16 @@ class ExtraCashForm(forms.ModelForm):
                     )
                     logger.error(f"failing translation for {field.label}")
 
+
+        # Placeholder for cash_amount and cash_amount_confirm
+        self.fields['cash_amount'].widget.attrs['placeholder'] = 'ARS $'
+        self.fields['cash_amount_confirm'].widget.attrs['placeholder'] = 'ARS $'
+
         # Customizations
         self.fields["in_agreement"].initial = "under_negotiation"
+
+    # ...
+
 
     def save(self, *args, **kwargs):
         try:
@@ -230,6 +252,14 @@ class ExtraCashForm(forms.ModelForm):
             logger.exception("Error occurred while saving ExtraCash order:")
             raise
 
+    def clean(self):
+        cleaned_data = super().clean()
+        cash_amount = cleaned_data.get("cash_amount")
+        cash_amount_confirm = cleaned_data.get("cash_amount_confirm")
+
+        if cash_amount != cash_amount_confirm:
+            self.add_error("cash_amount_confirm", "Cash amount does not match")
+
     class Meta:
         model = ExtraCash
         fields = '__all__'
@@ -237,6 +267,5 @@ class ExtraCashForm(forms.ModelForm):
             "operation_code",
             "user_creator",
             "user_lastmod",
-            "requested_date",
             "expiration_date",
         ]
