@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-19 00:38+0000\n"
+"POT-Creation-Date: 2023-07-23 00:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,51 +18,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/forms.py:17
+#: app/forms.py:18
 msgid "January"
 msgstr "January"
 
-#: app/forms.py:18
+#: app/forms.py:19
 msgid "February"
 msgstr "February"
 
-#: app/forms.py:19
+#: app/forms.py:20
 msgid "March"
 msgstr "March"
 
-#: app/forms.py:20
+#: app/forms.py:21
 msgid "April"
 msgstr "April"
 
-#: app/forms.py:21
+#: app/forms.py:22
 msgid "May"
 msgstr "May"
 
-#: app/forms.py:22
+#: app/forms.py:23
 msgid "June"
 msgstr "June"
 
-#: app/forms.py:23
+#: app/forms.py:24
 msgid "July"
 msgstr "July"
 
-#: app/forms.py:24
+#: app/forms.py:25
 msgid "August"
 msgstr "August"
 
-#: app/forms.py:25
+#: app/forms.py:26
 msgid "September"
 msgstr "September"
 
-#: app/forms.py:26
+#: app/forms.py:27
 msgid "October"
 msgstr "October"
 
-#: app/forms.py:27
+#: app/forms.py:28
 msgid "November"
 msgstr "November"
 
-#: app/forms.py:28
+#: app/forms.py:29
 msgid "December"
 msgstr "December"
 
@@ -240,11 +240,27 @@ msgstr ""
 "Welcome to 'ExtraCash'. This is a service for cash withdrawal at our service"
 " station. Once the order is approved, the assigned driver can withdraw the "
 "money. If for any reason the order is disapproved, click on the eye icon to "
-"get information about the problem."
+"get information about the problem. Extra-Cash orders last 48 hours."
 
-#: app/templates/modules/extracash.html:16
+#: app/templates/modules/extracash.html:25
+msgid "new_order_advice"
+msgstr "New Extra-Cash order added for "
+
+#: app/templates/modules/extracash.html:25
+msgid "allowed_to_withdraw"
+msgstr "can withdraw up to"
+
+#: app/templates/modules/extracash.html:67
 msgid "extracash_warning"
 msgstr "Remember to check the status of your account on the site:"
+
+#: app/templates/modules/extracash.html:81
+msgid "extracash_pending_orders"
+msgstr "Pending Orders"
+
+#: app/templates/modules/extracash.html:106
+msgid "no_extracash_orders"
+msgstr "No Extra-Cash orders"
 
 #: app/templates/modules/orders.html:3 app/templates/modules/orders.html:10
 #: app/templates/modules/single_order.html:8
@@ -420,7 +436,16 @@ msgid "requested_date"
 msgstr "Requested Date"
 
 msgid "cash_amount"
-msgstr "Cash Amount"
+msgstr "Cash"
 
 msgid "confirm_cash_amount"
-msgstr "Confirm Cash Amount"
+msgstr "Confirm"
+
+msgid "add_extracash"
+msgstr "send request"
+
+msgid "add_driver"
+msgstr "add driver"
+
+msgid "template"
+msgstr ""

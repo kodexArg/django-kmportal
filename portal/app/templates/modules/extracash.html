@@ -12,46 +12,105 @@
 <section id="extracash" class="mx-6 md:mx-10">
     <!-- header -->
     <article class="flex flex-col pt-4 pb-2 mt-24">
-        <p class="text-pantone7689c">{% translate 'extracash_welcome' %}</p>
-        <p class="text-pantone7689c">{% translate 'extracash_warning' %} <a class="text-orange-400" href="http://km1151.duckdns.org">http://km1151.duckdns.org</a></p>
+        <!-- Show last order added by user in the past 60 seconds using cookie -->
+        {% if request.COOKIES.last_order_id and request.COOKIES.last_order_timestamp|is_recent %}
+        {% with last_order=extracash_orders|get_order_by_id:request.COOKIES.last_order_id %}
+        {% if last_order %}
+
+        <article class="p-2 w-full">
+            <div class="max-w-fit m-auto py-2 px-4 rounded-full bg-yellow-100 border border-yellow-300">
+                <p class="m-auto text-center text-green-700 font-rubik">{% translate 'new_order_advice' %} <b>{{ last_order.driver }}</b><br> {% translate 'allowed_to_withdraw' %}
+                    <b>{{ last_order.cash_amount }}</b> AR$</p>
+            </div>
+        </article>
+        {% else %}
+        <p class="text-pantone7689c mb-1">{% translate 'extracash_welcome' %}</p>
+        {% endif %}
+        {% endwith %}
+        {% endif %}
     </article>
-    <article class="tw-loop-element">
-        <form method="post" action="{% url 'extracash' %}">
-            {% csrf_token %}
-            <div class="py-2">
-                {{ form.driver.label }}
-                {{ form.driver }}
-                {% if form.driver.errors %}
-                <div class="">
-                    {{ form.driver.errors }}
+
+
+    <article class="p-2 w-full">
+        <div class="max-w-fit m-auto bg-sky-200 border-2 border-pantone7689c rounded-lg shadow-lg drop-shadow-lg py-4 px-6">
+            <form method="post" action="{% url 'extracash' %}">
+                {% csrf_token %}
+                <div class="py-2">
+                    {{ form.driver.label }}
+                    {{ form.driver }}
+                    {% if form.driver.errors %}
+                    <div class="">
+                        {{ form.driver.errors }}
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
-            </div>
-            <div class="py-2">
-                {{ form.cash_amount.label }}
-                {{ form.cash_amount }}
-                {% if form.cash_amount.errors %}
-                <div class="">
-                    {{ form.cash_amount.errors }}
+                <div class="grid grid-cols-2 gap-x-2">
+                    <div class="py-2 flex flex-col">
+                        {{ form.cash_amount.label }}
+                        {{ form.cash_amount }}
+                        {% if form.cash_amount.errors %}
+                        <div class="">
+                            {{ form.cash_amount.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="py-2 flex flex-col">
+                        {{ form.cash_amount_confirm.label }}
+                        {{ form.cash_amount_confirm }}
+                        {% if form.cash_amount_confirm.errors %}
+                        <div class="">
+                            {{ form.cash_amount_confirm.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
-                {% endif %}
-            </div>
-            <div class="py-2">
-                {{ form.cash_amount_confirm.label }}
-                {{ form.cash_amount_confirm }}
-                {% if form.cash_amount_confirm.errors %}
-                <div class="">
-                    {{ form.cash_amount_confirm.errors }}
+                <div class="py-2">
+                    <p class="text-pantone7689c text-xs leading-tight">
+                        {% translate 'extracash_warning' %}
+                        <a class="text-orange-400" href="http://km1151.duckdns.org">
+                            http://km1151.duckdns.org
+                        </a>
+                    </p>
                 </div>
-                {% endif %}
+                <div class="flex justify-end items-center pt-4">
+                    {% rbutton_component caption="add_extracash" bg="bg-pantone7472c"%}
+                </div>
+            </form>
+        </div>
+    </article>
+    <div class="h-6"></div>
+    <h3 class="font-semibold text-white font-Roboto text-sm bg-pantone7689c rounded-full px-4">
+        {% translate "extracash_pending_orders" %}
+    </h3>
+    <article class="tw-loop-container">
+        {% for extracash_order in extracash_orders %}
+        <div class="tw-loop-element">
+            <div class="flex flex-col w-full">
+                <div class="flex justify-between w-full">
+                    <div class="flex flex-col">
+                        <div class="leading-snug text-sm">
+                            {{ extracash_order.driver }}
+                        </div>
+                        <div class="leading-snug text-sm font-mono text-sky-800">
+                            AR$ {{ extracash_order.cash_amount }}
+                        </div>
+                    </div>
+                    <div>
+                        <form method="post" action="{% url 'extracash' %}" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                            {% csrf_token %}
+                            {% rbutton_component caption="stop" bg="bg-red-500" name="delete" value=extracash_order.id %}
+                        </form>
+                    </div>
+                </div>
             </div>
-            
-            <div class="flex justify-end items-center pt-4">
-                {% rbutton_component caption="add_extracash" bg="bg-pantone7472c"%}
-            </div>
-        </form>
+        </div>
+        {% empty %}
+        <p class="m-auto font-Roboto text-lg text-pantone7689c">{% translate "no_extracash_orders" %}</p>
+        {% endfor %}
     </article>
 </section>
 
 <div class="h-24 w-full"></div>
+
+
 {% endblock %}

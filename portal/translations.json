@@ -460,14 +460,19 @@
     "pt": "Data Solicitada"
   },
   "cash_amount": {
-    "en": "Cash Amount",
-    "es": "Cantidad en Efectivo",
-    "pt": "Quantia em Dinheiro"
+    "en": "Cash",
+    "es": "Efectivo",
+    "pt": "Dinheiro"
   },
   "confirm_cash_amount": {
-    "en": "Confirm Cash Amount",
-    "es": "Confirme la Cantidad en Efectivo",
-    "pt": "Confirme a Quantia em Dinheiro"
+    "en": "Confirm",
+    "es": "Confirme",
+    "pt": "Confirme"
+  },
+  "extracash_pending_orders": {
+    "en": "Pending Orders",
+    "es": "Órdenes Pendientes",
+    "pt": "Pedidos Pendentes"
   },
   "extracash_warning": {
     "en": "Remember to check the status of your account on the site:",
@@ -475,8 +480,38 @@
     "pt": "Lembre-se de verificar o status da sua conta no site:"
   },
   "extracash_welcome": {
-    "en": "Welcome to 'ExtraCash'. This is a service for cash withdrawal at our service station. Once the order is approved, the assigned driver can withdraw the money. If for any reason the order is disapproved, click on the eye icon to get information about the problem.",
-    "es": "Bienvenido a 'ExtraCash'. Este es un servicio para retirar efectivo en nuestra estación de servicio. Una vez que se aprueba la orden, el conductor asignado puede retirar el dinero. Si por alguna razón la orden es desaprobada, haga clic en el ícono del ojo para obtener información sobre el problema.",
-    "pt": "Bem-vindo ao 'ExtraCash'. Este é um serviço para retirada de dinheiro em nosso posto de serviço. Assim que o pedido for aprovado, o motorista designado pode retirar o dinheiro. Se por algum motivo o pedido for desaprovado, clique no ícone do olho para obter informações sobre o problema."
+    "en": "Welcome to 'ExtraCash'. This is a service for cash withdrawal at our service station. Once the order is approved, the assigned driver can withdraw the money. If for any reason the order is disapproved, click on the eye icon to get information about the problem. Extra-Cash orders last 48 hours.",
+    "es": "Bienvenido a 'ExtraCash'. Este es un servicio para retirar efectivo en nuestra estación de servicio. Una vez que se aprueba la orden, el conductor asignado puede retirar el dinero. Si por alguna razón la orden es desaprobada, haga clic en el ícono del ojo para obtener información sobre el problema. Las órdenes de Extra-Cash duran 48 horas.",
+    "pt": "Bem-vindo ao 'ExtraCash'. Este é um serviço para retirada de dinheiro em nosso posto de serviço. Assim que o pedido for aprovado, o motorista designado pode retirar o dinheiro. Se por algum motivo o pedido for desaprovado, clique no ícone do olho para obter informações sobre o problema. Pedidos Extra-Cash duram 48 horas."
+  },
+  "add_extracash": {
+    "en": "send request",
+    "es": "enviar solicitud",
+    "pt": "enviar solicitação"
+  },
+  "add_driver": {
+    "en": "add driver",
+    "es": "agregar chofer",
+    "pt": "adicionar motorista"
+  },
+  "no_extracash_orders": {
+    "en": "No Extra-Cash orders",
+    "es": "No hay órdenes de Extra-Cash",
+    "pt": "Sem ordens de Extra-Cash"
+  },
+  "new_order_advice": {
+    "en": "New Extra-Cash order added for ",
+    "es": "Orden Extra-Cash agregada para ",
+    "pt": "Ordem Extra-Cash adicionada para "
+  },
+  "allowed_to_withdraw": {
+    "en": "can withdraw up to",
+    "es": "puede retirar hasta",
+    "pt": "pode retirar até"
+  },
+  "template": {
+    "en": "",
+    "es": "",
+    "pt": ""  
   }
 }

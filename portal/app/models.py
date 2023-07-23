@@ -501,6 +501,15 @@ class ExtraCash(models.Model):
                 if hasattr(self, "user_creator") and self.user_creator is None:
                     self.user_creator = self._get_current_user()
 
+                if hasattr(self, "company") and self.company is None:
+                    self.company = self._get_user_company()
+
+                if not self.requested_date:
+                    self.requested_date = now()
+
+                if not self.expiration_date:
+                    self.expiration_date = now() + timedelta(days=2)
+
             else:  # this is an edition
                 if hasattr(self, "user_lastmod"):
                     self.user_lastmod = self._get_current_user()
@@ -508,6 +517,14 @@ class ExtraCash(models.Model):
             logger.error(f"Error on saving cash order: {e}")
 
         super().save(*args, **kwargs)
+
+    def _get_current_user(self):
+        # Get the current authenticated user using Django-Allauth
+        try:
+            social_account = SocialAccount.objects.get(user=self.request.user)
+            return social_account.user
+        except (AttributeError, SocialAccount.DoesNotExist):
+            return None
 
     def __str__(self):
         return self.operation_code

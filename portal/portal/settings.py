@@ -198,6 +198,9 @@ LANGUAGES = [
     ("pt", "Portuguêse"),
 ]
 
+USE_THOUSAND_SEPARATOR = True
+
+
 # TAILWIND and RELOADER
 TAILWIND_APP_NAME = 'theme'
     

@@ -49,7 +49,7 @@
 
 
 .tw-loop-element {
-    @apply h-full w-fit sm:w-72 flex text-center border border-pantone7689c p-4 m-2 rounded-lg bg-sky-200 shadow-md drop-shadow-md;
+    @apply h-full w-full sm:w-72 flex text-center border border-pantone7689c p-4 m-2 rounded-lg bg-sky-200 shadow-md drop-shadow-md;
     @apply hover:bg-opacity-75;
 }
 

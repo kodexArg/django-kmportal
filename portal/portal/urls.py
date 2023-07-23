@@ -1,7 +1,7 @@
 from allauth.account.views import LoginView
 from app.views.authorized import UserHomeView
 from app.views.fuel_orders import FuelOrderDataView, FuelOrderListView, FuelOrderViewCancel, FuelOrderViewNewOrEdit
-from app.views.extracash import ExtraCashDataView, ExtraCashListView, ExtraCashViewCancel
+from app.views.extracash import ExtraCashView
 from app.views.helpers import get_qr, get_server_time
 from app.views.modules import CompanyView, VehiclesView
 from app.views.unauthorized import AboutUsView, ContactUsView, HomeView, LogoutView, UnderConstructionView
@@ -22,8 +22,6 @@ urlpatterns = [
     path("get-server-time/", get_server_time, name="get-server-time"),
     path("orders/<int:order_id>/data/", FuelOrderDataView.as_view(), name="order_data"),
     path("orders/<int:order_id>/cancel/", FuelOrderViewCancel.as_view(), name="cancel_order"),
-    path("extracash/<int:cash_id>/data/", ExtraCashDataView.as_view(), name="extracash_data"),
-    path("extracash/<int:cash_id>/cancel/", ExtraCashViewCancel.as_view(), name="cancel_extracash"),
 ]
 
 # API Rest Framework
@@ -45,7 +43,7 @@ urlpatterns += i18n_patterns(
     path("orders/new/", FuelOrderViewNewOrEdit.as_view(), name="new_order"),
     path("orders/<int:order_id>/edit/", FuelOrderViewNewOrEdit.as_view(), name="edit_order"),
     path("tickets/", UnderConstructionView.as_view(), name="tickets"),
-    path("extracash/", ExtraCashListView.as_view(), name="extracash"),
+    path("extracash/", ExtraCashView.as_view(), name="extracash"),
 )
 
 if settings.DEBUG:

@@ -8,6 +8,7 @@ from django.utils.translation import gettext as _
 from django.forms import BooleanField
 from django.core.exceptions import ValidationError
 from loguru import logger
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class DateSelectWidget(forms.MultiWidget):
@@ -157,8 +158,6 @@ class CreateDriverForm(forms.ModelForm):
         ]
 
 
-
-
 class UpdateDriverForm(forms.ModelForm):
     class Meta:
         model = Drivers
@@ -191,19 +190,22 @@ class TrailerForm(forms.ModelForm):
 class ExtraCashForm(forms.ModelForm):
     CHOICES = ExtraCash.AGREEMENT_CHOICES
 
-    in_agreement = forms.ChoiceField(
-        choices=CHOICES,
-        label="In Agreement",
-    )
     cash_amount_confirm = forms.IntegerField(
         label="confirm_cash_amount",
-        min_value=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(999999)  # max 6 digits
+        ],
     )
-    requested_date = forms.DateField(
-        input_formats=['%d %B, %Y'], 
-        label='requested_date',
+    cash_amount = forms.IntegerField(
+        label="cash_amount",
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(999999)  # max 6 digits
+        ],
     )
-
+    
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -216,8 +218,9 @@ class ExtraCashForm(forms.ModelForm):
             else:
                 field.widget.attrs["class"] += " tw-input-field"
                 
-            if field_name in ['requested_date', 'cash_amount_confirm', 'cash_amount']:
+            if field_name in ['cash_amount_confirm', 'cash_amount']:
                 field.widget.attrs["class"] += " text-right"
+                field.widget.attrs["step"] = "100"
                 
             # label translation:
             if field.label:
@@ -240,9 +243,7 @@ class ExtraCashForm(forms.ModelForm):
         self.fields['cash_amount_confirm'].widget.attrs['placeholder'] = 'ARS $'
 
         # Customizations
-        self.fields["in_agreement"].initial = "under_negotiation"
-
-    # ...
+        # self.fields["in_agreement"].initial = "under_negotiation"
 
 
     def save(self, *args, **kwargs):
@@ -264,8 +265,9 @@ class ExtraCashForm(forms.ModelForm):
         model = ExtraCash
         fields = '__all__'
         exclude = [
+            "company",
             "operation_code",
-            "user_creator",
-            "user_lastmod",
+            "in_agreement",
+            "requested_date",
             "expiration_date",
         ]
