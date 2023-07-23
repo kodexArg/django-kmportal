@@ -25,9 +25,9 @@ urlpatterns = [
 ]
 
 # Staff Area without internationalization
-urlpatterns += [
-    path("staff/", include("app.staff.urls")),
-]
+# urlpatterns += [
+#     path("staff/", include("app.staff.urls")),
+# ]
 
 # API Rest Framework
 urlpatterns += [
