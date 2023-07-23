@@ -60,7 +60,8 @@ class ExtraCashView(CustomTemplateView):
 
             context = self.get_context_data(**kwargs)
             context["form"] = form
-            return redirect("extracash")
+            # return redirect("extracash") <-- wrong! doesnt submit errors.
+            return render(request, self.template_name, context)
 
 
 

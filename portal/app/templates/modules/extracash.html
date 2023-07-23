@@ -20,7 +20,8 @@
         <article class="p-2 w-full">
             <div class="max-w-fit m-auto py-2 px-4 rounded-full bg-yellow-100 border border-yellow-300">
                 <p class="m-auto text-center text-green-700 font-rubik">{% translate 'new_order_advice' %} <b>{{ last_order.driver }}</b><br> {% translate 'allowed_to_withdraw' %}
-                    <b>{{ last_order.cash_amount }}</b> AR$</p>
+                    <b>{{ last_order.cash_amount }}</b> AR$
+                </p>
             </div>
         </article>
         {% else %}
@@ -33,6 +34,12 @@
 
     <article class="p-2 w-full">
         <div class="max-w-fit m-auto bg-sky-200 border-2 border-pantone7689c rounded-lg shadow-lg drop-shadow-lg py-4 px-6">
+            {% if form.non_field_errors %}
+            <div class="">
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+
             <form method="post" action="{% url 'extracash' %}">
                 {% csrf_token %}
                 <div class="py-2">
