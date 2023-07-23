@@ -1280,6 +1280,10 @@ input:checked + .toggle-bg {
   margin: 1.5rem;
 }
 
+.m-auto {
+  margin: auto;
+}
+
 .-mx-3 {
   margin-left: -0.75rem;
   margin-right: -0.75rem;
@@ -1557,6 +1561,11 @@ input:checked + .toggle-bg {
   min-width: max-content;
 }
 
+.max-w-fit {
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1722,6 +1731,11 @@ input:checked + .toggle-bg {
        column-gap: 0.25rem;
 }
 
+.gap-x-2 {
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
+}
+
 .gap-y-0 {
   row-gap: 0px;
 }
@@ -1881,6 +1895,11 @@ input:checked + .toggle-bg {
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
+.border-yellow-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(250 202 21 / var(--tw-border-opacity));
+}
+
 .bg-\[\#4285F4\] {
   --tw-bg-opacity: 1;
   background-color: rgb(66 133 244 / var(--tw-bg-opacity));
@@ -1963,6 +1982,11 @@ input:checked + .toggle-bg {
 
 .bg-white\/50 {
   background-color: rgb(255 255 255 / 0.5);
+}
+
+.bg-yellow-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(253 246 178 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50 {
@@ -2083,6 +2107,11 @@ input:checked + .toggle-bg {
   padding-right: 1.25rem;
 }
 
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -2101,6 +2130,11 @@ input:checked + .toggle-bg {
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .pb-1 {
@@ -2251,6 +2285,10 @@ input:checked + .toggle-bg {
   line-height: 1;
 }
 
+.leading-snug {
+  line-height: 1.375;
+}
+
 .leading-tight {
   line-height: 1.25;
 }
@@ -2300,9 +2338,19 @@ input:checked + .toggle-bg {
   color: rgb(14 159 110 / var(--tw-text-opacity));
 }
 
+.text-green-700 {
+  --tw-text-opacity: 1;
+  color: rgb(4 108 78 / var(--tw-text-opacity));
+}
+
 .text-green-900 {
   --tw-text-opacity: 1;
   color: rgb(1 71 55 / var(--tw-text-opacity));
+}
+
+.text-orange-400 {
+  --tw-text-opacity: 1;
+  color: rgb(255 138 76 / var(--tw-text-opacity));
 }
 
 .text-orange-500 {
@@ -2338,6 +2386,11 @@ input:checked + .toggle-bg {
 .text-sky-200 {
   --tw-text-opacity: 1;
   color: rgb(186 230 253 / var(--tw-text-opacity));
+}
+
+.text-sky-800 {
+  --tw-text-opacity: 1;
+  color: rgb(7 89 133 / var(--tw-text-opacity));
 }
 
 .text-sky-900 {
@@ -2586,8 +2639,7 @@ input:checked + .toggle-bg {
   margin: 0.5rem;
   display: flex;
   height: 100%;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 100%;
   border-radius: 0.5rem;
   border-width: 1px;
   --tw-border-opacity: 1;

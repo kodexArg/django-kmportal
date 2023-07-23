@@ -1,10 +1,28 @@
 import os
 from loguru import logger
 from django import template
+from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 
 register = template.Library()
+
+
+## Filter
+@register.filter
+def is_recent(value):
+    if value is None:
+        return False
+    timestamp = timezone.datetime.fromisoformat(value) # from string to date
+    now = timezone.now()
+    threshold = now - timezone.timedelta(seconds=60)
+    logger.info(f"value: {value} timestamp: {timestamp} now: {now} threshold: {threshold}")
+    return timestamp > threshold
+
+
+@register.filter
+def get_order_by_id(queryset, order_id):
+    return queryset.filter(id=order_id).first()
 
 
 ## All half-rounded buttons of the main screen
@@ -155,7 +173,12 @@ def checkbox_component(name, checked=False):
 ## From component: 
 @register.simple_tag()
 def rbutton_component(
-    caption, bg="bg-pantone307c", fg="text-white", size="", name="action", value="none"
+    caption, 
+    bg="bg-pantone307c", 
+    fg="text-white", 
+    size="", 
+    name="action", 
+    value="none"
 ):
     """Rounded button component"""
     translated_caption = _(caption)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-17 01:08+0000\n"
+"POT-Creation-Date: 2023-07-23 00:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,87 +18,87 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/forms.py:16
+#: app/forms.py:18
 msgid "January"
 msgstr "Janeiro"
 
-#: app/forms.py:17
+#: app/forms.py:19
 msgid "February"
 msgstr "Fevereiro"
 
-#: app/forms.py:18
+#: app/forms.py:20
 msgid "March"
 msgstr "Março"
 
-#: app/forms.py:19
+#: app/forms.py:21
 msgid "April"
 msgstr "Abril"
 
-#: app/forms.py:20
+#: app/forms.py:22
 msgid "May"
 msgstr "Maio"
 
-#: app/forms.py:21
+#: app/forms.py:23
 msgid "June"
 msgstr "Junho"
 
-#: app/forms.py:22
+#: app/forms.py:24
 msgid "July"
 msgstr "Julho"
 
-#: app/forms.py:23
+#: app/forms.py:25
 msgid "August"
 msgstr "Agosto"
 
-#: app/forms.py:24
+#: app/forms.py:26
 msgid "September"
 msgstr "Setembro"
 
-#: app/forms.py:25
+#: app/forms.py:27
 msgid "October"
 msgstr "Outubro"
 
-#: app/forms.py:26
+#: app/forms.py:28
 msgid "November"
 msgstr "Novembro"
 
-#: app/forms.py:27
+#: app/forms.py:29
 msgid "December"
 msgstr "Dezembro"
 
-#: app/models.py:72
+#: app/models.py:71
 msgid "Companies"
 msgstr ""
 
-#: app/models.py:92
+#: app/models.py:89
 msgid "first_name"
 msgstr "Nome"
 
-#: app/models.py:93
+#: app/models.py:90
 msgid "last_name"
 msgstr "Sobrenome"
 
-#: app/models.py:94
+#: app/models.py:91
 msgid "identification_type"
 msgstr "Tipo de ID"
 
-#: app/models.py:95
+#: app/models.py:92
 msgid "identification_number"
 msgstr "N° de ID"
 
-#: app/models.py:110 app/models.py:123
+#: app/models.py:107 app/models.py:120
 msgid "domain"
 msgstr "Domínio"
 
-#: app/models.py:163
+#: app/models.py:171
 msgid "no_agreement"
 msgstr "Sem acordo"
 
-#: app/models.py:164
+#: app/models.py:172
 msgid "under_negotiation"
 msgstr "Em negociação"
 
-#: app/models.py:165
+#: app/models.py:173
 msgid "agreed"
 msgstr "Acordado"
 
@@ -195,7 +195,7 @@ msgstr ""
 "\n"
 "Conosco, você poderá gerar facilmente <b>Ordens de Carregamento de Combustível</b>, garantindo que seus caminhões recebam a carga 🛢️ autorizada pelo empregado.\n"
 "\n"
-"Além disso, nosso sistema permitirá que você autorize transferências de dinheiro para seus motoristas através do 'CashTransfer', que receberão o dinheiro em Uspallata. 💸 \n"
+"Além disso, nosso sistema permitirá que você autorize transferências de dinheiro para seus motoristas através do 'Extra Cash', que receberão o dinheiro em Uspallata. 💸 \n"
 "\n"
 "Este portal será o seu ponto de entrada para todas as novidades do site. \n"
 "\n"
@@ -205,11 +205,7 @@ msgstr ""
 msgid "let_me_in"
 msgstr "Registro como Transportador"
 
-#: app/templates/modules/cashtransfer.html:3
-msgid "cashtransfer_page_title"
-msgstr "Transferência de dinheiro"
-
-#: app/templates/modules/company.html:3 app/templates/modules/orders.html:3
+#: app/templates/modules/company.html:3
 #: app/templates/modules/single_order.html:3
 msgid "company_page_title"
 msgstr "Empresa"
@@ -234,7 +230,41 @@ msgstr "CNPJ"
 msgid "driver"
 msgstr "Motorista"
 
-#: app/templates/modules/orders.html:10
+#: app/templates/modules/extracash.html:3
+#: app/templates/modules/extracash.html:8
+msgid "extracash"
+msgstr "Extra-Cash"
+
+#: app/templates/modules/extracash.html:15
+msgid "extracash_welcome"
+msgstr ""
+"Bem-vindo ao 'ExtraCash'. Este é um serviço para retirada de dinheiro em "
+"nosso posto de serviço. Assim que o pedido for aprovado, o motorista "
+"designado pode retirar o dinheiro. Se por algum motivo o pedido for "
+"desaprovado, clique no ícone do olho para obter informações sobre o "
+"problema. Pedidos Extra-Cash duram 48 horas."
+
+#: app/templates/modules/extracash.html:25
+msgid "new_order_advice"
+msgstr "Nova ordem Extra-Cash adicionada para "
+
+#: app/templates/modules/extracash.html:25
+msgid "allowed_to_withdraw"
+msgstr "pode retirar até"
+
+#: app/templates/modules/extracash.html:67
+msgid "extracash_warning"
+msgstr "Lembre-se de verificar o status da sua conta no site:"
+
+#: app/templates/modules/extracash.html:81
+msgid "extracash_pending_orders"
+msgstr "Pedidos Pendentes"
+
+#: app/templates/modules/extracash.html:106
+msgid "no_extracash_orders"
+msgstr "Sem ordens de Extra-Cash"
+
+#: app/templates/modules/orders.html:3 app/templates/modules/orders.html:10
 #: app/templates/modules/single_order.html:8
 msgid "fuel_orders"
 msgstr "Ordes de Reabastecimento"
@@ -404,3 +434,21 @@ msgstr "Adicionar Reboque"
 
 msgid "add_tractor"
 msgstr "Adicionar Trator"
+
+msgid "requested_date"
+msgstr "Data Solicitada"
+
+msgid "cash_amount"
+msgstr "Dinheiro"
+
+msgid "confirm_cash_amount"
+msgstr "Confirme"
+
+msgid "add_extracash"
+msgstr "enviar solicitação"
+
+msgid "add_driver"
+msgstr "adicionar motorista"
+
+msgid "template"
+msgstr ""

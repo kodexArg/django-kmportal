@@ -1,12 +1,14 @@
-from datetime import date, timedelta
+from datetime import date
+from logging import PlaceHolder
 from django import forms
 from django.utils import timezone
-from .models import FuelOrders, Drivers, Tractors, Trailers
+from app.models import ExtraCash, FuelOrders, Drivers, Tractors, Trailers
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
-from django.forms import BooleanField, Select
+from django.forms import BooleanField
 from django.core.exceptions import ValidationError
 from loguru import logger
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class DateSelectWidget(forms.MultiWidget):
@@ -183,3 +185,89 @@ class TrailerForm(forms.ModelForm):
     class Meta:
         model = Trailers
         fields = ["domain"]
+
+
+class ExtraCashForm(forms.ModelForm):
+    CHOICES = ExtraCash.AGREEMENT_CHOICES
+
+    cash_amount_confirm = forms.IntegerField(
+        label="confirm_cash_amount",
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(999999)  # max 6 digits
+        ],
+    )
+    cash_amount = forms.IntegerField(
+        label="cash_amount",
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(999999)  # max 6 digits
+        ],
+    )
+    
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+
+            # apply custom tailwind classes for fields
+            field.widget.attrs["class"] = "tw-field"
+            if isinstance(field, BooleanField):
+                field.widget.attrs["class"] += " tw-checkbox-field"
+            else:
+                field.widget.attrs["class"] += " tw-input-field"
+                
+            if field_name in ['cash_amount_confirm', 'cash_amount']:
+                field.widget.attrs["class"] += " text-right"
+                field.widget.attrs["step"] = "100"
+                
+            # label translation:
+            if field.label:
+                field.widget.attrs["placeholder"] = str(field.label)
+                field.widget.attrs["aria-label"] = str(field.label)
+                translated_label = _(str(field.label).replace(" ", "_").lower())
+                try:
+                    field.label = mark_safe(
+                        f'<span class="tw-label">{translated_label}</span>'
+                    )
+                except KeyError:
+                    field.label = mark_safe(
+                        f'<span class="tw-label">{str(field.label)}</span>'
+                    )
+                    logger.error(f"failing translation for {field.label}")
+
+
+        # Placeholder for cash_amount and cash_amount_confirm
+        self.fields['cash_amount'].widget.attrs['placeholder'] = 'ARS $'
+        self.fields['cash_amount_confirm'].widget.attrs['placeholder'] = 'ARS $'
+
+        # Customizations
+        # self.fields["in_agreement"].initial = "under_negotiation"
+
+
+    def save(self, *args, **kwargs):
+        try:
+            return super().save(*args, **kwargs)
+        except ValidationError as e:
+            logger.exception("Error occurred while saving ExtraCash order:")
+            raise
+
+    def clean(self):
+        cleaned_data = super().clean()
+        cash_amount = cleaned_data.get("cash_amount")
+        cash_amount_confirm = cleaned_data.get("cash_amount_confirm")
+
+        if cash_amount != cash_amount_confirm:
+            self.add_error("cash_amount_confirm", "Cash amount does not match")
+
+    class Meta:
+        model = ExtraCash
+        fields = '__all__'
+        exclude = [
+            "company",
+            "operation_code",
+            "in_agreement",
+            "requested_date",
+            "expiration_date",
+        ]
