@@ -24,6 +24,11 @@ urlpatterns = [
     path("orders/<int:order_id>/cancel/", FuelOrderViewCancel.as_view(), name="cancel_order"),
 ]
 
+# Staff Area without internationalization
+urlpatterns += [
+    path("staff/", include("app.staff.urls")),
+]
+
 # API Rest Framework
 urlpatterns += [
     # path("api/", include("app.api.urls")),
