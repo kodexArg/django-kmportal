@@ -1,14 +1,19 @@
 from allauth.account.views import LoginView
+from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
+from django.contrib import admin
+from django.urls import include, path
+
+# 'app' views
 from app.views.authorized import UserHomeView
 from app.views.fuel_orders import FuelOrderDataView, FuelOrderListView, FuelOrderViewCancel, FuelOrderViewNewOrEdit
 from app.views.extracash import ExtraCashView
 from app.views.helpers import get_qr, get_server_time
 from app.views.modules import CompanyView, VehiclesView
 from app.views.unauthorized import AboutUsView, ContactUsView, HomeView, LogoutView, UnderConstructionView
-from django.conf import settings
-from django.conf.urls.i18n import i18n_patterns
-from django.contrib import admin
-from django.urls import include, path
+
+# 'staff' views
+from staff.views import StaffHomeView
 
 
 # Without Internationalization
@@ -25,9 +30,9 @@ urlpatterns = [
 ]
 
 # Staff Area without internationalization
-# urlpatterns += [
-#     path("staff/", include("app.staff.urls")),
-# ]
+urlpatterns += [
+    path("staff/", StaffHomeView.as_view(), name="staff_home"),
+]
 
 # API Rest Framework
 urlpatterns += [

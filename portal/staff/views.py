@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from app.views.helpers import CustomTemplateView
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+from django.views import View
 
-# Create your views here.
+
+### UNAUTHORIZED PAGES ###
+class StaffHomeView(CustomTemplateView):
+    template_name = "home.html"
