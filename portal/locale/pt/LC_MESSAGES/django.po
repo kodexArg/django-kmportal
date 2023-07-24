@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-23 00:03+0000\n"
+"POT-Creation-Date: 2023-07-24 01:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,83 +102,82 @@ msgstr "Em negociação"
 msgid "agreed"
 msgstr "Acordado"
 
-#: app/templates/about_us.html:3 app/templates/contact_us.html:3
-#: app/templates/home.html:3 app/templates/under_construction.html:3
-#: app/templates/user_home.html:3
+#: templates/about_us.html:3 templates/contact_us.html:3 templates/home.html:3
+#: templates/under_construction.html:3 templates/user_home.html:3
 msgid "t_page_title"
 msgstr "Portal&nbsp;KM&nbsp;1151"
 
-#: app/templates/base/footer.html:2
+#: templates/base/footer.html:2
 msgid "t_about"
 msgstr "Nossa Empresa"
 
-#: app/templates/base/footer.html:3
+#: templates/base/footer.html:3
 msgid "t_contact"
 msgstr "Contato"
 
-#: app/templates/base/footer.html:22
+#: templates/base/footer.html:22
 msgid "time"
 msgstr "Tempo"
 
-#: app/templates/components/google_button.html:12
+#: templates/components/google_button.html:12
 msgid "t_login_with_google"
 msgstr "Entrar com Google"
 
-#: app/templates/components/legendary_buttons.html:17
+#: templates/components/legendary_buttons.html:17
 msgid "Legend"
 msgstr "Legenda"
 
-#: app/templates/components/row_fuelorder/buttons.html:19
+#: templates/components/row_fuelorder/buttons.html:19
 msgid "continue"
 msgstr "Continuar"
 
-#: app/templates/components/row_fuelorder/buttons.html:21
-msgid "cancel"
-msgstr "Cancelar"
+#: templates/components/row_fuelorder/buttons.html:21
+msgid "pause"
+msgstr "pausar"
 
-#: app/templates/components/row_fuelorder/buttons.html:34
+#: templates/components/row_fuelorder/buttons.html:34
 msgid "schedule"
 msgstr "Agendar"
 
-#: app/templates/components/row_fuelorder/buttons.html:46
+#: templates/components/row_fuelorder/buttons.html:46
 msgid "view"
 msgstr "Ver"
 
-#: app/templates/components/row_fuelorder/row.html:21
-#: app/templates/modules/orders.html:207
+#: templates/components/row_fuelorder/row.html:21
+#: templates/modules/orders.html:207
 msgid "finished"
 msgstr "concluído"
 
-#: app/templates/components/row_fuelorder/row.html:23
-#: app/templates/modules/orders.html:211
-msgid "canceled"
-msgstr "cancelado"
+#: templates/components/row_fuelorder/row.html:23
+#: templates/modules/orders.html:211
+msgid "pauseed"
+msgstr ""
 
-#: app/templates/components/row_fuelorder/row.html:25
+#: templates/components/row_fuelorder/row.html:25
 msgid "refueling"
 msgstr "Abastecimento"
 
-#: app/templates/components/row_fuelorder/row.html:27
+#: templates/components/row_fuelorder/row.html:27
 msgid "on_transit"
 msgstr "em rota"
 
-#: app/templates/components/row_fuelorder/row.html:57
+#: templates/components/row_fuelorder/row.html:57
 msgid "from"
 msgstr "de"
 
-#: app/templates/components/row_fuelorder/row.html:58
+#: templates/components/row_fuelorder/row.html:58
 msgid "to"
 msgstr "para"
 
-#: app/templates/components/welcome_card.html:6
+#: templates/components/welcome_card.html:6
 msgid "associated_shops_card_text_title"
 msgstr "Lojas Associadas"
 
-#: app/templates/components/welcome_card.html:8
+#: templates/components/welcome_card.html:8
 msgid "carriers_card_text_title"
 msgstr "Bem vindo transportador!"
 
-#: app/templates/components/welcome_card.html:13
+#: templates/components/welcome_card.html:13
 msgid "associated_shops_card_text"
 msgstr ""
 "Bem-vindo às nossas Lojas Associadas! Estamos emocionados por você estar "
@@ -188,7 +187,7 @@ msgstr ""
 "acesse as oportunidades que estão te esperando. Estamos ansiosos para tê-lo "
 "conosco!"
 
-#: app/templates/components/welcome_card.html:15
+#: templates/components/welcome_card.html:15
 msgid "carriers_card_text"
 msgstr ""
 "Bem-vindo ao nosso portal B2B, projetado especialmente para você! 🚚 Se você é um coordenador de logística ou proprietário, está no lugar certo. Aqui você pode acompanhar o progresso de seus veículos em nossa estação de serviço, o <b>Portal KM 1151</b>. \n"
@@ -201,41 +200,47 @@ msgstr ""
 "\n"
 "Estamos animados para tê-lo conosco! 🥳"
 
-#: app/templates/home.html:27
+#: templates/home.html:27
 msgid "let_me_in"
 msgstr "Registro como Transportador"
 
-#: app/templates/modules/company.html:3
-#: app/templates/modules/single_order.html:3
+#: templates/modules/company.html:3 templates/modules/single_order.html:3
 msgid "company_page_title"
 msgstr "Empresa"
 
-#: app/templates/modules/company.html:8
+#: templates/modules/company.html:8
 msgid "company_details"
 msgstr "Detalhes da Companhia"
 
-#: app/templates/modules/company.html:16
+#: templates/modules/company.html:16
 msgid "company_name"
 msgstr "Empresa"
 
-#: app/templates/modules/company.html:22
+#: templates/modules/company.html:22
 msgid "company_fantasy_name"
 msgstr "Fantasia"
 
-#: app/templates/modules/company.html:28
+#: templates/modules/company.html:28
 msgid "company_cuit"
 msgstr "CNPJ"
 
-#: app/templates/modules/company.html:37 app/templates/modules/orders.html:80
+#: templates/modules/company.html:37 templates/modules/orders.html:80
 msgid "driver"
 msgstr "Motorista"
 
-#: app/templates/modules/extracash.html:3
-#: app/templates/modules/extracash.html:8
+#: templates/modules/extracash.html:3 templates/modules/extracash.html:8
 msgid "extracash"
 msgstr "Extra-Cash"
 
-#: app/templates/modules/extracash.html:15
+#: templates/modules/extracash.html:22
+msgid "new_order_advice"
+msgstr "Ordem Extra-Cash adicionada para "
+
+#: templates/modules/extracash.html:22
+msgid "allowed_to_withdraw"
+msgstr "pode retirar até"
+
+#: templates/modules/extracash.html:28 templates/modules/extracash.html:32
 msgid "extracash_welcome"
 msgstr ""
 "Bem-vindo ao 'ExtraCash'. Este é um serviço para retirada de dinheiro em "
@@ -244,139 +249,128 @@ msgstr ""
 "desaprovado, clique no ícone do olho para obter informações sobre o "
 "problema. Pedidos Extra-Cash duram 48 horas."
 
-#: app/templates/modules/extracash.html:25
-msgid "new_order_advice"
-msgstr "Nova ordem Extra-Cash adicionada para "
-
-#: app/templates/modules/extracash.html:25
-msgid "allowed_to_withdraw"
-msgstr "pode retirar até"
-
-#: app/templates/modules/extracash.html:67
+#: templates/modules/extracash.html:78
 msgid "extracash_warning"
 msgstr "Lembre-se de verificar o status da sua conta no site:"
 
-#: app/templates/modules/extracash.html:81
+#: templates/modules/extracash.html:92
 msgid "extracash_pending_orders"
 msgstr "Pedidos Pendentes"
 
-#: app/templates/modules/extracash.html:106
+#: templates/modules/extracash.html:117
 msgid "no_extracash_orders"
 msgstr "Sem ordens de Extra-Cash"
 
-#: app/templates/modules/orders.html:3 app/templates/modules/orders.html:10
-#: app/templates/modules/single_order.html:8
+#: templates/modules/orders.html:3 templates/modules/orders.html:10
+#: templates/modules/single_order.html:8
 msgid "fuel_orders"
 msgstr "Ordes de Reabastecimento"
 
-#: app/templates/modules/orders.html:34
-msgid "dlg_cancel_confirm"
+#: templates/modules/orders.html:34
+msgid "dlg_pause_confirm"
 msgstr ""
 "Tem certeza de que deseja alterar o status do pedido? Enquanto estiver "
 "cancelado, o pedido pode ser ativado novamente, mas se for excluído, será "
 "definitivamente perdido."
 
-#: app/templates/modules/orders.html:50 app/templates/modules/orders.html:100
-#: app/templates/modules/single_order.html:41
+#: templates/modules/orders.html:50 templates/modules/orders.html:100
+#: templates/modules/single_order.html:41
 msgid "fuel_order"
 msgstr "Pedido de Combustível"
 
-#: app/templates/modules/orders.html:70
+#: templates/modules/orders.html:70
 msgid "order_information"
 msgstr "Informações do Pedido"
 
-#: app/templates/modules/orders.html:72
+#: templates/modules/orders.html:72
 msgid "creation_date"
 msgstr "Data de Criação"
 
-#: app/templates/modules/orders.html:76
+#: templates/modules/orders.html:76
 msgid "last_modification"
 msgstr "Última Modificação"
 
-#: app/templates/modules/orders.html:87
+#: templates/modules/orders.html:87
 msgid "vehicle_information"
 msgstr "Informações do Veículo"
 
-#: app/templates/modules/orders.html:89
+#: templates/modules/orders.html:89
 msgid "tractor_plate"
 msgstr "Placa do Trator"
 
-#: app/templates/modules/orders.html:93
+#: templates/modules/orders.html:93
 msgid "trailer_plate"
 msgstr "Placa do Reboque"
 
-#: app/templates/modules/orders.html:102
-#: app/templates/modules/single_order.html:45
+#: templates/modules/orders.html:102 templates/modules/single_order.html:45
 msgid "tractor"
 msgstr "Trator"
 
-#: app/templates/modules/orders.html:106
-#: app/templates/modules/single_order.html:48
+#: templates/modules/orders.html:106 templates/modules/single_order.html:48
 msgid "backpack"
 msgstr "Mochila"
 
-#: app/templates/modules/orders.html:110
-#: app/templates/modules/single_order.html:51
+#: templates/modules/orders.html:110 templates/modules/single_order.html:51
 msgid "chamber"
 msgstr "Câmara"
 
-#: app/templates/modules/orders.html:145
+#: templates/modules/orders.html:145
 msgid "btn_continue"
 msgstr "Continuar"
 
-#: app/templates/modules/orders.html:147
-msgid "btn_cancel"
-msgstr "Cancelar (pausar) o pedido"
+#: templates/modules/orders.html:147
+msgid "btn_pause"
+msgstr "pausar"
 
-#: app/templates/modules/orders.html:215
+#: templates/modules/orders.html:215
 msgid "blocked"
 msgstr "bloqueado"
 
-#: app/templates/modules/single_order.html:13
+#: templates/modules/single_order.html:13
 msgid "fuel_order_instruction"
 msgstr ""
 "Por favor, revise cuidadosamente o seu pedido de combustível. O operador "
 "carregará o tipo de combustível e as quantidades que você especificar. "
 "Revise o pedido novamente após ser inserido na próxima tela."
 
-#: app/templates/modules/single_order.html:77
+#: templates/modules/single_order.html:77
 msgid "new"
 msgstr "Nova"
 
-#: app/templates/modules/single_order.html:77
+#: templates/modules/single_order.html:77
 msgid "new_order"
 msgstr "Ordem de Carga"
 
-#: app/templates/modules/single_order.html:84
+#: templates/modules/single_order.html:84
 msgid "btn_skip"
 msgstr "Pular"
 
-#: app/templates/modules/tickets.html:3
+#: templates/modules/tickets.html:3
 msgid "tickets_page_title"
 msgstr "Sistema de Suporte"
 
-#: app/templates/modules/vehicles.html:3
+#: templates/modules/vehicles.html:3
 msgid "vehicle_page_title"
 msgstr "Tratores e Reboques"
 
-#: app/templates/modules/vehicles.html:8
+#: templates/modules/vehicles.html:8
 msgid "vehicle_title"
 msgstr "Tratores e Reboques"
 
-#: app/templates/modules/vehicles.html:14
+#: templates/modules/vehicles.html:14
 msgid "tractors_and_trailers_subtitle"
 msgstr ""
 "Estes são os veículos autorizados para as operações de carga de combustível."
 
-#: app/templates/modules/vehicles.html:20
+#: templates/modules/vehicles.html:20
 msgid "Tractors"
 msgstr "Tratores"
 
-#: app/templates/modules/vehicles.html:58
+#: templates/modules/vehicles.html:58
 msgid "Trailers"
 msgstr "Semi-reboques"
 
-#: app/templates/user_home.html:26
+#: templates/user_home.html:26
 msgid "user_home_greeting"
 msgstr ""
 "👋 Olá e bem-vinde ao Portal KM 1151! Estamos verificando alguns detalhes 🕵️ "
@@ -405,11 +399,17 @@ msgstr "Bem-vindo&nbsp;ao<br>Portal&nbsp;KM&nbsp;1151"
 msgid "register_button"
 msgstr "Registe-se"
 
+msgid "canceled"
+msgstr "cancelado"
+
 msgid "edit_order"
 msgstr "Editar Ordem"
 
 msgid "Actions"
 msgstr "Ações"
+
+msgid "cancel"
+msgstr "Cancelar"
 
 msgid "update"
 msgstr "atualizar"
@@ -420,7 +420,10 @@ msgstr "Ativo"
 msgid "btn_delete"
 msgstr "Excluir"
 
-msgid "dlg_cancel_confirm_title"
+msgid "btn_cancel"
+msgstr "Cancelar (pausar) o pedido"
+
+msgid "dlg_pause_confirm_title"
 msgstr "Confirmação de Cancelamento"
 
 msgid "requires_odometer"

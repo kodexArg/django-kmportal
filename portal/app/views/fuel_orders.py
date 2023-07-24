@@ -74,10 +74,10 @@ class FuelOrderListView(CustomTemplateView):
                 context["form"] = form
                 return render(request, self.template_name, context)
 
-            # Check if the order is canceled
-            if fuel_order.is_canceled:
-                form.add_error(None, "Order cannot be canceled.")
-                logger.error("Order cannot be canceled.")
+            # Check if the order is pauseed
+            if fuel_order.is_pauseed:
+                form.add_error(None, "Order cannot be pauseed.")
+                logger.error("Order cannot be pauseed.")
                 context = self.get_context_data(**kwargs)
                 context["form"] = form
                 return render(request, self.template_name, context)
@@ -113,8 +113,8 @@ class FuelOrderViewNewOrEdit(CustomTemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class FuelOrderViewCancel(RedirectView):
-    pattern_name = "orders"  # redirect to this after cancel or delete
+class FuelOrderViewPause(RedirectView):
+    pattern_name = "orders"  # redirect to this after pause or delete
 
     def post(self, request, order_id, *args, **kwargs):
         # Get the FuelOrders record with the given order_id
@@ -122,9 +122,9 @@ class FuelOrderViewCancel(RedirectView):
 
         # Check the action type
         action = request.POST.get("action")
-        if action == "cancel":
-            logger.info("Cancelling order")
-            fuel_order.is_canceled = not fuel_order.is_canceled
+        if action == "pause":
+            logger.info("Pauseling order")
+            fuel_order.is_pauseed = not fuel_order.is_pauseed
             fuel_order.save()
         elif action == "delete":
             logger.info("Deleting order")
@@ -146,7 +146,7 @@ class FuelOrderDataView(View):
             "operation_code": fuel_order.operation_code,
             "user_creator": str(fuel_order.user_creator),
             "is_blocked": fuel_order.is_blocked,
-            "is_canceled": fuel_order.is_canceled,
+            "is_pauseed": fuel_order.is_pauseed,
             "is_finished": fuel_order.is_finished,
             "order_date": fuel_order.order_date.isoformat(),
             "modified_date": fuel_order.modified_date.isoformat(),

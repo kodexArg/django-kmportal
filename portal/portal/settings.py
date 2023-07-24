@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "theme",
     "django_browser_reload", #reloader
     "app",
+    "staff",
 ]
 
 MIDDLEWARE = [

@@ -5,7 +5,7 @@
     <div class="
     {% if order.is_finished %}
     bg-pantone7472c
-    {% elif order.is_canceled %}
+    {% elif order.is_pauseed %}
     bg-gray-400
     {% elif order.is_blocked %}
     bg-pantone307c
@@ -19,8 +19,8 @@
             <span class="text-xxs font-Roboto text-white">
                 {% if order.is_finished %}
                 {% translate 'finished' %}
-                {% elif order.is_canceled %}
-                {% translate 'canceled' %}
+                {% elif order.is_pauseed %}
+                {% translate 'pauseed' %}
                 {% elif order.is_blocked %}
                 {% translate 'refueling' %}
                 {% else %}
@@ -115,7 +115,7 @@
 
         <!-- Sandwitch -->
         <div id="accordion-flush" data-accordion="collapse"
-            data-active-classes="transform duration-100 rotate-90 {% if order.is_finished %}bg-pantone7472c{% elif order.is_canceled %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else %}bg-pantone7689c{% endif %}">
+            data-active-classes="transform duration-100 rotate-90 {% if order.is_finished %}bg-pantone7472c{% elif order.is_pauseed %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else %}bg-pantone7689c{% endif %}">
             <button class="h-full aspect-1 flex ml-1 rounded-full" data-accordion-target="#row-toggle-body-{{ order.id }}" aria-expanded="false">
                 <div class="h-full aspect-1 rounded-full">
                     <img class="w-full h-full" src="{% static 'svg/sandwich.svg' %}" />

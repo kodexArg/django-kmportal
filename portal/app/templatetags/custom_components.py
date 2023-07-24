@@ -82,9 +82,9 @@ def row_fuelorder_buttons_component(context, order):
     return {"order": order}
 
 
-## Fuel Order: Popup - Cancel or Delete Order
-@register.inclusion_tag("components/row_fuelorder/popup_delete_or_cancel.html", takes_context=True)
-def popup_delete_or_cancel_component(context, order):
+## Fuel Order: Popup - Pause or Delete Order
+@register.inclusion_tag("components/row_fuelorder/popup_delete_or_pause.html", takes_context=True)
+def popup_delete_or_pause_component(context, order):
     return {"order": order}
 
 

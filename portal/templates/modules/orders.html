@@ -24,18 +24,18 @@
 
 {% legendary_buttons_component %}
 
-<!-- Modal Cancel -->
-<div id="cancel-modal" class="fixed pointer-events-none z-40 left-0 top-0 flex items-center justify-center w-full h-full opacity-0 invisible transition-opacity duration-300 bg-sky-200 bg-opacity-50">
+<!-- Modal Pause -->
+<div id="pause-modal" class="fixed pointer-events-none z-40 left-0 top-0 flex items-center justify-center w-full h-full opacity-0 invisible transition-opacity duration-300 bg-sky-200 bg-opacity-50">
   <div class="relative bg-white rounded-lg shadow-lg w-11/12 md:max-w-2xl m-6 pointer-events-auto">
-    <div class="px-4 text-right"><button id="cancel-modal-close" class="text-3xl font-semibold hover:text-gray-700">×</button></div>
-    <form id="cancel-form" action="" method="post">
+    <div class="px-4 text-right"><button id="pause-modal-close" class="text-3xl font-semibold hover:text-gray-700">×</button></div>
+    <form id="pause-form" action="" method="post">
       {% csrf_token %}
       <div class="p-4">
-        <p>{% translate 'dlg_cancel_confirm' %}</p>
+        <p>{% translate 'dlg_pause_confirm' %}</p>
       </div>
       <div class="p-4 flex space-x-3 justify-end">
         {% rbutton_component value="delete" bg="bg-red-500" caption="btn_delete" %}
-        {% rbutton_component value="cancel" caption="btn_cancel" %}
+        {% rbutton_component value="pause" caption="btn_pause" %}
         {% rbutton_component caption="btn_skip" %}
       </div>
     </form>
@@ -125,33 +125,33 @@
 {% block scripts %}
 <script type="text/javascript">
   $(document).ready(function () {
-    const cancelModal = $('#cancel-modal');
+    const pauseModal = $('#pause-modal');
     const viewModal = $('#view-modal');
-    const cancelCloseModal = $('#cancel-modal-close');
+    const pauseCloseModal = $('#pause-modal-close');
     const viewCloseModal = $('#view-modal-close');
-    const formCancel = $('#cancel-form');
+    const formPause = $('#pause-form');
     let orderId;
 
-    // Cancel order functionality
-    $('[id^="cancel-button-"]').click(function () {
+    // Pause order functionality
+    $('[id^="pause-button-"]').click(function () {
       orderId = $(this).data('order-id');
 
       $.ajax({
         url: `/orders/${orderId}/data/`,
         type: 'GET',
         success: function (data) {
-          // Check if the order is already canceled
-          if (data.is_canceled) {
-            $('button[value="cancel"]').find('p').text('{% translate "btn_continue" %}');
+          // Check if the order is already pauseed
+          if (data.is_pauseed) {
+            $('button[value="pause"]').find('p').text('{% translate "btn_continue" %}');
           } else {
-            $('button[value="cancel"]').find('p').text('{% translate "btn_cancel" %}');
+            $('button[value="pause"]').find('p').text('{% translate "btn_pause" %}');
           }
 
           // Modify the form action attribute
-          formCancel.attr('action', `/orders/${orderId}/cancel/`);
+          formPause.attr('action', `/orders/${orderId}/pause/`);
 
           // Display the modal
-          cancelModal.toggleClass('opacity-0 invisible pointer-events-none');
+          pauseModal.toggleClass('opacity-0 invisible pointer-events-none');
         },
         error: function (jqXHR, textStatus, errorThrown) {
           console.error('Error occurred while retrieving order data:', errorThrown);
@@ -159,13 +159,13 @@
       });
     });
 
-    // Close Cancel Modal
-    cancelCloseModal.click(function () {
-      cancelModal.addClass('opacity-0 invisible pointer-events-none');
+    // Close Pause Modal
+    pauseCloseModal.click(function () {
+      pauseModal.addClass('opacity-0 invisible pointer-events-none');
     });
 
     // Listen for form submit
-    formCancel.on('submit', function (e) {
+    formPause.on('submit', function (e) {
       e.preventDefault();  // prevent the form from submitting normally
 
       // get the value of the action
@@ -177,18 +177,18 @@
       };
 
       $.ajax({
-        url: `/orders/${orderId}/cancel/`,
+        url: `/orders/${orderId}/pause/`,
         type: 'POST',
         data: data,
         success: function (response) {
           console.log('Response from server: ', response);
           if (response.result == "success") {
-            cancelModal.addClass('opacity-0 invisible pointer-events-none');
+            pauseModal.addClass('opacity-0 invisible pointer-events-none');
             location.reload();
           }
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.error('Error occurred while trying to cancel/delete order:', errorThrown);
+          console.error('Error occurred while trying to pause/delete order:', errorThrown);
         }
       });
     });
@@ -207,8 +207,8 @@
             statusTextElement.text('{% translate "finished" %}');
             statusTextElement.removeClass('text-red-500 text-orange-500');
             statusTextElement.addClass('text-green-500');
-          } else if (data.is_canceled) {
-            statusTextElement.text('{% translate "canceled" %}');
+          } else if (data.is_pauseed) {
+            statusTextElement.text('{% translate "pauseed" %}');
             statusTextElement.removeClass('text-green-500 text-orange-500');
             statusTextElement.addClass('text-red-500');
           } else if (data.is_blocked) {
@@ -255,8 +255,8 @@
 
     // Close modals on outside click
     $(window).click(function (event) {
-      if (event.target == cancelModal[0]) {
-        cancelModal.addClass('opacity-0 invisible pointer-events-none');
+      if (event.target == pauseModal[0]) {
+        pauseModal.addClass('opacity-0 invisible pointer-events-none');
       } else if (event.target == viewModal[0]) {
         viewModal.addClass('opacity-0 invisible pointer-events-none');
       }

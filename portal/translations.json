@@ -384,12 +384,12 @@
     "en": "Skip",
     "pt": "Pular"
   },
-  "dlg_cancel_confirm": {
-    "es": "¿Está seguro que desea cambiar el estado de la orden? Mientras esté cancelada, la orden puede activarse nuevamente, pero al ser eliminada se perderá definitivamente.",
-    "en": "Are you sure you want to change the status of the order? While it's canceled, the order can be activated again, but if it's deleted, it will be permanently lost.",
+  "dlg_pause_confirm": {
+    "es": "¿Está seguro que desea cambiar el estado de la orden? Mientras esté pausada, la orden puede activarse nuevamente, pero al ser eliminada se perderá definitivamente.",
+    "en": "Are you sure you want to change the status of the order? While it's paused, the order can be activated again, but if it's deleted, it will be permanently lost.",
     "pt": "Tem certeza de que deseja alterar o status do pedido? Enquanto estiver cancelado, o pedido pode ser ativado novamente, mas se for excluído, será definitivamente perdido."
   },
-  "dlg_cancel_confirm_title": {
+  "dlg_pause_confirm_title": {
     "es": "Confirmación de Cancelación",
     "en": "Cancel Confirmation",
     "pt": "Confirmação de Cancelamento"
@@ -513,5 +513,15 @@
     "en": "",
     "es": "",
     "pt": ""  
+  },
+  "pause": {
+    "en": "pause",
+    "es": "pausar",
+    "pt": "pausar"  
+  },
+  "btn_pause": {
+    "en": "pause",
+    "es": "pausar",
+    "pt": "pausar"
   }
 }

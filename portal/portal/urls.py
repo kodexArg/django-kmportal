@@ -6,7 +6,7 @@ from django.urls import include, path
 
 # 'app' views
 from app.views.authorized import UserHomeView
-from app.views.fuel_orders import FuelOrderDataView, FuelOrderListView, FuelOrderViewCancel, FuelOrderViewNewOrEdit
+from app.views.fuel_orders import FuelOrderDataView, FuelOrderListView, FuelOrderViewPause, FuelOrderViewNewOrEdit
 from app.views.extracash import ExtraCashView
 from app.views.helpers import get_qr, get_server_time
 from app.views.modules import CompanyView, VehiclesView
@@ -26,7 +26,7 @@ urlpatterns = [
     path("get_qr/<int:order_id>/", get_qr, name="get_qr"),
     path("get-server-time/", get_server_time, name="get-server-time"),
     path("orders/<int:order_id>/data/", FuelOrderDataView.as_view(), name="order_data"),
-    path("orders/<int:order_id>/cancel/", FuelOrderViewCancel.as_view(), name="cancel_order"),
+    path("orders/<int:order_id>/pause/", FuelOrderViewPause.as_view(), name="pause_order"),
 ]
 
 # Staff Area without internationalization

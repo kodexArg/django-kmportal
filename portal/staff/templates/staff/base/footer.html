@@ -1,0 +1,53 @@
+<div class="
+            flex
+            h-full
+            w-full
+            px-4
+            items-center 
+            justify-between
+            rounded-t-lg
+            bg-[#1E2023]
+            text-sky-100
+            ">
+
+    <div class="text-xs flex justify-center w-full text-sky-100">
+        <div id="clock"></div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+
+    function updateClock(serverTimeDifference) {
+        const clockElement = document.getElementById('clock');
+
+        const clientTime = new Date();
+        const adjustedTime = new Date(clientTime.getTime() + serverTimeDifference);
+
+        const hours = adjustedTime.getHours().toString().padStart(2, '0');
+        const minutes = adjustedTime.getMinutes().toString().padStart(2, '0');
+        const seconds = adjustedTime.getSeconds().toString().padStart(2, '0');
+        const clockText = `${hours}:${minutes}:${seconds}`;
+        clockElement.textContent = clockText;
+    }
+
+    function startClock(serverTimeDifference) {
+        setInterval(() => {
+            updateClock(serverTimeDifference);
+        }, 1000);
+    }
+
+    fetch('/get-server-time')
+        .then(response => response.json())
+        .then(data => {
+            const serverTime = new Date(data.server_time);
+            const clientTime = new Date();
+            const serverTimeDifference = serverTime.getTime() - clientTime.getTime();
+            startClock(serverTimeDifference);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+</script>
+{% endblock %}

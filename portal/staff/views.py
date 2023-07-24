@@ -6,4 +6,4 @@ from django.views import View
 
 ### UNAUTHORIZED PAGES ###
 class StaffHomeView(CustomTemplateView):
-    template_name = "home.html"
+    template_name = "staff/home.html"
