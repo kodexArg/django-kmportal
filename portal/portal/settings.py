@@ -171,7 +171,10 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
+# this doesn't work for 'staff' app
 LOGIN_REDIRECT_URL = "user_home"
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
 
 # More Allauth configs...
 ACCOUNT_LOGOUT_ON_GET = True

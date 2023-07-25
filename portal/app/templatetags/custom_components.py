@@ -27,7 +27,7 @@ def get_order_by_id(queryset, order_id):
 
 ## All half-rounded buttons of the main screen
 @register.inclusion_tag("components/menu_button.html", takes_context=True)
-def menu_button_component(context, pos, side, icon="", size="small", url="#", style=""):
+def menu_button_component(context, pos, side, icon="", size="small", url="#", style="", bg=""):
     """Each menu button including Icons, Flags and avatars"""
     if not os.path.isfile(f"static/svg/{icon}.svg"):
         icon = "question"  # TODO: Replace question with a known good icon
@@ -40,6 +40,7 @@ def menu_button_component(context, pos, side, icon="", size="small", url="#", st
         "side": side,
         "url": url,
         "style": style,
+        "bg": bg,
         "user": user,  # Pass the user object to the template
     }
 

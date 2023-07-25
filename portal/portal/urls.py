@@ -2,6 +2,7 @@ from allauth.account.views import LoginView
 from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import include, path
 
 # 'app' views
@@ -14,6 +15,8 @@ from app.views.unauthorized import AboutUsView, ContactUsView, HomeView, LogoutV
 
 # 'staff' views
 from staff.views import StaffHomeView
+from staff.forms import CustomLoginForm
+
 
 
 # Without Internationalization
@@ -32,6 +35,8 @@ urlpatterns = [
 # Staff Area without internationalization
 urlpatterns += [
     path("staff/", StaffHomeView.as_view(), name="staff_home"),
+    path("staff/login/", auth_views.LoginView.as_view(template_name='staff/login.html', form_class=CustomLoginForm), name='staff_login'),
+    path("staff/logout/", auth_views.LogoutView.as_view(), name='staff_logout'),
 ]
 
 # API Rest Framework

@@ -1,0 +1,21 @@
+    <!-- Content to show to logged out users -->
+    <form method="post">
+        {% csrf_token %}
+        <div class="flex flex-col p-4
+                    bg-gray-800 drop-shadow-lg border-pantone7472c border-2 rounded-2xl
+                    text-pantone7472c font-Roboto 
+                    ">
+            <div class="w-full text-center mb-5 mt-2 text-lg">
+                Ingreso Trabajadores
+            </div>
+            <div class="flex bg-white rounded-lg p-1 my-2">
+                <input type="text" name="{{ form.username.name }}" class="form-control rounded-lg border-white border-2" placeholder="Usuario">
+                <span class="m-2"><i class="fas fa-user"></i></span>
+            </div>
+            <div class="flex bg-white rounded-lg p-1 my-2">
+                <input type="password" name="{{ form.password.name }}" class="form-control rounded-lg border-white border-2" placeholder="Contraseña">
+                <span class="m-2"><i class="fas fa-lock"></i></span>
+            </div>
+            <button type="submit" class="my-2 rounded-lg bg-pantone7472c py-3 px-4 text-white font-Roboto font-lg font-bold w-full">Ingresar</button>
+        </div>
+    </form>

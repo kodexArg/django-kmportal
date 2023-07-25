@@ -8,7 +8,7 @@
             {% if side == 'left' %}left-0{% else %}right-0{% endif %}
             {% if size == 'small' %}h-16{% else %}h-24{% endif %}
             aspect-1 md:aspect-fibbo-fwd
-            bg-pantone307c 
+            {% if bg != '' %}{{ bg }}{% else %}bg-pantone307c{% endif %} 
             rounded-{% if side == 'left' %}r{% else %}l{% endif %}-full
             flex {% if side == 'left' %}justify-end{% else %}justify-start{% endif %}
             shadow-md drop-shadow-md
