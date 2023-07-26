@@ -1,7 +1,6 @@
 from loguru import logger
 from app.views.helpers import CustomTemplateView
-from django.contrib.auth import logout, login, authenticate
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect, render
 from django.views import View
 from staff.forms import CustomLoginForm

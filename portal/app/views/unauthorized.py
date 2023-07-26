@@ -23,5 +23,9 @@ class UnderConstructionView(CustomTemplateView):
 
 class LogoutView(View):
     def get(self, request, *args, **kwargs):
+        was_user_staff = request.user.is_staff
         logout(request)
-        return redirect("home")
+        if was_user_staff:
+            return redirect('staff_home')
+        else:
+            return redirect('home')
