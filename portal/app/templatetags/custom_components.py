@@ -25,7 +25,6 @@ def get_order_by_id(queryset, order_id):
     return queryset.filter(id=order_id).first()
 
 
-## All half-rounded buttons of the main screen
 @register.inclusion_tag("components/menu_button.html", takes_context=True)
 def menu_button_component(context, pos, side, icon="", size="small", url="#", style="", bg=""):
     """Each menu button including Icons, Flags and avatars"""
@@ -44,7 +43,12 @@ def menu_button_component(context, pos, side, icon="", size="small", url="#", st
         "user": user,  # Pass the user object to the template
     }
 
-
+@register.simple_tag()
+def simple_icon_button_component(icon, url="#", fg="#ffffff"):
+    container_class = "h-16 aspect-1"
+    # get svg from icon name as 'svg/{icon}.svg'
+        
+     
 ## Popup with Goggle button to join the site
 @register.inclusion_tag("components/welcome_card.html")
 def welcome_card_component(choice):
