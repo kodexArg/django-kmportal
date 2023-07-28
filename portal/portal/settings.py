@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "compressor", # compressor
     "rest_framework",
     "api",
     "tailwind",
@@ -53,6 +54,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    'django.middleware.clickjacking.XFrameOptionsMiddleware', # compressor
+    'django.middleware.security.SecurityMiddleware', # compressor
     "django_browser_reload.middleware.BrowserReloadMiddleware", #reloader
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -136,6 +139,12 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# TODO
+#COMPRESS_ROOT = BASE_DIR / 'static'
+#COMPRESS_ENABLED = True
+#STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
 
 
 # Allauth configuration

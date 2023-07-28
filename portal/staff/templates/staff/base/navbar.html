@@ -1,9 +1,10 @@
 {% load static custom_components %}
 
-<nav class="fixed top-0">
-    <!-- right buttons -->
-    {% menu_button_component pos="5" side="right" url="logout" icon="logout" bg="bg-[#323232]" %}
-    {% menu_button_component pos="4" side="right" url="#" icon="fuel" bg="bg-[#323232]" %}
-    {% menu_button_component pos="3" side="right" url="#" icon="cash" bg="bg-[#323232]" %}
-    {% menu_button_component pos="2" side="right" url="#" icon="qr" bg="bg-[#323232]" %}
+
+<nav class="fixed z-40 w-full h-16 max-w-sm  bg-[#323232] border-2 border-pantone7472c rounded-full bottom-4 left-1/2 -translate-x-1/2">
+    <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
+
+       {% nav_buttom_component left=True icon="fuel" tooltip="Ordenes de Carga" %} 
+
+    </div>
 </nav>

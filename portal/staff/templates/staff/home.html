@@ -4,10 +4,11 @@
 
 {% block content %}
 
+{% include "staff/base/navbar.html" %}
+
 <section id="login" class="min-h-screen min-w-screen flex flex-col sm:flex-row items-center justify-center">
 
     {% if user.is_authenticated and user.is_staff %}
-    {% include "staff/base/navbar.html" %}
 
     <!-- Content to show to logged in users -->
     <div class="w-32 sm:w-56">

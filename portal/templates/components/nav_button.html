@@ -1,0 +1,16 @@
+{% load static custom_components %}
+
+<button data-tooltip-target="tooltip-{{ icon }}" 
+        type="button" 
+        class="inline-flex flex-col items-center justify-center {{ leftright }} group">
+
+    <img class="h-5" src="{% static 'svg/'|add:icon|add:'.svg' %}" />
+    <span class="sr-only">{{ tooltip }}</span>
+
+</button>
+
+<div id="tooltip-{{ icon }}" role="tooltip"
+    class="absolute z-20 invisible inline-block text-sm font-rubik font-bold text-[#323232] transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip">
+    {{ tooltip|title }}
+    <div class="tooltip-arrow" data-popper-arrow></div>
+</div>
