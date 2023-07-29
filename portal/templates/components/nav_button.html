@@ -1,16 +1,16 @@
 {% load static custom_components %}
-
-<button data-tooltip-target="tooltip-{{ icon }}" 
-        type="button" 
-        class="inline-flex flex-col items-center justify-center {{ leftright }} group">
-
-    <img class="h-5" src="{% static 'svg/'|add:icon|add:'.svg' %}" />
-    <span class="sr-only">{{ tooltip }}</span>
-
+<button data-tooltip-target="tooltip-{{ icon }}"
+        type="button"
+        class="inline-flex flex-col items-center justify-center {{ leftright }} hover:bg-pantone7472c group w-20 px-3">
+    <img class="rounded-full"
+         src="{% static 'svg/'|add:icon|add:'.svg' %}"
+         alt="{{ icon }}" />
+    <span class="sr-only">{{ tooltip|title }}</span>
 </button>
 
-<div id="tooltip-{{ icon }}" role="tooltip"
-    class="absolute z-20 invisible inline-block text-sm font-rubik font-bold text-[#323232] transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip">
+<div id="tooltip-{{ icon }}"
+     role="tooltip"
+     class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip bg-[#323232]">
     {{ tooltip|title }}
     <div class="tooltip-arrow" data-popper-arrow></div>
 </div>

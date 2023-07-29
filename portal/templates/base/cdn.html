@@ -1,14 +1,14 @@
 {% load compress static %}
 
-{# Finally my base.css #}
-<link href="{% static 'css/base.css' %}" rel="stylesheet">
+<!-- cdn:css -->
+{% compress css %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet" />
+{% endcompress %}
 
-{# Fonts #}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<!-- cdn:js -->
+{% compress js %}
+    <script src="{% static 'js/ajax.googleapis.com_ajax_libs_jquery_3.7.0_jquery.min.js' %}"></script>
+    <script src="{% static 'js/cdnjs.cloudflare.com_ajax_libs_flowbite_1.8.0_flowbite.min.js' %}"></script>
+{% endcompress %}
 
-{# should be included with Flowbite... but it's not #}
-<script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-
-{# JQuery Ajax #}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<!-- endcdn -->

@@ -1,40 +1,33 @@
 {% load static tailwind_tags %}
-
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title%}{% endblock %}</title>
-    <link rel="icon" href="{% static 'favicon.ico' %}">
-    {% tailwind_css %}
-    {% include "base/cdn.html" %}
-    {% block styles %}{% endblock %}
-</head>
-
-<body class="flex flex-col bg-gradient-to-b from-sky-200 to-transparent min-h-screen">
-    <header class="fixed w-full z-50 bg-gradient-to-b from-sky-200 to-transparent flex-shrink-0">
-        <!-- NAVBAR -->
-        {% block navbar %}
-        {% include 'base/navbar.html' %}
-        {% endblock %}
-    </header>
-
-    <main role="main" class="flex flex-col flex-grow">
-        <div></div>
-        {% block content %}
-        <!-- CONTENT -->
-        {% endblock %}
-    </main>
-
-    <footer class="z-50 fixed bottom-0 h-7 w-full flex-shrink-0">
-        <!-- FOOTBAR -->
-        {% include 'base/footer.html' %}
-    </footer>
-
-    {% block scripts %}{% endblock %}
-</body>
-
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            {% block title %}{% endblock %}
+        </title>
+        <link rel="icon" href="{% static 'favicon.ico' %}" />
+        {% tailwind_css %}
+        {% include "base/cdn.html" %}
+        {% block styles %}{% endblock %}
+    </head>
+    <body class="flex flex-col bg-gradient-to-b from-sky-200 to-transparent min-h-screen">
+        <header class="fixed w-full z-50 bg-gradient-to-b from-sky-200 to-transparent flex-shrink-0">
+            <!-- NAVBAR -->
+            {% block navbar %}
+                {% include "base/navbar.html" %}
+            {% endblock %}
+        </header>
+        <main role="main" class="flex flex-col flex-grow">
+            <div></div>
+            {% block content %}<!-- CONTENT -->{% endblock %}
+        </main>
+        <footer class="z-50 fixed bottom-0 h-7 w-full flex-shrink-0">
+            <!-- FOOTBAR -->
+            {% include "base/footer.html" %}
+        </footer>
+        {% block scripts %}{% endblock %}
+    </body>
 </html>

@@ -1,10 +1,9 @@
 {% load static custom_components %}
-
-
-<nav class="fixed z-40 w-full h-16 max-w-sm  bg-[#323232] border-2 border-pantone7472c rounded-full bottom-4 left-1/2 -translate-x-1/2">
-    <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
-
-       {% nav_buttom_component left=True icon="fuel" tooltip="Ordenes de Carga" %} 
-
+<nav class="fixed z-40 bg-[#323232] border-2 border-pantone7472c rounded-full bottom-4 left-1/2 -translate-x-1/2">
+    <div class="grid grid-cols-4 m-1">
+        {% nav_buttom_component icon="fuel2" tooltip="Órdenes de Carga" left=True %}
+        {% nav_buttom_component icon="cash2" tooltip="Órdenes Extra-Cash" %}
+        {% nav_buttom_component icon="qr2" tooltip="Escanear Código" %}
+        {% nav_buttom_component icon="logout" tooltip="Cerrar sesión" right=True %}
     </div>
 </nav>

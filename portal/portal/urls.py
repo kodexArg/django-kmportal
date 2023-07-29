@@ -17,8 +17,6 @@ from app.views.unauthorized import AboutUsView, ContactUsView, HomeView, LogoutV
 from staff.views import StaffHomeView
 from staff.forms import CustomLoginForm
 
-
-
 # Without Internationalization
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -35,8 +33,8 @@ urlpatterns = [
 # Staff Area without internationalization
 urlpatterns += [
     path("staff/", StaffHomeView.as_view(), name="staff_home"),
-    path("staff/login/", auth_views.LoginView.as_view(template_name='staff/login.html', form_class=CustomLoginForm), name='staff_login'),
-    path("staff/logout/", auth_views.LogoutView.as_view(), name='staff_logout'),
+    path("staff/login/", auth_views.LoginView.as_view(template_name="staff/login.html", form_class=CustomLoginForm), name="staff_login"),
+    path("staff/logout/", auth_views.LogoutView.as_view(), name="staff_logout"),
 ]
 
 # API Rest Framework

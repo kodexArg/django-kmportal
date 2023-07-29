@@ -13,7 +13,7 @@ register = template.Library()
 def is_recent(value):
     if value is None:
         return False
-    timestamp = timezone.datetime.fromisoformat(value) # from string to date
+    timestamp = timezone.datetime.fromisoformat(value)  # from string to date
     now = timezone.now()
     threshold = now - timezone.timedelta(seconds=60)
     logger.info(f"value: {value} timestamp: {timestamp} now: {now} threshold: {threshold}")
@@ -43,12 +43,13 @@ def menu_button_component(context, pos, side, icon="", size="small", url="#", st
         "user": user,  # Pass the user object to the template
     }
 
+
 @register.simple_tag()
 def simple_icon_button_component(icon, url="#", fg="#ffffff"):
     container_class = "h-16 aspect-1"
     # get svg from icon name as 'svg/{icon}.svg'
-        
-     
+
+
 ## Popup with Goggle button to join the site
 @register.inclusion_tag("components/welcome_card.html")
 def welcome_card_component(choice):
@@ -175,16 +176,9 @@ def checkbox_component(name, checked=False):
     return mark_safe(html)
 
 
-## From component: 
+## From component:
 @register.simple_tag()
-def rbutton_component(
-    caption, 
-    bg="bg-pantone307c", 
-    fg="text-white", 
-    size="", 
-    name="action", 
-    value="none"
-):
+def rbutton_component(caption, bg="bg-pantone307c", fg="text-white", size="", name="action", value="none"):
     """Rounded button component"""
     translated_caption = _(caption)
 
@@ -198,23 +192,19 @@ def rbutton_component(
     return mark_safe(html)
 
 
-
 # NAVBAR BOTTOM
 ## Button
 
-@register.inclusion_tag('components/nav_button.html')
+
+@register.inclusion_tag("components/nav_button.html")
 def nav_buttom_component(tooltip, icon, left=False, right=False):
     if left:
         leftright = "rounded-l-full"
     elif right:
         leftright = "rounded-r-full"
     else:
-        leftright = "rounded-full"
-    
+        leftright = ""
+
     logger.info(f"left={left}, right={right}, leftright={leftright}")
-    
-    return {
-        "tooltip": tooltip,
-        "icon": icon,
-        "leftright": leftright
-    }
+
+    return {"tooltip": tooltip, "icon": icon, "leftright": leftright}
