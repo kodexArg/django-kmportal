@@ -1,7 +1,8 @@
 # KM 1151 Enterprise Portal
 This Django-based Fuel Station Enterprise website features a homepage, a minimalistic navbar, and user authentication. The site utilizes an RDS AWS database in the production environment and is styled using __**Tailwind**__ **Flowbite**!.
 ### Language
-Although this site is written in English but it will be implemented in Argentina, having **Spanish** as main language (and probably Portuguese and English as alt languages). For this reason, dictionaries labeled as dialog{} will be used within the code (hard-coded) to alleviate the use of any brave person who wants to take advantage of it in another language.
+Although this site is written in English but it will be implemented in Argentina, having **Spanish** as main language (having Portuguese and English as alt languages). To facilitate the use of internationalization I have created a 'translations.py' script that, together with 'translations.json', keeps all the translations of the site in a single json (currently "en", "es" and "pt" ). In summary: to change any term or create new ones, it is enough to edit or create new keys in the json. PRO TIP: chat-gpt will do all the work if you offer it a key and text in your favorite language, asking it to fill in the rest.
+it is necessary to run "python manage.py makemessages -a" before the translations and "python manage.py compilemessages" at the end (usually I shoot the line: ```python manage.py makemessages -a && python translations.py && python manage.py compilemessage```
 ### Current state of the project
 **This project is currently a work in progress and is not yet ready for production use**. There may be bugs, incomplete features, and other issues that need to be resolved. Use at your own risk and please report any issues or suggestions to the project team. Thank you for your understanding and patience as we work to improve and finalize the site.
 ## Roadmap
@@ -10,42 +11,57 @@ Although this site is written in English but it will be implemented in Argentina
 3. Develop a user authentication system with Google or Instagram OAuth, ensuring all pages are secured against unauthorized access. **🗸** (50%:Google)
 4. Set up an RDS AWS database for the production environment. **🗸**
 5. Implement a ticketing system for customers.
-6. Create additional modules for various tasks.
+6. Create additional modules for various tasks:
+  - "Fuel Orders" module **🗸**
+  - "Cash Transfer" (named Extra-Cash) module **🗸**
+  - "Enterprise" module **🗸**
+  - "Drivers" module **🗸**
+  - "Truck and Trailers" module **🗸**
+  - "Ticketing" module
 7. Refine the visual styling with a singular `base.css` file and **Tailwind**. **🗸**
 8. Include Continuous Integration/Continuous Deployment with GitHub Actions. **🗸**
 9. Generate comprehensive documentation to implement the project in EC2.
-10. Develop a pump operator's application to attend to orders.
-11. Setup Nginx+Gunicorn!
+10. Develop a pump operator's application to attend to orders that includes:
+  - Intranet Login System **🗸**
+  - "Fuel Orders" module
+  - "Cash Transfer" (named Extra-Cash) module
+  - "Ticketing" module
+11. Setup Nginx+Gunicorn! **🗸**
 12. Transition the project to a production environment.
 ## Skeleton 
 ```
-**/**
-├── extras
-│ ├── ddbb
-│ ├── docs
-│ ├── scripts
-│ └── tailwind
+.
 └── portal
-├── app
-│ ├── migrations
-│ ├── templates
-│ └── templatetags
-├── locale
-│ ├── en
-│ ├── es
-│ └── pt
-├── portal
-└── static
-├── css
-├── images
-├── js
-├── svg
-├── tailwind
-└── videos_background
+    ├── app  * Main Application
+    │   ├── migrations
+    │   ├── templatetags
+    │   └── views
+    ├── locale  *(internationalization)*
+    │   ├── en
+    │   ├── es
+    │   └── pt
+    ├── portal
+    ├── staff  * Intranet module
+    │   ├── migrations
+    │   └── templates
+    ├── static
+    │   ├── CACHE
+    │   ├── css
+    │   ├── images
+    │   ├── js
+    │   ├── src
+    │   ├── svg
+    │   └── videos_background
+    ├── templates
+    │   ├── base
+    │   ├── components
+    │   └── modules
+    └── theme  * Used by Tailwind and Flowbite
+        ├── static
+        └── static_src
+
 ```
 ## Packages and Libraries
-## Packages and Libraries
-
 This project utilizes the following primary packages and libraries:
 
 - **Django**: A high-level Python web framework that allows for clean, rapid development.
@@ -135,41 +151,3 @@ __Fill in the following details:__
 - Secret Key: Enter your Secret Key. (This can also be obtained from the Google Cloud Console)
 - After entering these details, click on "Save".
 Now, your Django admin site is configured and ready to handle authentication using Google
-
-### ToDo-cument:
-you can stop reading from now on... No, seriously, this is garbage, i'm not even sure if I'm going to use it:
-- nginx installation on prod
-- gunicorn installation on prod
-- open ports in aws security group
-```
-sudo apt install gunicorn nginx
-cd /home/ubuntu/django-kmportal/
-```
-test:
-```
-gunicorn portal.wsgi:application --bind 0.0.0.0:8080
-```.
-
-current nginx confguration (where are the logs you ...)
-```
-server {
-    listen 80;
-    server_name km1151.duckdns.org; # Replace with your domain or IP addres
-
-    location ^/static/ {
-            autoindex on;
-            alias /home/ubuntu/django-kmportal/local-cdn/static/;
-        }
-
-    location / {
-            proxy_pass http://localhost:8080;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header Host $host;
-            proxy_redirect off;
-        }
-}
-```.
-
-And I really should be reading this https://flowbite.com/docs/getting-started/django/
-
-Gabo Cavedal :)
