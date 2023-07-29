@@ -1,12 +1,13 @@
 {% load static custom_components %}
-<button data-tooltip-target="tooltip-{{ icon }}"
+<a data-tooltip-target="tooltip-{{ icon }}"
         type="button"
-        class="inline-flex flex-col items-center justify-center {{ leftright }} hover:bg-pantone7472c group w-20 px-3">
+        class="inline-flex flex-col items-center justify-center {{ leftright }} hover:bg-pantone7472c group w-20 px-3"
+        href="{% if url == '#' %}#{% else %}{% url url %}{% endif %}">
     <img class="rounded-full"
          src="{% static 'svg/'|add:icon|add:'.svg' %}"
          alt="{{ icon }}" />
     <span class="sr-only">{{ tooltip|title }}</span>
-</button>
+</a>
 
 <div id="tooltip-{{ icon }}"
      role="tooltip"

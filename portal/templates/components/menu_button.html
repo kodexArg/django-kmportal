@@ -20,7 +20,7 @@
         {% with provider_id=user.socialaccount_set.all.0.get_provider.id %}
         {% if provider_id == 'google' %}
         <a href="{% url 'user_home' %}" class="flex p-1">
-            <img class="rounded-full border-2 border-white" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
+            <img class="rounded-full border-2 border-white" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="Avatar"/>
         </a>
         {% endif %}
         {% endwith %}
@@ -50,7 +50,7 @@
 
         {% else %}
         <!-- normal button -->
-        <img class="p-1 aspect-1 h-full rounded-full" src="{% static 'svg/'|add:icon|add:'.svg' %}" />
+        <img class="p-1 aspect-1 h-full rounded-full" src="{% static 'svg/'|add:icon|add:'.svg' %}" alt=""/>
         {% endif %}
 
     </div>

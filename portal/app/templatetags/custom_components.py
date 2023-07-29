@@ -197,7 +197,7 @@ def rbutton_component(caption, bg="bg-pantone307c", fg="text-white", size="", na
 
 
 @register.inclusion_tag("components/nav_button.html")
-def nav_buttom_component(tooltip, icon, left=False, right=False):
+def nav_buttom_component(tooltip, icon, url, left=False, right=False):
     if left:
         leftright = "rounded-l-full"
     elif right:
@@ -207,4 +207,4 @@ def nav_buttom_component(tooltip, icon, left=False, right=False):
 
     logger.info(f"left={left}, right={right}, leftright={leftright}")
 
-    return {"tooltip": tooltip, "icon": icon, "leftright": leftright}
+    return {"tooltip": tooltip, "icon": icon, "leftright": leftright, "url": url}
