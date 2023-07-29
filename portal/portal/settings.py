@@ -32,6 +32,7 @@ DEBUG = False if os.environ.get("DEBUG")=="False" else True
 
 ALLOWED_HOSTS = ["*"]
 
+
 # Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -41,8 +42,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "whitenoise.runserver_nostatic",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.facebook",
     "compressor", # compressor
-    "rest_framework",
+    "rest_framework", # rest
     "api",
     "tailwind",
     "theme",
@@ -50,6 +57,7 @@ INSTALLED_APPS = [
     "app",
     "staff",
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -143,21 +151,15 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # TODO
 #COMPRESS_ROOT = BASE_DIR / 'static'
-#COMPRESS_ENABLED = True
-#STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
+COMPRESS_ENABLED = True
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
 
 # Allauth configuration
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-
-INSTALLED_APPS += [
-    "whitenoise.runserver_nostatic",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
-    "allauth.socialaccount.providers.facebook",
-]
 
 
 SOCIALACCOUNT_LOGIN_ON_GET = True

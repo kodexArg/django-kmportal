@@ -9,7 +9,7 @@
     bg-gray-400
     {% elif order.is_blocked %}
     bg-pantone307c
-    {% else  %}
+    {% else %}
     bg-pantone7689c
     {% endif %}
     h-10 rounded-full flex flex-nowrap p-1
@@ -18,13 +18,13 @@
         <div class="h-full aspect-fibbo-up rounded-l-full grid place-items-center">
             <span class="text-xxs font-Roboto text-white">
                 {% if order.is_finished %}
-                {% translate 'finished' %}
+                {% translate "finished" %}
                 {% elif order.is_pauseed %}
-                {% translate 'pauseed' %}
+                {% translate "pauseed" %}
                 {% elif order.is_blocked %}
-                {% translate 'refueling' %}
+                {% translate "refueling" %}
                 {% else %}
-                {% translate 'on_transit' %}
+                {% translate "on_transit" %}
                 {% endif %}
             </span>
         </div>
@@ -54,8 +54,8 @@
             <div class="flex-grow-0 flex-shrink overflow-hidden flex">
                 <div class="bg-sky-100 h-full justify-end text-end w-full">
                     <div class="flex flex-col opacity-0 md:opacity-100">
-                        <span class="whitespace-nowrap text-xxs text-gray-400">{% translate 'from' %}: {{ order.requested_date }} &nbsp;</span>
-                        <span class="whitespace-nowrap text-xxs text-gray-400">{% translate 'to' %}: {{ order.expiration_date }} &nbsp;</span>
+                        <span class="whitespace-nowrap text-xxs text-gray-400">{% translate "from" %}: {{ order.requested_date }} &nbsp;</span>
+                        <span class="whitespace-nowrap text-xxs text-gray-400">{% translate "to" %}: {{ order.expiration_date }} &nbsp;</span>
                     </div>
                 </div>
                 <!-- odo & km -->
@@ -118,11 +118,10 @@
             data-active-classes="transform duration-100 rotate-90 {% if order.is_finished %}bg-pantone7472c{% elif order.is_pauseed %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else %}bg-pantone7689c{% endif %}">
             <button class="h-full aspect-1 flex ml-1 rounded-full" data-accordion-target="#row-toggle-body-{{ order.id }}" aria-expanded="false">
                 <div class="h-full aspect-1 rounded-full">
-                    <img class="w-full h-full" src="{% static 'svg/sandwich.svg' %}" />
+                    <img class="w-full h-full" src="{% static 'svg/sandwich.svg' %}" alt="Menu" />
                 </div>
             </button>
         </div>
     </div>
-
 
 </article>

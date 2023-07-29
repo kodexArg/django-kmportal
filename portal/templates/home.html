@@ -1,82 +1,82 @@
 {% extends "base/base.html" %}
 {% load static i18n socialaccount custom_components %}
-{% block title %}{% translate "t_page_title" %}{% endblock %}
-
-{% block content %}
-
-
-<h1></h1>
-<section class="flex justify-center items-center px-3 h-screen">
-  <!-- Welcome Cards -->
-  <div class="w-full mx-6 md:mx-32 h-96 md:h-auto max-h-72 flex overflow-clip rounded-md">
-    <div id="associated_shops-card" class="hidden">
-      {% welcome_card_component '1' %}
-    </div>
-    <div id="carriers-card" class="hidden">
-      {% welcome_card_component '2' %}
-    </div>
-  </div>
-</section>
-
-<!-- Floating Buttons -->
-<div class="fixed flex bottom-11 justify-center w-full">
-  {% if not user.is_authenticated %}
-  <div class="flex justify-center space-x-0">
-    <button id="carriers-button" onclick="showCard('carriers')"
-      class="bg-sky-200 hover:bg-pantone307c text-pantone307c hover:text-white text-sm font-bold py-2 px-4 rounded-full">
-      {% translate 'let_me_in' %}
-    </button>
-  </div>
-  {% endif %}
-</div>
-
-<video class="fixed top-0 bottom-0 left-0 right-0 p-0 m-0 object-cover w-full h-full z-[-999]" id="video" autoplay loop muted playsinline> {# autoplay commented!!!!!!!! #}
-  <source src="{% static 'videos_background/vid_bg.mp4' %}" type="video/mp4">
-</video>
-<img class="fixed top-0 bottom-0 left-0 right-0 p-0 m-0 object-cover w-full h-full z-[-9999]" src="{% static 'videos_background/video_placeholder.png' %}" alt="Video Placeholder">
+{% block title %}
+  {% translate "t_page_title" %}
 {% endblock %}
-
-
+{% block content %}
+  <h1></h1>
+  <section class="flex justify-center items-center px-3 h-screen">
+    <!-- Welcome Cards -->
+    <div class="w-full mx-6 md:mx-32 h-96 md:h-auto max-h-72 flex overflow-clip rounded-md">
+      <div id="associated_shops-card" class="hidden">{% welcome_card_component '1' %}</div>
+      <div id="carriers-card" class="hidden">{% welcome_card_component '2' %}</div>
+    </div>
+  </section>
+  <!-- Floating Buttons -->
+  <div class="fixed flex bottom-11 justify-center w-full">
+    {% if not user.is_authenticated %}
+      <div class="flex justify-center space-x-0">
+        <button id="carriers-button"
+                onclick="showCard('carriers')"
+                class="bg-sky-200 hover:bg-pantone307c text-pantone307c hover:text-white text-sm font-bold py-2 px-4 rounded-full">
+          {% translate "let_me_in" %}
+        </button>
+      </div>
+    {% endif %}
+  </div>
+  <video class="fixed top-0 bottom-0 left-0 right-0 p-0 m-0 object-cover w-full h-full z-[-999]"
+         id="video"
+         autoplay
+         loop
+         muted
+         playsinline>
+    {# autoplay commented!!!!!!!! #}
+    <source src="{% static 'videos_background/vid_bg.mp4' %}" type="video/mp4" />
+  </video>
+  <img class="fixed top-0 bottom-0 left-0 right-0 p-0 m-0 object-cover w-full h-full z-[-9999]"
+       src="{% static 'videos_background/video_placeholder.png' %}"
+       alt="Video Placeholder" />
+{% endblock %}
 {% block scripts %}
-<script>
-  var associated_shopsCard = document.getElementById('associated_shops-card');
-  var carriersCard = document.getElementById('carriers-card');
-  var associated_shopsButton = document.getElementById('associated_shops-button');
-  var carriersButton = document.getElementById('carriers-button');
+  <script>
+      var associated_shopsCard = document.getElementById('associated_shops-card');
+      var carriersCard = document.getElementById('carriers-card');
+      var associated_shopsButton = document.getElementById('associated_shops-button');
+      var carriersButton = document.getElementById('carriers-button');
 
-  function showCard(tipo) {
-    if (tipo === 'associated_shops') {
-      toggleCard(associated_shopsCard, carriersCard, associated_shopsButton, carriersButton);
-    } else if (tipo === 'carriers') {
-      toggleCard(carriersCard, associated_shopsCard, carriersButton, associated_shopsButton);
-    }
-  }
+      function showCard(tipo) {
+          if (tipo === 'associated_shops') {
+              toggleCard(associated_shopsCard, carriersCard, associated_shopsButton, carriersButton);
+          } else if (tipo === 'carriers') {
+              toggleCard(carriersCard, associated_shopsCard, carriersButton, associated_shopsButton);
+          }
+      }
 
-  function toggleCard(activeCard, inactiveCard, activeButton, inactiveButton) {
-    if (activeCard.style.display === 'block') {
-      activeCard.style.display = 'none';
-      activeButton.classList.remove('bg-pantone307c', 'text-white');
-      activeButton.classList.add('bg-sky-200', 'text-pantone307c');
-    } else {
-      activeCard.style.display = 'block';
-      inactiveCard.style.display = 'none';
-      activeButton.classList.add('bg-pantone307c', 'text-white');
-      activeButton.classList.remove('bg-sky-200', 'text-pantone307c');
-      inactiveButton.classList.add('bg-sky-200', 'text-pantone307c');
-      inactiveButton.classList.remove('bg-pantone307c', 'text-white');
-    }
-  }
-</script>
-<script>
-  // Wait for the page to load then start the bg video
-  document.addEventListener('DOMContentLoaded', function () {
-    var video = document.getElementById('video');
+      function toggleCard(activeCard, inactiveCard, activeButton, inactiveButton) {
+          if (activeCard.style.display === 'block') {
+              activeCard.style.display = 'none';
+              activeButton.classList.remove('bg-pantone307c', 'text-white');
+              activeButton.classList.add('bg-sky-200', 'text-pantone307c');
+          } else {
+              activeCard.style.display = 'block';
+              inactiveCard.style.display = 'none';
+              activeButton.classList.add('bg-pantone307c', 'text-white');
+              activeButton.classList.remove('bg-sky-200', 'text-pantone307c');
+              inactiveButton.classList.add('bg-sky-200', 'text-pantone307c');
+              inactiveButton.classList.remove('bg-pantone307c', 'text-white');
+          }
+      }
+  </script>
+  <script>
+      // Wait for the page to load then start the bg video
+      document.addEventListener('DOMContentLoaded', function() {
+          var video = document.getElementById('video');
 
-    video.addEventListener('canplaythrough', function () {
-      var videoPlaceholder = document.querySelector('.video-placeholder');
-      videoPlaceholder.style.display = 'none';
-      console.log("Playing video... Sorry dude, art matter... :)")
-    });
-  });
-</script>
+          video.addEventListener('canplaythrough', function() {
+              var videoPlaceholder = document.querySelector('.video-placeholder');
+              videoPlaceholder.style.display = 'none';
+              console.log("Playing video... Sorry dude, art matter... :)")
+          });
+      });
+  </script>
 {% endblock %}

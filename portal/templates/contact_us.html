@@ -1,38 +1,58 @@
 {% extends "base/base.html" %}
 {% load static i18n socialaccount %}
-{% block title %}{% translate "t_page_title" %}{% endblock %}
-
-
+{% block title %}
+  {% translate "t_page_title" %}
+{% endblock %}
 {% block content %}
-<section class="w-auto mb-24 md:mb-12 flex flex-col mx-16 rounded-md justify-center drop-shadow-lg">
-  <div class="p-3 overflow-auto pb-11">
-    <h1 class="text-2xl font-bold mb-4">Contact Us</h1>
-    <p class="mb-4">Thank you for your interest in contacting our enterprise. We value your feedback, questions, and
-      inquiries. Please find below the different ways you can get in touch with us.</p>
-    <h2 class="text-xl font-bold mb-2">Contact Information</h2>
-    <ul class="list-disc ml-6 mb-4">
-      <li><strong>Phone:</strong> [Phone number]</li>
-      <li><strong>Email:</strong> [Email address]</li>
-      <li><strong>Address:</strong> [Physical address]</li>
-    </ul>
-    <h2 class="text-xl font-bold mb-2">Follow us on Instagram</h2>
-    <p class="mb-4">We are active on Instagram and would love to connect with you. Follow our official Instagram account
-      to stay updated with the latest news, events, and behind-the-scenes content:</p>
-    <a href="https://www.instagram.com/kilometro1151/" target="_blank"
-      class="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg mb-4 hover:bg-blue-600">Follow us on Instagram</a>
-
-    <p class="mb-4">Feel free to explore our Instagram profile and engage with our posts by liking, commenting, and
-      sharing. We appreciate your support!</p>
-    <h2 class="text-xl font-bold mb-2">Reach Out to Us</h2>
-    <p class="mb-4">If you have any specific questions or inquiries, please don't hesitate to reach out to us using one
-      of the following methods:</p>
-    <ul class="list-disc ml-6 mb-4">
-      <li><strong>Phone:</strong> [Phone number]</li>
-      <li><strong>Email:</strong> [Email address]</li>
-      <li><strong>Contact Form:</strong> [Link to the contact form on our website]</li>
-    </ul>
-    <p class="mb-4">We strive to respond to all inquiries as quickly as possible and look forward to hearing from you!
-    </p>
-  </div>
-</section>
+  <section class="w-auto mb-24 md:mb-12 flex flex-col mx-16 rounded-md justify-center drop-shadow-lg">
+    <div class="p-3 overflow-auto pb-11">
+      <h1 class="text-2xl font-bold mb-4">Contact Us</h1>
+      <p class="mb-4">
+        Thank you for your interest in contacting our enterprise. We value your feedback, questions, and
+        inquiries. Please find below the different ways you can get in touch with us.
+      </p>
+      <h2 class="text-xl font-bold mb-2">Contact Information</h2>
+      <ul class="list-disc ml-6 mb-4">
+        <li>
+          <strong>Phone:</strong> [Phone number]
+        </li>
+        <li>
+          <strong>Email:</strong> [Email address]
+        </li>
+        <li>
+          <strong>Address:</strong> [Physical address]
+        </li>
+      </ul>
+      <h2 class="text-xl font-bold mb-2">Follow us on Instagram</h2>
+      <p class="mb-4">
+        We are active on Instagram and would love to connect with you. Follow our official Instagram account
+        to stay updated with the latest news, events, and behind-the-scenes content:
+      </p>
+      <a href="https://www.instagram.com/kilometro1151/"
+         target="_blank"
+         class="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg mb-4 hover:bg-blue-600">Follow us on
+      Instagram</a>
+      <p class="mb-4">
+        Feel free to explore our Instagram profile and engage with our posts by liking, commenting, and
+        sharing. We appreciate your support!
+      </p>
+      <h2 class="text-xl font-bold mb-2">Reach Out to Us</h2>
+      <p class="mb-4">
+        If you have any specific questions or inquiries, please don't hesitate to reach out to us using one
+        of the following methods:
+      </p>
+      <ul class="list-disc ml-6 mb-4">
+        <li>
+          <strong>Phone:</strong> [Phone number]
+        </li>
+        <li>
+          <strong>Email:</strong> [Email address]
+        </li>
+        <li>
+          <strong>Contact Form:</strong> [Link to the contact form on our website]
+        </li>
+      </ul>
+      <p class="mb-4">We strive to respond to all inquiries as quickly as possible and look forward to hearing from you!</p>
+    </div>
+  </section>
 {% endblock %}

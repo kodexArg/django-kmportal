@@ -1,81 +1,65 @@
 {% extends "base/base.html" %}
 {% load static i18n socialaccount custom_components %}
-{% block title %}{% translate "company_page_title" %}{% endblock %}
-
-{% block navbar %}{% include 'base/navbar_components.html' with icon='building' %}{% endblock %}
-
+{% block title %}
+    {% translate "company_page_title" %}
+{% endblock %}
+{% block navbar %}
+    {% include "base/navbar_components.html" with icon="building" %}
+{% endblock %}
 {% block content %}
-{% translate 'company_details' as translated_title %}
-{% module_title_component translated_title %}
-
-<section id="Company" class="mx-6 md:mx-10">
-    <!-- Header: Company, Treading name and RUT -->
-    <article class="flex flex-col md:flex-row md:space-x-10 mt-24">
-        <div class="p-1">
-            <h3 class="font-semibold text-pantone307c font-Roboto text-sm">
-                {% translate "company_name" %}
-            </h3>
-            <p class="from-sky-950 font-mono text-sm text-pantone7689c">{{ company.name }}</p>
-        </div>
-        <div class="p-1">
-            <h3 class="font-semibold text-pantone307c font-Roboto text-sm">
-                {% translate "company_fantasy_name" %}
-            </h3>
-            <p class="from-sky-950 font-mono text-sm text-pantone7689c">{{ company.fantasy_name }}</p>
-        </div>
-        <div class="p-1">
-            <h3 class="font-semibold text-pantone307c font-Roboto text-sm">
-                {% translate "company_cuit" %}
-            </h3>
-            <p class="from-sky-950 font-mono text-sm text-pantone7689c">{{ company.cuit }}</p>
-        </div>
-    </article>
-
-    <!-- Content -->
-    <article class="flex flex-col pt-4 pb-2">
-        <h3 class="font-semibold text-white font-Roboto text-sm bg-pantone7689c rounded-full px-4">
-            {% translate 'driver' %}
-        </h3>
-
-        <div class="tw-loop-container">
-
-            {% for driver in drivers %}
-            <div class="tw-loop-element">
-                <form method="post" class="tw-loop-form">
-                    <input type="hidden" name="form_type" value="update_driver">
-
-                    {% csrf_token %}
-                    {% input_field_component name="first_name" value=driver.first_name %}
-                    {% input_field_component name="last_name" value=driver.last_name %}
-                    {% input_field_component name="identification_type" value=driver.identification_type %}
-                    {% input_field_component name="identification_number" value=driver.identification_number %}
-
-                    <div class="flex justify-between items-center pt-4">
-                        {% checkbox_component name="is_active" checked=driver.is_active %}
-                        <input type="hidden" name="driver_id" value="{{ driver.id }}">
-                        {% rbutton_component caption="update" %}
-                    </div>
-                </form>
+    {% translate "company_details" as translated_title %}
+    {% module_title_component translated_title %}
+    <section id="Company" class="mx-6 md:mx-10">
+        <!-- Header: Company, Treading name and RUT -->
+        <article class="flex flex-col md:flex-row md:space-x-10 mt-24">
+            <div class="p-1">
+                <h3 class="font-semibold text-pantone307c font-Roboto text-sm">{% translate "company_name" %}</h3>
+                <p class="from-sky-950 font-mono text-sm text-pantone7689c">{{ company.name }}</p>
             </div>
-            {% endfor %}
-            <div class="h-full w-fit sm:w-72 m-4 flex text-center border-2 border-pantone7689c p-4 rounded-lg bg-sky-200 shadow-md mb-10">
-                <form method="post" class="flex flex-col w-full space-y-2">
-                    <input type="hidden" name="form_type" value="create_driver">
-
-                    {% csrf_token %}
-                    {% input_field_component name="first_name" %}
-                    {% input_field_component name="last_name" %}
-                    {% input_field_component name="identification_type" value="DNI" %}
-                    {% input_field_component name="identification_number" %}
-
-                    <div class="flex justify-end items-center pt-4">
-                        {% rbutton_component caption="add_driver" bg="bg-pantone7472c"%}
-                    </div>
-                </form>
+            <div class="p-1">
+                <h3 class="font-semibold text-pantone307c font-Roboto text-sm">{% translate "company_fantasy_name" %}</h3>
+                <p class="from-sky-950 font-mono text-sm text-pantone7689c">{{ company.fantasy_name }}</p>
             </div>
-        </div>
-
-    </article>
-
-</section>
+            <div class="p-1">
+                <h3 class="font-semibold text-pantone307c font-Roboto text-sm">{% translate "company_cuit" %}</h3>
+                <p class="from-sky-950 font-mono text-sm text-pantone7689c">{{ company.cuit }}</p>
+            </div>
+        </article>
+        <!-- Content -->
+        <article class="flex flex-col pt-4 pb-2">
+            <h3 class="font-semibold text-white font-Roboto text-sm bg-pantone7689c rounded-full px-4">
+                {% translate "driver" %}
+            </h3>
+            <div class="tw-loop-container">
+                {% for driver in drivers %}
+                    <div class="tw-loop-element">
+                        <form method="post" class="tw-loop-form">
+                            <input type="hidden" name="form_type" value="update_driver" />
+                            {% csrf_token %}
+                            {% input_field_component name="first_name" value=driver.first_name %}
+                            {% input_field_component name="last_name" value=driver.last_name %}
+                            {% input_field_component name="identification_type" value=driver.identification_type %}
+                            {% input_field_component name="identification_number" value=driver.identification_number %}
+                            <div class="flex justify-between items-center pt-4">
+                                {% checkbox_component name="is_active" checked=driver.is_active %}
+                                <input type="hidden" name="driver_id" value="{{ driver.id }}" />
+                                {% rbutton_component caption="update" %}
+                            </div>
+                        </form>
+                    </div>
+                {% endfor %}
+                <div class="h-full w-fit sm:w-72 m-4 flex text-center border-2 border-pantone7689c p-4 rounded-lg bg-sky-200 shadow-md mb-10">
+                    <form method="post" class="flex flex-col w-full space-y-2">
+                        <input type="hidden" name="form_type" value="create_driver" />
+                        {% csrf_token %}
+                        {% input_field_component name="first_name" %}
+                        {% input_field_component name="last_name" %}
+                        {% input_field_component name="identification_type" value="DNI" %}
+                        {% input_field_component name="identification_number" %}
+                        <div class="flex justify-end items-center pt-4">{% rbutton_component caption="add_driver" bg="bg-pantone7472c" %}</div>
+                    </form>
+                </div>
+            </div>
+        </article>
+    </section>
 {% endblock %}
