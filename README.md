@@ -1,8 +1,5 @@
 # KM 1151 Enterprise Portal
 This Django-based Fuel Station Enterprise website features a homepage, a minimalistic navbar, and user authentication. The site utilizes an RDS AWS database in the production environment and is styled using __**Tailwind**__ **Flowbite**!.
-### Language
-Although this site is written in English but it will be implemented in Argentina, having **Spanish** as main language (having Portuguese and English as alt languages). To facilitate the use of internationalization I have created a 'translations.py' script that, together with 'translations.json', keeps all the translations of the site in a single json (currently "en", "es" and "pt" ). In summary: to change any term or create new ones, it is enough to edit or create new keys in the json. PRO TIP: chat-gpt will do all the work if you offer it a key and text in your favorite language, asking it to fill in the rest.
-it is necessary to run "python manage.py makemessages -a" before the translations and "python manage.py compilemessages" at the end (usually I shoot the line: ```python manage.py makemessages -a && python translations.py && python manage.py compilemessage```
 ### Current state of the project
 **This project is currently a work in progress and is not yet ready for production use**. There may be bugs, incomplete features, and other issues that need to be resolved. Use at your own risk and please report any issues or suggestions to the project team. Thank you for your understanding and patience as we work to improve and finalize the site.
 ## Roadmap
@@ -61,9 +58,11 @@ it is necessary to run "python manage.py makemessages -a" before the translation
         └── static_src
 
 ```
+## Language
+Although this site is written in English but it will be implemented in Argentina, having **Spanish** as main language (having Portuguese and English as alt languages). To facilitate the use of internationalization I have created a 'translations.py' script that, together with 'translations.json', keeps all the translations of the site in a single json (currently "en", "es" and "pt" ). In summary: to change any term or create new ones, it is enough to edit or create new keys in the json. PRO TIP: chat-gpt will do all the work if you offer it a key and text in your favorite language, asking it to fill in the rest.
+it is necessary to run "python manage.py makemessages -a" before the translations and "python manage.py compilemessages" at the end (usually I shoot the line: ```python manage.py makemessages -a && python translations.py && python manage.py compilemessage```
 ## Packages and Libraries
 This project utilizes the following primary packages and libraries:
-
 - **Django**: A high-level Python web framework that allows for clean, rapid development.
 - mysqlclient: A Python DB API-2.0 compliant interface to MySQL.
 - python-dotenv: A package that makes it easy to work with environment variables, particularly useful for handling application secrets.
@@ -74,9 +73,7 @@ This project utilizes the following primary packages and libraries:
 - loguru: A library that provides a straightforward and powerful logging for Python.
 - Pillow: A Python Imaging Library, handy for adding image processing capabilities to your Python interpreter.
 - **django-tailwind** with **Flowbite**. A perfect pairing for Django, especially in this project that relies on components (template tags)... And no, I'm not going to admit that I don't get along with javascript and I'm always looking for ways to avoid it. Fallacies...
-
 Please note that the specific packages and libraries required for your project may vary based on the features and functionalities you choose to implement.
-
 In addition to these Python packages, some system-level packages are also required. If you're using an Ubuntu machine, you may need to install the following:
 - python3-dev: Includes the header files you need to build Python extensions.
 - libmysqlclient-dev: This package contains the development files of the MySQL library and is needed for mysqlclient.
