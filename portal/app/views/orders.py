@@ -69,7 +69,7 @@ class OrdersListView(CustomTemplateView):
                 return render(request, self.template_name, context)
 
             # Check if the order is pauseed
-            if fuel_order.is_pauseed:
+            if fuel_order.is_paused:
                 form.add_error(None, "Order cannot be pauseed.")
                 logger.error("Order cannot be pauseed.")
                 context = self.get_context_data(**kwargs)
@@ -113,7 +113,7 @@ class OrderPauseView(RedirectView):
         action = request.POST.get("action")
         if action == "pause":
             logger.info(f"Pausing order {fuel_order}")
-            fuel_order.is_pauseed = not fuel_order.is_pauseed
+            fuel_order.is_paused = not fuel_order.is_paused
             fuel_order.save()
         elif action == "delete":
             logger.info(f"Deleting order {fuel_order}")
@@ -134,7 +134,7 @@ class OrderJsonView(View):
             "operation_code": fuel_order.operation_code,
             "user_creator": str(fuel_order.user_creator),
             "is_blocked": fuel_order.is_blocked,
-            "is_pauseed": fuel_order.is_pauseed,
+            "is_paused": fuel_order.is_paused,
             "is_finished": fuel_order.is_finished,
             "order_date": fuel_order.order_date.isoformat(),
             "modified_date": fuel_order.modified_date.isoformat(),

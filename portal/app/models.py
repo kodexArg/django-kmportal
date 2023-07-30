@@ -11,7 +11,6 @@ from django.utils.timezone import now
 from django.utils.translation import gettext as _
 
 
-# HELPER
 def get_default_expiration_date():
     return now() + timedelta(days=7)
 
@@ -133,6 +132,120 @@ class Trailers(models.Model):
         return self.domain
 
 
+
+class ExtraCashManager(models.Manager):
+    def get_queryset(self):
+        return (
+            super()
+            .get_queryset()
+            .annotate(
+                custom_sort_order=Case(
+                    When(
+                        is_blocked=True,
+                        is_paused=False,
+                        is_finished=False,
+                        then=Value(1),
+                    ),
+                    When(is_paused=False, is_finished=False, then=Value(2)),
+                    When(is_paused=True, then=Value(4)),
+                    When(is_finished=True, then=Value(4)),
+                    default=Value(3),
+                    output_field=IntegerField(),
+                )
+            )
+            .order_by("custom_sort_order", "-requested_date", "-id")
+        )
+
+
+class ExtraCash(models.Model):
+    """New model for the ExtraCash service"""
+
+    objects = ExtraCashManager()
+
+    AGREEMENT_CHOICES = [
+        ("under_negotiation", "Under Negotiation"),
+        ("no_agreement", "No Agreement"),
+        ("agreed", "Agreed"),
+    ]
+
+    operation_code = models.CharField(max_length=6, unique=True, blank=True, null=True)
+
+    order_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+    requested_date = models.DateField(default=now)
+    expiration_date = models.DateField(default=get_default_expiration_date)
+
+    user_creator = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name="extracash_created",
+        blank=True,
+        null=True,
+    )
+    user_lastmod = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name="extracash_modified",
+        blank=True,
+        null=True,
+    )
+
+    company = models.ForeignKey(Company, on_delete=models.PROTECT)
+    driver = models.ForeignKey(Drivers, on_delete=models.PROTECT)
+
+    is_blocked = models.BooleanField(default=False, verbose_name="is_blocked")
+    is_paused = models.BooleanField(default=False, verbose_name="is_paused")
+    is_finished = models.BooleanField(default=False, verbose_name="is_finished")
+
+    pause_reason = models.TextField(blank=True, null=True, verbose_name="pause_reason")
+    in_agreement = models.CharField(choices=AGREEMENT_CHOICES, default="under_negotiation", max_length=20, verbose_name="in_agreement")
+    comments = models.TextField(blank=True, null=True, verbose_name="comments")
+
+    cash_amount = models.PositiveIntegerField(verbose_name="cash_amount")
+
+    def save(self, *args, **kwargs):
+        try:
+            if not self.pk:  # this is a new record
+                self.operation_code = secrets.token_hex(3)
+                while ExtraCash.objects.filter(operation_code=self.operation_code).exists():
+                    self.operation_code = secrets.token_hex(3)
+
+                if hasattr(self, "user_creator") and self.user_creator is None:
+                    self.user_creator = self._get_current_user()
+
+                if hasattr(self, "company") and self.company is None:
+                    self.company = self._get_user_company()
+
+                if not self.requested_date:
+                    self.requested_date = now()
+
+                if not self.expiration_date:
+                    self.expiration_date = now() + timedelta(days=2)
+
+            else:  # this is an edition
+                if hasattr(self, "user_lastmod"):
+                    self.user_lastmod = self._get_current_user()
+        except Exception as e:
+            logger.error(f"Error on saving cash order: {e}")
+
+        super().save(*args, **kwargs)
+
+    def _get_current_user(self):
+        # Get the current authenticated user using Django-Allauth
+        try:
+            social_account = SocialAccount.objects.get(user=self.request.user)
+            return social_account.user
+        except (AttributeError, SocialAccount.DoesNotExist):
+            return None
+
+    def __str__(self):
+        return self.operation_code
+
+    class Meta:
+        verbose_name = "ExtraCash Order"
+        verbose_name_plural = "ExtraCash Orders"
+
+
 class FuelOrdersManager(Manager):
     def get_queryset(self):
         return (
@@ -140,9 +253,9 @@ class FuelOrdersManager(Manager):
             .get_queryset()
             .annotate(
                 custom_sort_order=Case(
-                    When(is_blocked=True, is_pauseed=False, is_finished=False, then=Value(1)),
-                    When(is_pauseed=False, is_finished=False, then=Value(2)),
-                    When(is_pauseed=True, then=Value(4)),
+                    When(is_blocked=True, is_paused=False, is_finished=False, then=Value(1)),
+                    When(is_paused=False, is_finished=False, then=Value(2)),
+                    When(is_paused=True, then=Value(4)),
                     When(is_finished=True, then=Value(4)),
                     default=Value(3),
                     output_field=IntegerField(),
@@ -255,14 +368,8 @@ class FuelOrders(models.Model):
     requires_kilometers = models.BooleanField(default=False, verbose_name="requires_kilometers")
 
     is_blocked = models.BooleanField(default=False, verbose_name="is_blocked")  # because its being attended
-    is_pauseed = models.BooleanField(default=False, verbose_name="is_pauseed")  # because there's an error or user action
+    is_paused = models.BooleanField(default=False, verbose_name="is_paused")  # because there's an error or user action
     is_finished = models.BooleanField(default=False, verbose_name="is_finished")  # because it's been attended and it's been filled
-
-    AGREEMENT_CHOICES = [
-        ("under_negotiation", "Under Negotiation"),
-        ("no_agreement", "No Agreement"),
-        ("agreed", "Agreed"),
-    ]
 
     in_agreement = models.CharField(choices=AGREEMENT_CHOICES, default="under_negotiation", max_length=20, verbose_name="in_agreement")
     comments = models.TextField(blank=True, null=True, verbose_name="comments")
@@ -380,7 +487,6 @@ class FuelOrders(models.Model):
         verbose_name = "Fuel Order"
         verbose_name_plural = "Fuel Orders"
 
-
 class Refuelings(models.Model):
     """Core Table of the refueling Workflow: STEP 2"""
 
@@ -417,115 +523,3 @@ class Refuelings(models.Model):
     def get_total_liters(self):
         return self.tractor_liters + self.backpack_liters + self.chamber_liters
 
-
-class ExtraCashManager(models.Manager):
-    def get_queryset(self):
-        return (
-            super()
-            .get_queryset()
-            .annotate(
-                custom_sort_order=Case(
-                    When(
-                        is_blocked=True,
-                        is_pauseed=False,
-                        is_finished=False,
-                        then=Value(1),
-                    ),
-                    When(is_pauseed=False, is_finished=False, then=Value(2)),
-                    When(is_pauseed=True, then=Value(4)),
-                    When(is_finished=True, then=Value(4)),
-                    default=Value(3),
-                    output_field=IntegerField(),
-                )
-            )
-            .order_by("custom_sort_order", "-requested_date", "-id")
-        )
-
-
-class ExtraCash(models.Model):
-    """New model for the ExtraCash service"""
-
-    objects = ExtraCashManager()
-
-    AGREEMENT_CHOICES = [
-        ("under_negotiation", "Under Negotiation"),
-        ("no_agreement", "No Agreement"),
-        ("agreed", "Agreed"),
-    ]
-
-    operation_code = models.CharField(max_length=6, unique=True, blank=True, null=True)
-
-    order_date = models.DateTimeField(auto_now_add=True)
-    modified_date = models.DateTimeField(auto_now=True)
-    requested_date = models.DateField(default=now)
-    expiration_date = models.DateField(default=get_default_expiration_date)
-
-    user_creator = models.ForeignKey(
-        User,
-        on_delete=models.SET_NULL,
-        related_name="extracash_created",
-        blank=True,
-        null=True,
-    )
-    user_lastmod = models.ForeignKey(
-        User,
-        on_delete=models.SET_NULL,
-        related_name="extracash_modified",
-        blank=True,
-        null=True,
-    )
-
-    company = models.ForeignKey(Company, on_delete=models.PROTECT)
-    driver = models.ForeignKey(Drivers, on_delete=models.PROTECT)
-
-    is_blocked = models.BooleanField(default=False, verbose_name="is_blocked")
-    is_pauseed = models.BooleanField(default=False, verbose_name="is_pauseed")
-    is_finished = models.BooleanField(default=False, verbose_name="is_finished")
-
-    pause_reason = models.TextField(blank=True, null=True, verbose_name="pause_reason")
-    in_agreement = models.CharField(choices=AGREEMENT_CHOICES, default="under_negotiation", max_length=20, verbose_name="in_agreement")
-    comments = models.TextField(blank=True, null=True, verbose_name="comments")
-
-    cash_amount = models.PositiveIntegerField(verbose_name="cash_amount")
-
-    def save(self, *args, **kwargs):
-        try:
-            if not self.pk:  # this is a new record
-                self.operation_code = secrets.token_hex(3)
-                while ExtraCash.objects.filter(operation_code=self.operation_code).exists():
-                    self.operation_code = secrets.token_hex(3)
-
-                if hasattr(self, "user_creator") and self.user_creator is None:
-                    self.user_creator = self._get_current_user()
-
-                if hasattr(self, "company") and self.company is None:
-                    self.company = self._get_user_company()
-
-                if not self.requested_date:
-                    self.requested_date = now()
-
-                if not self.expiration_date:
-                    self.expiration_date = now() + timedelta(days=2)
-
-            else:  # this is an edition
-                if hasattr(self, "user_lastmod"):
-                    self.user_lastmod = self._get_current_user()
-        except Exception as e:
-            logger.error(f"Error on saving cash order: {e}")
-
-        super().save(*args, **kwargs)
-
-    def _get_current_user(self):
-        # Get the current authenticated user using Django-Allauth
-        try:
-            social_account = SocialAccount.objects.get(user=self.request.user)
-            return social_account.user
-        except (AttributeError, SocialAccount.DoesNotExist):
-            return None
-
-    def __str__(self):
-        return self.operation_code
-
-    class Meta:
-        verbose_name = "ExtraCash Order"
-        verbose_name_plural = "ExtraCash Orders"
