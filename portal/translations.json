@@ -154,12 +154,12 @@
     "es": "en tránsito",
     "pt": "em rota"
   },
-  "new_order": {
+  "order_new": {
     "en": "Load Order",
     "es": "Orden de Carga",
     "pt": "Ordem de Carga"
   },
-  "edit_order": {
+  "order_edit": {
     "en": "Edit Order",
     "es": "Editar Orden",
     "pt": "Editar Ordem"

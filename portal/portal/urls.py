@@ -7,7 +7,7 @@ from django.urls import include, path
 
 # 'app' views
 from app.views.authorized import UserHomeView
-from app.views.fuel_orders import FuelOrderDataView, FuelOrderListView, FuelOrderViewPause, FuelOrderViewNewOrEdit
+from app.views.orders import OrderJsonView, OrdersListView, OrderPauseView, OrderEditView
 from app.views.extracash import ExtraCashView
 from app.views.helpers import get_qr, get_server_time
 from app.views.modules import CompanyView, VehiclesView
@@ -26,8 +26,11 @@ urlpatterns = [
     path("under_construction/", UnderConstructionView.as_view(), name="under_construction"),
     path("get_qr/<int:order_id>/", get_qr, name="get_qr"),
     path("get-server-time/", get_server_time, name="get-server-time"),
-    path("orders/<int:order_id>/data/", FuelOrderDataView.as_view(), name="order_data"),
-    path("orders/<int:order_id>/pause/", FuelOrderViewPause.as_view(), name="pause_order"),
+
+    # Modules
+    ## Fuel Orders
+    path("orders/<int:order_id>/data/", OrderJsonView.as_view(), name="order_data"),
+    path("orders/<int:order_id>/pause/", OrderPauseView.as_view(), name="pause_order"),
 ]
 
 # Staff Area without internationalization
@@ -52,11 +55,14 @@ urlpatterns += i18n_patterns(
     path("__reload__/", include("django_browser_reload.urls")),
     path("company/", CompanyView.as_view(), name="company"),
     path("vehicles/", VehiclesView.as_view(), name="vehicles"),
-    path("orders/", FuelOrderListView.as_view(), name="orders"),
-    path("orders/new/", FuelOrderViewNewOrEdit.as_view(), name="new_order"),
-    path("orders/<int:order_id>/edit/", FuelOrderViewNewOrEdit.as_view(), name="edit_order"),
     path("tickets/", UnderConstructionView.as_view(), name="tickets"),
     path("extracash/", ExtraCashView.as_view(), name="extracash"),
+
+    # Modules
+    ## Fuel Orders
+    path("orders/", OrdersListView.as_view(), name="orders"),
+    path("orders/new/", OrderEditView.as_view(), name="order_new"),
+    path("orders/<int:order_id>/edit/", OrderEditView.as_view(), name="order_edit"),
 )
 
 if settings.DEBUG:

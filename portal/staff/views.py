@@ -25,13 +25,13 @@ class StaffHomeView(View):
                 if user.is_staff:
                     login(request, user)
                     messages.success(request, "Ingreso correcto")
-                    return redirect("staff_home")  
+                    return redirect("staff_home")
                 else:
                     messages.error(request, "Tu usuario es correcto pero no tienes permiso para ingresar en este sitio")
             else:
                 messages.error(request, "Usuario o contraseña incorrectos")
         else:
             messages.error(request, "Los datos ingresados son incorrectos")
-        
+
         # Redirect to GET request if form is invalid or login fails
         return redirect("staff_home")

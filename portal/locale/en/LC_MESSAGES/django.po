@@ -203,7 +203,7 @@ msgstr ""
 msgid "let_me_in"
 msgstr "Register as a Carrier"
 
-#: templates/modules/company.html:3 templates/modules/single_order.html:3
+#: templates/modules/company.html:3 templates/modules/order.html:3
 msgid "company_page_title"
 msgstr "Company"
 
@@ -260,7 +260,7 @@ msgid "no_extracash_orders"
 msgstr "No Extra-Cash orders"
 
 #: templates/modules/orders.html:3 templates/modules/orders.html:10
-#: templates/modules/single_order.html:8
+#: templates/modules/order.html:8
 msgid "fuel_orders"
 msgstr "Refueling Orders"
 
@@ -272,7 +272,7 @@ msgstr ""
 "permanently lost."
 
 #: templates/modules/orders.html:50 templates/modules/orders.html:100
-#: templates/modules/single_order.html:41
+#: templates/modules/order.html:41
 msgid "fuel_order"
 msgstr "Fuel Order"
 
@@ -300,15 +300,15 @@ msgstr "Tractor Plate"
 msgid "trailer_plate"
 msgstr "Trailer Plate"
 
-#: templates/modules/orders.html:102 templates/modules/single_order.html:45
+#: templates/modules/orders.html:102 templates/modules/order.html:45
 msgid "tractor"
 msgstr "Tractor"
 
-#: templates/modules/orders.html:106 templates/modules/single_order.html:48
+#: templates/modules/orders.html:106 templates/modules/order.html:48
 msgid "backpack"
 msgstr "Backpack"
 
-#: templates/modules/orders.html:110 templates/modules/single_order.html:51
+#: templates/modules/orders.html:110 templates/modules/order.html:51
 msgid "chamber"
 msgstr "Chamber"
 
@@ -324,22 +324,22 @@ msgstr "pause"
 msgid "blocked"
 msgstr "bloqued"
 
-#: templates/modules/single_order.html:13
+#: templates/modules/order.html:13
 msgid "fuel_order_instruction"
 msgstr ""
 "Please carefully review your fuel order. The pump operator will load the "
 "fuel type and quantities you specify. Review the order again once it has "
 "been entered on the next screen."
 
-#: templates/modules/single_order.html:77
+#: templates/modules/order.html:77
 msgid "new"
 msgstr "New"
 
-#: templates/modules/single_order.html:77
-msgid "new_order"
+#: templates/modules/order.html:77
+msgid "order_new"
 msgstr "Load Order"
 
-#: templates/modules/single_order.html:84
+#: templates/modules/order.html:84
 msgid "btn_skip"
 msgstr "Skip"
 
@@ -399,7 +399,7 @@ msgstr "Register"
 msgid "canceled"
 msgstr "canceled"
 
-msgid "edit_order"
+msgid "order_edit"
 msgstr "Edit Order"
 
 msgid "Actions"

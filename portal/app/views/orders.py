@@ -11,7 +11,7 @@ from loguru import logger
 
 
 @method_decorator(login_required, name="dispatch")
-class FuelOrderListView(CustomTemplateView):
+class OrdersListView(CustomTemplateView):
     template_name = "modules/orders.html"
 
     def get_context_data(self, **kwargs):
@@ -24,18 +24,12 @@ class FuelOrderListView(CustomTemplateView):
     def post(self, request, *args, **kwargs):
         form = FuelOrderForm(request.POST)
         if form.is_valid():
+            logger.info("Fuel order form is valid.")
             fuel_order = form.save(commit=False)
             fuel_order.company = self.get_company(request.user, self.provider_name)
 
             # Check if all liters values are zero
-            if all(
-                tank == -1
-                for tank in [
-                    fuel_order.tractor_liters,
-                    fuel_order.backpack_liters,
-                    fuel_order.chamber_liters,
-                ]
-            ):
+            if all(tank == -1 for tank in [fuel_order.tractor_liters, fuel_order.backpack_liters, fuel_order.chamber_liters]):
                 form.add_error(None, "All liters values cannot be zero.")
                 logger.error("All liters values are zero.")
                 context = self.get_context_data(**kwargs)
@@ -95,10 +89,8 @@ class FuelOrderListView(CustomTemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class FuelOrderViewNewOrEdit(CustomTemplateView):
-    """Add new or edit order by order_id. Used along with FuelOrderListView"""
-
-    template_name = "modules/single_order.html"
+class OrderEditView(CustomTemplateView):
+    template_name = "modules/order.html"
 
     def get_context_data(self, order_id=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -113,30 +105,27 @@ class FuelOrderViewNewOrEdit(CustomTemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class FuelOrderViewPause(RedirectView):
+class OrderPauseView(RedirectView):
     pattern_name = "orders"  # redirect to this after pause or delete
 
     def post(self, request, order_id, *args, **kwargs):
         # Get the FuelOrders record with the given order_id
         fuel_order = get_object_or_404(FuelOrders, id=order_id)
 
-        # Check the action type
         action = request.POST.get("action")
         if action == "pause":
-            logger.info("Pauseling order")
+            logger.info(f"Pausing order {fuel_order}")
             fuel_order.is_pauseed = not fuel_order.is_pauseed
             fuel_order.save()
         elif action == "delete":
-            logger.info("Deleting order")
-            fuel_order.delete()  # Permanently delete the order
-            logger.info("Order deleted")
-
-        return JsonResponse({"result": "success"})
+            logger.info(f"Deleting order {fuel_order}")
+            fuel_order.delete()
+        # return JsonResponse({"result": "success"})
 
 
-class FuelOrderDataView(View):
+class OrderJsonView(View):
     """Return a JSon object with the data for a single order.
-    Used along with FuelOrderListView
+    Used along with OrderListView
     """
 
     def get(self, request, *args, **kwargs):

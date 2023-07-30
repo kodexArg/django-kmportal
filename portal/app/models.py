@@ -135,12 +135,7 @@ class FuelOrdersManager(Manager):
             .get_queryset()
             .annotate(
                 custom_sort_order=Case(
-                    When(
-                        is_blocked=True,
-                        is_pauseed=False,
-                        is_finished=False,
-                        then=Value(1),
-                    ),
+                    When(is_blocked=True, is_pauseed=False, is_finished=False, then=Value(1)),
                     When(is_pauseed=False, is_finished=False, then=Value(2)),
                     When(is_pauseed=True, then=Value(4)),
                     When(is_finished=True, then=Value(4)),
@@ -254,11 +249,9 @@ class FuelOrders(models.Model):
     requires_odometer = models.BooleanField(default=False, verbose_name="requires_odometer")
     requires_kilometers = models.BooleanField(default=False, verbose_name="requires_kilometers")
 
-    is_blocked = models.BooleanField(default=False, verbose_name="is_blocked")  # because it has been attended
+    is_blocked = models.BooleanField(default=False, verbose_name="is_blocked")  # because its being attended
     is_pauseed = models.BooleanField(default=False, verbose_name="is_pauseed")  # because there's an error or user action
     is_finished = models.BooleanField(default=False, verbose_name="is_finished")  # because it's been attended and it's been filled
-
-    pause_reason = models.TextField(blank=True, null=True, verbose_name="pause_reason")  # because there's an error or user action
 
     AGREEMENT_CHOICES = [
         ("under_negotiation", "Under Negotiation"),
@@ -267,7 +260,6 @@ class FuelOrders(models.Model):
     ]
 
     in_agreement = models.CharField(choices=AGREEMENT_CHOICES, default="under_negotiation", max_length=20, verbose_name="in_agreement")
-
     comments = models.TextField(blank=True, null=True, verbose_name="comments")
 
     def save(self, *args, **kwargs):

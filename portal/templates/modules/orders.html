@@ -1,268 +1,139 @@
 {% extends "base/base.html" %}
-{% load static i18n socialaccount custom_components %}
-{% block title %}{% translate "fuel_orders" %}{% endblock %}
-
-
-{% block navbar %}{% include 'base/navbar_components.html' with icon='fuel' %}{% endblock %}
-
-
-{% block content %}
-{% translate 'fuel_orders' as translated_title %}
-{% module_title_component translated_title %}
-
-<div class="h-24 w-full"></div>
-
-<section class="w-full flex flex-col">
-  <!-- Orders List -->
-  <article id="orders" class="mx-2 md:mx-10 pt-4 overflow-y-auto">
-    {% for order in fuel_orders %}
-    {% row_fuelorder_component order %}
-    {% endfor %}
-  </article>
-  <div class="h-32"><!-- bottom margin --></div>
-</section>
-
-{% legendary_buttons_component %}
-
-<!-- Modal Pause -->
-<div id="pause-modal" class="fixed pointer-events-none z-40 left-0 top-0 flex items-center justify-center w-full h-full opacity-0 invisible transition-opacity duration-300 bg-sky-200 bg-opacity-50">
-  <div class="relative bg-white rounded-lg shadow-lg w-11/12 md:max-w-2xl m-6 pointer-events-auto">
-    <div class="px-4 text-right"><button id="pause-modal-close" class="text-3xl font-semibold hover:text-gray-700">×</button></div>
-    <form id="pause-form" action="" method="post">
-      {% csrf_token %}
-      <div class="p-4">
-        <p>{% translate 'dlg_pause_confirm' %}</p>
-      </div>
-      <div class="p-4 flex space-x-3 justify-end">
-        {% rbutton_component value="delete" bg="bg-red-500" caption="btn_delete" %}
-        {% rbutton_component value="pause" caption="btn_pause" %}
-        {% rbutton_component caption="btn_skip" %}
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Modal View -->
-<div id="view-modal" class="fixed opacity-0 invisible z-40 left-0 top-0 bottom-0 flex items-center justify-center w-full transition-opacity duration-300 bg-sky-200 bg-opacity-50">
-  <div class="relative bg-white rounded-lg shadow-lg pointer-events-auto w-11/12 h-3/4 flex flex-col">
-    <div class="flex justify-between">
-      <div class="flex justify-start">
-        <div class="p-4 text-lg font-bold">{% translate 'fuel_order' %}</div>
-        <div class="p-4 text-xs self-center" id="order-status-text">
-          <p></p>
-        </div>
-      </div>
-      <div class="px-4 text-righ rounded-full"><button id="view-modal-close" class="text-3xl font-semibold hover:text-gray-700">×</button></div>
-    </div>
-    <div class="flex flex-col overflow-y-auto">
-      <!-- QR -->
-      <div class="p-4 flex flex-col justify-center items-center mb-2">
-        <div id="qr_image" class="w-40 h-40 mx-auto rounded-md border-2 border-pantone307c">
-          <img src="" alt="QR Code">
-          <p class="text-2xl font-quicksand leading-tight font-bold text-center"></p>
-        </div>
-      </div>
-      <!-- Body -->
-      <div class="m-4 flex justify-center">
-        <dl class="w-fit grid grid-cols-1 md:grid-cols-3 md:space-x-4">
-          <!-- Order Information -->
-          <div>
-            <dt class="mt-4 text-md font-semibold text-sky-900 dark:text-gray-900">{% translate 'order_information' %}</dt>
-            <dd>
-              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'creation_date' %}:</span>
-              <span id="order_date" class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
-            </dd>
-            <dd>
-              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'last_modification' %}:</span>
-              <span id="modified_date" class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
-            </dd>
-            <dd>
-              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'driver' %}:</span>
-              <span id="driver" class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
-            </dd>
-          </div>
-
-          <!-- Vehicle Information -->
-          <div>
-            <dt class="mt-4 text-md font-semibold text-sky-900 dark:text-gray-900">{% translate 'vehicle_information' %}</dt>
-            <dd>
-              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'tractor_plate' %}:</span>
-              <span id="tractor_plate" class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
-            </dd>
-            <dd>
-              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'trailer_plate' %}:</span>
-              <span id="trailer_plate" class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
-            </dd>
-          </div>
-
-          <!-- Fuel Order -->
-          <div>
-            <dt class="mt-4 text-md font-semibold text-sky-900 dark:text-gray-900">{% translate 'fuel_order' %}</dt>
-            <dd>
-              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'tractor' %}:</span>
-              <span id="formated_tractor_liters_to_load_of" class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
-            </dd>
-            <dd>
-              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'backpack' %}:</span>
-              <span id="formated_backpack_liters_to_load_of" class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
-            </dd>
-            <dd>
-              <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate 'chamber' %}:</span>
-              <span id="formated_chamber_liters_to_load_of" class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
-            </dd>
-          </div>
-        </dl>
-      </div>
-    </div>
-    <div class="h-6"></div>
-  </div>
-</div>
-
-
+{% load static i18n socialaccount custom_components compress %}
+{% block title %}
+  {% translate "fuel_orders" %}
 {% endblock %}
-
-
+{% block navbar %}
+  {% include "base/navbar_components.html" with icon="fuel" %}
+{% endblock %}
+{% block content %}
+  {% translate "fuel_orders" as translated_title %}
+  {% module_title_component translated_title %}
+  <div class="h-24 w-full">
+    <!-- top margin -->
+  </div>
+  <section class="w-full flex flex-col">
+    <!-- Orders List -->
+    <article id="orders" class="mx-2 md:mx-10 pt-4 overflow-y-auto">
+      {% for order in fuel_orders %}
+        {% row_fuelorder_component order %}
+      {% endfor %}
+    </article>
+    <div class="h-32">
+      <!-- bottom margin -->
+    </div>
+  </section>
+  {% legendary_buttons_component %}
+  <!-- Modal Pause -->
+  <div id="pause-modal"
+       class="fixed pointer-events-none z-40 left-0 top-0 flex items-center justify-center w-full h-full opacity-0 invisible transition-opacity duration-300 bg-sky-200 bg-opacity-50">
+    <div class="relative bg-white rounded-lg shadow-lg w-11/12 md:max-w-2xl m-6 pointer-events-auto">
+      <div class="px-4 text-right">
+        <button id="pause-modal-close"
+                class="text-3xl font-semibold hover:text-gray-700">×</button>
+      </div>
+      <form id="pause-form" action="" method="post">
+        {% csrf_token %}
+        <div class="p-4">
+          <p>{% translate "dlg_pause_confirm" %}</p>
+        </div>
+        <div class="p-4 flex space-x-3 justify-end">
+          {% rbutton_component value="delete" bg="bg-red-500" caption="btn_delete" %}
+          {% rbutton_component value="pause" caption="btn_pause" %}
+          {% rbutton_component caption="btn_skip" %}
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Modal View -->
+  <div id="view-modal"
+       class="fixed opacity-0 invisible z-40 left-0 top-0 bottom-0 flex items-center justify-center w-full transition-opacity duration-300 bg-sky-200 bg-opacity-50">
+    <div class="relative bg-white rounded-lg shadow-lg pointer-events-auto w-11/12 h-3/4 flex flex-col">
+      <div class="flex justify-between">
+        <div class="flex justify-start">
+          <div class="p-4 text-lg font-bold">{% translate "fuel_order" %}</div>
+          <div class="p-4 text-xs self-center" id="order-status-text">
+            <p></p>
+          </div>
+        </div>
+        <div class="px-4 text-righ rounded-full">
+          <button id="view-modal-close"
+                  class="text-3xl font-semibold hover:text-gray-700">×</button>
+        </div>
+      </div>
+      <div class="flex flex-col overflow-y-auto">
+        <!-- QR -->
+        <div class="p-4 flex flex-col justify-center items-center mb-2">
+          <div id="qr_image"
+               class="w-40 h-40 mx-auto rounded-md border-2 border-pantone307c">
+            <img src="" alt="QR Code" />
+            <p class="text-2xl font-quicksand leading-tight font-bold text-center"></p>
+          </div>
+        </div>
+        <!-- Body -->
+        <div class="m-4 flex justify-center">
+          <dl class="w-fit grid grid-cols-1 md:grid-cols-3 md:space-x-4">
+            <!-- Order Information -->
+            <div>
+              <dt class="mt-4 text-md font-semibold text-sky-900 dark:text-gray-900">{% translate "order_information" %}</dt>
+              <dd>
+                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate "creation_date" %}:</span>
+                <span id="order_date"
+                      class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
+              </dd>
+              <dd>
+                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate "last_modification" %}:</span>
+                <span id="modified_date"
+                      class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
+              </dd>
+              <dd>
+                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate "driver" %}:</span>
+                <span id="driver"
+                      class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
+              </dd>
+            </div>
+            <!-- Vehicle Information -->
+            <div>
+              <dt class="mt-4 text-md font-semibold text-sky-900 dark:text-gray-900">{% translate "vehicle_information" %}</dt>
+              <dd>
+                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate "tractor_plate" %}:</span>
+                <span id="tractor_plate"
+                      class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
+              </dd>
+              <dd>
+                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate "trailer_plate" %}:</span>
+                <span id="trailer_plate"
+                      class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
+              </dd>
+            </div>
+            <!-- Fuel Order -->
+            <div>
+              <dt class="mt-4 text-md font-semibold text-sky-900 dark:text-gray-900">{% translate "fuel_order" %}</dt>
+              <dd>
+                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate "tractor" %}:</span>
+                <span id="formated_tractor_liters_to_load_of"
+                      class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
+              </dd>
+              <dd>
+                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate "backpack" %}:</span>
+                <span id="formated_backpack_liters_to_load_of"
+                      class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
+              </dd>
+              <dd>
+                <span class="text-sm font-semibold text-gray-700 dark:text-gray-400">{% translate "chamber" %}:</span>
+                <span id="formated_chamber_liters_to_load_of"
+                      class="text-sm text-gray-900 dark:text-sky-800 font-mono ml-1"></span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+      <div class="h-6"></div>
+    </div>
+  </div>
+{% endblock %}
 {% block scripts %}
-<script type="text/javascript">
-  $(document).ready(function () {
-    const pauseModal = $('#pause-modal');
-    const viewModal = $('#view-modal');
-    const pauseCloseModal = $('#pause-modal-close');
-    const viewCloseModal = $('#view-modal-close');
-    const formPause = $('#pause-form');
-    let orderId;
-
-    // Pause order functionality
-    $('[id^="pause-button-"]').click(function () {
-      orderId = $(this).data('order-id');
-
-      $.ajax({
-        url: `/orders/${orderId}/data/`,
-        type: 'GET',
-        success: function (data) {
-          // Check if the order is already pauseed
-          if (data.is_pauseed) {
-            $('button[value="pause"]').find('p').text('{% translate "btn_continue" %}');
-          } else {
-            $('button[value="pause"]').find('p').text('{% translate "btn_pause" %}');
-          }
-
-          // Modify the form action attribute
-          formPause.attr('action', `/orders/${orderId}/pause/`);
-
-          // Display the modal
-          pauseModal.toggleClass('opacity-0 invisible pointer-events-none');
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          console.error('Error occurred while retrieving order data:', errorThrown);
-        }
-      });
-    });
-
-    // Close Pause Modal
-    pauseCloseModal.click(function () {
-      pauseModal.addClass('opacity-0 invisible pointer-events-none');
-    });
-
-    // Listen for form submit
-    formPause.on('submit', function (e) {
-      e.preventDefault();  // prevent the form from submitting normally
-
-      // get the value of the action
-      let action = $(this).find('button[type="submit"]:focus').val();
-
-      let data = {
-        'csrfmiddlewaretoken': $(this).find('input[name="csrfmiddlewaretoken"]').val(),
-        'action': action,
-      };
-
-      $.ajax({
-        url: `/orders/${orderId}/pause/`,
-        type: 'POST',
-        data: data,
-        success: function (response) {
-          console.log('Response from server: ', response);
-          if (response.result == "success") {
-            pauseModal.addClass('opacity-0 invisible pointer-events-none');
-            location.reload();
-          }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          console.error('Error occurred while trying to pause/delete order:', errorThrown);
-        }
-      });
-    });
-
-    // View order functionality
-    $('[id^="view-button-"]').click(function () {
-      orderId = $(this).data('order-id');
-
-      $.ajax({
-        url: `/orders/${orderId}/data/`,
-        type: 'GET',
-        success: function (data) {
-          // Update the order status text based on the order data
-          let statusTextElement = $('#order-status-text');
-          if (data.is_finished) {
-            statusTextElement.text('{% translate "finished" %}');
-            statusTextElement.removeClass('text-red-500 text-orange-500');
-            statusTextElement.addClass('text-green-500');
-          } else if (data.is_pauseed) {
-            statusTextElement.text('{% translate "pauseed" %}');
-            statusTextElement.removeClass('text-green-500 text-orange-500');
-            statusTextElement.addClass('text-red-500');
-          } else if (data.is_blocked) {
-            statusTextElement.text('{% translate "blocked" %}');
-            statusTextElement.removeClass('text-green-500 text-red-500');
-            statusTextElement.addClass('text-orange-500');
-          } else {
-            statusTextElement.text('')
-          }
-
-          // This approach generates a URL with order_id as 0 and then replaces '0' with the actual orderId
-          // because { % url.. % } line is generated serverside, and the javascript replaces it when the orderId variable
-          // is ready.
-          $('#qr_image img').attr('src', "{% url 'get_qr' order_id=0 %}".replace('0', orderId));
-          $('#qr_image p').text(data.operation_code.toUpperCase());
-
-          // Fill in the rest of the fields in the view modal
-          $('#order_date').text(data.order_date);
-          $('#modified_date').text(data.modified_date);
-          $('#driver').text(data.driver);
-          $('#tractor_plate').text(data.tractor_plate);
-          $('#trailer_plate').text(data.trailer_plate);
-          $('#formated_tractor_liters_to_load_of').text(data.formated_tractor_liters_to_load_of == 0 ? 'NO' : data.formated_tractor_liters_to_load_of == -1 ? 'MAX' : data.formated_tractor_liters_to_load_of);
-
-          $('#formated_backpack_liters_to_load_of').text(data.formated_backpack_liters_to_load_of == 0 ? 'NO' : data.formated_backpack_liters_to_load_of == -1 ? 'MAX' : data.formated_backpack_liters_to_load_of);
-          
-          $('#formated_chamber_liters_to_load_of').text(data.formated_chamber_liters_to_load_of == 0 ? 'NO' : data.formated_chamber_liters_to_load_of == -1 ? 'MAX' : data.formated_chamber_liters_to_load_of);
-          
-
-          viewModal.toggleClass('opacity-0 invisible pointer-events-none');
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          console.error('Error occurred while retrieving order data:', errorThrown);
-        }
-      });
-    });
-
-
-
-    // Close View Modal
-    viewCloseModal.click(function () {
-      viewModal.addClass('opacity-0 invisible pointer-events-none');
-    });
-
-    // Close modals on outside click
-    $(window).click(function (event) {
-      if (event.target == pauseModal[0]) {
-        pauseModal.addClass('opacity-0 invisible pointer-events-none');
-      } else if (event.target == viewModal[0]) {
-        viewModal.addClass('opacity-0 invisible pointer-events-none');
-      }
-    });
-
-  });
-
-</script>
+  {% compress js %}
+    <script type="text/javascript" src="{% static 'js/orders_sandwitch.js' %}"></script>
+  {% endcompress %}
 {% endblock %}

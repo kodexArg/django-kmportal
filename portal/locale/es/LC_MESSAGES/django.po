@@ -204,7 +204,7 @@ msgstr ""
 msgid "let_me_in"
 msgstr "Registro como Transportista"
 
-#: templates/modules/company.html:3 templates/modules/single_order.html:3
+#: templates/modules/company.html:3 templates/modules/order.html:3
 msgid "company_page_title"
 msgstr "Empresa"
 
@@ -262,7 +262,7 @@ msgid "no_extracash_orders"
 msgstr "No hay órdenes de Extra-Cash"
 
 #: templates/modules/orders.html:3 templates/modules/orders.html:10
-#: templates/modules/single_order.html:8
+#: templates/modules/order.html:8
 msgid "fuel_orders"
 msgstr "Órdenes de Carga"
 
@@ -274,7 +274,7 @@ msgstr ""
 "definitivamente."
 
 #: templates/modules/orders.html:50 templates/modules/orders.html:100
-#: templates/modules/single_order.html:41
+#: templates/modules/order.html:41
 msgid "fuel_order"
 msgstr "Pedido de Combustible"
 
@@ -302,15 +302,15 @@ msgstr "Placa del Tractor"
 msgid "trailer_plate"
 msgstr "Placa del Remolque"
 
-#: templates/modules/orders.html:102 templates/modules/single_order.html:45
+#: templates/modules/orders.html:102 templates/modules/order.html:45
 msgid "tractor"
 msgstr "Tractor"
 
-#: templates/modules/orders.html:106 templates/modules/single_order.html:48
+#: templates/modules/orders.html:106 templates/modules/order.html:48
 msgid "backpack"
 msgstr "Mochila"
 
-#: templates/modules/orders.html:110 templates/modules/single_order.html:51
+#: templates/modules/orders.html:110 templates/modules/order.html:51
 msgid "chamber"
 msgstr "Cámara"
 
@@ -326,22 +326,22 @@ msgstr "pausar"
 msgid "blocked"
 msgstr "bloqueado"
 
-#: templates/modules/single_order.html:13
+#: templates/modules/order.html:13
 msgid "fuel_order_instruction"
 msgstr ""
 "Por favor revise cuidadosamente su pedido de combustible. El operador "
 "cargará el tipo de combustible y las cantidades que Ud. indique. Revise "
 "nuevamente la orden una vez realizada el alta, en la siguiente pantalla."
 
-#: templates/modules/single_order.html:77
+#: templates/modules/order.html:77
 msgid "new"
 msgstr "Nueva"
 
-#: templates/modules/single_order.html:77
-msgid "new_order"
+#: templates/modules/order.html:77
+msgid "order_new"
 msgstr "Orden de Carga"
 
-#: templates/modules/single_order.html:84
+#: templates/modules/order.html:84
 msgid "btn_skip"
 msgstr "Omitir"
 
@@ -403,7 +403,7 @@ msgstr "Registrarse"
 msgid "canceled"
 msgstr "cancelado"
 
-msgid "edit_order"
+msgid "order_edit"
 msgstr "Editar Orden"
 
 msgid "Actions"
