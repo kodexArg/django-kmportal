@@ -134,6 +134,134 @@
 {% endblock %}
 {% block scripts %}
   {% compress js %}
-    <script type="text/javascript" src="{% static 'js/orders_sandwitch.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            // Cache DOM elements for performance
+            const pauseModal = $('#pause-modal');
+            const viewModal = $('#view-modal');
+            const pauseCloseModal = $('#pause-modal-close');
+            const viewCloseModal = $('#view-modal-close');
+            const formPause = $('#pause-form');
+
+            let orderId;
+
+            // Function to close modals
+            const closeModal = (modal) => modal.addClass('opacity-0 invisible pointer-events-none');
+
+            // Function to manage order pause/unpause actions
+            const pauseOrder = function() {
+                orderId = $(this).data('order-id');
+
+                $.ajax({
+                    url: `/orders/${orderId}/data/`,
+                    type: 'GET',
+                    success: function(data) {
+                        $('button[value="pause"]').find('p').text(data.is_paused ? '{% translate "btn_continue" %}' : '{% translate "btn_pause" %}');
+                        formPause.attr('action', `/orders/${orderId}/pause/`);
+                        pauseModal.toggleClass('opacity-0 invisible pointer-events-none');
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error('Error occurred while retrieving order data:', errorThrown);
+                    }
+                });
+            }
+
+            // Function to submit pause form
+            const submitPauseForm = function(e) {
+                e.preventDefault();
+
+                const data = {
+                    'csrfmiddlewaretoken': $(this).find('input[name="csrfmiddlewaretoken"]').val(),
+                    'action': $(this).find('button[type="submit"]:focus').val(),
+                };
+
+                $.ajax({
+                    url: `/orders/${orderId}/pause/`,
+                    type: 'POST',
+                    data: data,
+                    success: function(response) {
+                        console.log('Response from server: ', response);
+                        if (response.result == "success") {
+                            closeModal(pauseModal);
+                            location.reload();
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error('Error occurred while trying to pause/delete order:', errorThrown);
+                    }
+                });
+            }
+
+            // Function to view order details
+            const viewOrder = function() {
+                orderId = $(this).data('order-id');
+
+                $.ajax({
+                    url: `/orders/${orderId}/data/`,
+                    type: 'GET',
+                    success: function(data) {
+                        let statusTextElement = $('#order-status-text');
+                        if (data.is_finished) {
+                            statusTextElement.text('{% translate "finished" %}').removeClass('text-red-500 text-orange-500').addClass('text-green-500');
+                        } else if (data.is_paused) {
+                            statusTextElement.text('{% translate "paused" %}').removeClass('text-green-500 text-orange-500').addClass('text-red-500');
+                        } else if (data.is_blocked) {
+                            statusTextElement.text('{% translate "blocked" %}').removeClass('text-green-500 text-red-500').addClass('text-orange-500');
+                        } else {
+                            statusTextElement.text('');
+                        }
+                        // Update QR code and operation code
+                        $('#qr_image img').attr('src', "{% url 'get_qr' order_id=0 %}".replace('0', orderId));
+                        $('#qr_image p').text(data.operation_code.toUpperCase());
+
+                        // Update order details in the view modal
+                        $('#order_date').text(data.order_date);
+                        $('#modified_date').text(data.modified_date);
+                        $('#driver').text(data.driver);
+                        $('#tractor_plate').text(data.tractor_plate);
+                        $('#trailer_plate').text(data.trailer_plate);
+                        $('#formated_tractor_liters_to_load_of').text(data.formated_tractor_liters_to_load_of == 0 ? 'NO' : data.formated_tractor_liters_to_load_of == -1 ? 'MAX' : data.formated_tractor_liters_to_load_of);
+                        $('#formated_backpack_liters_to_load_of').text(data.formated_backpack_liters_to_load_of == 0 ? 'NO' : data.formated_backpack_liters_to_load_of == -1 ? 'MAX' : data.formated_backpack_liters_to_load_of);
+                        $('#formated_chamber_liters_to_load_of').text(data.formated_chamber_liters_to_load_of == 0 ? 'NO' : data.formated_chamber_liters_to_load_of == -1 ? 'MAX' : data.formated_chamber_liters_to_load_of);
+
+                        viewModal.toggleClass('opacity-0 invisible pointer-events-none');
+
+                        // Format the dates
+                        const orderDate = new Date(data.order_date);
+                        const modifiedDate = new Date(data.modified_date);
+                        const options = {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        };
+
+                        // Set the formatted dates in the modal
+                        console.log("{{ LANGUAGE_CODE}}");
+                        $('#order_date').text(orderDate.toLocaleDateString("{{ LANGUAGE_CODE }}", options));
+                        $('#modified_date').text(modifiedDate.toLocaleDateString("{{ LANGUAGE_CODE }}", options));
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error('Error occurred while retrieving order data:', errorThrown);
+                    }
+                });
+            }
+
+            // Attach event listeners
+            $('[id^="pause-button-"]').click(pauseOrder);
+            pauseCloseModal.click(() => closeModal(pauseModal));
+            formPause.on('submit', submitPauseForm);
+            $('[id^="view-button-"]').click(viewOrder);
+            viewCloseModal.click(() => closeModal(viewModal));
+
+            // Close modals on outside click
+            $(window).click(function(event) {
+                if (event.target == pauseModal[0]) {
+                    closeModal(pauseModal);
+                } else if (event.target == viewModal[0]) {
+                    closeModal(viewModal);
+                }
+            });
+        });
+    </script>
   {% endcompress %}
 {% endblock %}

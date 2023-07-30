@@ -11,6 +11,11 @@ from django.utils.timezone import now
 from django.utils.translation import gettext as _
 
 
+# HELPER
+def get_default_expiration_date():
+    return now() + timedelta(days=7)
+
+
 # Create your models here.
 class Setting(models.Model):
     """This table is using for this project settings, some important values are:
@@ -187,7 +192,7 @@ class FuelOrders(models.Model):
     order_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     requested_date = models.DateField(default=now)
-    expiration_date = models.DateField(default=now() + timedelta(days=7))
+    expiration_date = models.DateField(default=get_default_expiration_date)
 
     user_creator = models.ForeignKey(
         User,
@@ -283,7 +288,7 @@ class FuelOrders(models.Model):
                     self.requested_date = now()
 
                 if not self.expiration_date:
-                    self.expiration_date = now() + timedelta(days=7)
+                    self.expiration_date = get_default_expiration_date()
 
             else:  # this is an edition
                 if hasattr(self, "user_lastmod"):
@@ -453,7 +458,7 @@ class ExtraCash(models.Model):
     order_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     requested_date = models.DateField(default=now)
-    expiration_date = models.DateField(default=now() + timedelta(days=7))
+    expiration_date = models.DateField(default=get_default_expiration_date)
 
     user_creator = models.ForeignKey(
         User,

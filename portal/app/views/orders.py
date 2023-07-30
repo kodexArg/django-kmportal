@@ -106,8 +106,6 @@ class OrderEditView(CustomTemplateView):
 
 @method_decorator(login_required, name="dispatch")
 class OrderPauseView(RedirectView):
-    pattern_name = "orders"  # redirect to this after pause or delete
-
     def post(self, request, order_id, *args, **kwargs):
         # Get the FuelOrders record with the given order_id
         fuel_order = get_object_or_404(FuelOrders, id=order_id)
@@ -120,7 +118,8 @@ class OrderPauseView(RedirectView):
         elif action == "delete":
             logger.info(f"Deleting order {fuel_order}")
             fuel_order.delete()
-        # return JsonResponse({"result": "success"})
+        
+        return JsonResponse({"result": "success"})
 
 
 class OrderJsonView(View):
