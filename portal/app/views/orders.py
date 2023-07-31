@@ -10,10 +10,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import RedirectView
-from django.views.generic.edit import FormView 
+from django.views.generic.edit import FormView
 
 from loguru import logger
-
 
 
 @method_decorator(login_required, name="dispatch")
@@ -82,6 +81,13 @@ class OrderBaseView(CustomTemplateView, FormView):
         fuel_order.save()
         return super().form_valid(form)
 
+    # company is required by teh form to filter records
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        company = self.get_company(self.request.user, self.provider_name)
+        kwargs.update({"company": company})
+        return kwargs
+
     def form_invalid(self, form):
         logger.error(f"Error saving order: {form.errors}")
         return super().form_invalid(form)
@@ -101,10 +107,10 @@ class OrderUpdateView(OrderBaseView):
     form_class = FuelOrderForm
 
     def get_object(self):
-        order_id = self.kwargs.get('order_id')
+        order_id = self.kwargs.get("order_id")
         return get_object_or_404(FuelOrders, id=order_id)
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs.update({'instance': self.get_object()})
+        kwargs.update({"instance": self.get_object()})
         return kwargs

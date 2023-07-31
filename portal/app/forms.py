@@ -78,7 +78,13 @@ class FuelOrderForm(forms.ModelForm):
     chamber_liters_to_load = forms.ChoiceField(choices=CHOICES)
 
     def __init__(self, *args, **kwargs):
+        company = kwargs.pop('company', None)  # You will pass company from your view
         super().__init__(*args, **kwargs)
+        
+        if company is not None:
+            self.fields['driver'].queryset = Drivers.objects.filter(company=company)
+            self.fields['tractor_plate'].queryset = Tractors.objects.filter(company=company)
+            self.fields['trailer_plate'].queryset = Trailers.objects.filter(company=company)
 
         for field_name, field in self.fields.items():
             # tailwind classes for fields
