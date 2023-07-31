@@ -21,6 +21,7 @@ class CustomTemplateView(TemplateView):
             social_account = user.socialaccount_set.get(provider=provider_name)
             return social_account.get_provider().id
         except user.socialaccount_set.model.DoesNotExist:
+            logger.error("Company does not exist")
             return None
 
     # context["company"]
@@ -32,7 +33,7 @@ class CustomTemplateView(TemplateView):
             user.socialaccount_set.model.DoesNotExist,
             CompanySocialAccount.DoesNotExist,
         ):
-            logger.info("Company does not exist")
+            logger.error("Company does not exist")
             return None
 
     def get_company_id(self, user, provider_name):
@@ -53,18 +54,23 @@ class CustomTemplateView(TemplateView):
         if self.request.user.is_authenticated:
             context["provider_id"] = self.get_provider_id(self.request.user, self.provider_name)
             context["company"] = self.get_company(self.request.user, self.provider_name)
+            context["user"] = self.request.user
         return context
 
 
-def get_provider_id(user, provider_name):
-    """get provider id from social account, required to retrieve
-    image from social nets
-    """
-    try:
-        social_account = user.socialaccount_set.get(provider=provider_name)
-        return social_account.get_provider().id
-    except user.socialaccount_set.model.DoesNotExist:
-        return None
+
+
+
+
+# def get_provider_id(user, provider_name):
+#     """get provider id from social account, required to retrieve
+#     image from social nets
+#     """
+#     try:
+#         social_account = user.socialaccount_set.get(provider=provider_name)
+#         return social_account.get_provider().id
+#     except user.socialaccount_set.model.DoesNotExist:
+#         return None
 
 
 def get_qr(request, order_id):

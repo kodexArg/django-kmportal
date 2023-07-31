@@ -13,9 +13,21 @@
         <article class="flex flex-col pt-4 pb-2 mt-24">
             <p class="text-pantone7689c text-justify">{% translate "fuel_order_instruction" %}</p>
         </article>
+        {% if form.errors %}
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <ul>
+                {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    
         <form method="post"
               enctype="multipart/form-data"
-              action="{% url 'orders' %}">
+              action="{% url 'order_new' %}">
             {% csrf_token %}
             <div class="tw-bigform">
                 <div class="grid grid-cols-2 gap-1 sm:gap-2 justify-start w-fit">
@@ -76,4 +88,3 @@
         </form>
     </section>
 {% endblock %}
-

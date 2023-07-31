@@ -1,16 +1,17 @@
 from datetime import date
-from logging import PlaceHolder
+
+from app.models import Drivers, ExtraCash, FuelOrders, Tractors, Trailers
 from django import forms
+from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.forms import BooleanField
 from django.utils import timezone
-from app.models import ExtraCash, FuelOrders, Drivers, Tractors, Trailers
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
-from django.forms import BooleanField
-from django.core.exceptions import ValidationError
 from loguru import logger
-from django.core.validators import MaxValueValidator, MinValueValidator
 
 
+# Helper function and classes
 class DateSelectWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
         day_choices = [(str(day), str(day).zfill(2)) for day in range(1, 32)]
@@ -28,10 +29,7 @@ class DateSelectWidget(forms.MultiWidget):
             ("11", _("November")),
             ("12", _("December")),
         ]
-        year_choices = [
-            (str(year), str(year))
-            for year in range(timezone.now().year, timezone.now().year + 2)
-        ]
+        year_choices = [(str(year), str(year)) for year in range(timezone.now().year, timezone.now().year + 2)]
 
         widgets = [
             forms.Select(choices=day_choices),
@@ -47,10 +45,7 @@ class DateSelectWidget(forms.MultiWidget):
         return [None, None, None]
 
     def value_from_datadict(self, data, files, name):
-        day, month, year = [
-            widget.value_from_datadict(data, files, f"{name}_{i}")
-            for i, widget in enumerate(self.widgets)
-        ]
+        day, month, year = [widget.value_from_datadict(data, files, f"{name}_{i}") for i, widget in enumerate(self.widgets)]
         if all(val is not None for val in [day, month, year]):
             try:
                 return date(int(year), int(month), int(day))
@@ -69,81 +64,54 @@ class DateSelectWidget(forms.MultiWidget):
             raise
 
 
+CHOICES = (
+    ("0", "NO"),
+    ("-1", "MAX"),
+    *[(str(x), str(x) + " L.") for x in range(50, 1001, 50)],
+)
+
+
+# Forms
 class FuelOrderForm(forms.ModelForm):
-    CHOICES = (
-        ("-1", "MAX"),
-        ("0", "NO"),
-        *[(str(x), str(x) + " L.") for x in range(50, 1001, 50)],
-    )
-
-    tractor_liters_to_load = forms.ChoiceField(
-        choices=CHOICES,
-        label="Tractor Liters to Load",
-    )
-
-    backpack_liters_to_load = forms.ChoiceField(
-        choices=CHOICES,
-        label="Backpack Liters to Load",
-    )
-
-    chamber_liters_to_load = forms.ChoiceField(
-        choices=CHOICES,
-        label="Chamber Liters to Load",
-    )
-
+    tractor_liters_to_load = forms.ChoiceField(choices=CHOICES)
+    backpack_liters_to_load = forms.ChoiceField(choices=CHOICES)
+    chamber_liters_to_load = forms.ChoiceField(choices=CHOICES)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         for field_name, field in self.fields.items():
-            # apply custom tailwind classes for fields
+            # tailwind classes for fields
             field.widget.attrs["class"] = "tw-field"
-            if isinstance(field, BooleanField):
+            if isinstance(field, BooleanField):  # if is boolean field
                 field.widget.attrs["class"] += " tw-checkbox-field"
             else:
                 field.widget.attrs["class"] += " tw-input-field"
-
             # label tranlation:
             if field.label:
                 field.widget.attrs["placeholder"] = str(field.label)
                 field.widget.attrs["aria-label"] = str(field.label)
                 translated_label = _(str(field.label).replace(" ", "_").lower())
                 try:
-                    field.label = mark_safe(
-                        f'<span class="tw-label">{translated_label}</span>'
-                    )
+                    field.label = mark_safe(f'<span class="tw-label">{translated_label}</span>')
                 except KeyError:
-                    field.label = mark_safe(
-                        f'<span class="tw-label">{str(field.label)}</span>'
-                    )
+                    field.label = mark_safe(f'<span class="tw-label">{str(field.label)}</span>')
                     logger.error(f"failing translation for {field.label}")
-
-        # Customizations
-        self.fields["tractor_liters_to_load"].initial = 0
-        self.fields["backpack_liters_to_load"].initial = 0
-        self.fields["chamber_liters_to_load"].initial = 0
-
-        ## Customizations
-
-        self.fields["tractor_liters_to_load"].initial = 0
-        self.fields["backpack_liters_to_load"].initial = 0
-        self.fields["chamber_liters_to_load"].initial = 0
-
-    def save(self, *args, **kwargs):
-        try:
-            return super().save(*args, **kwargs)
-        except ValidationError as e:
-            logger.exception("Error occurred while saving fuel order:")
-            raise
 
     class Meta:
         model = FuelOrders
-        fields = '__all__'
-        exclude = [
-            "company",
-            "operation_code",
-            "in_agreement",
-            "requested_date",
-            "expiration_date",
+        fields = [
+            "driver",
+            "tractor_plate",
+            "trailer_plate",
+            "tractor_fuel_type",
+            "backpack_fuel_type",
+            "chamber_fuel_type",
+            "tractor_liters_to_load",
+            "backpack_liters_to_load",
+            "chamber_liters_to_load",
+            "requires_odometer",
+            "requires_kilometers",
         ]
 
 
@@ -192,59 +160,45 @@ class ExtraCashForm(forms.ModelForm):
 
     cash_amount_confirm = forms.IntegerField(
         label="confirm_cash_amount",
-        validators=[
-            MinValueValidator(0),
-            MaxValueValidator(999999)  # max 6 digits
-        ],
+        validators=[MinValueValidator(0), MaxValueValidator(999999)],  # max 6 digits
     )
     cash_amount = forms.IntegerField(
         label="cash_amount",
-        validators=[
-            MinValueValidator(0),
-            MaxValueValidator(999999)  # max 6 digits
-        ],
+        validators=[MinValueValidator(0), MaxValueValidator(999999)],  # max 6 digits
     )
-    
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         for field_name, field in self.fields.items():
-
             # apply custom tailwind classes for fields
             field.widget.attrs["class"] = "tw-field"
             if isinstance(field, BooleanField):
                 field.widget.attrs["class"] += " tw-checkbox-field"
             else:
                 field.widget.attrs["class"] += " tw-input-field"
-                
-            if field_name in ['cash_amount_confirm', 'cash_amount']:
+
+            if field_name in ["cash_amount_confirm", "cash_amount"]:
                 field.widget.attrs["class"] += " text-right"
                 field.widget.attrs["step"] = "100"
-                
+
             # label translation:
             if field.label:
                 field.widget.attrs["placeholder"] = str(field.label)
                 field.widget.attrs["aria-label"] = str(field.label)
                 translated_label = _(str(field.label).replace(" ", "_").lower())
                 try:
-                    field.label = mark_safe(
-                        f'<span class="tw-label">{translated_label}</span>'
-                    )
+                    field.label = mark_safe(f'<span class="tw-label">{translated_label}</span>')
                 except KeyError:
-                    field.label = mark_safe(
-                        f'<span class="tw-label">{str(field.label)}</span>'
-                    )
+                    field.label = mark_safe(f'<span class="tw-label">{str(field.label)}</span>')
                     logger.error(f"failing translation for {field.label}")
 
-
         # Placeholder for cash_amount and cash_amount_confirm
-        self.fields['cash_amount'].widget.attrs['placeholder'] = 'ARS $'
-        self.fields['cash_amount_confirm'].widget.attrs['placeholder'] = 'ARS $'
+        self.fields["cash_amount"].widget.attrs["placeholder"] = "ARS $"
+        self.fields["cash_amount_confirm"].widget.attrs["placeholder"] = "ARS $"
 
         # Customizations
         # self.fields["in_agreement"].initial = "under_negotiation"
-
 
     def save(self, *args, **kwargs):
         try:
@@ -263,7 +217,7 @@ class ExtraCashForm(forms.ModelForm):
 
     class Meta:
         model = ExtraCash
-        fields = '__all__'
+        fields = "__all__"
         exclude = [
             "company",
             "operation_code",

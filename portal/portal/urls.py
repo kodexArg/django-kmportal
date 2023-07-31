@@ -1,21 +1,21 @@
 from allauth.account.views import LoginView
+
+# 'app' views
+from app.views.authorized import UserHomeView
+from app.views.extracash import ExtraCashView
+from app.views.helpers import get_qr, get_server_time
+from app.views.modules import CompanyView, VehiclesView
+from app.views.orders import OrderUpdateView, OrderCreateView, OrderJsonView, OrderPauseView, OrdersListView
+from app.views.unauthorized import AboutUsView, ContactUsView, HomeView, LogoutView, UnderConstructionView
 from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import include, path
-
-# 'app' views
-from app.views.authorized import UserHomeView
-from app.views.orders import OrderJsonView, OrdersListView, OrderPauseView, OrderEditView
-from app.views.extracash import ExtraCashView
-from app.views.helpers import get_qr, get_server_time
-from app.views.modules import CompanyView, VehiclesView
-from app.views.unauthorized import AboutUsView, ContactUsView, HomeView, LogoutView, UnderConstructionView
+from staff.forms import CustomLoginForm
 
 # 'staff' views
 from staff.views import StaffHomeView
-from staff.forms import CustomLoginForm
 
 # Without Internationalization
 urlpatterns = [
@@ -26,7 +26,6 @@ urlpatterns = [
     path("under_construction/", UnderConstructionView.as_view(), name="under_construction"),
     path("get_qr/<int:order_id>/", get_qr, name="get_qr"),
     path("get-server-time/", get_server_time, name="get-server-time"),
-
     # Modules
     ## Fuel Orders
     path("orders/<int:order_id>/data/", OrderJsonView.as_view(), name="order_data"),
@@ -57,12 +56,11 @@ urlpatterns += i18n_patterns(
     path("vehicles/", VehiclesView.as_view(), name="vehicles"),
     path("tickets/", UnderConstructionView.as_view(), name="tickets"),
     path("extracash/", ExtraCashView.as_view(), name="extracash"),
-
     # Modules
     ## Fuel Orders
     path("orders/", OrdersListView.as_view(), name="orders"),
-    path("orders/new/", OrderEditView.as_view(), name="order_new"),
-    path("orders/<int:order_id>/edit/", OrderEditView.as_view(), name="order_edit"),
+    path("order/new/", OrderCreateView.as_view(), name="order_new"),
+    path("order/edit/<int:order_id>/", OrderUpdateView.as_view(), name="order_edit"),
 )
 
 if settings.DEBUG:

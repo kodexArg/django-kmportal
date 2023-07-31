@@ -1,3 +1,6 @@
+from re import I
+
+from arrow import get
 from app.forms import FuelOrderForm
 from app.models import FuelOrders
 from app.views.helpers import CustomTemplateView
@@ -7,7 +10,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import RedirectView
+from django.views.generic.edit import FormView 
+
 from loguru import logger
+
 
 
 @method_decorator(login_required, name="dispatch")
@@ -21,88 +27,6 @@ class OrdersListView(CustomTemplateView):
             context["fuel_orders"] = FuelOrders.objects.filter(company=company)
         return context
 
-    def post(self, request, *args, **kwargs):
-        form = FuelOrderForm(request.POST)
-        if form.is_valid():
-            logger.info("Fuel order form is valid.")
-            fuel_order = form.save(commit=False)
-            fuel_order.company = self.get_company(request.user, self.provider_name)
-
-            # Check if all liters values are zero
-            if all(tank == -1 for tank in [fuel_order.tractor_liters, fuel_order.backpack_liters, fuel_order.chamber_liters]):
-                form.add_error(None, "All liters values cannot be zero.")
-                logger.error("All liters values are zero.")
-                context = self.get_context_data(**kwargs)
-                context["form"] = form
-                return render(request, self.template_name, context)
-
-            # Check if a non-zero liters value has a fuel_type field with a value different from empty
-            if fuel_order.tractor_liters != None and not fuel_order.tractor_fuel_type:
-                form.add_error(
-                    "tractor_fuel_type",
-                    "Fuel type is required for non-zero liters value.",
-                )
-                logger.error("Fuel type is missing for non-zero tractor liters value.")
-                context = self.get_context_data(**kwargs)
-                context["form"] = form
-                return render(request, self.template_name, context)
-
-            # Repeat the same checks for backpack_liters and chamber_liters if needed
-            if fuel_order.backpack_liters != None and not fuel_order.backpack_fuel_type:
-                form.add_error(
-                    "backpack_fuel_type",
-                    "Fuel type is required for non-zero liters value.",
-                )
-                logger.error("Fuel type is missing for non-zero backpack liters value.")
-                context = self.get_context_data(**kwargs)
-                context["form"] = form
-                return render(request, self.template_name, context)
-
-            if fuel_order.chamber_liters != None and not fuel_order.chamber_fuel_type:
-                form.add_error(
-                    "chamber_fuel_type",
-                    "Fuel type is required for non-zero liters value.",
-                )
-                logger.error("Fuel type is missing for non-zero chamber liters value.")
-                context = self.get_context_data(**kwargs)
-                context["form"] = form
-                return render(request, self.template_name, context)
-
-            # Check if the order is pauseed
-            if fuel_order.is_paused:
-                form.add_error(None, "Order cannot be pauseed.")
-                logger.error("Order cannot be pauseed.")
-                context = self.get_context_data(**kwargs)
-                context["form"] = form
-                return render(request, self.template_name, context)
-
-            fuel_order.save()
-            return redirect("orders")
-
-        logger.error(form.errors)
-        logger.error("Form is not valid")
-
-        # If the form is invalid, re-render the template with the form and display the errors
-        context = self.get_context_data(**kwargs)
-        context["form"] = form
-        return render(request, self.template_name, context)
-
-
-@method_decorator(login_required, name="dispatch")
-class OrderEditView(CustomTemplateView):
-    template_name = "modules/order.html"
-
-    def get_context_data(self, order_id=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if order_id:
-            fuel_order = get_object_or_404(FuelOrders, id=order_id)
-            form = FuelOrderForm(instance=fuel_order)
-        else:
-            form = FuelOrderForm()
-
-        context["form"] = form
-        return context
-
 
 @method_decorator(login_required, name="dispatch")
 class OrderPauseView(RedirectView):
@@ -112,13 +36,12 @@ class OrderPauseView(RedirectView):
 
         action = request.POST.get("action")
         if action == "pause":
-            logger.info(f"Pausing order {fuel_order}")
             fuel_order.is_paused = not fuel_order.is_paused
             fuel_order.save()
         elif action == "delete":
             logger.info(f"Deleting order {fuel_order}")
             fuel_order.delete()
-        
+
         return JsonResponse({"result": "success"})
 
 
@@ -146,3 +69,42 @@ class OrderJsonView(View):
             "formated_chamber_liters_to_load_of": fuel_order.chamber_liters_to_load,
         }
         return JsonResponse(data)
+
+
+class OrderBaseView(CustomTemplateView, FormView):
+    template_name = "modules/order.html"
+    success_url = "/orders/"
+
+    def form_valid(self, form):
+        fuel_order = form.save(commit=False)
+        fuel_order.company = self.get_company(self.request.user, self.provider_name)
+        fuel_order.user_lastmod = self.request.user
+        fuel_order.save()
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        logger.error(f"Error saving order: {form.errors}")
+        return super().form_invalid(form)
+
+
+@method_decorator(login_required, name="dispatch")
+class OrderCreateView(OrderBaseView):
+    form_class = FuelOrderForm
+
+    def form_valid(self, form):
+        form.instance.user_creator = self.request.user
+        return super().form_valid(form)
+
+
+@method_decorator(login_required, name="dispatch")
+class OrderUpdateView(OrderBaseView):
+    form_class = FuelOrderForm
+
+    def get_object(self):
+        order_id = self.kwargs.get('order_id')
+        return get_object_or_404(FuelOrders, id=order_id)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'instance': self.get_object()})
+        return kwargs

@@ -1,14 +1,15 @@
-from loguru import logger
 import secrets
 from datetime import timedelta
-from django.db import models
-from django.db.models import Case, When, Value, IntegerField, Manager
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.models import User
+
 from allauth.socialaccount.models import SocialAccount
-from django.db.models import Case, When, Value, IntegerField
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+from django.db import models
+from django.db.models import Case, IntegerField, Manager, Value, When
+from django.forms import ValidationError
 from django.utils.timezone import now
 from django.utils.translation import gettext as _
+from loguru import logger
 
 
 def get_default_expiration_date():
@@ -132,7 +133,6 @@ class Trailers(models.Model):
         return self.domain
 
 
-
 class ExtraCashManager(models.Manager):
     def get_queryset(self):
         return (
@@ -239,7 +239,7 @@ class ExtraCash(models.Model):
             return None
 
     def __str__(self):
-        return self.operation_code
+        return self.operation_code if self.operation_code else "Unsaved FuelOrder"
 
     class Meta:
         verbose_name = "ExtraCash Order"
@@ -309,45 +309,25 @@ class FuelOrders(models.Model):
 
     user_creator = models.ForeignKey(
         User,
-        on_delete=models.SET_NULL,
+        on_delete=models.PROTECT,
         related_name="fuel_orders_created",
-        blank=True,
-        null=True,
     )
     user_lastmod = models.ForeignKey(
         User,
-        on_delete=models.SET_NULL,
+        on_delete=models.PROTECT,
         related_name="fuel_orders_modified",
-        blank=True,
-        null=True,
     )
 
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     driver = models.ForeignKey(Drivers, on_delete=models.PROTECT)
 
     tractor_plate = models.ForeignKey(Tractors, on_delete=models.PROTECT, verbose_name="tractor_plate")
-    trailer_plate = models.ForeignKey(
-        Trailers,
-        on_delete=models.PROTECT,
-        blank=True,
-        null=True,
-        verbose_name="trailer_plate",
-    )
+    trailer_plate = models.ForeignKey(Trailers, on_delete=models.PROTECT, blank=True, null=True, verbose_name="trailer_plate")
 
-    tractor_fuel_type = models.CharField(
-        max_length=50,
-        choices=FUEL_TYPE_CHOICES,
-        blank=True,
-        null=True,
-        verbose_name="tractor_fuel_type",
-    )
-    backpack_fuel_type = models.CharField(
-        max_length=50,
-        choices=FUEL_TYPE_CHOICES,
-        blank=True,
-        null=True,
-        verbose_name="backpack_fuel_type",
-    )
+    tractor_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True, verbose_name="tractor_fuel_type")
+
+    backpack_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True, verbose_name="backpack_fuel_type")
+
     chamber_fuel_type = models.CharField(
         max_length=50,
         choices=FUEL_TYPE_CHOICES,
@@ -374,60 +354,44 @@ class FuelOrders(models.Model):
     in_agreement = models.CharField(choices=AGREEMENT_CHOICES, default="under_negotiation", max_length=20, verbose_name="in_agreement")
     comments = models.TextField(blank=True, null=True, verbose_name="comments")
 
+
+    def clean(self):
+        # Rule 1: if x_liters_to_load is non-zero, x_fuel_type is required.
+        if self.tractor_liters_to_load != 0 and not self.tractor_fuel_type:
+            raise ValidationError({'tractor_fuel_type': "Tractor fuel type is required if tractor liters to load is non-zero."})
+
+        if self.backpack_liters_to_load != 0 and not self.backpack_fuel_type:
+            raise ValidationError({'backpack_fuel_type': "Backpack fuel type is required if backpack liters to load is non-zero."})
+
+        if self.chamber_liters_to_load != 0 and not self.chamber_fuel_type:
+            raise ValidationError({'chamber_fuel_type': "Chamber fuel type is required if chamber liters to load is non-zero."})
+
+        # Rule 2: if in_agreement changes to "agreed", disallow any further modification
+        if self.pk:  # check if this instance is already saved in the database
+            old_instance = FuelOrders.objects.get(pk=self.pk)  # retrieve the old instance
+            if old_instance.in_agreement == "agreed" and self.in_agreement != "agreed":
+                raise ValidationError({'in_agreement': "You cannot modify this order as it has already been approved. Please contact the administrator for further assistance."})
+
+        # Rule 3: At least one of the tanks must be non-zero
+        if all(x == 0 for x in [self.tractor_liters_to_load, self.chamber_liters_to_load, self.backpack_liters_to_load]):
+            raise ValidationError("At least one of the tanks must be non-zero")
+
+        # Always return the full collection of cleaned data.
+        super().clean()
+
+
     def save(self, *args, **kwargs):
-        """This save method accept some missing fields:
-        ["requested_date", "expiration_date", "in_agreement"]
-        """
-
-        try:
-            if not self.pk:  # this is a new record
+        # on new record, generate operation_code before saving the record
+        if not self.pk:
+            self.operation_code = secrets.token_hex(3)
+            while FuelOrders.objects.filter(operation_code=self.operation_code).exists():
                 self.operation_code = secrets.token_hex(3)
-                while FuelOrders.objects.filter(operation_code=self.operation_code).exists():
-                    self.operation_code = secrets.token_hex(3)
-
-                if hasattr(self, "user_creator") and self.user_creator is None:
-                    self.user_creator = self._get_current_user()
-
-                if hasattr(self, "company") and self.company is None:
-                    self.company = self._get_user_company()
-
-                if not self.requested_date:
-                    self.requested_date = now()
-
-                if not self.expiration_date:
-                    self.expiration_date = get_default_expiration_date()
-
-            else:  # this is an edition
-                if hasattr(self, "user_lastmod"):
-                    self.user_lastmod = self._get_current_user()
-        except Exception as e:
-            logger.error(f"Error on saving fuel order: {e}")
-
+        logger.info(f"FuelOrders.save: {self.operation_code}")
+        logger.debug(f"by {self.user_lastmod} company {self.company}")
         super().save(*args, **kwargs)
 
     def get_total_liters(self):
         return self.tractor_liters + self.backpack_liters + self.chamber_liters
-
-    def _get_current_user(self):
-        # Get the current authenticated user using Django-Allauth
-        try:
-            social_account = SocialAccount.objects.get(user=self.request.user)
-            return social_account.user
-        except (AttributeError, SocialAccount.DoesNotExist):
-            return None
-
-    def _get_user_company(self):
-        # Get the user's company based on the SocialAccount
-        try:
-            social_account = SocialAccount.objects.get(user=self.request.user)
-            company_social_account = CompanySocialAccount.objects.get(social_account=social_account)
-            return company_social_account.company
-        except (
-            AttributeError,
-            SocialAccount.DoesNotExist,
-            CompanySocialAccount.DoesNotExist,
-        ):
-            return None
 
     @property
     def short_tractor_fuel_type(self):
@@ -487,6 +451,7 @@ class FuelOrders(models.Model):
         verbose_name = "Fuel Order"
         verbose_name_plural = "Fuel Orders"
 
+
 class Refuelings(models.Model):
     """Core Table of the refueling Workflow: STEP 2"""
 
@@ -522,4 +487,3 @@ class Refuelings(models.Model):
 
     def get_total_liters(self):
         return self.tractor_liters + self.backpack_liters + self.chamber_liters
-

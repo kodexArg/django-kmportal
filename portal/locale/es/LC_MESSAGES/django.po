@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-24 01:12+0000\n"
+"POT-Creation-Date: 2023-07-30 06:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,44 +66,44 @@ msgstr "Noviembre"
 msgid "December"
 msgstr "Diciembre"
 
-#: app/models.py:71
+#: app/models.py:75
 msgid "Companies"
 msgstr ""
 
-#: app/models.py:89
+#: app/models.py:93
 msgid "first_name"
 msgstr "Nombre"
 
-#: app/models.py:90
+#: app/models.py:94
 msgid "last_name"
 msgstr "Apellido"
 
-#: app/models.py:91
+#: app/models.py:95
 msgid "identification_type"
 msgstr "Tipo de ID"
 
-#: app/models.py:92
+#: app/models.py:96
 msgid "identification_number"
 msgstr "N° de ID"
 
-#: app/models.py:107 app/models.py:120
+#: app/models.py:111 app/models.py:124
 msgid "domain"
 msgstr "Dominio"
 
-#: app/models.py:171
+#: app/models.py:284
 msgid "no_agreement"
 msgstr "Sin acuerdo"
 
-#: app/models.py:172
+#: app/models.py:285
 msgid "under_negotiation"
 msgstr "En negociación"
 
-#: app/models.py:173
+#: app/models.py:286
 msgid "agreed"
 msgstr "Acordado"
 
-#: templates/about_us.html:3 templates/contact_us.html:3 templates/home.html:3
-#: templates/under_construction.html:3 templates/user_home.html:3
+#: templates/about_us.html:4 templates/contact_us.html:4 templates/home.html:4
+#: templates/under_construction.html:4 templates/user_home.html:4
 msgid "t_page_title"
 msgstr "Portal&nbsp;KM&nbsp;1151"
 
@@ -127,29 +127,28 @@ msgstr "Ingresar con Google"
 msgid "Legend"
 msgstr "Leyenda"
 
-#: templates/components/row_fuelorder/buttons.html:19
+#: templates/components/row_fuelorder/buttons.html:33
 msgid "continue"
 msgstr "Continuar"
 
-#: templates/components/row_fuelorder/buttons.html:21
+#: templates/components/row_fuelorder/buttons.html:35
 msgid "pause"
 msgstr "pausar"
 
-#: templates/components/row_fuelorder/buttons.html:34
+#: templates/components/row_fuelorder/buttons.html:45
 msgid "schedule"
 msgstr "Programar"
 
-#: templates/components/row_fuelorder/buttons.html:46
+#: templates/components/row_fuelorder/buttons.html:70
 msgid "view"
 msgstr "Ver"
 
 #: templates/components/row_fuelorder/row.html:21
-#: templates/modules/orders.html:207
+#: templates/modules/orders.html:205
 msgid "finished"
 msgstr "finalizado"
 
 #: templates/components/row_fuelorder/row.html:23
-#: templates/modules/orders.html:211
 msgid "pauseed"
 msgstr ""
 
@@ -200,15 +199,15 @@ msgstr ""
 "\n"
 "¡Estamos emocionados de tenerte con nosotros! 🥳"
 
-#: templates/home.html:27
+#: templates/home.html:22
 msgid "let_me_in"
 msgstr "Registro como Transportista"
 
-#: templates/modules/company.html:3 templates/modules/order.html:3
+#: templates/modules/company.html:4 templates/modules/order.html:4
 msgid "company_page_title"
 msgstr "Empresa"
 
-#: templates/modules/company.html:8
+#: templates/modules/company.html:10
 msgid "company_details"
 msgstr "Detalles de Compañía"
 
@@ -216,15 +215,15 @@ msgstr "Detalles de Compañía"
 msgid "company_name"
 msgstr "Empresa"
 
-#: templates/modules/company.html:22
+#: templates/modules/company.html:20
 msgid "company_fantasy_name"
 msgstr "Fantasía"
 
-#: templates/modules/company.html:28
+#: templates/modules/company.html:24
 msgid "company_cuit"
 msgstr "CUIT"
 
-#: templates/modules/company.html:37 templates/modules/orders.html:80
+#: templates/modules/company.html:31 templates/modules/orders.html:90
 msgid "driver"
 msgstr "Conductor"
 
@@ -261,89 +260,93 @@ msgstr "Órdenes Pendientes"
 msgid "no_extracash_orders"
 msgstr "No hay órdenes de Extra-Cash"
 
-#: templates/modules/orders.html:3 templates/modules/orders.html:10
-#: templates/modules/order.html:8
+#: templates/modules/order.html:10 templates/modules/orders.html:4
+#: templates/modules/orders.html:10
 msgid "fuel_orders"
 msgstr "Órdenes de Carga"
 
-#: templates/modules/orders.html:34
-msgid "dlg_pause_confirm"
-msgstr ""
-"¿Está seguro que desea cambiar el estado de la orden? Mientras esté pausada,"
-" la orden puede activarse nuevamente, pero al ser eliminada se perderá "
-"definitivamente."
-
-#: templates/modules/orders.html:50 templates/modules/orders.html:100
-#: templates/modules/order.html:41
-msgid "fuel_order"
-msgstr "Pedido de Combustible"
-
-#: templates/modules/orders.html:70
-msgid "order_information"
-msgstr "Información del Pedido"
-
-#: templates/modules/orders.html:72
-msgid "creation_date"
-msgstr "Fecha de Creación"
-
-#: templates/modules/orders.html:76
-msgid "last_modification"
-msgstr "Última Modificación"
-
-#: templates/modules/orders.html:87
-msgid "vehicle_information"
-msgstr "Información del Vehículo"
-
-#: templates/modules/orders.html:89
-msgid "tractor_plate"
-msgstr "Placa del Tractor"
-
-#: templates/modules/orders.html:93
-msgid "trailer_plate"
-msgstr "Placa del Remolque"
-
-#: templates/modules/orders.html:102 templates/modules/order.html:45
-msgid "tractor"
-msgstr "Tractor"
-
-#: templates/modules/orders.html:106 templates/modules/order.html:48
-msgid "backpack"
-msgstr "Mochila"
-
-#: templates/modules/orders.html:110 templates/modules/order.html:51
-msgid "chamber"
-msgstr "Cámara"
-
-#: templates/modules/orders.html:145
-msgid "btn_continue"
-msgstr "Continuar"
-
-#: templates/modules/orders.html:147
-msgid "btn_pause"
-msgstr "pausar"
-
-#: templates/modules/orders.html:215
-msgid "blocked"
-msgstr "bloqueado"
-
-#: templates/modules/order.html:13
+#: templates/modules/order.html:14
 msgid "fuel_order_instruction"
 msgstr ""
 "Por favor revise cuidadosamente su pedido de combustible. El operador "
 "cargará el tipo de combustible y las cantidades que Ud. indique. Revise "
 "nuevamente la orden una vez realizada el alta, en la siguiente pantalla."
 
-#: templates/modules/order.html:77
+#: templates/modules/order.html:45 templates/modules/orders.html:54
+#: templates/modules/orders.html:111
+msgid "fuel_order"
+msgstr "Pedido de Combustible"
+
+#: templates/modules/order.html:48 templates/modules/orders.html:113
+msgid "tractor"
+msgstr "Tractor"
+
+#: templates/modules/order.html:49 templates/modules/orders.html:118
+msgid "backpack"
+msgstr "Mochila"
+
+#: templates/modules/order.html:50 templates/modules/orders.html:123
+msgid "chamber"
+msgstr "Cámara"
+
+#: templates/modules/order.html:63
 msgid "new"
 msgstr "Nueva"
 
-#: templates/modules/order.html:77
+#: templates/modules/order.html:63
 msgid "order_new"
 msgstr "Orden de Carga"
 
-#: templates/modules/order.html:84
+#: templates/modules/order.html:70
 msgid "btn_skip"
 msgstr "Omitir"
+
+#: templates/modules/orders.html:38
+msgid "dlg_pause_confirm"
+msgstr ""
+"¿Está seguro que desea cambiar el estado de la orden? Mientras esté pausada,"
+" la orden puede activarse nuevamente, pero al ser eliminada se perderá "
+"definitivamente."
+
+#: templates/modules/orders.html:78
+msgid "order_information"
+msgstr "Información del Pedido"
+
+#: templates/modules/orders.html:80
+msgid "creation_date"
+msgstr "Fecha de Creación"
+
+#: templates/modules/orders.html:85
+msgid "last_modification"
+msgstr "Última Modificación"
+
+#: templates/modules/orders.html:97
+msgid "vehicle_information"
+msgstr "Información del Vehículo"
+
+#: templates/modules/orders.html:99
+msgid "tractor_plate"
+msgstr "Placa del Tractor"
+
+#: templates/modules/orders.html:104
+msgid "trailer_plate"
+msgstr "Placa del Remolque"
+
+#: templates/modules/orders.html:159
+msgid "btn_continue"
+msgstr "Continuar"
+
+#: templates/modules/orders.html:159
+msgid "btn_pause"
+msgstr "pausar"
+
+#: templates/modules/orders.html:207
+msgid "paused"
+msgstr ""
+
+#: templates/modules/orders.html:209
+msgid "blocked"
+msgstr "bloqueado"
 
 #: templates/modules/tickets.html:3
 msgid "tickets_page_title"
@@ -371,7 +374,7 @@ msgstr "Tractores"
 msgid "Trailers"
 msgstr "Semi-remolques"
 
-#: templates/user_home.html:26
+#: templates/user_home.html:14
 msgid "user_home_greeting"
 msgstr ""
 "👋 ¡Hola y bienvenide al Portal KM 1151! Estamos revisando algunos detalles "
