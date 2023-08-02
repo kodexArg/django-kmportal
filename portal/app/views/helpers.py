@@ -58,10 +58,6 @@ class CustomTemplateView(TemplateView):
         return context
 
 
-
-
-
-
 # def get_provider_id(user, provider_name):
 #     """get provider id from social account, required to retrieve
 #     image from social nets

@@ -281,9 +281,9 @@ class FuelOrders(models.Model):
     ]
 
     AGREEMENT_CHOICES = [
-        (0, _("no_agreement")),
-        (1, _("under_negotiation")),
-        (2, _("agreed")),
+        ("no_agreement", _("no_agreement")),
+        ("under_negotiation", _("under_negotiation")),
+        ("agreed", _("agreed")),
     ]
 
     color_map = {

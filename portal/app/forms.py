@@ -174,7 +174,11 @@ class ExtraCashForm(forms.ModelForm):
     )
 
     def __init__(self, *args, **kwargs):
+        company = kwargs.pop('company', None)  # You will pass company from your view
         super().__init__(*args, **kwargs)
+
+        if company is not None:
+            self.fields['driver'].queryset = Drivers.objects.filter(company=company)
 
         for field_name, field in self.fields.items():
             # apply custom tailwind classes for fields

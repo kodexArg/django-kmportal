@@ -23,7 +23,7 @@ class ExtraCashView(CustomTemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         company = context.get("company")
-        context['form'] = ExtraCashForm()  # Add this line
+        context['form'] = ExtraCashForm(company=company)  # Add this line
         if company is not None:
             context["extracash"] = ExtraCash.objects.filter(company=company)
             context["extracash_orders"] = ExtraCash.objects.filter(company=company)
