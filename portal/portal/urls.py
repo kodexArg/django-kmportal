@@ -15,7 +15,7 @@ from django.urls import include, path
 from staff.forms import CustomLoginForm
 
 # 'staff' views
-from staff.views import StaffHomeView
+from staff.views import StaffHomeView, StaffRefillView
 
 # Without Internationalization
 urlpatterns = [
@@ -37,6 +37,7 @@ urlpatterns += [
     path("staff/", StaffHomeView.as_view(), name="staff_home"),
     path("staff/login/", auth_views.LoginView.as_view(template_name="staff/login.html", form_class=CustomLoginForm), name="staff_login"),
     path("staff/logout/", auth_views.LogoutView.as_view(), name="staff_logout"),
+    path("staff/refill", StaffRefillView.as_view(), name="staff_refill"),
 ]
 
 # API Rest Framework

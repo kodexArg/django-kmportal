@@ -1,10 +1,12 @@
 from loguru import logger
-from app.views.helpers import CustomTemplateView
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect, render
 from django.views import View
 from staff.forms import CustomLoginForm
+from django.utils.decorators import method_decorator
+from django.contrib.admin.views.decorators import staff_member_required
+from django.views.generic import TemplateView
 
 
 ### UNAUTHORIZED PAGES ###
@@ -35,3 +37,13 @@ class StaffHomeView(View):
 
         # Redirect to GET request if form is invalid or login fails
         return redirect("staff_home")
+
+### AUTHORIZED PAGES ###
+
+#similar to orders.py it shows the orders that are pending from all companies
+@method_decorator(staff_member_required, name="dispatch")
+class StaffRefillView(TemplateView):
+    template_name = "staff/refill.html"
+
+
+    
