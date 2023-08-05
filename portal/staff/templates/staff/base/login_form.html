@@ -1,3 +1,4 @@
+
 <!-- Content to show to logged out users -->
 <form method="post">
     {% csrf_token %}
@@ -19,8 +20,8 @@
         <button type="submit" class="my-2 rounded-lg bg-pantone7472c py-3 px-4 text-white font-Roboto font-lg font-bold w-full">Ingresar</button>
         {% if messages %}
         {% for message in messages %}
-        <div class="flex rounded-full p-1">
-            <span class="text-red-500 font-xs text-center">
+        <div class="flex rounded-full p-1 break-words w-full">
+            <span class="text-red-500 font-xs max-w-full">
                 {{ message }}
             </span>
         </div>

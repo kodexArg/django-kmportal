@@ -25,6 +25,14 @@ def get_order_by_id(queryset, order_id):
     return queryset.filter(id=order_id).first()
 
 
+@register.filter(name="is_pump_operator")
+def is_pump_operator(user):
+    return user.groups.filter(name="Pump Operators").exists()
+
+
+## Tags
+
+
 @register.inclusion_tag("components/menu_button.html", takes_context=True)
 def menu_button_component(context, pos, side, icon="", size="small", url="#", style="", bg=""):
     """Each menu button including Icons, Flags and avatars"""

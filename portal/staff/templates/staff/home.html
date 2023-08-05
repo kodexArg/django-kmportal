@@ -4,7 +4,7 @@
 {% block content %}
     <section id="login"
              class="min-h-screen min-w-screen flex flex-col sm:flex-row items-center justify-center">
-        {% if user.is_authenticated and user.is_staff %}
+        {% if user.is_authenticated and user|is_pump_operator %}
             <!-- Content to show to logged in users -->
             {% include "staff/base/navbar.html" %}
             <!-- End Navbar-->
@@ -24,8 +24,14 @@
             <div class="flex flex-col text-xl sm:text-[3rem] text-[#323232] leading-tight">
                 <span class="text-center font-quicksand font-bold">{{ user.first_name|title }}</span>
                 <span class="text-center font-quicksand font-bold">{{ user.last_name|title }}</span>
+                <span class="text-center font-quicksand text-xxs text-sky-300">{{ user }}
             </div>
         {% else %}
+            {% if user.is_authenticated %}
+            <div class="fixed bottom-20 left-3 text-red-500 font-bold">
+                    Staff User no in "Pump Operators" Group
+            </div>
+            {% endif %}
             {% include "staff/base/login_form.html" %}
         {% endif %}
     </section>

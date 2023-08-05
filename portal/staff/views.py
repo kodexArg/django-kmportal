@@ -10,6 +10,8 @@ from django.views.generic import TemplateView
 
 
 ### UNAUTHORIZED PAGES ###
+from django.contrib.auth.models import Group
+
 class StaffHomeView(View):
     template_name = "staff/home.html"
 
@@ -25,9 +27,13 @@ class StaffHomeView(View):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 if user.is_staff:
-                    login(request, user)
-                    messages.success(request, "Ingreso correcto")
-                    return redirect("staff_home")
+                    # Check if the user is in the "Pump Operators" group
+                    if Group.objects.get(name="Pump Operators") in user.groups.all():
+                        login(request, user)
+                        messages.success(request, "Ingreso correcto")
+                        return redirect("staff_home")
+                    else:
+                        messages.error(request, "Tu usuario es correcto pero no eres un operador de bomba")
                 else:
                     messages.error(request, "Tu usuario es correcto pero no tienes permiso para ingresar en este sitio")
             else:
@@ -37,6 +43,7 @@ class StaffHomeView(View):
 
         # Redirect to GET request if form is invalid or login fails
         return redirect("staff_home")
+
 
 ### AUTHORIZED PAGES ###
 
