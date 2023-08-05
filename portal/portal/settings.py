@@ -176,6 +176,7 @@ SOCIAL_ACCOUNT_PROVIDERS = {
 SITE_ID = int(os.environ.get("SITE_ID"))
 
 AUTHENTICATION_BACKENDS = (
+    'staff.backends.PumpOperatorAuthenticationBackend', 
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 )

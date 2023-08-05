@@ -1,8 +1,10 @@
-from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.core.exceptions import PermissionDenied
-from django.forms import ValidationError
 from app.models import FuelOrders
+from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
+                                        PermissionsMixin)
+from django.core.exceptions import PermissionDenied
+from django.db import models
+from django.forms import ValidationError
+from loguru import logger
 
 
 class PumpOperatorManager(BaseUserManager):
@@ -11,14 +13,16 @@ class PumpOperatorManager(BaseUserManager):
             raise ValueError("The Username field must be set")
         user = self.model(username=username, **extra_fields)
         user.set_password(password)
+        logger.debug(f"Creating user <{username}> with hashed password: {user.password}")
         user.save(using=self._db)
         return user
 
     def create_superuser(self, username, password=None, **extra_fields):
+        logger.error(f"Attempt to create superuser <{username}> denied")
         raise PermissionDenied("PumpOperator cannot be a superuser")
 
 
-class PumpOperator(AbstractBaseUser):
+class PumpOperator(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=50, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
@@ -30,6 +34,10 @@ class PumpOperator(AbstractBaseUser):
 
     def __str__(self):
         return self.username
+
+    def save(self, *args, **kwargs):
+        logger.debug(f"Saving user <{self.username}> with hashed password: {self.password}")
+        super().save(*args, **kwargs)
 
 
 # Create your models here.
@@ -77,4 +85,3 @@ class Refuelings(models.Model):
 
     def get_total_liters(self):
         return self.tractor_liters + self.backpack_liters + self.chamber_liters
-

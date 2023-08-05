@@ -3,7 +3,6 @@ from datetime import timedelta
 
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.db.models import Case, IntegerField, Manager, Value, When
 from django.forms import ValidationError
