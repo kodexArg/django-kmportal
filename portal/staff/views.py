@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import TemplateView
@@ -77,7 +78,7 @@ class StaffRefuelingView(FormView):
         It's not handled in the qr.html because most probably the user will continue anyway...
         """
         logger.info(kwargs)
-        if kwargs.get("was_locked"):
+        if kwargs.get("was_locked")=="True":
             messages.warning(self.request, "Esta orden ya ha sido bloqueada y no finalizada. Asegúrate de que no haya otro oeprador atendiéndola.")
             logger.warning("Esta orden ya ha sido bloqueada y no finalizada. Asegúrate de que no haya otro oeprador atendiéndola.")
         return super().get(request, *args, **kwargs)
@@ -106,4 +107,4 @@ class StaffRefuelingView(FormView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return redirect("staff_home")
+        return reverse("staff_home")

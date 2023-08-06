@@ -13,19 +13,19 @@ class Refuelings(models.Model):
     fuel_order = models.OneToOneField("app.FuelOrders", on_delete=models.CASCADE)
     pump_operator = models.ForeignKey(User, limit_choices_to={'groups__name': 'Pump Operators'}, on_delete=models.CASCADE)
 
-    tractor_pic = models.ImageField(upload_to="operation_code/tractor")
-    backpack_pic = models.ImageField(upload_to="operation_code/backpack")
-    chamber_pic = models.ImageField(upload_to="operation_code/chamber")
+    tractor_pic = models.ImageField(upload_to="operation_code/tractor", null=True, blank=True)
+    backpack_pic = models.ImageField(upload_to="operation_code/backpack", null=True, blank=True)
+    chamber_pic = models.ImageField(upload_to="operation_code/chamber", null=True, blank=True)
 
     tractor_liters = models.PositiveIntegerField(default=0)
     backpack_liters = models.PositiveIntegerField(default=0)
     chamber_liters = models.PositiveIntegerField(default=0)
 
-    tractor_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES)
-    backpack_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES)
-    chamber_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES)
+    tractor_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES, null=True, blank=True)
+    backpack_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES, null=True, blank=True)
+    chamber_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES, null=True, blank=True)
 
-    dispatch_note_pic = models.ImageField(upload_to="operation_code/dispatch_note")
+    dispatch_note_pic = models.ImageField(upload_to="operation_code/dispatch_note", null=True, blank=True)
     observation_pic = models.ImageField(upload_to="operation_code/others", null=True, blank=True)
     observation = models.CharField(max_length=512, null=True, blank=True)
 
