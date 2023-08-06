@@ -1,16 +1,19 @@
-from loguru import logger
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
-from django.shortcuts import redirect, render
-from django.views import View
-from staff.forms import CustomLoginForm
-from django.utils.decorators import method_decorator
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.decorators import method_decorator
+from django.views import View
 from django.views.generic import TemplateView
-
+from django.views.generic.edit import FormView
+from loguru import logger
+from app.models import FuelOrders
+from staff.forms import CustomLoginForm, QrForm, RefuelingForm
 
 ### UNAUTHORIZED PAGES ###
-from django.contrib.auth.models import Group
+
 
 class StaffHomeView(View):
     template_name = "staff/home.html"
@@ -47,10 +50,32 @@ class StaffHomeView(View):
 
 ### AUTHORIZED PAGES ###
 
-#similar to orders.py it shows the orders that are pending from all companies
-@method_decorator(staff_member_required, name="dispatch")
-class StaffRefillView(TemplateView):
-    template_name = "staff/refill.html"
+
+class StaffQrView(FormView):
+    template_name = "staff/qr.html"
+    form_class = QrForm
+
+    def form_valid(self, form):
+        operation_code = form.cleaned_data.get("operation_code")
+        return redirect("staff_refueling", operation_code=operation_code)
 
 
-    
+class StaffRefuelingView(FormView):
+    template_name = "staff/refueling.html"
+    form_class = RefuelingForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        operation_code = self.kwargs.get("operation_code")
+        self.fuel_order = get_object_or_404(FuelOrders, operation_code=operation_code)
+        return kwargs
+
+    def form_valid(self, form):
+        refueling = form.save(commit=False)
+        refueling.pump_operator = self.request.user
+        refueling.status = "pending"
+        refueling.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return redirect("staff_home")

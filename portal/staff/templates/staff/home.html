@@ -2,8 +2,7 @@
 {% load static custom_components compress %}
 {% block title %}KM1151 - Staff Area{% endblock %}
 {% block content %}
-    <section id="login"
-             class="min-h-screen min-w-screen flex flex-col sm:flex-row items-center justify-center">
+    <section class="min-h-screen min-w-screen flex flex-col sm:flex-row items-center justify-center">
         {% if user.is_authenticated and user|is_pump_operator %}
             <!-- Content to show to logged in users -->
             {% include "staff/base/navbar.html" %}
@@ -24,7 +23,7 @@
             <div class="flex flex-col text-xl sm:text-[3rem] text-[#323232] leading-tight">
                 <span class="text-center font-quicksand font-bold">{{ user.first_name|title }}</span>
                 <span class="text-center font-quicksand font-bold">{{ user.last_name|title }}</span>
-                <span class="text-center font-quicksand text-xxs text-sky-300">{{ user }}
+                <span class="text-center font-quicksand text-xxs text-sky-300">{{ user }}</span>
             </div>
         {% else %}
             {% if user.is_authenticated %}

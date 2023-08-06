@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from loguru import logger
 
 
-# Create your models here.
 class Refuelings(models.Model):
     """Core Table of the refueling Workflow: STEP 2"""
 
@@ -19,7 +18,7 @@ class Refuelings(models.Model):
     acceptance_date = models.DateField(auto_now_add=True)
     edited_date = models.DateField(auto_now=True)
     fuel_order = models.ForeignKey("app.FuelOrders", on_delete=models.CASCADE)
-    pump_operator = models.ForeignKey(User, limit_choices_to={"group_name": "Pump Operators"}, on_delete=models.CASCADE)
+    pump_operator = models.ForeignKey(User, limit_choices_to={'groups__name': 'Pump Operators'}, on_delete=models.CASCADE)
     status = models.CharField(choices=ACCEPTANCE_STATUS_CHOICES, default="pending", max_length=10)
 
     tractor_pic = models.ImageField(upload_to="operation_code/tractor")
