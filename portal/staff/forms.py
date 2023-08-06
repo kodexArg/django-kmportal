@@ -41,6 +41,7 @@ class RefuelingForm(forms.ModelForm):
         model = Refuelings
         exclude = ['fuel_order', 'pump_operator', 'is_finished']
 
+
     def __init__(self, *args, **kwargs):
         self.fuel_order = kwargs.pop('fuel_order', None)
         super().__init__(*args, **kwargs)

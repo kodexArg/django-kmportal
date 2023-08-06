@@ -13,7 +13,7 @@
                                bg-pantone7472c
                            {% elif order.is_paused %}
                                bg-gray-400
-                           {% elif order.is_blocked %}
+                           {% elif order.is_locked %}
                                bg-pantone307c
                            {% else %}
                                bg-pantone7689c
@@ -36,7 +36,7 @@
                 {% endif %}
             </button>
             <!-- Schedule button
-            <button class="flex flex-col px-2 items-center justify-center font-rubik font-bold text-xxs leading-none text-white {% if order.is_finished %}bg-pantone7472c{% elif order.is_paused %}bg-gray-400{% elif order.is_blocked %}bg-pantone307c{% else  %}bg-pantone7689c{% endif %}">
+            <button class="flex flex-col px-2 items-center justify-center font-rubik font-bold text-xxs leading-none text-white {% if order.is_finished %}bg-pantone7472c{% elif order.is_paused %}bg-gray-400{% elif order.is_locked %}bg-pantone307c{% else  %}bg-pantone7689c{% endif %}">
                 <div class="flex flex-col">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -53,7 +53,7 @@
                                bg-pantone7472c
                            {% elif order.is_paused %}
                                bg-gray-400
-                           {% elif order.is_blocked %}
+                           {% elif order.is_locked %}
                                bg-pantone307c
                            {% else %}
                                bg-pantone7689c

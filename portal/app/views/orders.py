@@ -52,7 +52,7 @@ class OrderJsonView(View):
         data = {
             "operation_code": fuel_order.operation_code,
             "user_creator": str(fuel_order.user_creator),
-            "is_blocked": fuel_order.is_blocked,
+            "is_locked": fuel_order.is_locked,
             "is_paused": fuel_order.is_paused,
             "is_finished": fuel_order.is_finished,
             "order_date": fuel_order.order_date.isoformat(),

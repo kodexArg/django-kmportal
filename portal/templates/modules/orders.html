@@ -205,7 +205,7 @@
                             statusTextElement.text('{% translate "finished" %}').removeClass('text-red-500 text-orange-500').addClass('text-green-500');
                         } else if (data.is_paused) {
                             statusTextElement.text('{% translate "paused" %}').removeClass('text-green-500 text-orange-500').addClass('text-red-500');
-                        } else if (data.is_blocked) {
+                        } else if (data.is_locked) {
                             statusTextElement.text('{% translate "blocked" %}').removeClass('text-green-500 text-red-500').addClass('text-orange-500');
                         } else {
                             statusTextElement.text('');

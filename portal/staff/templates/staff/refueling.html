@@ -3,6 +3,18 @@
 {% block title %}KM1151 - Staff Area{% endblock %}
 {% block content %}
   <section class="mx-6 md:mx-10">
+    {% if messages %}
+      <div class="flex w-full justify-center">
+        {% for message in messages %}
+          <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 max-w-fit py-3 rounded relative"
+               role="alert">
+            <ul>
+              <li>{{ message }}</li>
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
     <form method="post">
       {% csrf_token %}
       <div class="tw-bigform !bg-pantone7472c">

@@ -62,16 +62,25 @@ class StaffQrView(FormView):
         if fuel_order.is_finished:
             form.add_error(None, "This fuel order has already been completed. Please enter a new order.")
             return self.form_invalid(form)
-        elif fuel_order.is_locked:
-            # Add a warning message here. This will be handled in the template.
-            messages.warning(self.request, "This fuel order has already been locked. If you're sure this is not an error, click 'Continue', otherwise enter a new order.")
-        return redirect("staff_refueling", operation_code=operation_code)
+        return redirect("staff_refueling", operation_code=operation_code, was_locked=fuel_order.is_locked)
 
 
 
 class StaffRefuelingView(FormView):
     template_name = "staff/refueling.html"
     form_class = RefuelingForm
+
+    def get(self, request, *args, **kwargs):
+        """was_locked is a GET parameter that is sent by the qr view.
+        If it's true, then the user has already entered a fuel order and
+        the fuel order is locked. This is used to display a warning message in the template.
+        It's not handled in the qr.html because most probably the user will continue anyway...
+        """
+        logger.info(kwargs)
+        if kwargs.get("was_locked"):
+            messages.warning(self.request, "Esta orden ya ha sido bloqueada y no finalizada. Asegúrate de que no haya otro oeprador atendiéndola.")
+            logger.warning("Esta orden ya ha sido bloqueada y no finalizada. Asegúrate de que no haya otro oeprador atendiéndola.")
+        return super().get(request, *args, **kwargs)
 
     def get_form_kwargs(self):
         """Sending fuel_order record to the form based on the operation_code received from qr"""

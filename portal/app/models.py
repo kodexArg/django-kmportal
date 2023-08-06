@@ -108,7 +108,7 @@ class ExtraCashManager(models.Manager):
             .annotate(
                 custom_sort_order=Case(
                     When(
-                        is_blocked=True,
+                        is_locked=True,
                         is_paused=False,
                         is_finished=False,
                         then=Value(1),
@@ -160,7 +160,7 @@ class ExtraCash(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     driver = models.ForeignKey(Drivers, on_delete=models.PROTECT)
 
-    is_blocked = models.BooleanField(default=False, verbose_name="is_blocked")
+    is_locked = models.BooleanField(default=False, verbose_name="is_locked")
     is_paused = models.BooleanField(default=False, verbose_name="is_paused")
     is_finished = models.BooleanField(default=False, verbose_name="is_finished")
 
@@ -220,7 +220,7 @@ class FuelOrdersManager(Manager):
             .get_queryset()
             .annotate(
                 custom_sort_order=Case(
-                    When(is_blocked=True, is_paused=False, is_finished=False, then=Value(1)),
+                    When(is_locked=True, is_paused=False, is_finished=False, then=Value(1)),
                     When(is_paused=False, is_finished=False, then=Value(2)),
                     When(is_paused=True, then=Value(4)),
                     When(is_finished=True, then=Value(4)),
@@ -314,7 +314,7 @@ class FuelOrders(models.Model):
     requires_odometer = models.BooleanField(default=False, verbose_name="requires_odometer")
     requires_kilometers = models.BooleanField(default=False, verbose_name="requires_kilometers")
 
-    is_blocked = models.BooleanField(default=False, verbose_name="is_blocked")  # because its being attended
+    is_locked = models.BooleanField(default=False, verbose_name="is_locked")  # because its being attended
     is_paused = models.BooleanField(default=False, verbose_name="is_paused")  # because there's an error or user action
     is_finished = models.BooleanField(default=False, verbose_name="is_finished")  # because it's been attended and it's been filled
 
