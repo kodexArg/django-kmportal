@@ -213,6 +213,4 @@ def nav_buttom_component(tooltip, icon, url, left=False, right=False):
     else:
         leftright = ""
 
-    logger.info(f"left={left}, right={right}, leftright={leftright}")
-
     return {"tooltip": tooltip, "icon": icon, "leftright": leftright, "url": url}

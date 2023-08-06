@@ -8,18 +8,10 @@ from loguru import logger
 class Refuelings(models.Model):
     """Core Table of the refueling Workflow: STEP 2"""
 
-    ACCEPTANCE_STATUS_CHOICES = [
-        ("pending", "Pending"),
-        ("attending", "Attending"),
-        ("finished", "Finished"),
-        ("locked", "Locked"),
-    ]
-
     acceptance_date = models.DateField(auto_now_add=True)
     edited_date = models.DateField(auto_now=True)
-    fuel_order = models.ForeignKey("app.FuelOrders", on_delete=models.CASCADE)
+    fuel_order = models.OneToOneField("app.FuelOrders", on_delete=models.CASCADE)
     pump_operator = models.ForeignKey(User, limit_choices_to={'groups__name': 'Pump Operators'}, on_delete=models.CASCADE)
-    status = models.CharField(choices=ACCEPTANCE_STATUS_CHOICES, default="pending", max_length=10)
 
     tractor_pic = models.ImageField(upload_to="operation_code/tractor")
     backpack_pic = models.ImageField(upload_to="operation_code/backpack")
@@ -36,6 +28,8 @@ class Refuelings(models.Model):
     dispatch_note_pic = models.ImageField(upload_to="operation_code/dispatch_note")
     observation_pic = models.ImageField(upload_to="operation_code/others", null=True, blank=True)
     observation = models.CharField(max_length=512, null=True, blank=True)
+
+    is_finished = models.BooleanField(default=False)
 
     def clean(self):
         if self.pk:  # check if this instance is already saved in the database

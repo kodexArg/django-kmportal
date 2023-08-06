@@ -2,14 +2,14 @@
 {% load static custom_components compress %}
 {% block title %}KM1151 - Staff Area{% endblock %}
 {% block content %}
-
-<section>
+  <section class="mx-6 md:mx-10">
     <form method="post">
-        {% csrf_token %}
+      {% csrf_token %}
+      <div class="tw-bigform !bg-pantone7472c">
         {{ form.as_p }}
         <button type="submit">Submit</button>
+      </div>
     </form>
-</section>
-
-{% include "staff/base/navbar.html" %}
+  </section>
+  {% include "staff/base/navbar.html" %}
 {% endblock %}

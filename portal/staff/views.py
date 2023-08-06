@@ -12,6 +12,7 @@ from loguru import logger
 from app.models import FuelOrders
 from staff.forms import CustomLoginForm, QrForm, RefuelingForm
 
+
 ### UNAUTHORIZED PAGES ###
 
 
@@ -36,9 +37,9 @@ class StaffHomeView(View):
                         messages.success(request, "Ingreso correcto")
                         return redirect("staff_home")
                     else:
-                        messages.error(request, "Tu usuario es correcto pero no eres un operador de bomba")
+                        messages.error(request, "No estás registrado como operador de bomba")
                 else:
-                    messages.error(request, "Tu usuario es correcto pero no tienes permiso para ingresar en este sitio")
+                    messages.error(request, "No tienes permiso para ingresar en este sitio")
             else:
                 messages.error(request, "Usuario o contraseña incorrectos")
         else:
@@ -57,7 +58,15 @@ class StaffQrView(FormView):
 
     def form_valid(self, form):
         operation_code = form.cleaned_data.get("operation_code")
+        fuel_order = FuelOrders.objects.get(operation_code=operation_code)
+        if fuel_order.is_finished:
+            form.add_error(None, "This fuel order has already been completed. Please enter a new order.")
+            return self.form_invalid(form)
+        elif fuel_order.is_locked:
+            # Add a warning message here. This will be handled in the template.
+            messages.warning(self.request, "This fuel order has already been locked. If you're sure this is not an error, click 'Continue', otherwise enter a new order.")
         return redirect("staff_refueling", operation_code=operation_code)
+
 
 
 class StaffRefuelingView(FormView):
@@ -65,15 +74,25 @@ class StaffRefuelingView(FormView):
     form_class = RefuelingForm
 
     def get_form_kwargs(self):
+        """Sending fuel_order record to the form based on the operation_code received from qr"""
         kwargs = super().get_form_kwargs()
         operation_code = self.kwargs.get("operation_code")
         self.fuel_order = get_object_or_404(FuelOrders, operation_code=operation_code)
-        return kwargs
+        # if the fuel order exists, lock it
+        if self.fuel_order:
+            self.fuel_order.is_locked = True
+            self.fuel_order.save()
+            kwargs["fuel_order"] = self.fuel_order
+            return kwargs
+        else:
+            # this should be handled by the qr view. Just in case the user change the GET url...
+            logger.error(f"Fuel order with operation_code {operation_code} not found")
+            return redirect("staff_home")
 
     def form_valid(self, form):
         refueling = form.save(commit=False)
         refueling.pump_operator = self.request.user
-        refueling.status = "pending"
+        refueling.is_finished = True
         refueling.save()
         return super().form_valid(form)
 
