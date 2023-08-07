@@ -15,11 +15,131 @@
         {% endfor %}
       </div>
     {% endif %}
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="tw-bigform !bg-pantone7472c">
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
+        <div class="grid grid-cols-4 gap-4">
+          <div></div>
+          <div class="text-center text-white font-bold font-Rubik">Tractor</div>
+          <div class="text-center text-white font-bold font-Rubik">Mochila</div>
+          <div class="text-center text-white font-bold font-Rubik">Cámara</div>
+          <div class="text-white font-bold font-Rubik">Litros</div>
+          <div>
+            <input type="number"
+                   class="w-full rounded-md"
+                   name="{{ form.tractor_liters.name }}"
+                   id="{{ form.tractor_liters.id_for_label }}" />
+          </div>
+          <div>
+            <input type="number"
+                   class="w-full rounded-md"
+                   name="{{ form.backpack_liters.name }}"
+                   id="{{ form.backpack_liters.id_for_label }}" />
+          </div>
+          <div>
+            <input type="number"
+                   class="w-full rounded-md"
+                   name="{{ form.chamber_liters.name }}"
+                   id="{{ form.chamber_liters.id_for_label }}" />
+          </div>
+          <div class="text-black font-bold font-Rubik"></div>
+          <div>
+            <input type="hidden"
+                   name="{{ form.tractor_fuel_type.name }}"
+                   id="{{ form.tractor_fuel_type.id_for_label }}"
+                   value="{{ form.tractor_fuel_type.value }}" />
+            <p class="text-center">
+              {% if form.tractor_fuel_type.value %}{{ form.tractor_fuel_type.value }}{% endif %}
+            </p>
+          </div>
+          <div>
+            <input type="hidden"
+                   name="{{ form.backpack_fuel_type.name }}"
+                   id="{{ form.backpack_fuel_type.id_for_label }}"
+                   value="{{ form.backpack_fuel_type.value }}" />
+            <p class="text-center">
+              {% if form.backpack_fuel_type.value %}{{ form.backpack_fuel_type.value }}{% endif %}
+            </p>
+          </div>
+          <div>
+            <input type="hidden"
+                   name="{{ form.chamber_fuel_type.name }}"
+                   id="{{ form.chamber_fuel_type.id_for_label }}"
+                   value="{{ form.chamber_fuel_type.value }}" />
+            <p class="text-center">
+              {% if form.chamber_fuel_type.value %}{{ form.chamber_fuel_type.value }}{% endif %}
+            </p>
+          </div>
+          <div class="text-white font-bold font-Rubik">Imágenes</div>
+          <div>
+            <label class="w-full bg-white text-black p-2 rounded-full border text-xs border-gray-300 cursor-pointer hover:bg-gray-200">
+              adjunto
+              <input type="file"
+                     class="hidden"
+                     name="{{ form.tractor_pic.name }}"
+                     id="{{ form.tractor_pic.id_for_label }}" />
+            </label>
+          </div>
+          <div>
+            <label class="w-full bg-white text-black p-2 rounded-full border text-xs border-gray-300 cursor-pointer hover:bg-gray-200">
+              adjunto
+              <input type="file"
+                     class="hidden"
+                     name="{{ form.backpack_pic.name }}"
+                     id="{{ form.backpack_pic.id_for_label }}" />
+            </label>
+          </div>
+          <div>
+            <label class="w-full bg-white text-black p-2 rounded-full border text-xs border-gray-300 cursor-pointer hover:bg-gray-200">
+              adjunto
+              <input type="file"
+                     class="hidden"
+                     name="{{ form.chamber_pic.name }}"
+                     id="{{ form.chamber_pic.id_for_label }}" />
+            </label>
+          </div>
+          <div class="form-group text-white font-bold font-Rubik">Observación</div>
+          <div class="col-span-3">
+            <input type="text"
+                   class="w-full rounded-md"
+                   name="{{ form.observation.name }}"
+                   id="{{ form.observation.id_for_label }}" />
+          </div>
+          <div class="form-group text-white font-bold font-Rubik">Documentos</div>
+          <div class="col-span-3">
+            <label class="w-full bg-white text-black p-2 rounded-full border text-xs border-gray-300 cursor-pointer hover:bg-gray-200">
+              adjunto
+              <input type="file"
+                     class="hidden"
+                     name="{{ form.observation_pic.name }}"
+                     id="{{ form.observation_pic.id_for_label }}" />
+            </label>
+          </div>
+          <div class="form-group text-white font-bold font-Rubik">Despachos</div>
+          <div class="col-span-3">
+            <label class="w-full bg-white text-black p-2 rounded-full border text-xs border-gray-300 cursor-pointer hover:bg-gray-200">
+              adjunto
+              <input type="file"
+                     class="hidden"
+                     name="{{ form.dispatch_note_pic.name }}"
+                     id="{{ form.dispatch_note_pic.id_for_label }}" />
+            </label>
+          </div>
+        </div>
+        <menu class="w-full pt-12 pb-4 flex justify-center drop-shadow-lg">
+          <div class="col-span2 bg-pantone7472c p-0.5 rounded-l-full w-fit h-fit">
+            <div class="border-2 border-sky-200 p-0.5 rounded-l-full flex justify-center items-center">
+              <button class="flex whitespace-nowrap w-fit px-4 py-2 rounded-full bg-pantone7472c text-white font-rubik font-bold lowercase text-center"
+                      type="submit">Reportar Carga</button>
+            </div>
+          </div>
+          <div class="col-span2 bg-pantone7472c p-0.5 rounded-r-full w-fit h-fit">
+            <div class="border-2 border-sky-200 p-0.5 rounded-r-full flex justify-center items-center">
+              <a href="{% url 'staff_qr' %}"
+                 class="flex whitespace-nowrap w-fit px-4 py-2 rounded-full bg-pantone7472c text-white font-rubik font-bold lowercase text-center">Volver</a>
+            </div>
+          </div>
+        </menu>
       </div>
     </form>
   </section>
