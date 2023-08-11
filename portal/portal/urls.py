@@ -1,6 +1,6 @@
 from allauth.account.views import LoginView
 
-# 'app' views
+# "app" views
 from app.views.authorized import UserHomeView
 from app.views.extracash import ExtraCashView
 from app.views.helpers import get_qr, get_server_time
@@ -14,8 +14,8 @@ from django.contrib.auth import views as auth_views
 from django.urls import include, path
 from staff.forms import CustomLoginForm
 
-# 'staff' views
-from staff.views import StaffHomeView, StaffRefuelingView, StaffQrView
+# "staff" views
+from staff.views import StaffHomeView, StaffRefuelingView, StaffQrView, handle_qr_code
 
 # Without Internationalization
 urlpatterns = [
@@ -38,8 +38,9 @@ urlpatterns += [
     path("staff/login/", auth_views.LoginView.as_view(template_name="staff/login.html", form_class=CustomLoginForm), name="staff_login"),
     path("staff/logout/", auth_views.LogoutView.as_view(), name="staff_logout"),
     path("staff/qr/", StaffQrView.as_view(), name="staff_qr"),
-    path('staff/refueling/<str:operation_code>/', StaffRefuelingView.as_view(), name='staff_refueling'),
-    path('staff/refueling/<str:operation_code>/<str:was_locked>/', StaffRefuelingView.as_view(), name='staff_refueling'),
+    path("staff/refueling/<str:operation_code>/", StaffRefuelingView.as_view(), name="staff_refueling"),
+    path("staff/refueling/<str:operation_code>/<str:was_locked>/", StaffRefuelingView.as_view(), name="staff_refueling"),
+    path("staff/handle_qr_code/", handle_qr_code, name="handle_qr_code"),
 ]
 
 # API Rest Framework

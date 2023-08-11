@@ -3,6 +3,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
@@ -109,3 +110,15 @@ class StaffRefuelingView(FormView):
 
     def get_success_url(self):
         return reverse("staff_home")
+
+import json
+
+def handle_qr_code(request):
+    body = json.loads(request.body)
+    decoded_text = body.get('decoded_text')
+    logger.info(f"decoded text: {decoded_text}")
+
+    # Process the decoded text (e.g., validate, save to database, etc.)
+    # ...
+
+    return JsonResponse({'status': 'success'})
