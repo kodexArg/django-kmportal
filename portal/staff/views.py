@@ -66,28 +66,23 @@ class StaffQrView(FormView):
         return redirect("staff_refueling", operation_code=operation_code, was_locked=fuel_order.is_locked)
 
 
-
 class StaffRefuelingView(FormView):
     template_name = "staff/refueling.html"
     form_class = RefuelingForm
 
+    def get_fuel_order(self):
+        operation_code = self.kwargs.get("operation_code")
+        return get_object_or_404(FuelOrders, operation_code=operation_code)
+
     def get(self, request, *args, **kwargs):
-        """was_locked is a GET parameter that is sent by the qr view.
-        If it's true, then the user has already entered a fuel order and
-        the fuel order is locked. This is used to display a warning message in the template.
-        It's not handled in the qr.html because most probably the user will continue anyway...
-        """
-        logger.info(kwargs)
-        if kwargs.get("was_locked")=="True":
-            messages.warning(self.request, "Esta orden ya ha sido bloqueada y no finalizada. Asegúrate de que no haya otro oeprador atendiéndola.")
-            logger.warning("Esta orden ya ha sido bloqueada y no finalizada. Asegúrate de que no haya otro oeprador atendiéndola.")
+        """ ... [rest of your get method] ... """
+        self.fuel_order = self.get_fuel_order()
         return super().get(request, *args, **kwargs)
 
     def get_form_kwargs(self):
         """Sending fuel_order record to the form based on the operation_code received from qr"""
         kwargs = super().get_form_kwargs()
-        operation_code = self.kwargs.get("operation_code")
-        self.fuel_order = get_object_or_404(FuelOrders, operation_code=operation_code)
+        self.fuel_order = self.get_fuel_order()
         # if the fuel order exists, lock it
         if self.fuel_order:
             self.fuel_order.is_locked = True
@@ -96,9 +91,15 @@ class StaffRefuelingView(FormView):
             return kwargs
         else:
             # this should be handled by the qr view. Just in case the user change the GET url...
-            logger.error(f"Fuel order with operation_code {operation_code} not found")
+            logger.error(f"Fuel order not found")
             return redirect("staff_home")
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        self.fuel_order = self.get_fuel_order()
+        context['fuel_order'] = self.fuel_order
+        return context
+    
     def form_valid(self, form):
         refueling = form.save(commit=False)
         refueling.pump_operator = self.request.user
