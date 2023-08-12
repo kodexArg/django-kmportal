@@ -3,9 +3,11 @@ Last update: 2028 07 28
 
 
 ## Currently in process
-- Staff/qr to send FuelOrders to Refuelings on Refueling creation.
+- QR for real (picture reader whatever you call it)
 
 ## Next up
+- Refueling view
+- Qr should handle the error if the Refueling order already exist (avoiding IntegrityError) or finished!
 - Refueling Crud in staff
 
 
@@ -21,6 +23,7 @@ Last update: 2028 07 28
 - fix Migration or reset?
 - Currently: views from staff filtered with "staff_member_required" instead of "Pump Operators" group.
 - Staff navbar: change the 'include' call for a custom_component
+- i18n to STAFF!!!
 
 
 ## Won't
@@ -34,6 +37,7 @@ Last update: 2028 07 28
 
 
 ## Done (2023 07 30 and on)
+- Staff/qr to send FuelOrders to Refuelings on Refueling creation. --> sending operation_code in GET method and handled by the Refueling view
 - Refueling model
 - Pump Operator model or User model for staff?? --> User model and Pump Operators group.
 - /order/new/

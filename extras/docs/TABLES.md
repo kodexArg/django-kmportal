@@ -60,7 +60,7 @@
 | user_lastmod       | User                        |
 | company            | Company                     |
 | driver             | Drivers                     |
-| is_blocked         | BooleanField                |
+| is_locked         | BooleanField                |
 | is_paused          | BooleanField                |
 | is_finished        | BooleanField                |
 | pause_reason       | TextField                   |
@@ -93,7 +93,7 @@
 | chamber_liters_to_load     | IntegerField                |
 | requires_odometer          | BooleanField                |
 | requires_kilometers        | BooleanField                |
-| is_blocked                 | BooleanField                |
+| is_locked                 | BooleanField                |
 | is_paused                  | BooleanField                |
 | is_finished                | BooleanField                |
 | in_agreement               | CharField                   |

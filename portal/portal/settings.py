@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.facebook",
+    "sslserver", # django-sslserver
     "compressor", # compressor
     "rest_framework", # rest
     "api",

@@ -2,14 +2,6 @@
 {% load static custom_components compress %}
 {% block title %}KM1151 - Staff Area{% endblock %}
 {% block content %}
-  <style>
-      #preview {
-          width: 300px;
-          height: 300px;
-          border: 1px solid red;
-          /* Temporary border to see the element */
-      }
-  </style>
   <section id="SingleFuelOrder" class="mx-6 md:mx-10">
     <form method="post">
       {% csrf_token %}
@@ -18,12 +10,12 @@
           <span class="text-white font-bold">Operation Code</span>
           {{ form.operation_code }}
         </div>
-        <div class="w-full rounded-md bg-white flex p-1 mt-2 justify-center items-center">
+        <div class="w-full rounded-xl bg-sky-200 flex p-4 mt-2 justify-center items-center">
           <!-- Video element to display the camera feed -->
-          <video id="preview">
+          <video id="preview" class="w-56 rounded-lg">
           </video>
           <!-- Canvas element to process the video frames -->
-          <canvas id="canvas" style="display:none;"></canvas>
+          <canvas id="canvas" class="max-w-8" style="display:none;"></canvas>
         </div>
         <menu class="w-full p-6 flex justify-center drop-shadow-lg">
           <div class="col-span2 bg-pantone7472c p-0.5 rounded-l-full w-fit h-fit">
@@ -104,36 +96,16 @@
               const code = jsQR(imageData.data, imageData.width, imageData.height, {
                   inversionAttempts: 'dontInvert',
               });
-              if (code) {
-                  // Send the decoded text to the server
-                  sendToServer(code.data);
+              // inside the tick function
+              if (code && code.data.length == 6) {
+                  document.querySelector('[name="operation_code"]').value = code.data;
+                  document.querySelector('#SingleFuelOrder form').submit(); // Submit the form
               }
+
           }
           requestAnimationFrame(tick);
       }
 
-      function sendToServer(decodedText) {
-          fetch("{% url 'handle_qr_code' %}", {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'X-CSRFToken': '{{ csrf_token }}'
-                  },
-                  body: JSON.stringify({
-                      decoded_text: decodedText
-                  })
-              })
-              .then(response => response.json())
-              .then(data => {
-                  if (data.status === 'success') {
-                      // Handle success (e.g., redirect to another page, show a success message, etc.)
-                  } else {
-                      // Handle error
-                  }
-              })
-              .catch(error => {
-                  console.error('Error sending QR code to server:', error);
-              });
-      }
+
   </script>
 {% endblock %}

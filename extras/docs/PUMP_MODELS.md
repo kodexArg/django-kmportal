@@ -88,7 +88,7 @@ This table is used to store B2B partner company information.
 | chamber_liters_to_load | IntegerField        | The liters to load for the chamber.      |
 | requires_odometer     | BooleanField          | Flag to indicate if odometer is required.|
 | requires_kilometers   | BooleanField          | Flag to indicate if kilometers are required.|
-| is_blocked            | BooleanField          | Represents if the order is blocked.      |
+| is_locked            | BooleanField          | Represents if the order is blocked.      |
 | comments              | TextField             | Any comments associated with the order.  |
 | in_agreement          | IntegerField          | The agreement status of the order.       |
 
