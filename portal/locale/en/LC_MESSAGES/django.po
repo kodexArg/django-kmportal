@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-30 06:05+0000\n"
+"POT-Creation-Date: 2023-08-12 01:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,87 +18,87 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/forms.py:18
+#: app/forms.py:19
 msgid "January"
 msgstr "January"
 
-#: app/forms.py:19
+#: app/forms.py:20
 msgid "February"
 msgstr "February"
 
-#: app/forms.py:20
+#: app/forms.py:21
 msgid "March"
 msgstr "March"
 
-#: app/forms.py:21
+#: app/forms.py:22
 msgid "April"
 msgstr "April"
 
-#: app/forms.py:22
+#: app/forms.py:23
 msgid "May"
 msgstr "May"
 
-#: app/forms.py:23
+#: app/forms.py:24
 msgid "June"
 msgstr "June"
 
-#: app/forms.py:24
+#: app/forms.py:25
 msgid "July"
 msgstr "July"
 
-#: app/forms.py:25
+#: app/forms.py:26
 msgid "August"
 msgstr "August"
 
-#: app/forms.py:26
+#: app/forms.py:27
 msgid "September"
 msgstr "September"
 
-#: app/forms.py:27
+#: app/forms.py:28
 msgid "October"
 msgstr "October"
 
-#: app/forms.py:28
+#: app/forms.py:29
 msgid "November"
 msgstr "November"
 
-#: app/forms.py:29
+#: app/forms.py:30
 msgid "December"
 msgstr "December"
 
-#: app/models.py:75
+#: app/models.py:43
 msgid "Companies"
 msgstr ""
 
-#: app/models.py:93
+#: app/models.py:61
 msgid "first_name"
 msgstr "First Name"
 
-#: app/models.py:94
+#: app/models.py:62
 msgid "last_name"
 msgstr "Last Name"
 
-#: app/models.py:95
+#: app/models.py:63
 msgid "identification_type"
 msgstr "ID Type"
 
-#: app/models.py:96
+#: app/models.py:64
 msgid "identification_number"
 msgstr "ID N°"
 
-#: app/models.py:111 app/models.py:124
+#: app/models.py:79 app/models.py:92
 msgid "domain"
 msgstr "Domain"
 
-#: app/models.py:284
+#: app/models.py:251
 msgid "no_agreement"
 msgstr "No agreement"
 
-#: app/models.py:285
+#: app/models.py:252
 msgid "under_negotiation"
 msgstr "Under negotiation"
 
-#: app/models.py:286
+#: app/models.py:253
 msgid "agreed"
 msgstr "Agreed"
 
@@ -226,7 +226,7 @@ msgstr "RUT"
 msgid "driver"
 msgstr "Driver"
 
-#: templates/modules/extracash.html:3 templates/modules/extracash.html:8
+#: templates/modules/extracash.html:4 templates/modules/extracash.html:10
 msgid "extracash"
 msgstr "Extra-Cash"
 
@@ -234,11 +234,11 @@ msgstr "Extra-Cash"
 msgid "new_order_advice"
 msgstr "New Extra-Cash order added for "
 
-#: templates/modules/extracash.html:22
+#: templates/modules/extracash.html:24
 msgid "allowed_to_withdraw"
 msgstr "can withdraw up to"
 
-#: templates/modules/extracash.html:28 templates/modules/extracash.html:32
+#: templates/modules/extracash.html:30 templates/modules/extracash.html:34
 msgid "extracash_welcome"
 msgstr ""
 "Welcome to 'ExtraCash'. This is a service for cash withdrawal at our service"
@@ -246,15 +246,15 @@ msgstr ""
 "money. If for any reason the order is disapproved, click on the eye icon to "
 "get information about the problem. Extra-Cash orders last 48 hours."
 
-#: templates/modules/extracash.html:78
+#: templates/modules/extracash.html:61
 msgid "extracash_warning"
 msgstr "Remember to check the status of your account on the site:"
 
-#: templates/modules/extracash.html:92
+#: templates/modules/extracash.html:73
 msgid "extracash_pending_orders"
 msgstr "Pending Orders"
 
-#: templates/modules/extracash.html:117
+#: templates/modules/extracash.html:96
 msgid "no_extracash_orders"
 msgstr "No Extra-Cash orders"
 
@@ -270,32 +270,32 @@ msgstr ""
 "fuel type and quantities you specify. Review the order again once it has "
 "been entered on the next screen."
 
-#: templates/modules/order.html:45 templates/modules/orders.html:54
+#: templates/modules/order.html:55 templates/modules/orders.html:54
 #: templates/modules/orders.html:111
 msgid "fuel_order"
 msgstr "Fuel Order"
 
-#: templates/modules/order.html:48 templates/modules/orders.html:113
+#: templates/modules/order.html:58 templates/modules/orders.html:113
 msgid "tractor"
 msgstr "Tractor"
 
-#: templates/modules/order.html:49 templates/modules/orders.html:118
+#: templates/modules/order.html:59 templates/modules/orders.html:118
 msgid "backpack"
 msgstr "Backpack"
 
-#: templates/modules/order.html:50 templates/modules/orders.html:123
+#: templates/modules/order.html:60 templates/modules/orders.html:123
 msgid "chamber"
 msgstr "Chamber"
 
-#: templates/modules/order.html:63
+#: templates/modules/order.html:73
 msgid "new"
 msgstr "New"
 
-#: templates/modules/order.html:63
+#: templates/modules/order.html:73
 msgid "order_new"
 msgstr "Load Order"
 
-#: templates/modules/order.html:70
+#: templates/modules/order.html:80
 msgid "btn_skip"
 msgstr "Skip"
 
@@ -344,7 +344,7 @@ msgstr ""
 
 #: templates/modules/orders.html:209
 msgid "blocked"
-msgstr "bloqued"
+msgstr "blocked"
 
 #: templates/modules/tickets.html:3
 msgid "tickets_page_title"

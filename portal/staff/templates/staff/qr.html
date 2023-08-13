@@ -10,13 +10,13 @@
           <span class="text-white font-bold">Operation Code</span>
           {{ form.operation_code }}
         </div>
-        <div class="w-full rounded-xl bg-sky-200 flex p-4 mt-2 justify-center items-center">
+        <div id="camera-container" class="w-full rounded-xl bg-sky-200 flex p-4 mt-2 justify-center items-center">
           <!-- Video element to display the camera feed -->
-          <video id="preview" class="w-56 rounded-lg">
-          </video>
+          <video id="preview" class="w-56 rounded-lg"></video>
           <!-- Canvas element to process the video frames -->
           <canvas id="canvas" class="max-w-8" style="display:none;"></canvas>
         </div>
+        
         <menu class="w-full p-6 flex justify-center drop-shadow-lg">
           <div class="col-span2 bg-pantone7472c p-0.5 rounded-l-full w-fit h-fit">
             <div class="border-2 border-sky-200 p-0.5 rounded-l-full flex justify-center items-center">
@@ -33,6 +33,14 @@
         </menu>
       </div>
     </form>
+    <div id="js-error" class="flex w-full justify-center" style="display:none">
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 max-w-fit py-3 rounded relative"
+           role="alert">
+        <ul id="js-error-list">
+          <!-- JavaScript errors will be appended here -->
+        </ul>
+      </div>
+    </div>
     {% if form.errors %}
       <div class="flex w-full justify-center">
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 max-w-fit py-3 rounded relative"
@@ -81,8 +89,14 @@
               requestAnimationFrame(tick);
           })
           .catch(function(error) {
-              console.error('An error occurred when accessing the camera:', error);
+              // Get error div and list
+              var errorDiv = document.getElementById('js-error');
+              var errorList = document.getElementById('js-error-list');
+              var cameraContainer = document.getElementById('camera-container');
+              cameraContainer.innerHTML = '<p class="text-center text-red-600">No se detectó una cámara.<br>Por favor, ingrese el código manualmente.</p>';
+
           });
+
 
 
       function tick() {
@@ -105,7 +119,5 @@
           }
           requestAnimationFrame(tick);
       }
-
-
   </script>
 {% endblock %}

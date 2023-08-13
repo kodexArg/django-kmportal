@@ -1,3 +1,4 @@
+import json
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login
@@ -8,10 +9,12 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.views.generic.edit import FormView
+from django.db.models import Prefetch
 from loguru import logger
 from app.models import FuelOrders
+from staff.models import Refuelings
 from staff.forms import CustomLoginForm, QrForm, RefuelingForm
 
 
@@ -54,29 +57,19 @@ class StaffHomeView(View):
 ### AUTHORIZED PAGES ###
 
 
-class StaffQrView(FormView):
-    template_name = "staff/qr.html"
-    form_class = QrForm
-
-    def form_valid(self, form):
-        operation_code = form.cleaned_data.get("operation_code")
-        fuel_order = FuelOrders.objects.get(operation_code=operation_code)
-        if fuel_order.is_finished:
-            form.add_error(None, "This fuel order has already been completed. Please enter a new order.")
-            return self.form_invalid(form)
-        return redirect("staff_refueling", operation_code=operation_code, was_locked=fuel_order.is_locked)
-
-
 class StaffRefuelingView(FormView):
     template_name = "staff/refueling.html"
     form_class = RefuelingForm
+
+    def post(self, request, *args, **kwargs):
+        logger.info("Post method called")
+        return super().post(request, *args, **kwargs)
 
     def get_fuel_order(self):
         operation_code = self.kwargs.get("operation_code")
         return get_object_or_404(FuelOrders, operation_code=operation_code)
 
     def get(self, request, *args, **kwargs):
-        """ ... [rest of your get method] ... """
         self.fuel_order = self.get_fuel_order()
         return super().get(request, *args, **kwargs)
 
@@ -84,11 +77,11 @@ class StaffRefuelingView(FormView):
         """Sending fuel_order record to the form based on the operation_code received from qr"""
         kwargs = super().get_form_kwargs()
         self.fuel_order = self.get_fuel_order()
-        # if the fuel order exists, lock it
         if self.fuel_order:
             self.fuel_order.is_locked = True
             self.fuel_order.save()
             kwargs["fuel_order"] = self.fuel_order
+            logger.info(f"Fuel order found and locked. ID: {self.fuel_order.id}")
             return kwargs
         else:
             # this should be handled by the qr view. Just in case the user change the GET url...
@@ -98,27 +91,59 @@ class StaffRefuelingView(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         self.fuel_order = self.get_fuel_order()
-        context['fuel_order'] = self.fuel_order
+        context["fuel_order"] = self.fuel_order
         return context
-    
+
     def form_valid(self, form):
+        logger.info(f"Form is valid. Refueling data: {form.cleaned_data}")
         refueling = form.save(commit=False)
         refueling.pump_operator = self.request.user
         refueling.is_finished = True
         refueling.save()
-        return super().form_valid(form)
+        logger.info(f"Refueling saved successfully. ID: {refueling.id}")
+        
+        self.fuel_order.is_finished = True
+        self.fuel_order.save()
+        logger.info(f"Fuel order saved successfully. ID: {self.fuel_order.id}")
+        return redirect('staff_home')
+
+    def form_invalid(self, form):
+        logger.error(f"Form is invalid. Errors: {form.errors}")
+        return super().form_invalid(form)
 
     def get_success_url(self):
         return reverse("staff_home")
 
-import json
 
+class StaffQrView(FormView):
+    template_name = "staff/qr.html"
+    form_class = QrForm
+
+    def form_valid(self, form):
+        operation_code = form.cleaned_data.get("operation_code")
+        fuel_order = FuelOrders.objects.get(operation_code=operation_code)
+        if fuel_order.is_finished:
+            form.add_error(None, "Esta orden ya fue finalizada y no se puede modificar por este medio.")
+            return self.form_invalid(form)
+        return redirect("staff_refueling", operation_code=operation_code, was_locked=fuel_order.is_locked)
+
+
+## Helper
 def handle_qr_code(request):
     body = json.loads(request.body)
-    decoded_text = body.get('decoded_text')
+    decoded_text = body.get("decoded_text")
     logger.info(f"decoded text: {decoded_text}")
 
     # Process the decoded text (e.g., validate, save to database, etc.)
     # ...
 
-    return JsonResponse({'status': 'success'})
+    return JsonResponse({"status": "success"})
+
+class StaffListOrdersView(ListView):
+    template_name = 'staff/orders.html'
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        refuelings = Refuelings.objects.all()
+        queryset = FuelOrders.objects.prefetch_related(Prefetch('refuelings', queryset=refuelings))
+        return queryset

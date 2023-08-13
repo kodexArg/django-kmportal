@@ -45,6 +45,17 @@ class RefuelingForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.fuel_order = kwargs.pop('fuel_order', None)
         super().__init__(*args, **kwargs)
+        if self.fuel_order and self.fuel_order.tractor_liters_to_load == 0:
+            self.fields['tractor_liters'].initial = 0
+            self.fields['tractor_liters'].disabled = True
+
+        if self.fuel_order and self.fuel_order.chamber_liters_to_load == 0:
+            self.fields['chamber_liters'].initial = 0
+            self.fields['chamber_liters'].disabled = True
+
+        if self.fuel_order and self.fuel_order.backpack_liters_to_load == 0:
+            self.fields['backpack_liters'].initial = 0
+            self.fields['backpack_liters'].disabled = True
 
     def clean(self):
         if not self.fuel_order.is_locked or self.fuel_order.is_finished:

@@ -1,0 +1,59 @@
+{% extends "staff/base/base.html" %}
+{% load static custom_components compress %}
+{% block title %}KM1151 - Staff Area{% endblock %}
+{% block content %}
+    <section class="min-h-screen min-w-screen flex m-2">
+        {% if user.is_authenticated and user|is_pump_operator %}
+            <!-- Content to show to logged in users -->
+            {% include "staff/base/navbar.html" %}
+            <!-- End Navbar-->
+            <!-- All the orders and related Refuelings... -->
+            <div class="flex flex-col">
+                <!-- big table -->
+                {% for order in orders %}
+                    <div class="text-xxs text-sky-800 italic ml-24 -mb-4 font-rubik font-light">{{ order.order_date }}</div>
+                    <div class="flex rounded-full p-1 h-10
+                    {% if order.is_finished %}
+                    bg-pantone7472c
+                    {% elif order.is_paused %}
+                    bg-gray-400
+                    {% elif order.is_locked %}
+                    bg-pantone307c
+                    {% else %}
+                    bg-pantone7689c
+                    {% endif %} my-3">
+                        <!-- a record -->
+                        <div class="w-20 p-1 flex flex-col border-r border-pantone7472c bg-white items-center justify-center rounded-l-full">
+                            <div class="font-rubik text-sm tracking-wider leading-none font-bold uppercase text-center w-full">{{ order.operation_code }}</div>
+                        </div>
+                        <div class="w-28 p-1 flex flex-col border-r border-pantone7472c bg-white items-center justify-center whitespace-nowrap overflow-hidden">
+                            <div class="font-rubik leading-none font-bold text-xs w-full">{{ order.company }}</div>
+                            <div class="font-rubik leading-none text-xxxs italic font-light w-full">{{ order.driver }}</div>
+                        </div>
+                        <div class="w-20 p-1 flex flex-col border-r border-pantone7472c bg-white items-center justify-center whitespace-nowrap overflow-hidden">
+                            <div class="font-mono text-xxs leading-1 text-center w-full"><span class="rounded-sm px-0.5 text-white bg-black">{{ order.tractor_plate }}</div>
+                                {% if order.trailer_plate %}
+                            <div class="font-mono text-xxs leading-1 text-center w-full"><span class="rounded-sm px-0.5 text-white bg-black">{{ order.trailer_plate }}</div>
+                                {% endif %}
+                        </div>
+                        <!-- ORDER -->
+                        <div class="w-6 p-1 flex flex-col border-r border-pantone7472c bg-white items-center justify-center whitespace-nowrap overflow-hidden">
+                            <div class="font-mono text-xxs leading-tight {% if order.requires_kilometers %}text-black font-bold {% else %}text-gray-400{% endif %}">KM</div>
+                            <div class="font-mono text-xxs leading-tight {% if order.requires_odometer %}text-black font-bold {% else %}text-gray-400{% endif %}">OD</div>
+                        </div>
+
+                        <!-- tail -->
+                        <div class="w-8 rounded-r-full flex">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- user not authenticated -->
+        {% else %}
+            {% if user.is_authenticated %}
+                <div class="fixed bottom-20 left-3 text-red-500 font-bold">Staff User no in "Pump Operators" Group</div>
+            {% endif %}
+            {% include "staff/base/login_form.html" %}
+        {% endif %}
+    </section>
+{% endblock %}

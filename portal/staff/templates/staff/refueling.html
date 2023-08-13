@@ -15,64 +15,80 @@
         {% endfor %}
       </div>
     {% endif %}
-    <div class="bg-sky-200 rounded-md p-2 my-4 w-full">{{ fuel_order }}</div>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" action="">
       {% csrf_token %}
       <div class="tw-bigform !bg-pantone7472c">
+        <div class="flex justify-center w-full my-4">
+          <div class="font-quicksand text-2xl">
+            Orden: <span class="font-bold">{{ fuel_order }}</span>
+          </div>
+        </div>
         <div class="flex flex-col w-96">
           <!--fields-->
           {% if fuel_order.tractor_liters_to_load %}
-          <div class="grid grid-cols-3 font-rubik text-white items-center py-1">
-              <span class="text-black">Tractor</span>
-              <input type="number"
-                     class="w-32 text-black text-right rounded-md h-8"
-                     placeholder="{{ fuel_order.formated_tractor_liters_to_load_of }} lts."
-                     name="{{ form.tractor_liters.name }}"
-                     id="{{ form.tractor_liters.id_for_label }}" />
-              <div>
-                  <div class="w-fit px-4 rounded-full ml-4 border-white border-2 whitespace-nowrap"
-                       style="background:{{ fuel_order.tractor_fuel_type_color }}">
-                      {{ fuel_order.short_tractor_fuel_type }}
-                  </div>
+            <div class="flex flex-col items-center sm:flex-row sm:justify-center font-rubik text-white py-1">
+              <span class="text-black mr-2">Tractor</span>
+              <div class="flex">
+                <input type="number"
+                       class="w-32 text-black text-right rounded-md h-8"
+                       placeholder="{{ fuel_order.formated_tractor_liters_to_load_of }} lts."
+                       name="{{ form.tractor_liters.name }}"
+                       id="{{ form.tractor_liters.id_for_label }}" />
+                <div class="w-fit px-4 rounded-full ml-4 border-white border-2 whitespace-nowrap"
+                     style="background:{{ fuel_order.tractor_fuel_type_color }}">
+                  {{ fuel_order.short_tractor_fuel_type }}
+                </div>
               </div>
-          </div>
-      {% endif %}
-      
-      {% if fuel_order.chamber_liters_to_load %}
-          <div class="grid grid-cols-3 font-rubik text-white items-center py-1">
-              <span class="text-black">Cámara</span>
-              <input type="number"
-                     class="w-32 text-black text-right rounded-md h-8"
-                     placeholder="{{ fuel_order.formated_chamber_liters_to_load_of }} lts."
-                     name="{{ form.chamber_liters.name }}"
-                     id="{{ form.chamber_liters.id_for_label }}" />
-              <div>
-                  <div class="w-fit px-4 rounded-full ml-4 border-white border-2 whitespace-nowrap"
-                       style="background:{{ fuel_order.chamber_fuel_type_color }}">
-                      {{ fuel_order.short_chamber_fuel_type }}
-                  </div>
+            </div>
+          {% endif %}
+          {% if fuel_order.backpack_liters_to_load %}
+            <div class="flex flex-col items-center sm:flex-row sm:justify-center font-rubik text-white py-1">
+              <span class="text-black mr-2">Mochila</span>
+              <div class="flex">
+                <input type="number"
+                       class="w-32 text-black text-right rounded-md h-8"
+                       placeholder="{{ fuel_order.formated_backpack_liters_to_load_of }} lts."
+                       name="{{ form.backpack_liters.name }}"
+                       id="{{ form.backpack_liters.id_for_label }}" />
+                <div class="w-fit px-4 rounded-full ml-4 border-white border-2 whitespace-nowrap"
+                     style="background:{{ fuel_order.backpack_fuel_type_color }}">
+                  {{ fuel_order.short_backpack_fuel_type }}
+                </div>
               </div>
-          </div>
-      {% endif %}
-      
-      {% if fuel_order.backpack_liters_to_load %}
-          <div class="grid grid-cols-3 font-rubik text-white items-center py-1">
-              <span class="text-black">Mochila</span>
-              <input type="number"
-                     class="w-32 text-black text-right rounded-md h-8"
-                     placeholder="{{ fuel_order.formated_backpack_liters_to_load_of }} lts."
-                     name="{{ form.backpack_liters.name }}"
-                     id="{{ form.backpack_liters.id_for_label }}" />
-              <div>
-                  <div class="w-fit px-4 rounded-full ml-4 border-white border-2 whitespace-nowrap"
-                       style="background:{{ fuel_order.backpack_fuel_type_color }}">
-                      {{ fuel_order.short_backpack_fuel_type }}
-                  </div>
+            </div>
+          {% endif %}
+          {% if fuel_order.chamber_liters_to_load %}
+            <div class="flex flex-col items-center sm:flex-row sm:justify-center font-rubik text-white py-1">
+              <span class="text-black mr-2">Cámara</span>
+              <div class="flex">
+                <input type="number"
+                       class="w-32 text-black text-right rounded-md h-8"
+                       placeholder="{{ fuel_order.formated_chamber_liters_to_load_of }} lts."
+                       name="{{ form.chamber_liters.name }}"
+                       id="{{ form.chamber_liters.id_for_label }}" />
+                <div class="w-fit px-4 rounded-full ml-4 border-white border-2 whitespace-nowrap"
+                     style="background:{{ fuel_order.chamber_fuel_type_color }}">
+                  {{ fuel_order.short_chamber_fuel_type }}
+                </div>
               </div>
-          </div>
-      {% endif %}
-      
+            </div>
+          {% endif %}
           <!--endfields-->
+
+    {% if form.errors %}
+      <div class="flex w-full justify-center">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 max-w-fit py-3 rounded relative"
+             role="alert">
+          <ul>
+            {% for field, errors in form.errors.items %}
+              {% for error in errors %}<li>{{ error }}</li>{% endfor %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+
+
         </div>
         <menu class="w-full pt-12 pb-4 flex justify-center drop-shadow-lg">
           <div class="col-span2 bg-pantone7472c p-0.5 rounded-l-full w-fit h-fit">
