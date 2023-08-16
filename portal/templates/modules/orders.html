@@ -220,9 +220,25 @@
                         $('#driver').text(data.driver);
                         $('#tractor_plate').text(data.tractor_plate);
                         $('#trailer_plate').text(data.trailer_plate);
-                        $('#formated_tractor_liters_to_load_of').text(data.formated_tractor_liters_to_load_of == 0 ? 'NO' : data.formated_tractor_liters_to_load_of == -1 ? 'MAX' : data.formated_tractor_liters_to_load_of);
-                        $('#formated_backpack_liters_to_load_of').text(data.formated_backpack_liters_to_load_of == 0 ? 'NO' : data.formated_backpack_liters_to_load_of == -1 ? 'MAX' : data.formated_backpack_liters_to_load_of);
-                        $('#formated_chamber_liters_to_load_of').text(data.formated_chamber_liters_to_load_of == 0 ? 'NO' : data.formated_chamber_liters_to_load_of == -1 ? 'MAX' : data.formated_chamber_liters_to_load_of);
+                        $('#formated_tractor_liters_to_load_of').text(
+                            data.formated_tractor_liters_to_load_of == 0 ? 'NO' :
+                            data.formated_tractor_liters_to_load_of == -1 ? 'MAX' :
+                            (data.is_finished ? ' ' + data.tractor_liters + ' / ': '') + data.formated_tractor_liters_to_load_of 
+                        );
+
+                        $('#formated_backpack_liters_to_load_of').text(
+                            data.formated_backpack_liters_to_load_of == 0 ? 'NO' :
+                            data.formated_backpack_liters_to_load_of == -1 ? 'MAX' :
+                            (data.is_finished ? ' ' + data.backpack_liters + ' / ': '') + data.formated_backpack_liters_to_load_of 
+                        );
+
+                        $('#formated_chamber_liters_to_load_of').text(
+                            data.formated_chamber_liters_to_load_of == 0 ? 'NO' :
+                            data.formated_chamber_liters_to_load_of == -1 ? 'MAX' :
+                            (data.is_finished ? ' ' + data.chamber_liters + ' / ': '') + data.formated_chamber_liters_to_load_of 
+                        );
+
+
 
                         viewModal.toggleClass('opacity-0 invisible pointer-events-none');
 

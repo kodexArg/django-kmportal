@@ -96,11 +96,17 @@ class StaffRefuelingView(FormView):
 
     def form_valid(self, form):
         logger.info(f"Form is valid. Refueling data: {form.cleaned_data}")
+
         refueling = form.save(commit=False)
         refueling.pump_operator = self.request.user
         refueling.is_finished = True
         refueling.save()
         logger.info(f"Refueling saved successfully. ID: {refueling.id}")
+        
+        for field in ['tractor_liters', 'backpack_liters', 'chamber_liters']:
+            field_value = form.cleaned_data.get(field)
+            if field_value:
+                setattr(self.fuel_order, field, field_value)       
         
         self.fuel_order.is_finished = True
         self.fuel_order.save()

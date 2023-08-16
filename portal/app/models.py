@@ -387,7 +387,7 @@ class FuelOrders(models.Model):
     @property
     def formated_tractor_liters_to_load_of(self):
         if self.tractor_liters_to_load == 0:
-            return "no"
+            return "-"
         elif self.tractor_liters_to_load == -1:
             return "max"
         else:
@@ -396,7 +396,7 @@ class FuelOrders(models.Model):
     @property
     def formated_backpack_liters_to_load_of(self):
         if self.backpack_liters_to_load == 0:
-            return "no"
+            return "-"
         elif self.backpack_liters_to_load == -1:
             return "max"
         else:
@@ -405,7 +405,7 @@ class FuelOrders(models.Model):
     @property
     def formated_chamber_liters_to_load_of(self):
         if self.chamber_liters_to_load == 0:
-            return "no"
+            return "-"
         elif self.chamber_liters_to_load == -1:
             return "max"
         else:

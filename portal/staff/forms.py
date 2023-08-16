@@ -35,12 +35,24 @@ class QrForm(forms.Form):
         return operation_code
 
 
-
 class RefuelingForm(forms.ModelForm):
+
+    tractor_pic = forms.ImageField(
+        widget=forms.FileInput(attrs={'accept': 'image/*', 'capture': 'camera'}),
+        required=False  # Set to False to make this field not required
+    )
+    backpack_pic = forms.ImageField(
+        widget=forms.FileInput(attrs={'accept': 'image/*', 'capture': 'camera'}),
+        required=False  # Set to False to make this field not required
+    )
+    chamber_pic = forms.ImageField(
+        widget=forms.FileInput(attrs={'accept': 'image/*', 'capture': 'camera'}),
+        required=False  # Set to False to make this field not required
+    )
+    
     class Meta:
         model = Refuelings
         exclude = ['fuel_order', 'pump_operator', 'is_finished']
-
 
     def __init__(self, *args, **kwargs):
         self.fuel_order = kwargs.pop('fuel_order', None)

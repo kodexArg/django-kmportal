@@ -79,32 +79,14 @@
                 </div>
                 <div class="h-full space-x-1 ml-1 flex">
                     <!-- fuel values -->
-                    <div class="w-1/3 h-full bg-white text-xxs leading-0 font-mono font-bold flex justify-center">
-                        {% if order.tractor_liters_to_load == -1 %}
-                        <span class="text-xxxs text-green-900">MAX</span>
-                        {% elif order.tractor_liters_to_load == 0 %}
-                        <span class="text-xxxs text-gray-300"></span>
-                        {% else %}
-                        <span class="text-xxxs">{{ order.tractor_liters_to_load }}</span>
-                        {% endif %}
+                    <div class="w-1/3 h-full bg-white text-xxs leading-tight font-mono font-bold flex justify-center">
+                      {% if order.tractor_liters and order.is_finished %}{{ order.tractor_liters }}{% else %}{{ order.formated_tractor_liters_to_load_of }}{% endif %}
                     </div>
-                    <div class="w-1/3 h-full bg-white text-xxs leading-0 font-mono font-bold flex justify-center">
-                        {% if order.backpack_liters_to_load == -1 %}
-                        <span class="text-xxxs text-green-900">MAX</span>
-                        {% elif order.backpack_liters_to_load == 0 %}
-                        <span class="text-xxxs text-gray-300"></span>
-                        {% else %}
-                        <span class="text-xxxs">{{ order.backpack_liters_to_load }}</span>
-                        {% endif %}
+                    <div class="w-1/3 h-full bg-white text-xxs leading-tight font-mono font-bold flex justify-center">
+                      {% if order.backpack_liters and order.is_finished %}{{ order.backpack_liters }}{% else %}{{ order.formated_backpack_liters_to_load_of }}{% endif %}
                     </div>
-                    <div class="w-1/3 h-full bg-white text-xxs leading-0 font-mono font-bold flex justify-center">
-                        {% if order.chamber_liters_to_load == -1 %}
-                        <span class="text-xxxs text-green-900">MAX</span>
-                        {% elif order.chamber_liters_to_load == 0 %}
-                        <span class="text-xxxs text-gray-300"></span>
-                        {% else %}
-                        <span class="text-xxxs">{{ order.chamber_liters_to_load }}</span>
-                        {% endif %}
+                    <div class="w-1/3 h-full bg-white text-xxs leading-tight font-mono font-bold flex justify-center">
+                      {% if order.chamber_liters and order.is_finished %}{{ order.chamber_liters }}{% else %}{{ order.formated_chamber_liters_to_load_of }}{% endif %}
                     </div>
                 </div>
             </div>

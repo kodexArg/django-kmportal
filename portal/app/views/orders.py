@@ -60,9 +60,12 @@ class OrderJsonView(View):
             "driver": str(fuel_order.driver),
             "tractor_plate": str(fuel_order.tractor_plate),
             "trailer_plate": str(fuel_order.trailer_plate),
-            "formated_tractor_liters_to_load_of": fuel_order.tractor_liters_to_load,
-            "formated_backpack_liters_to_load_of": fuel_order.backpack_liters_to_load,
-            "formated_chamber_liters_to_load_of": fuel_order.chamber_liters_to_load,
+            "formated_tractor_liters_to_load_of": fuel_order.formated_tractor_liters_to_load_of,
+            "formated_backpack_liters_to_load_of": fuel_order.formated_backpack_liters_to_load_of,
+            "formated_chamber_liters_to_load_of": fuel_order.formated_chamber_liters_to_load_of,
+            "tractor_liters": fuel_order.tractor_liters,
+            "backpack_liters": fuel_order.backpack_liters,
+            "chamber_liters": fuel_order.chamber_liters,
         }
         return JsonResponse(data)
 
