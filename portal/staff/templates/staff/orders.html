@@ -58,22 +58,34 @@
                                 text-gray-400
                               {% endif %}">OD</div>
                 </div>
-                <div class="w-28 p-1 flex flex-col border-r border-pantone7472c bg-white items-center justify-center whitespace-nowrap overflow-hidden">
-                  <div class="font-rubik leading-tight font-bold text-xs">Tractor</div>
+                <div class="w-20 p-1 flex flex-col border-r border-pantone7472c bg-white items-center justify-center whitespace-nowrap overflow-hidden">
+                  <div class="font-rubik leading-tight font-bold text-xs">
+                    {% if order.refuelings and order.refuelings.tractor_pic %}<a href="{{ order.refuelings.tractor_pic.url }}"
+                       target="_blank"
+                       title="Tractor">📎{% endif %}Tractor</a>
+                  </div>
                   <div class="font-mono leading-tight text-xs">
                     {% if order.tractor_liters %}{{ order.tractor_liters }} /{% endif %}
                     {{ order.formated_tractor_liters_to_load_of }}
                   </div>
                 </div>
                 <div class="w-28 p-1 flex flex-col border-r border-pantone7472c bg-white items-center justify-center whitespace-nowrap overflow-hidden">
-                  <div class="font-rubik leading-tight font-bold text-xs">Mochila</div>
+                  <div class="font-rubik leading-tight font-bold text-xs">
+                    {% if order.refuelings and order.refuelings.backpack_pic %}<a href="{{ order.refuelings.backpack_pic.url }}"
+                       target="_blank"
+                       title="Mochila">📎{% endif %}Mochila</a>
+                  </div>
                   <div class="font-mono leading-tight text-xs">
                     {% if order.backpack_liters %}{{ order.backpack_liters }} /{% endif %}
                     {{ order.formated_backpack_liters_to_load_of }}
                   </div>
                 </div>
                 <div class="w-28 p-1 flex flex-col border-r border-pantone7472c bg-white items-center justify-center whitespace-nowrap overflow-hidden">
-                  <div class="font-rubik leading-tight font-bold text-xs">Cámara</div>
+                  <div class="font-rubik leading-tight font-bold text-xs">
+                    {% if order.refuelings and order.refuelings.chamber_pic %}<a href="{{ order.refuelings.chamber_pic.url }}"
+                       target="_blank"
+                       title="Cámara">📎{% endif %}Cámara</a>
+                  </div>
                   <div class="font-mono leading-tight text-xs">
                     {% if order.chamber_liters %}{{ order.chamber_liters }} /{% endif %}
                     {{ order.formated_chamber_liters_to_load_of }}
