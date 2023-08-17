@@ -9,6 +9,19 @@ from pytest import mark
 register = template.Library()
 
 
+# NAVBAR BOTTOM
+## Button
+@register.inclusion_tag("components/nav_button.html")
+def nav_buttom_component(tooltip, icon, url, left=False, right=False):
+    if left:
+        leftright = "rounded-l-full"
+    elif right:
+        leftright = "rounded-r-full"
+    else:
+        leftright = ""
+    return {"tooltip": tooltip, "icon": icon, "leftright": leftright, "url": url}
+
+
 @register.simple_tag()
 def liters_field_component(id, ph, field_name, name):
     html = f"""
@@ -25,7 +38,7 @@ def liters_field_component(id, ph, field_name, name):
         </div>
 
     """
-    
+
     return mark_safe(html)
 
 
@@ -56,7 +69,7 @@ def camera_icon_component(name, label_id):
             </label>
         </div>
     """
-    
+
     return mark_safe(html)
 
 
@@ -68,5 +81,5 @@ def fuel_type_component(color, short):
             {short}
         </div>
     """
-    
+
     return mark_safe(html)

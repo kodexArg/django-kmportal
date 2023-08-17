@@ -118,7 +118,7 @@ class StaffRefuelingView(FormView):
         return super().form_invalid(form)
 
     def get_success_url(self):
-        return reverse("staff_home")
+        return reverse("staff_orders")
 
 
 class StaffQrView(FormView):

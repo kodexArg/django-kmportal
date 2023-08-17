@@ -198,19 +198,3 @@ def rbutton_component(caption, bg="bg-pantone307c", fg="text-white", size="", na
         </button>
     """
     return mark_safe(html)
-
-
-# NAVBAR BOTTOM
-## Button
-
-
-@register.inclusion_tag("components/nav_button.html")
-def nav_buttom_component(tooltip, icon, url, left=False, right=False):
-    if left:
-        leftright = "rounded-l-full"
-    elif right:
-        leftright = "rounded-r-full"
-    else:
-        leftright = ""
-
-    return {"tooltip": tooltip, "icon": icon, "leftright": leftright, "url": url}

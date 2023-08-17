@@ -5,7 +5,6 @@
   <section class="min-h-screen min-w-screen flex m-2">
     {% if user.is_authenticated and user|is_pump_operator %}
       <!-- Content to show to logged in users -->
-      {% include "staff/base/navbar.html" %}
       <!-- End Navbar-->
       <!-- All the orders and related Refuelings... -->
       <div class="flex flex-col">
@@ -60,9 +59,12 @@
                 </div>
                 <div class="w-20 p-1 flex flex-col border-r border-pantone7472c bg-white items-center justify-center whitespace-nowrap overflow-hidden">
                   <div class="font-rubik leading-tight font-bold text-xs">
-                    {% if order.refuelings and order.refuelings.tractor_pic %}<a href="{{ order.refuelings.tractor_pic.url }}"
-                       target="_blank"
-                       title="Tractor">📎{% endif %}Tractor</a>
+                    {% if order.refuelings and order.refuelings.tractor_pic %}
+                      <a href="{{ order.refuelings.tractor_pic.url }}"
+                         target="_blank"
+                         title="Tractor">📎
+                      {% endif %}
+                    Tractor</a>
                   </div>
                   <div class="font-mono leading-tight text-xs">
                     {% if order.tractor_liters %}{{ order.tractor_liters }} /{% endif %}
@@ -71,9 +73,12 @@
                 </div>
                 <div class="w-28 p-1 flex flex-col border-r border-pantone7472c bg-white items-center justify-center whitespace-nowrap overflow-hidden">
                   <div class="font-rubik leading-tight font-bold text-xs">
-                    {% if order.refuelings and order.refuelings.backpack_pic %}<a href="{{ order.refuelings.backpack_pic.url }}"
-                       target="_blank"
-                       title="Mochila">📎{% endif %}Mochila</a>
+                    {% if order.refuelings and order.refuelings.backpack_pic %}
+                      <a href="{{ order.refuelings.backpack_pic.url }}"
+                         target="_blank"
+                         title="Mochila">📎
+                      {% endif %}
+                    Mochila</a>
                   </div>
                   <div class="font-mono leading-tight text-xs">
                     {% if order.backpack_liters %}{{ order.backpack_liters }} /{% endif %}
@@ -82,9 +87,12 @@
                 </div>
                 <div class="w-28 p-1 flex flex-col border-r border-pantone7472c bg-white items-center justify-center whitespace-nowrap overflow-hidden">
                   <div class="font-rubik leading-tight font-bold text-xs">
-                    {% if order.refuelings and order.refuelings.chamber_pic %}<a href="{{ order.refuelings.chamber_pic.url }}"
-                       target="_blank"
-                       title="Cámara">📎{% endif %}Cámara</a>
+                    {% if order.refuelings and order.refuelings.chamber_pic %}
+                      <a href="{{ order.refuelings.chamber_pic.url }}"
+                         target="_blank"
+                         title="Cámara">📎
+                      {% endif %}
+                    Cámara</a>
                   </div>
                   <div class="font-mono leading-tight text-xs">
                     {% if order.chamber_liters %}{{ order.chamber_liters }} /{% endif %}
