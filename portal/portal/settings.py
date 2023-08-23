@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get("SECRET-KEY")
 DEBUG = False if os.environ.get("DEBUG")=="False" else True
 
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["kodex.duckdns.org"]
 
 
 # Application definition
@@ -75,10 +75,11 @@ MIDDLEWARE = [
     "django.middleware.locale.LocaleMiddleware",
 ]
 
-# SECURE_SSL_REDIRECT = True
-# SECURE_HSTS_SECONDS = 3600 # 1 hour
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_PRELOAD = True
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_HSTS_SECONDS = 3600 # 1 hour
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
 ROOT_URLCONF = "portal.urls"
 TEMPLATES = [
