@@ -7,7 +7,6 @@ on:
 
 jobs:
   kill-servers:
-    needs: collect-statics
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -34,7 +33,6 @@ jobs:
             tmux new-session -d -s django-kmportal
 
   git-commands:
-    needs: create-tmux-session
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -78,11 +76,11 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /home/ubuntu/django-kmportal/portal/
-            python3 portal/manage.py makemigrations
-            python3 portal/manage.py migrate
+            python3 manage.py makemigrations
+            python3 manage.py migrate
 
   collect-statics:
-    needs: run-migrations
+    needs: pip-commands
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -98,7 +96,10 @@ jobs:
             sudo chown -R www-data: /home/ubuntu/django-kmportal/local-cdn/static/
 
   start-gunicorn:
-    needs: kill-servers
+    needs: 
+      - kill-servers
+      - run-migrations
+      - collect-statics
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
