@@ -6,20 +6,32 @@ on:
       - main
 
 jobs:
+  kill-servers:
+    needs: collect-statics
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Kill any server still running
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: sudo fuser -k 8080/tcp
+
   create-tmux-session:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Create and rename tmux session
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USERNAME }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
-          tmux kill-session -t django-kmportal || true
-          tmux new-session -d -s django-kmportal
-
+      - uses: actions/checkout@v2
+      - name: Create and rename tmux session
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            tmux kill-session -t django-kmportal || true
+            tmux new-session -d -s django-kmportal
 
   git-commands:
     needs: create-tmux-session
@@ -65,6 +77,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            cd /home/ubuntu/django-kmportal/portal/
             python3 portal/manage.py makemigrations
             python3 portal/manage.py migrate
 
@@ -80,21 +93,9 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            cd /home/ubuntu/django-kmportal/portal/
             python3 portal/manage.py collectstatic --no-input
             sudo chown -R www-data: /home/ubuntu/django-kmportal/local-cdn/static/
-
-  kill-servers:
-    needs: collect-statics
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Kill any server still running
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: sudo fuser -k 8080/tcp
 
   start-gunicorn:
     needs: kill-servers
