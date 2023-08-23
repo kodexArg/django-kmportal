@@ -1,5 +1,4 @@
 name: djang-kmportal Deploy to EC2
-
 on:
   push:
     branches:
@@ -12,58 +11,39 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Update repository on EC2
+    - name: Execute commands over ssh
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          echo -e "\033[34m---- UPDATING REPOSITORY ----\033[0m"
+          # add log line
+          echo "$(date) - Deploy triggered by ${{ github.actor }} on commit ${{ github.sha }} of ${{ github.repository }}" >> /home/ubuntu/logs/django-kmportal.log
+
+          # update the repo
           cd /home/ubuntu/django-kmportal/
           git fetch origin main
           git reset --hard origin/main
-          echo -e "\033[32mRepository updated successfully\033[0m"
 
-    - name: Update pip packages on EC2
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USERNAME }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
-          echo -e "\033[34m---- UPDATING PIP PACKAGES ----\033[0m"
+          # update pip packages
           echo "---- $(date) ----" > /home/ubuntu/logs/pip.log
           pip install --upgrade pip >> /home/ubuntu/logs/pip.log 2>&1
           pip install -r requirements.txt >> /home/ubuntu/logs/pip.log 2>&1
-          echo -e "\033[32mPIP packages updated successfully\033[0m"
 
-    - name: Run migrations on EC2
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USERNAME }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
-          echo -e "\033[34m---- RUNNING MIGRATIONS ----\033[0m"
+          # makemigrations and migrate
           echo "---- $(date) ----" >> /home/ubuntu/logs/migrations.log
           python3 portal/manage.py makemigrations >> /home/ubuntu/logs/migrations.log 2>&1
           python3 portal/manage.py migrate >> /home/ubuntu/logs/migrations.log 2>&1
-          echo -e "\033[32mMigrations completed successfully\033[0m"
 
-    - name: Collect static files on EC2
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USERNAME }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
-          echo -e "\033[34m---- COLLECTING STATIC FILES ----\033[0m"
+          # collect static files
           echo "---- $(date) ----" > /home/ubuntu/logs/collectstatic.log
           sudo chown -R ubuntu: /home/ubuntu/django-kmportal/local-cdn/static/
           python3 portal/manage.py collectstatic --no-input >> /home/ubuntu/logs/collectstatic.log 2>&1
           sudo chown -R www-data: /home/ubuntu/django-kmportal/local-cdn/static/
-          echo -e "\033[32mStatic files collected successfully\033[0m"
+
+          # add log line
+          echo "$(date) - Update completed :)" >> /home/ubuntu/logs/django-kmportal.log
 
     - name: Restart gunicorn in tmux session
       uses: appleboy/ssh-action@master
@@ -72,9 +52,14 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          echo -e "\033[34m---- RESTARTING GUNICORN ----\033[0m"
+          # stop running session if exists
           tmux kill-session -t django-kmportal || true
+          
+          # kill any process using port 8080
           sudo fuser -k 8080/tcp
+          
+          # start new session
           cd /home/ubuntu/django-kmportal/portal/
           tmux new-session -d -s django-kmportal 'gunicorn portal.wsgi:application --bind 0.0.0.0:8080 --workers 4' \; split-window -v 'bash'
-          echo -e "\033[32mGunicorn restarted successfully\033[0m"
+
+
