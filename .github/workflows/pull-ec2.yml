@@ -9,14 +9,17 @@ jobs:
   create-tmux-session:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Create and rename tmux session
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: tmux new-session -d -s django-kmportal
+    - uses: actions/checkout@v2
+    - name: Create and rename tmux session
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          tmux kill-session -t django-kmportal || true
+          tmux new-session -d -s django-kmportal
+
 
   git-commands:
     needs: create-tmux-session
