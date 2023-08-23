@@ -49,6 +49,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            cd /home/ubuntu/django-kmportal/
             pip install --upgrade pip
             pip install -r requirements.txt
 
