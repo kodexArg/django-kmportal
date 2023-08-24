@@ -148,3 +148,5 @@ __Fill in the following details:__
 - Secret Key: Enter your Secret Key. (This can also be obtained from the Google Cloud Console)
 - After entering these details, click on "Save".
 Now, your Django admin site is configured and ready to handle authentication using Google
+# MORE DOCS
+- check SSL_CERT.md to setup HTTPS

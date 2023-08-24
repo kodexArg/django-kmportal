@@ -3,12 +3,9 @@ Last update: 2028 07 28
 
 
 ## Currently in process
-- QR for real (picture reader whatever you call it)
+- setting up HTTPS (Let's Encrypt)
 
 ## Next up
-- Refueling view
-- Qr should handle the error if the Refueling order already exist (avoiding IntegrityError) or finished!
-- Refueling Crud in staff
 
 
 ## ToDo
@@ -37,6 +34,10 @@ Last update: 2028 07 28
 
 
 ## Done (2023 07 30 and on)
+- Refueling Crud in staff
+- Qr should handle the error if the Refueling order already exist (avoiding IntegrityError) or finished!
+- Refueling view
+- QR for real (picture reader whatever you call it)
 - Staff/qr to send FuelOrders to Refuelings on Refueling creation. --> sending operation_code in GET method and handled by the Refueling view
 - Refueling model
 - Pump Operator model or User model for staff?? --> User model and Pump Operators group.
