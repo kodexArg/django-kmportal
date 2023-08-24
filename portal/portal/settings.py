@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get("SECRETKEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if os.environ.get("DEBUG")=="False" else True
 
-ALLOWED_HOSTS = [".grupo-avs.com", "kodex.duckdns.org"]
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 INSTALLED_APPS = [
