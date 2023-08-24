@@ -111,5 +111,4 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ubuntu/django-kmportal/portal/
-            tmux send-keys -t django-kmportal 'gunicorn portal.wsgi:application --bind 0.0.0.0:8080 --workers 4' C-m
+            tmux send-keys -t django-kmportal 'cd /home/ubuntu/django-kmportal/portal/ && gunicorn portal.wsgi:application --bind 0.0.0.0:8080 --workers 4' C-m
