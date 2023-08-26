@@ -13,6 +13,19 @@ from loguru import logger
 
 
 @method_decorator(login_required, name="dispatch")
+class OrderView(CustomTemplateView):
+    template_name = "modules/order.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        operation_code = self.kwargs.get("operation_code")
+        context["operation_code"] = operation_code
+        context["order"] = FuelOrders.objects.get(operation_code=operation_code)
+
+        return context
+
+
+@method_decorator(login_required, name="dispatch")
 class OrdersListView(CustomTemplateView):
     template_name = "modules/orders.html"
 
@@ -71,7 +84,7 @@ class OrderJsonView(View):
 
 
 class OrderBaseView(CustomTemplateView, FormView):
-    template_name = "modules/order.html"
+    template_name = "modules/create_order.html"
     success_url = "/orders/"
 
     def form_valid(self, form):

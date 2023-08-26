@@ -509,19 +509,34 @@
     "es": "puede retirar hasta",
     "pt": "pode retirar até"
   },
-  "template": {
-    "en": "",
-    "es": "",
-    "pt": ""  
-  },
   "pause": {
     "en": "pause",
     "es": "pausar",
-    "pt": "pausar"  
+    "pt": "pausar"
   },
   "btn_pause": {
     "en": "pause",
     "es": "pausar",
     "pt": "pausar"
+  },
+  "order": {
+    "en": "Order",
+    "es": "Orden",
+    "pt": "Ordem"
+  },
+  "fuel_order_fill": {
+    "en": "Load Completed",
+    "es": "Carga Realizada",
+    "pt": "Carga Realizada"
+  },
+  "created_by": {
+    "en": "Created by",
+    "es": "Creado por",
+    "pt": "Criado por"
+  },
+  "template": {
+    "en": "",
+    "es": "",
+    "pt": ""
   }
 }

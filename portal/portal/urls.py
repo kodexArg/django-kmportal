@@ -5,7 +5,7 @@ from app.views.authorized import UserHomeView
 from app.views.extracash import ExtraCashView
 from app.views.helpers import get_qr, get_server_time
 from app.views.modules import CompanyView, VehiclesView
-from app.views.orders import OrderUpdateView, OrderCreateView, OrderJsonView, OrderPauseView, OrdersListView
+from app.views.orders import OrderUpdateView, OrderCreateView, OrderJsonView, OrderPauseView, OrdersListView, OrderView
 from app.views.unauthorized import AboutUsView, ContactUsView, HomeView, LogoutView, UnderConstructionView
 from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
@@ -65,7 +65,8 @@ urlpatterns += i18n_patterns(
     ## Fuel Orders
     path("orders/", OrdersListView.as_view(), name="orders"),
     path("order/new/", OrderCreateView.as_view(), name="order_new"),
-    path("order/edit/<int:order_id>/", OrderUpdateView.as_view(), name="order_edit"),
+    path("order/<str:operation_code>/", OrderView.as_view(), name="order"),
+    # path("order/edit/<int:order_id>/", OrderUpdateView.as_view(), name="order_edit"),
 )
 
 if settings.DEBUG:

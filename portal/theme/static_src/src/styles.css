@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* Form classes */
 .tw-label {
     @apply tracking-wide font-rubik text-sm text-left whitespace-nowrap;
@@ -86,3 +87,18 @@
 
 /* End */
 
+
+
+/* Order Page */
+
+.order-field-value {
+    @apply text-sm text-gray-900 dark:text-sky-800 font-mono ml-1;
+}
+
+.order-field-t {
+    @apply mt-4 font-semibold text-sky-900 dark:text-gray-900;
+}
+
+.order-field {
+    @apply text-sm font-semibold text-gray-700 dark:text-gray-400;
+}

@@ -1,0 +1,87 @@
+{% extends "base/base.html" %}
+{% load static i18n socialaccount custom_components %}
+{% block title %}
+  {% translate "fuel_orders" %}
+{% endblock %}
+{% block navbar %}
+  {% include
+  "base/navbar_components.html" with icon="fuel" %}
+{% endblock %}
+{% block content %}
+  {% translate "fuel_orders" as translated_title %} {% module_title_component translated_title %}
+  <section class="opacity-0 invisible z-40 left-0 top-0 bottom-0 flex items-center justify-center w-full transition-opacity duration-300 bg-sky-200 bg-opacity-50">
+    <div class="relative bg-white rounded-lg shadow-lg pointer-events-auto w-11/12 h-3/4 flex flex-col">
+      <div class="flex justify-between" id="modal-order-title">
+        <div class="flex justify-start">
+          <div class="p-4 text-lg font-bold">{% translate "fuel_order" %}</div>
+          <div class="p-4 text-xs self-center" id="order-status-text">
+            <p></p>
+          </div>
+        </div>
+        <div class="px-4 text-righ rounded-full">
+          <button id="view-modal-close"
+                  class="text-3xl font-semibold hover:text-gray-700">×</button>
+        </div>
+      </div>
+      <div class="flex flex-col overflow-y-auto">
+        <!-- QR -->
+        <div class="p-4 flex flex-col justify-center items-center mb-2">
+          <div id="qr_image"
+               class="w-40 h-40 mx-auto rounded-md border-2 border-pantone307c">
+            <img src="" alt="QR Code" />
+            <p class="text-2xl font-quicksand leading-tight font-bold text-center"></p>
+          </div>
+        </div>
+        <!-- Body -->
+        <div class="m-4 flex justify-center">
+          <dl class="w-fit grid grid-cols-1 md:grid-cols-3 md:space-x-4">
+            <!-- Order Information -->
+            <div>
+              <dt class="mt-4 text-md font-semibold text-sky-900 dark:text-gray-900">{% translate "order_information" %}</dt>
+              <dd>
+                <span class="order-field">{% translate "creation_date" %}:</span>
+                <span id="order_date" class="order-field-value"></span>
+              </dd>
+              <dd>
+                <span class="order-field">{% translate "last_modification" %}:</span>
+                <span id="modified_date" class="order-field-value"></span>
+              </dd>
+              <dd>
+                <span class="order-field">{% translate "driver" %}:</span>
+                <span id="driver" class="order-field-value"></span>
+              </dd>
+            </div>
+            <!-- Vehicle Information -->
+            <div>
+              <dt class="mt-4 text-md font-semibold text-sky-900 dark:text-gray-900">{% translate "vehicle_information" %}</dt>
+              <dd>
+                <span class="order-field">{% translate "tractor_plate" %}:</span>
+                <span id="tractor_plate" class="order-field-value"></span>
+              </dd>
+              <dd>
+                <span class="order-field">{% translate "trailer_plate" %}:</span>
+                <span id="trailer_plate" class="order-field-value"></span>
+              </dd>
+            </div>
+            <!-- Fuel Order -->
+            <div>
+              <dt class="mt-4 text-md font-semibold text-sky-900 dark:text-gray-900">{% translate "fuel_order" %}</dt>
+              <dd>
+                <span class="order-field">{% translate "tractor" %}:</span>
+                <span id="formated_tractor_liters_to_load_of" class="order-field-value"></span>
+              </dd>
+              <dd>
+                <span class="order-field">{% translate "backpack" %}:</span>
+                <span id="formated_backpack_liters_to_load_of" class="order-field-value"></span>
+              </dd>
+              <dd>
+                <span class="order-field">{% translate "chamber" %}:</span>
+                <span id="formated_chamber_liters_to_load_of" class="order-field-value"></span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+      <div class="h-6"></div>
+    </div>
+  </section>

@@ -72,8 +72,8 @@ def google_button_component():
 
 ## Module title in Quicksand font
 @register.inclusion_tag("components/module_title.html")
-def module_title_component(title):
-    return {"title": title}
+def module_title_component(title, extras=""):
+    return {"title": title, "extras": " "+extras}
 
 
 # FUEL ORDERS
@@ -97,11 +97,6 @@ def status_color_component(is_finished=False, is_paused=False, is_locked=False):
 def row_fuelorder_component(context, order):
     user = context["request"].user
     return {"user": user, "order": order}
-
-
-@register.inclusion_tag("components/row_fuelorder/modal_qr.html", takes_context=True)
-def modal_qr_component(context):
-    return
 
 
 ## Fuel Order: Row design

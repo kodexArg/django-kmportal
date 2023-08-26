@@ -1,7 +1,7 @@
 {% load static socialaccount i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 
-<a class="flex" href="{% if url == '#' %}#{% else %}{% url url %}{% endif %}">
+<a class="flex" href="{% if url == '' or url == "#" %}#{% else %}{% url url %}{% endif %}">
     <div class="
             fixed
             {{ pos }}

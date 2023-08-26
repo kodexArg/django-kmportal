@@ -2295,19 +2295,9 @@ input[type="range"]::-ms-fill-lower {
   color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
-.text-gray-700 {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
 .text-gray-800 {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
-}
-
-.text-gray-900 {
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
 .text-green-500 {
@@ -2679,6 +2669,45 @@ input[type="range"]::-ms-fill-lower {
 
 /* End */
 
+/* Order Page */
+
+.order-field-value {
+  margin-left: 0.25rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: .875rem;
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+:is(.dark .order-field-value) {
+  --tw-text-opacity: 1;
+  color: rgb(7 89 133 / var(--tw-text-opacity));
+}
+
+.order-field-t {
+  margin-top: 1rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(12 74 110 / var(--tw-text-opacity));
+}
+
+:is(.dark .order-field-t) {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.order-field {
+  font-size: .875rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+:is(.dark .order-field) {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
 .hover\:cursor-pointer:hover {
   cursor: pointer;
 }
@@ -2732,11 +2761,6 @@ input[type="range"]::-ms-fill-lower {
   background-color: rgb(30 32 35 / var(--tw-bg-opacity));
 }
 
-:is(.dark .dark\:text-gray-400) {
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
-}
-
 :is(.dark .dark\:text-gray-900) {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
@@ -2745,11 +2769,6 @@ input[type="range"]::-ms-fill-lower {
 :is(.dark .dark\:text-sky-100) {
   --tw-text-opacity: 1;
   color: rgb(224 242 254 / var(--tw-text-opacity));
-}
-
-:is(.dark .dark\:text-sky-800) {
-  --tw-text-opacity: 1;
-  color: rgb(7 89 133 / var(--tw-text-opacity));
 }
 
 @media (min-width: 640px) {
@@ -2852,4 +2871,3 @@ input[type="range"]::-ms-fill-lower {
     opacity: 1;
   }
 }
-
