@@ -77,11 +77,31 @@ def module_title_component(title):
 
 
 # FUEL ORDERS
+## Color
+@register.simple_tag()
+def status_color_component(is_finished=False, is_paused=False, is_locked=False):
+    if is_finished:
+        color  = "bg-pantone7472c"
+    elif is_paused:
+        color  = "bg-gray-400"
+    elif is_locked: 
+        color  = "bg-pantone307c"
+    else: 
+        color  = "bg-pantone7689c"
+        
+    return color  
+
+    
 ## Fuel Order: Main component (to group them all)
 @register.inclusion_tag("components/row_fuelorder/main.html", takes_context=True)
 def row_fuelorder_component(context, order):
     user = context["request"].user
     return {"user": user, "order": order}
+
+
+@register.inclusion_tag("components/row_fuelorder/modal_qr.html", takes_context=True)
+def modal_qr_component(context):
+    return
 
 
 ## Fuel Order: Row design

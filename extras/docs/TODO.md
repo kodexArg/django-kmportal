@@ -3,7 +3,7 @@ Last update: 2028 07 28
 
 
 ## Currently in process
-- QR for real (picture reader whatever you call it)
+- Custom component for order color (green color if finish, etc.)
 
 ## Next up
 - Refueling view
@@ -12,6 +12,7 @@ Last update: 2028 07 28
 
 
 ## ToDo
+- QR for real (picture reader whatever you call it)
 - Create order 'locked'
 - Save correct user that edit the model (done but not checked)
 - 'Page Not found'
