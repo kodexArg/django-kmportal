@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-12 01:27+0000\n"
+"POT-Creation-Date: 2023-08-26 19:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,36 +135,32 @@ msgstr "Continue"
 msgid "pause"
 msgstr "pause"
 
-#: templates/components/row_fuelorder/buttons.html:45
-msgid "schedule"
-msgstr "Schedule"
-
-#: templates/components/row_fuelorder/buttons.html:70
+#: templates/components/row_fuelorder/buttons.html:49
 msgid "view"
 msgstr "View"
 
-#: templates/components/row_fuelorder/row.html:21
-#: templates/modules/orders.html:205
+#: templates/components/row_fuelorder/row.html:9
+#: templates/modules/orders.html:119
 msgid "finished"
 msgstr "finished"
 
-#: templates/components/row_fuelorder/row.html:23
+#: templates/components/row_fuelorder/row.html:9
 msgid "pauseed"
 msgstr ""
 
-#: templates/components/row_fuelorder/row.html:25
+#: templates/components/row_fuelorder/row.html:9
 msgid "refueling"
 msgstr "Refueling"
 
-#: templates/components/row_fuelorder/row.html:27
+#: templates/components/row_fuelorder/row.html:10
 msgid "on_transit"
 msgstr "on transit"
 
-#: templates/components/row_fuelorder/row.html:57
+#: templates/components/row_fuelorder/row.html:35
 msgid "from"
 msgstr "from"
 
-#: templates/components/row_fuelorder/row.html:58
+#: templates/components/row_fuelorder/row.html:36
 msgid "to"
 msgstr "to"
 
@@ -202,7 +198,7 @@ msgstr ""
 msgid "let_me_in"
 msgstr "Register as a Carrier"
 
-#: templates/modules/company.html:4 templates/modules/order.html:4
+#: templates/modules/company.html:4 templates/modules/create_order.html:4
 msgid "company_page_title"
 msgstr "Company"
 
@@ -222,9 +218,55 @@ msgstr "Trading"
 msgid "company_cuit"
 msgstr "RUT"
 
-#: templates/modules/company.html:31 templates/modules/orders.html:90
+#: templates/modules/company.html:31 templates/modules/order.html:32
+#: templates/modules/order_modal.html:50
 msgid "driver"
 msgstr "Driver"
+
+#: templates/modules/create_order.html:10 templates/modules/order.html:4
+#: templates/modules/order_modal.html:4 templates/modules/order_modal.html:11
+#: templates/modules/orders.html:4 templates/modules/orders.html:10
+msgid "fuel_orders"
+msgstr "Refueling Orders"
+
+#: templates/modules/create_order.html:14
+msgid "fuel_order_instruction"
+msgstr ""
+"Please carefully review your fuel order. The pump operator will load the "
+"fuel type and quantities you specify. Review the order again once it has "
+"been entered on the next screen."
+
+#: templates/modules/create_order.html:55 templates/modules/order.html:50
+#: templates/modules/order_modal.html:16 templates/modules/order_modal.html:68
+msgid "fuel_order"
+msgstr "Fuel Order"
+
+#: templates/modules/create_order.html:58 templates/modules/order.html:52
+#: templates/modules/order.html:68 templates/modules/order_modal.html:70
+msgid "tractor"
+msgstr "Tractor"
+
+#: templates/modules/create_order.html:59 templates/modules/order.html:56
+#: templates/modules/order.html:72 templates/modules/order_modal.html:74
+msgid "backpack"
+msgstr "Backpack"
+
+#: templates/modules/create_order.html:60 templates/modules/order.html:60
+#: templates/modules/order.html:76 templates/modules/order_modal.html:78
+msgid "chamber"
+msgstr "Chamber"
+
+#: templates/modules/create_order.html:73
+msgid "new"
+msgstr "New"
+
+#: templates/modules/create_order.html:73
+msgid "order_new"
+msgstr "Load Order"
+
+#: templates/modules/create_order.html:80
+msgid "btn_skip"
+msgstr "Skip"
 
 #: templates/modules/extracash.html:4 templates/modules/extracash.html:10
 msgid "extracash"
@@ -258,91 +300,62 @@ msgstr "Pending Orders"
 msgid "no_extracash_orders"
 msgstr "No Extra-Cash orders"
 
-#: templates/modules/order.html:10 templates/modules/orders.html:4
-#: templates/modules/orders.html:10
-msgid "fuel_orders"
-msgstr "Refueling Orders"
+#: templates/modules/order.html:11
+msgid "order"
+msgstr "Order"
 
-#: templates/modules/order.html:14
-msgid "fuel_order_instruction"
-msgstr ""
-"Please carefully review your fuel order. The pump operator will load the "
-"fuel type and quantities you specify. Review the order again once it has "
-"been entered on the next screen."
+#: templates/modules/order.html:22 templates/modules/order_modal.html:40
+msgid "order_information"
+msgstr "Order Information"
 
-#: templates/modules/order.html:55 templates/modules/orders.html:54
-#: templates/modules/orders.html:111
-msgid "fuel_order"
-msgstr "Fuel Order"
+#: templates/modules/order.html:24 templates/modules/order_modal.html:42
+msgid "creation_date"
+msgstr "Creation Date"
 
-#: templates/modules/order.html:58 templates/modules/orders.html:113
-msgid "tractor"
-msgstr "Tractor"
+#: templates/modules/order.html:28
+msgid "created_by"
+msgstr "Created by"
 
-#: templates/modules/order.html:59 templates/modules/orders.html:118
-msgid "backpack"
-msgstr "Backpack"
+#: templates/modules/order.html:38 templates/modules/order_modal.html:56
+msgid "vehicle_information"
+msgstr "Vehicle Information"
 
-#: templates/modules/order.html:60 templates/modules/orders.html:123
-msgid "chamber"
-msgstr "Chamber"
+#: templates/modules/order.html:40 templates/modules/order_modal.html:58
+msgid "tractor_plate"
+msgstr "Tractor Plate"
 
-#: templates/modules/order.html:73
-msgid "new"
-msgstr "New"
+#: templates/modules/order.html:44 templates/modules/order_modal.html:62
+msgid "trailer_plate"
+msgstr "Trailer Plate"
 
-#: templates/modules/order.html:73
-msgid "order_new"
-msgstr "Load Order"
+#: templates/modules/order.html:66
+msgid "fuel_order_fill"
+msgstr "Load Completed"
 
-#: templates/modules/order.html:80
-msgid "btn_skip"
-msgstr "Skip"
+#: templates/modules/order_modal.html:46
+msgid "last_modification"
+msgstr "Last Modification"
 
-#: templates/modules/orders.html:38
+#: templates/modules/orders.html:37
 msgid "dlg_pause_confirm"
 msgstr ""
 "Are you sure you want to change the status of the order? While it's paused, "
 "the order can be activated again, but if it's deleted, it will be "
 "permanently lost."
 
-#: templates/modules/orders.html:78
-msgid "order_information"
-msgstr "Order Information"
-
-#: templates/modules/orders.html:80
-msgid "creation_date"
-msgstr "Creation Date"
-
-#: templates/modules/orders.html:85
-msgid "last_modification"
-msgstr "Last Modification"
-
-#: templates/modules/orders.html:97
-msgid "vehicle_information"
-msgstr "Vehicle Information"
-
-#: templates/modules/orders.html:99
-msgid "tractor_plate"
-msgstr "Tractor Plate"
-
-#: templates/modules/orders.html:104
-msgid "trailer_plate"
-msgstr "Trailer Plate"
-
-#: templates/modules/orders.html:159
+#: templates/modules/orders.html:73
 msgid "btn_continue"
 msgstr "Continue"
 
-#: templates/modules/orders.html:159
+#: templates/modules/orders.html:73
 msgid "btn_pause"
 msgstr "pause"
 
-#: templates/modules/orders.html:207
+#: templates/modules/orders.html:121
 msgid "paused"
 msgstr ""
 
-#: templates/modules/orders.html:209
+#: templates/modules/orders.html:123
 msgid "blocked"
 msgstr "blocked"
 
@@ -410,6 +423,9 @@ msgstr "Actions"
 
 msgid "cancel"
 msgstr "Cancel"
+
+msgid "schedule"
+msgstr "Schedule"
 
 msgid "update"
 msgstr "update"

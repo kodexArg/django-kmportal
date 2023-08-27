@@ -29,7 +29,12 @@ SECRET_KEY = os.environ.get("SECRETKEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if os.environ.get("DEBUG")=="False" else True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = ["*"]
+=======
+
+ALLOWED_HOSTS = ["kodex.duckdns.org"]
+>>>>>>> staff
 
 # Application definition
 INSTALLED_APPS = [
@@ -74,6 +79,10 @@ MIDDLEWARE = [
 ]
 
 SECURE_SSL_REDIRECT = True
+<<<<<<< HEAD
+=======
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+>>>>>>> staff
 SECURE_HSTS_SECONDS = 3600 # 1 hour
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True

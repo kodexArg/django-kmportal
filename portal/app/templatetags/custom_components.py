@@ -72,11 +72,26 @@ def google_button_component():
 
 ## Module title in Quicksand font
 @register.inclusion_tag("components/module_title.html")
-def module_title_component(title):
-    return {"title": title}
+def module_title_component(title, extras=""):
+    return {"title": title, "extras": " "+extras}
 
 
 # FUEL ORDERS
+## Color
+@register.simple_tag()
+def status_color_component(is_finished=False, is_paused=False, is_locked=False):
+    if is_finished:
+        color  = "bg-pantone7472c"
+    elif is_paused:
+        color  = "bg-gray-400"
+    elif is_locked: 
+        color  = "bg-pantone307c"
+    else: 
+        color  = "bg-pantone7689c"
+        
+    return color  
+
+    
 ## Fuel Order: Main component (to group them all)
 @register.inclusion_tag("components/row_fuelorder/main.html", takes_context=True)
 def row_fuelorder_component(context, order):
@@ -198,19 +213,3 @@ def rbutton_component(caption, bg="bg-pantone307c", fg="text-white", size="", na
         </button>
     """
     return mark_safe(html)
-
-
-# NAVBAR BOTTOM
-## Button
-
-
-@register.inclusion_tag("components/nav_button.html")
-def nav_buttom_component(tooltip, icon, url, left=False, right=False):
-    if left:
-        leftright = "rounded-l-full"
-    elif right:
-        leftright = "rounded-r-full"
-    else:
-        leftright = ""
-
-    return {"tooltip": tooltip, "icon": icon, "leftright": leftright, "url": url}

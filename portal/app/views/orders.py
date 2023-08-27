@@ -1,5 +1,6 @@
 from app.forms import FuelOrderForm
 from app.models import FuelOrders
+from staff.models import Refuelings
 from app.views.helpers import CustomTemplateView
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -10,6 +11,26 @@ from django.views.generic import RedirectView
 from django.views.generic.edit import FormView
 
 from loguru import logger
+
+
+@method_decorator(login_required, name="dispatch")
+class OrderView(CustomTemplateView):
+    template_name = "modules/order.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        operation_code = self.kwargs.get("operation_code")
+        context["operation_code"] = operation_code
+        order = FuelOrders.objects.get(operation_code=operation_code)
+        context["order"] = order
+
+        try:
+            refueling = order.refuelings  # Access the related Refuelings record
+            context["refueling"] = refueling
+        except Refuelings.DoesNotExist:
+            context["refueling"] = None  # If no related Refuelings record exists
+
+        return context
 
 
 @method_decorator(login_required, name="dispatch")
@@ -60,15 +81,18 @@ class OrderJsonView(View):
             "driver": str(fuel_order.driver),
             "tractor_plate": str(fuel_order.tractor_plate),
             "trailer_plate": str(fuel_order.trailer_plate),
-            "formated_tractor_liters_to_load_of": fuel_order.tractor_liters_to_load,
-            "formated_backpack_liters_to_load_of": fuel_order.backpack_liters_to_load,
-            "formated_chamber_liters_to_load_of": fuel_order.chamber_liters_to_load,
+            "formated_tractor_liters_to_load_of": fuel_order.formated_tractor_liters_to_load_of,
+            "formated_backpack_liters_to_load_of": fuel_order.formated_backpack_liters_to_load_of,
+            "formated_chamber_liters_to_load_of": fuel_order.formated_chamber_liters_to_load_of,
+            "tractor_liters": fuel_order.tractor_liters,
+            "backpack_liters": fuel_order.backpack_liters,
+            "chamber_liters": fuel_order.chamber_liters,
         }
         return JsonResponse(data)
 
 
 class OrderBaseView(CustomTemplateView, FormView):
-    template_name = "modules/order.html"
+    template_name = "modules/create_order.html"
     success_url = "/orders/"
 
     def form_valid(self, form):

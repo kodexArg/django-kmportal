@@ -9,6 +9,7 @@ jobs:
   kill-servers:
     runs-on: ubuntu-latest
     steps:
+<<<<<<< HEAD
       - uses: actions/checkout@v2
       - name: Kill any server still running
         uses: appleboy/ssh-action@master
@@ -24,12 +25,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Create and rename tmux session
+=======
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Update repository on EC2
+>>>>>>> staff
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+<<<<<<< HEAD
             tmux kill-session -t django-kmportal || true
             tmux new-session -d -s django-kmportal
 
@@ -38,12 +46,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Git commands
+=======
+            echo -e "\033[34m---- UPDATING REPOSITORY ----\033[0m"
+            cd /home/ubuntu/django-kmportal/
+            git fetch origin main
+            git reset --hard origin/main
+            echo -e "\033[32mRepository updated successfully\033[0m"
+
+      - name: Update pip packages on EC2
+>>>>>>> staff
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+<<<<<<< HEAD
             cd /home/ubuntu/django-kmportal/
             git fetch origin main
             git reset --hard origin/main
@@ -54,12 +72,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Pip commands
+=======
+            echo -e "\033[34m---- UPDATING PIP PACKAGES ----\033[0m"
+            echo "---- $(date) ----" > /home/ubuntu/logs/pip.log
+            pip install --upgrade pip >> /home/ubuntu/logs/pip.log 2>&1
+            pip install -r requirements.txt >> /home/ubuntu/logs/pip.log 2>&1
+            echo -e "\033[32mPIP packages updated successfully\033[0m"
+
+      - name: Run migrations on EC2
+>>>>>>> staff
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+<<<<<<< HEAD
             cd /home/ubuntu/django-kmportal/
             pip install --upgrade pip
             pip install -r requirements.txt
@@ -86,12 +114,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Collect static files and set permissions
+=======
+            echo -e "\033[34m---- RUNNING MIGRATIONS ----\033[0m"
+            echo "---- $(date) ----" >> /home/ubuntu/logs/migrations.log
+            python3 portal/manage.py makemigrations >> /home/ubuntu/logs/migrations.log 2>&1
+            python3 portal/manage.py migrate >> /home/ubuntu/logs/migrations.log 2>&1
+            echo -e "\033[32mMigrations completed successfully\033[0m"
+
+      - name: Collect static files on EC2
+>>>>>>> staff
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+<<<<<<< HEAD
             cd /home/ubuntu/django-kmportal/portal/
             python3 portal/manage.py collectstatic --no-input
             sudo chown -R www-data: /home/ubuntu/django-kmportal/local-cdn/static/
@@ -105,10 +143,29 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Start Gunicorn
+=======
+            echo -e "\033[34m---- COLLECTING STATIC FILES ----\033[0m"
+            echo "---- $(date) ----" > /home/ubuntu/logs/collectstatic.log
+            sudo chown -R ubuntu: /home/ubuntu/django-kmportal/local-cdn/static/
+            python3 portal/manage.py collectstatic --no-input >> /home/ubuntu/logs/collectstatic.log 2>&1
+            sudo chown -R www-data: /home/ubuntu/django-kmportal/local-cdn/static/
+            echo -e "\033[32mStatic files collected successfully\033[0m"
+
+      - name: Restart gunicorn in tmux session
+>>>>>>> staff
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+<<<<<<< HEAD
             tmux send-keys -t django-kmportal 'cd /home/ubuntu/django-kmportal/portal/ && gunicorn portal.wsgi:application --bind 0.0.0.0:8080 --workers 4' C-m
+=======
+            echo -e "\033[34m---- RESTARTING GUNICORN ----\033[0m"
+            tmux kill-session -t django-kmportal || true
+            sudo fuser -k 8080/tcp
+            cd /home/ubuntu/django-kmportal/portal/
+            tmux new-session -d -s django-kmportal 'gunicorn portal.wsgi:application --bind 0.0.0.0:8080 --workers 4' \; split-window -v 'bash'
+            echo -e "\033[32mGunicorn restarted successfully\033[0m"
+>>>>>>> staff

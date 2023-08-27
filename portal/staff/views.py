@@ -96,23 +96,29 @@ class StaffRefuelingView(FormView):
 
     def form_valid(self, form):
         logger.info(f"Form is valid. Refueling data: {form.cleaned_data}")
+
         refueling = form.save(commit=False)
         refueling.pump_operator = self.request.user
         refueling.is_finished = True
         refueling.save()
         logger.info(f"Refueling saved successfully. ID: {refueling.id}")
-        
+
+        for field in ["tractor_liters", "backpack_liters", "chamber_liters"]:
+            field_value = form.cleaned_data.get(field)
+            if field_value:
+                setattr(self.fuel_order, field, field_value)
+
         self.fuel_order.is_finished = True
         self.fuel_order.save()
         logger.info(f"Fuel order saved successfully. ID: {self.fuel_order.id}")
-        return redirect('staff_home')
+        return redirect("staff_home")
 
     def form_invalid(self, form):
         logger.error(f"Form is invalid. Errors: {form.errors}")
         return super().form_invalid(form)
 
     def get_success_url(self):
-        return reverse("staff_home")
+        return reverse("staff_orders")
 
 
 class StaffQrView(FormView):
@@ -125,6 +131,7 @@ class StaffQrView(FormView):
         if fuel_order.is_finished:
             form.add_error(None, "Esta orden ya fue finalizada y no se puede modificar por este medio.")
             return self.form_invalid(form)
+        
         return redirect("staff_refueling", operation_code=operation_code, was_locked=fuel_order.is_locked)
 
 
@@ -134,16 +141,15 @@ def handle_qr_code(request):
     decoded_text = body.get("decoded_text")
     logger.info(f"decoded text: {decoded_text}")
 
-    # Process the decoded text (e.g., validate, save to database, etc.)
-    # ...
-
     return JsonResponse({"status": "success"})
 
+
 class StaffListOrdersView(ListView):
-    template_name = 'staff/orders.html'
-    context_object_name = 'orders'
+    template_name = "staff/orders.html"
+    context_object_name = "orders"
 
     def get_queryset(self):
         refuelings = Refuelings.objects.all()
-        queryset = FuelOrders.objects.prefetch_related(Prefetch('refuelings', queryset=refuelings))
+        queryset = FuelOrders.objects.prefetch_related(Prefetch("refuelings", queryset=refuelings))
+
         return queryset
