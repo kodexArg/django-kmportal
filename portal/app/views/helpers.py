@@ -69,18 +69,32 @@ class CustomTemplateView(TemplateView):
 #         return None
 
 
-def get_qr(request, order_id):
-    """get qr svg from the operation_code of a FuelOrder to include in the response"""
-    fuel_order = get_object_or_404(FuelOrders, id=order_id)
-    operation_code = fuel_order.operation_code
-    svg_image = generate_qr_code_svg(operation_code)
-    response = HttpResponse(svg_image, content_type="image/svg+xml")
-    response["Content-Disposition"] = 'attachment; filename="qrcode.svg"'
+def get_qr(request, operation_code):
+    png_image = generate_qr_code_png(operation_code)
+    response = HttpResponse(png_image, content_type="image/png")
+    response["Content-Disposition"] = 'attachment; filename="qrcode.png"'
     return response
+
+def generate_qr_code_png(text):
+    qr = QRCode(
+        version=1,
+        error_correction=constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data(text)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    img_stream = BytesIO()
+    img.save(img_stream, format="PNG")
+    img_string = img_stream.getvalue()
+    return img_string
 
 
 def generate_qr_code_svg(text):
     """returns a QR as a svg string from a given text"""
+
     qr = QRCode(
         version=1,
         error_correction=constants.ERROR_CORRECT_L,

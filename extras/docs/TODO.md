@@ -3,15 +3,19 @@ Last update: 2028 07 28
 
 
 ## Currently in process
-- Custom component for order color (green color if finish, etc.)
+- S3 repo for the pictures
 
 ## Next up
-- Refueling view
-- Qr should handle the error if the Refueling order already exist (avoiding IntegrityError) or finished!
-- Refueling Crud in staff
-
+- Generate a shareable QR
+- Export to CSV/Excel/Whatever
 
 ## ToDo
+- Refueling view
+- Refueling Crud in staff
+- Qr should handle the error if the Refueling order already exist (avoiding IntegrityError) or finished!
+- Methods to work with Order:
+    - Copy link
+    - Create a PNG or HTML page accessible for everyone to share the link.
 - QR for real (picture reader whatever you call it)
 - Create order 'locked'
 - Save correct user that edit the model (done but not checked)
@@ -38,6 +42,7 @@ Last update: 2028 07 28
 
 
 ## Done (2023 07 30 and on)
+- Custom component for order color (green color if finish, etc.)
 - Staff/qr to send FuelOrders to Refuelings on Refueling creation. --> sending operation_code in GET method and handled by the Refueling view
 - Refueling model
 - Pump Operator model or User model for staff?? --> User model and Pump Operators group.

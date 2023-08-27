@@ -1,5 +1,6 @@
 from app.forms import FuelOrderForm
 from app.models import FuelOrders
+from staff.models import Refuelings
 from app.views.helpers import CustomTemplateView
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -20,7 +21,14 @@ class OrderView(CustomTemplateView):
         context = super().get_context_data(**kwargs)
         operation_code = self.kwargs.get("operation_code")
         context["operation_code"] = operation_code
-        context["order"] = FuelOrders.objects.get(operation_code=operation_code)
+        order = FuelOrders.objects.get(operation_code=operation_code)
+        context["order"] = order
+
+        try:
+            refueling = order.refuelings  # Access the related Refuelings record
+            context["refueling"] = refueling
+        except Refuelings.DoesNotExist:
+            context["refueling"] = None  # If no related Refuelings record exists
 
         return context
 

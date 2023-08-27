@@ -125,7 +125,7 @@
                             statusTextElement.text('');
                         }
                         // Update QR code and operation code
-                        $('#qr_image img').attr('src', "{% url 'get_qr' order_id=0 %}".replace('0', orderId));
+                        {% comment %} $('#qr_image img').attr('src', "{% url 'get_qr' order_id=0 %}".replace('0', orderId)); {% endcomment %}
                         $('#qr_image p').text(data.operation_code.toUpperCase());
 
                         // Update order details in the view modal

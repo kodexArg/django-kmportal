@@ -14,6 +14,13 @@
     <!-- top margin -->
   </div>
   <section class="w-full flex flex-col">
+    <!-- QR -->
+    <div class="p-4 flex flex-col justify-center items-center mb-2">
+      <div class="w-40 h-40 mx-auto rounded-md border-2 border-pantone307c bg-white drop-shadow-lg">
+        <img class="p-0.5" src="{% url 'get_qr' operation_code %}" alt="QR Code" />
+        <p class="text-2xl font-quicksand leading-tight font-bold text-center"></p>
+      </div>
+    </div>
     <!-- Body -->
     <div class="m-4 flex justify-center">
       <dl class="flex flex-col">
@@ -77,6 +84,30 @@
             <span class="order-field-value">{{ order.chamber_liters|default:"-" }}</span>
           </dd>
         </div>
+        <!-- Picutres -->
+        {% if refueling %}
+          <div>
+            <dt class="order-field-t">{% translate "pictures" %}</dt>
+            <dd>
+              <span class="order-field">{% translate "tractor" %}:</span>
+              <div>
+                <img src="{{ refueling.tractor_pic }}" alt="tractor_pic" />
+              </div>
+            </dd>
+            <dd>
+              <span class="order-field">{% translate "backpack" %}:</span>
+              <div>
+                <img src="{{ refueling.backack_pic }}" alt="backpack_pic" />
+              </div>
+            </dd>
+            <dd>
+              <span class="order-field">{% translate "chamber" %}:</span>
+              <div>
+                <img src="{{ refueling.chamber_pic }}" alt="chamber_pic" />
+              </div>
+            </dd>
+          </div>
+        {% endif %}
       </dl>
     </div>
   </section>

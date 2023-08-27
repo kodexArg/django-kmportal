@@ -24,7 +24,7 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("login/", LoginView.as_view(), name="login"),
     path("under_construction/", UnderConstructionView.as_view(), name="under_construction"),
-    path("get_qr/<int:order_id>/", get_qr, name="get_qr"),
+    path("get_qr/<str:operation_code>/", get_qr, name="get_qr"),
     path("get-server-time/", get_server_time, name="get-server-time"),
     # Modules
     ## Fuel Orders
