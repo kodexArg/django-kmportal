@@ -3,19 +3,17 @@ Last update: 2028 07 28
 
 
 ## Currently in process
+- setting up s3 for /statics/documents/
 
 ## Next up
 
-
 ## ToDo
-- setting up HTTPS (Let's Encrypt)
 - Refueling view
 - Refueling Crud in staff
 - Qr should handle the error if the Refueling order already exist (avoiding IntegrityError) or finished!
 - Methods to work with Order:
     - Copy link
     - Create a PNG or HTML page accessible for everyone to share the link.
-- QR for real (picture reader whatever you call it)
 - Create order 'locked'
 - Save correct user that edit the model (done but not checked)
 - 'Page Not found'
@@ -24,7 +22,6 @@ Last update: 2028 07 28
 - 'Contact us' page
 - show more in orders/ (like user who updated...)
 - Comment in new order
-- fix Migration or reset?
 - Currently: views from staff filtered with "staff_member_required" instead of "Pump Operators" group.
 - Staff navbar: change the 'include' call for a custom_component
 - i18n to STAFF!!!
@@ -41,14 +38,13 @@ Last update: 2028 07 28
 
 
 ## Done (2023 07 30 and on)
-<<<<<<< HEAD
+- fix Migration or reset?
+- setting up HTTPS (Let's Encrypt)
+- QR for real (picture reader whatever you call it)
 - Refueling Crud in staff
 - Qr should handle the error if the Refueling order already exist (avoiding IntegrityError) or finished!
 - Refueling view
 - QR for real (picture reader whatever you call it)
-=======
-- Custom component for order color (green color if finish, etc.)
->>>>>>> staff
 - Staff/qr to send FuelOrders to Refuelings on Refueling creation. --> sending operation_code in GET method and handled by the Refueling view
 - Refueling model
 - Pump Operator model or User model for staff?? --> User model and Pump Operators group.

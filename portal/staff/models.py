@@ -9,28 +9,24 @@ import datetime
 
 
 
-def rename_upload_file(instance, filename):
-    # Get the file extension
-    ext = filename.split('.')[-1]
+def get_rename_upload_file_func(field_type):
+    def rename_upload_file(instance, filename):
+        ext = filename.split('.')[-1]
+        today = datetime.date.today()
+        year = today.year
+        month = today.month
+        day = today.day
 
-    # Get the current date to construct folder paths
-    today = datetime.date.today()
-    year = today.year
-    month = today.month
-    day = today.day
+        dir_path = os.path.join('static/documents', str(year), str(month).zfill(2), str(day).zfill(2))
 
-    # Create the directory path
-    dir_path = os.path.join('static/documents', str(year), str(month).zfill(2), str(day).zfill(2))
+        if not os.path.exists(dir_path):
+            os.makedirs(dir_path)
 
-    # Check if the directory exists, if not, create it
-    if not os.path.exists(dir_path):
-        os.makedirs(dir_path)
+        new_filename = f"{instance.fuel_order.operation_code}-{field_type}.{ext}"
 
-    # Create the new filename using the operation code
-    new_filename = f"{instance.fuel_order.operation_code}-{filename}"
-
-    # Return the complete path
-    return os.path.join(dir_path, new_filename)
+        return os.path.join(dir_path, new_filename)
+    
+    return rename_upload_file
 
 
 class Refuelings(models.Model):
@@ -41,9 +37,9 @@ class Refuelings(models.Model):
     fuel_order = models.OneToOneField("app.FuelOrders", on_delete=models.CASCADE)
     pump_operator = models.ForeignKey(User, limit_choices_to={'groups__name': 'Pump Operators'}, on_delete=models.CASCADE)
 
-    tractor_pic = models.ImageField(upload_to=rename_upload_file, storage=DocumentStorage(), null=True, blank=True)
-    backpack_pic = models.ImageField(upload_to=rename_upload_file, storage=DocumentStorage(), null=True, blank=True)
-    chamber_pic = models.ImageField(upload_to=rename_upload_file, storage=DocumentStorage(), null=True, blank=True)
+    tractor_pic = models.ImageField(upload_to=get_rename_upload_file_func('tractor'), storage=DocumentStorage(), null=True, blank=True)
+    backpack_pic = models.ImageField(upload_to=get_rename_upload_file_func('backpack'), storage=DocumentStorage(), null=True, blank=True)
+    chamber_pic = models.ImageField(upload_to=get_rename_upload_file_func('chamber'), storage=DocumentStorage(), null=True, blank=True)
 
     tractor_liters = models.PositiveIntegerField(default=0)
     backpack_liters = models.PositiveIntegerField(default=0)

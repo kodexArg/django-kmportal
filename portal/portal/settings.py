@@ -118,16 +118,6 @@ AUTH_PASSWORD_VALIDATORS = [
 SOCIAL_ACCOUNT_ADAPTER = "app.adapters.CustomAdapter"
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = "static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
-
-STATIC_ROOT = BASE_DIR.parent / "local-cdn" / "static"  # stored for production
-
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -202,6 +192,8 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_KEY")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SEC")
 AWS_STORAGE_BUCKET_NAME = "portal-km1151"
@@ -212,3 +204,13 @@ AWS_STATIC_LOCATION = "static/document"
 STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/document/"
+
+DEFAULT_FILE_STORAGE = '.custom_storage.DocumentStorage'
+
+
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+STATIC_ROOT = BASE_DIR.parent / "local-cdn" / "static"  # stored for production
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

@@ -1,7 +1,7 @@
 from allauth.account.views import LoginView
 
 # "app" views
-from app.views.authorized import UserHomeView
+from app.views.authorized import ExportFuelOrderCSV, UserHomeView
 from app.views.extracash import ExtraCashView
 from app.views.helpers import get_qr, get_server_time
 from app.views.modules import CompanyView, VehiclesView
@@ -26,6 +26,8 @@ urlpatterns = [
     path("under_construction/", UnderConstructionView.as_view(), name="under_construction"),
     path("get_qr/<str:operation_code>/", get_qr, name="get_qr"),
     path("get-server-time/", get_server_time, name="get-server-time"),
+    path('export_csv/<int:company>/', ExportFuelOrderCSV.as_view(), name='export_fuel_order_csv'),
+
     # Modules
     ## Fuel Orders
     path("orders/<int:order_id>/data/", OrderJsonView.as_view(), name="order_data"),

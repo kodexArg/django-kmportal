@@ -11,7 +11,7 @@
     {% module_title_component translated_title %}
     <section id="Company" class="mx-6 md:mx-10">
         <!-- Header: Company, Treading name and RUT -->
-        <article class="flex flex-col md:flex-row md:space-x-10 mt-24">
+        <article class="flex flex-wrap md:flex-row md:space-x-10 mt-24">
             <div class="p-1">
                 <h3 class="font-semibold text-pantone307c font-Roboto text-sm">{% translate "company_name" %}</h3>
                 <p class="from-sky-950 font-mono text-sm text-pantone7689c">{{ company.name }}</p>
@@ -24,6 +24,11 @@
                 <h3 class="font-semibold text-pantone307c font-Roboto text-sm">{% translate "company_cuit" %}</h3>
                 <p class="from-sky-950 font-mono text-sm text-pantone7689c">{{ company.cuit }}</p>
             </div>
+            <div class="p-2">
+                <a href="{% url 'export_fuel_order_csv' company.id %}" class="bg-sky-800 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-full">
+                    {% translate "download" %}
+                </a>
+            </div>                    
         </article>
         <!-- Content -->
         <article class="flex flex-col pt-4 pb-2">

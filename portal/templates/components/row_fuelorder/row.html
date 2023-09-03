@@ -2,10 +2,11 @@
 
 <!-- Orders List -->
 <article class="flex flex-col pt-2">
-  <div class="{% status_color_component order.is_finished order.is_paused order.is_locked %} h-10 rounded-full flex flex-nowrap p-1">
+  <div class="{% status_color_component order.is_finished order.is_paused order.is_locked %} h-12 rounded-full flex flex-nowrap p-1">
     <!-- HEAD -->
-    <div class="h-full aspect-fibbo-up rounded-l-full grid place-items-center">
-      <span class="text-xxs font-Roboto text-white">
+    <div class="h-full aspect-fibbo-up rounded-l-full flex flex-col items-center justify-center">
+      <span class="text-sm tracking-wider font-bold font-rubik text-white uppercase leading-none">{{ order.operation_code }}</span>
+      <span class="text-xxs font-Roboto text-white leading-tight">
         {% if order.is_finished %} {% translate "finished" %} {% elif order.is_paused %} {% translate "pauseed" %} {% elif order.is_locked %} {% translate "refueling" %} {% else %}
         {% translate "on_transit" %} {% endif %}
       </span>
@@ -15,7 +16,7 @@
     <div class="h-full w-full flex overflow-clip">
       <div class="flex-grow flex flex-col">
         <!-- Plates -->
-        <div class="min-w-max h-full bg-sky-100 flex space-x-1 pl-0.5">
+        <div class="min-w-max h-full bg-sky-100 flex space-x-1 py-0.5 px-1">
           <span class="bg-black text-white font-bold font-mono text-xxs px-1 mt-0.5 leading-4"> {{ order.tractor_plate }} </span>
           {% if order.trailer_plate %}
           <span class="bg-black text-white font-bold font-mono text-xxs px-1 mt-0.5 leading-4 hidden sm:block"> {{ order.trailer_plate }} </span>
@@ -23,7 +24,7 @@
         </div>
         <!-- Driver -->
         <div class="min-w-max h-full bg-sky-100 flex space-x-1 pl-0.5 flex-nowrap">
-          <span class="text-gray-800 font-mono text-xxs flex pt-[2px]" style="white-space: nowrap">
+          <span class="text-gray-800 font-mono text-xs flex p-1" style="white-space: nowrap">
             <p class="block sm:hidden leading-none">{{ order.driver|truncatechars:12 }}</p>
             <p class="hidden sm:block leading-none">{{ order.driver }}</p>
           </span>
