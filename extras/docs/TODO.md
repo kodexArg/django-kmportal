@@ -3,20 +3,12 @@ Last update: 2028 07 28
 
 
 ## Currently in process
-<<<<<<< HEAD
-- setting up HTTPS (Let's Encrypt)
 
 ## Next up
 
-=======
-- S3 repo for the pictures
-
-## Next up
-- Generate a shareable QR
-- Export to CSV/Excel/Whatever
->>>>>>> staff
 
 ## ToDo
+- setting up HTTPS (Let's Encrypt)
 - Refueling view
 - Refueling Crud in staff
 - Qr should handle the error if the Refueling order already exist (avoiding IntegrityError) or finished!
