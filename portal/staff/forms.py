@@ -36,18 +36,21 @@ class QrForm(forms.Form):
 
 
 class RefuelingForm(forms.ModelForm):
-
+    observation = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+        required=False  
+    )
     tractor_pic = forms.ImageField(
         widget=forms.FileInput(attrs={'accept': 'image/*', 'capture': 'camera'}),
-        required=False  # Set to False to make this field not required
+        required=False  
     )
     backpack_pic = forms.ImageField(
         widget=forms.FileInput(attrs={'accept': 'image/*', 'capture': 'camera'}),
-        required=False  # Set to False to make this field not required
+        required=False  
     )
     chamber_pic = forms.ImageField(
         widget=forms.FileInput(attrs={'accept': 'image/*', 'capture': 'camera'}),
-        required=False  # Set to False to make this field not required
+        required=False  
     )
     
     class Meta:

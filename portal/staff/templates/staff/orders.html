@@ -4,22 +4,11 @@
 {% block content %}
   <section class="h-full w-full max-w-full flex justify-center">
     {% if user.is_authenticated and user|is_pump_operator %}
-      <div class="flex flex-col">
+      <div class="flex flex-col mt-6">
         {% for order in orders %}
-          <div class="flex rounded-full p-1 h-10 m-1
-                      {% if order.is_finished %}
-                        bg-pantone7472c
-                      {% elif order.is_paused %}
-                        bg-gray-400
-                      {% elif order.is_locked %}
-                        bg-pantone307c
-                      {% else %}
-                        bg-pantone7689c
-                      {% endif %}
-                      my-1">
+          <div class="flex rounded-full p-1 h-10 m-1 {% if order.is_finished %} bg-pantone7472c {% elif order.is_paused %} bg-gray-400 {% elif order.is_locked %} bg-pantone307c {% else %} bg-pantone7689c {% endif %} my-1">
             <!--code-->
-            <div class="w-20 p-1 text-sm flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %}
-                        bg-white items-center justify-center rounded-l-full">
+            <div class="w-20 p-1 text-sm flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center rounded-l-full">
               <div class="font-rubik tracking-wider leading-none font-bold uppercase text-center w-full">
                 {{ order.operation_code }}
               </div>
@@ -33,19 +22,18 @@
             <div class="w-20 p-1 flex flex-col border-r border-pantone7472c bg-white items-center justify-center whitespace-nowrap overflow-hidden">
               <div class="font-mono text-xxs leading-1 text-center w-full">
                 <span class="rounded-sm px-1 text-white bg-gray-600">{{ order.tractor_plate }}
+                </div>
+                {% if order.trailer_plate %}
+                  <div class="font-mono text-xxs leading-1 text-center w-full">
+                    <span class="rounded-sm px-1 text-white bg-gray-600">{{ order.trailer_plate }}</span>
+                  </div>
+                {% endif %}
               </div>
-              {% if order.trailer_plate %}
-              <div class="font-mono text-xxs leading-1 text-center w-full">
-                <span class="rounded-sm px-1 text-white bg-gray-600">{{ order.trailer_plate }}</span>
-              </div>
-              {% endif %}
-            </div>
-
-            <!-- tail button -->
-            <div class="w-8 rounded-r-full flex pl-0.5">
-              <button onclick="toggleColumns('{{ order.operation_code }}')"
+              <!-- tail button -->
+              <div class="w-8 rounded-r-full flex pl-0.5">
+                <button onclick="toggleColumns('{{ order.operation_code }}')"
                         class="rounded-full focus:outline-none transition-colors duration-300">
-                <img class="w-full h-full"
+                  <img class="w-full h-full"
                        src="{% static 'svg/sandwich.svg' %}"
                        alt="Menu" />
                 </button>
@@ -53,35 +41,21 @@
             </div>
             <!--Toggle-->
             <div id="extra-{{ order.operation_code }}"
-                 class="hidden flex flex-col m-auto -mt-1 p-1 rounded-b-2xl
-                        {% if order.is_finished %}
-                          bg-pantone7472c
-                        {% elif order.is_paused %}
-                          bg-gray-400
-                        {% elif order.is_locked %}
-                          bg-pantone307c
-                        {% else %}
-                          bg-pantone7689c
-                        {% endif %}">
+                 class="hidden flex flex-col m-auto -mt-1 p-1 rounded-b-2xl {% if order.is_finished %} bg-pantone7472c {% elif order.is_paused %} bg-gray-400 {% elif order.is_locked %} bg-pantone307c {% else %} bg-pantone7689c {% endif %}">
               <!-- date and info-->
               <div class="text-xs leading-1 m-auto bg-white bg-opacity-50 w-full text-center font-rubik font-light border-b {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %}">
-                {{ order.order_date }} {% if order.is_locked %}🔒{% endif %}
+                {{ order.order_date }}
+                {% if order.is_locked %}🔒{% endif %}
               </div>
               <!-- odo & km -->
               <div class="flex">
                 <div class="w-6 rounded-bl-xl p-1 flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center whitespace-nowrap overflow-hidden">
-                  <div class="font-mono text-xxs leading-tight
-                              {% if order.requires_kilometers %}
-                                text-black font-bold
-                              {% else %}
-                                text-gray-400
-                              {% endif %}">KM</div>
-                  <div class="font-mono text-xxs leading-tight
-                              {% if order.requires_odometer %}
-                                text-black font-bold
-                              {% else %}
-                                text-gray-400
-                              {% endif %}">OD</div>
+                  <div class="font-mono text-xxs leading-tight {% if order.requires_kilometers %} text-black font-bold {% else %} text-gray-400 {% endif %}">
+                    KM
+                  </div>
+                  <div class="font-mono text-xxs leading-tight {% if order.requires_odometer %} text-black font-bold {% else %} text-gray-400 {% endif %}">
+                    OD
+                  </div>
                 </div>
                 <div class="w-20 p-1 flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center whitespace-nowrap overflow-hidden">
                   <div class="font-rubik leading-tight font-bold text-xs">
@@ -93,7 +67,8 @@
                     Tractor</a>
                   </div>
                   <div class="font-mono leading-tight text-xs">
-                    {% if order.tractor_liters %}{{ order.tractor_liters }}/{% endif %}{{ order.formated_tractor_liters_to_load_of }}
+                    {% if order.tractor_liters %}{{ order.tractor_liters }}/{% endif %}
+                    {{ order.formated_tractor_liters_to_load_of }}
                   </div>
                 </div>
                 <div class="w-20 p-1 flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center whitespace-nowrap overflow-hidden">
@@ -106,7 +81,8 @@
                     Mochila</a>
                   </div>
                   <div class="font-mono leading-tight text-xs">
-                    {% if order.backpack_liters %}{{ order.backpack_liters }}/{% endif %}{{ order.formated_backpack_liters_to_load_of }}
+                    {% if order.backpack_liters %}{{ order.backpack_liters }}/{% endif %}
+                    {{ order.formated_backpack_liters_to_load_of }}
                   </div>
                 </div>
                 <div class="w-20 rounded-br-xl p-1 flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center whitespace-nowrap overflow-hidden">
@@ -119,7 +95,8 @@
                     Cámara</a>
                   </div>
                   <div class="font-mono leading-tight text-xs">
-                    {% if order.chamber_liters %}{{ order.chamber_liters }}/{% endif %}{{ order.formated_chamber_liters_to_load_of }}
+                    {% if order.chamber_liters %}{{ order.chamber_liters }}/{% endif %}
+                    {{ order.formated_chamber_liters_to_load_of }}
                   </div>
                 </div>
               </div>

@@ -15,6 +15,18 @@
         {% endfor %}
       </div>
     {% endif %}
+    {% if form.errors %}
+      <div class="flex w-full justify-center">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 max-w-fit py-3 rounded relative"
+             role="alert">
+          <ul>
+            {% for field, errors in form.errors.items %}
+              {% for error in errors %}<li>{{ field }} {{ error }}</li>{% endfor %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
     <form method="post" enctype="multipart/form-data" action="">
       {% csrf_token %}
       <div class="tw-bigform !bg-pantone7472c">
@@ -46,27 +58,32 @@
               {% fuel_type_component color=fuel_order.backpack_fuel_type_color short=fuel_order.short_chamber_fuel_type %}
             </div>
           {% endif %}
+          <!-- Observations -->
+          {% if fuel_order.comments %}
+          <div class="flex italic text-green-950 border p-1 rounded-lg my-3">
+            <div class="w-[300px] overflow-y-auto overflow-x-hidden break-words">
+              <b>Cliente: "</b><span class="text-black text-sm">{{ fuel_order.comments }}</span><b>"</b>
+            </div>
+          </div>{% endif %}
+          <div class="grid grid-cols-4 font-rubik text-white py-2">
+            <span class="text-black mr-2 w-full">Notas:</span>
+            <div class="flex w-full col-span-3">
+              <textarea class="w-full text-black text-left rounded-md h-32 appearance-none"
+                        name="{{ form.observation.name }}"
+                        id="{{ form.observation.id_for_label }}"
+                        rows="4"></textarea>
+            </div>
+          </div>
+          
+          <div class="flex font-rubik  py-2 justify-between items-center">
+            <div>Observaciones{% camera_icon_component name=form.observation_pic.name label_id="Observaciones" %}</div>
+            <div>Nota Despacho{% camera_icon_component name=form.dispatch_note_pic.name label_id="Nota de Despacho" %}</div>
+          </div>
         </div>
         <!--endfields-->
       </div>
-      {% if form.errors %}
-        <div class="flex w-full justify-center">
-          <div class="bg-red-100 border border-red-400 text-red-700 px-4 max-w-fit py-3 rounded relative"
-               role="alert">
-            <ul>
-              {% for field, errors in form.errors.items %}
-                {% for error in errors %}
-                <li>
-                  {{ field }} {{ error }}
-                </li>
-                {% endfor %}
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-      {% endif %}
     </div>
-    <menu class="w-full pt-12 pb-4 flex justify-center drop-shadow-lg">
+    <menu class="w-full pb-4 flex justify-center drop-shadow-lg">
       <div class="col-span2 bg-pantone7472c p-0.5 rounded-l-full w-fit h-fit">
         <div class="border-2 border-sky-200 p-0.5 rounded-l-full flex justify-center items-center">
           <button class="flex whitespace-nowrap w-fit px-4 py-2 rounded-full bg-pantone7472c text-white font-rubik font-bold lowercase text-center"
@@ -82,5 +99,6 @@
     </menu>
   </div>
 </form>
+<div class="h-28"/>
 </section>
 {% endblock %}

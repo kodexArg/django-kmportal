@@ -41,6 +41,26 @@ def liters_field_component(id, ph, field_name, name):
 
     return mark_safe(html)
 
+@register.simple_tag()
+def field_component(id, ph, field_name, name):
+    html = f"""
+        <span class="text-black mr-2 w-full">
+            {name}
+        </span>
+        <div class="flex w-full">
+            <textarea
+                   class="w-96 text-black text-right rounded-md h-32 pr-10 appearance-none"
+                   placeholder="{ph}"
+                   name="{field_name}"
+                   id="{id}"
+                   rows="4"
+            ></textarea>
+        </div>
+    """
+
+
+    return mark_safe(html)
+
 
 @register.simple_tag()
 def camera_icon_component(name, label_id):

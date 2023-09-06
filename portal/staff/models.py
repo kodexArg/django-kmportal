@@ -49,8 +49,8 @@ class Refuelings(models.Model):
     backpack_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES, null=True, blank=True)
     chamber_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES, null=True, blank=True)
 
-    dispatch_note_pic = models.ImageField(upload_to="operation_code/dispatch_note", null=True, blank=True)
-    observation_pic = models.ImageField(upload_to="operation_code/others", null=True, blank=True)
+    dispatch_note_pic = models.ImageField(upload_to=get_rename_upload_file_func('dispatch'), storage=DocumentStorage(), null=True, blank=True)
+    observation_pic = models.ImageField(upload_to=get_rename_upload_file_func('observation'), storage=DocumentStorage(), null=True, blank=True)
     observation = models.CharField(max_length=512, null=True, blank=True)
 
     is_finished = models.BooleanField(default=False)
