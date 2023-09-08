@@ -6,8 +6,21 @@ on:
       - main
 
 jobs:
+  test-ssh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test SSH connection
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: echo "SSH connection successful."
+
+
   kill-servers:
     runs-on: ubuntu-latest
+    needs: test-ssh
     steps:
       - uses: actions/checkout@v2
       - name: Kill any server still running
@@ -21,6 +34,7 @@ jobs:
 
   create-tmux-session:
     runs-on: ubuntu-latest
+    needs: test-ssh
     steps:
       - uses: actions/checkout@v2
       - name: Create and rename tmux session
@@ -35,6 +49,7 @@ jobs:
 
   git-commands:
     runs-on: ubuntu-latest
+    needs: test-ssh
     steps:
       - uses: actions/checkout@v2
       - name: Git commands
