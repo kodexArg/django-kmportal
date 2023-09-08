@@ -13,5 +13,8 @@ pip3 install gunicorn
 # Install Tmux
 sudo apt install tmux
 
-# Install Fuser
+# Install Fuser, required for github actions (and that's about all I know)
 sudo apt install psmisc
+
+# pip mysql connector will fail without this:
+sudo apt install libmysqlclient-dev

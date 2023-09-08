@@ -108,7 +108,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /home/ubuntu/app/portal/
-            python3 portal/manage.py collectstatic --no-input
+            python3 manage.py collectstatic --no-input
             sudo chown -R www-data: /home/ubuntu/app/local-cdn/static/
 
   start-gunicorn:
