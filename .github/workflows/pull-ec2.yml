@@ -45,7 +45,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             tmux kill-session -t django || true
-            tmux new-session -d -s django-kmportal
+            tmux new-session -A -s django
 
   git-commands:
     runs-on: ubuntu-latest
