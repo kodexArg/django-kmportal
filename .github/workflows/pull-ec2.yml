@@ -44,7 +44,6 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            tmux kill-session -t django || true
             tmux new-session -A -s django
 
   git-commands:
