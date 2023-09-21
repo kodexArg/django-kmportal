@@ -42,163 +42,148 @@
                 </div>
                 <div class="w-20 px-1 border-r text-sm flex flex-col justify-center items-center">
                   <div class="font-rubik leading-tight font-bold text-xs">
-                    {% if order.refuelings and order.refuelings.tractor_pic %}
-                      <a href="{{ order.refuelings.tractor_pic.url }}"
-                         target="_blank"
-                         title="Tractor">📎
-                      {% endif %}
-                    Tractor</a>
-                  </div>
-                  <div class="font-mono leading-tight text-xs">
-                    {% if order.tractor_liters %}{{ order.tractor_liters }}/{% endif %}
-                    {{ order.formated_tractor_liters_to_load_of }}
-                  </div>
+                  Tractor</a>
                 </div>
-                <div class="w-20 px-1 border-r text-sm flex flex-col justify-center items-center">
-                  <div class="font-rubik leading-tight font-bold text-xs">
-                    {% if order.refuelings and order.refuelings.backpack_pic %}
-                      <a href="{{ order.refuelings.backpack_pic.url }}"
-                         target="_blank"
-                         title="Mochila">📎
-                      {% endif %}
-                    Mochila</a>
-                  </div>
-                  <div class="font-mono leading-tight text-xs">
-                    {% if order.backpack_liters %}{{ order.backpack_liters }}/{% endif %}
-                    {{ order.formated_backpack_liters_to_load_of }}
-                  </div>
-                </div>
-                <div class="w-20 px-1 border-r text-sm flex flex-col justify-center items-center">
-                  <div class="font-rubik leading-tight font-bold text-xs">
-                    {% if order.refuelings and order.refuelings.chamber_pic %}
-                      <a href="{{ order.refuelings.chamber_pic.url }}"
-                         target="_blank"
-                         title="Cámara">📎
-                      {% endif %}
-                    Cámara</a>
-                  </div>
-                  <div class="font-mono leading-tight text-xs">
-                    {% if order.chamber_liters %}{{ order.chamber_liters }}/{% endif %}
-                    {{ order.formated_chamber_liters_to_load_of }}
-                  </div>
+                <div class="font-mono leading-tight text-xs">
+                  {% if order.tractor_liters %}{{ order.tractor_liters }}/{% endif %}
+                  {{ order.formated_tractor_liters_to_load_of }}
                 </div>
               </div>
-              <!-- tail button -->
-              <div class="w-8 rounded-r-full flex pl-0.5">
-                <button onclick="toggleColumns('{{ order.operation_code }}')"
-                        class="rounded-full focus:outline-none transition-colors duration-300">
-                  <img class="w-full h-full"
-                       src="{% static 'svg/sandwich.svg' %}"
-                       alt="Menu" />
-                </button>
+              <div class="w-20 px-1 border-r text-sm flex flex-col justify-center items-center">
+                <div class="font-rubik leading-tight font-bold text-xs">
+                Mochila</a>
+              </div>
+              <div class="font-mono leading-tight text-xs">
+                {% if order.backpack_liters %}{{ order.backpack_liters }}/{% endif %}
+                {{ order.formated_backpack_liters_to_load_of }}
               </div>
             </div>
-            <!--Toggle-->
-            <div id="extra-{{ order.operation_code }}"
-                 class="hidden flex flex-col mx-6 -mt-1 rounded-b-2xl md:rounded-none border {% if order.is_finished %} border-pantone7472c {% elif order.is_paused %} border-gray-400 {% elif order.is_locked %} border-pantone307c {% else %} border-pantone7689c {% endif %}">
-              <!-- date and info-->
-              <div class="text-xs leading-thig m-auto bg-sky-100 bg-opacity-50 w-full text-center font-rubik font-light border-b {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %}">
-                {{ order.order_date }}
-              </div>
-              <!-- comment -->
-              {% if order.comments %}
-              <div class="flex flex-col text-xxs leading-thig p-1 w-full font-rubik border-b {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %}">
-                <b class="text-xs">nota del cliente:</b>{{ order.comments }}
-                </div>
-              {% endif %}
-              <!-- attachs -->
-              {% if order.refuelings %}
-                <div class="flex flex-col text-xxs leading-thig p-1 w-full font-rubik border-b {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %}">
-                  <b class="text-xs">Observaciones</b>
-                  <p class="w-72 sm:w-96">{{ order.refuelings.observation }}</p>
-                  <p>
-                    {% if order.refueling.observation_pic %}
-                    adjunto:
-                      <a href="{{ order.refueling.observation_pic }}"
-                         target="_blank"
-                         title="Tractor">📎</a>
-                    {% endif %}
-                  </p>
-                  <p>
-                    {% if order.refueling.dispatch_note_pic %}
-                    orden de despacho adjunta:
-                      <a href="{{ order.refueling.dispatch_note_pic }}"
-                         target="_blank"
-                         title="Tractor">📎</a>
-                    {% endif %}
-                  </p>       
-                </div>
-              {% endif %}
-              <div class="flex md:hidden">
-                <!-- odo & km -->
-                <div class="w-24 flex-grow-0 rounded-bl-2xl p-1 flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center whitespace-nowrap overflow-hidden">
-                  <div class="font-mono text-xxs leading-tight {% if order.requires_kilometers %} text-black font-bold {% else %} text-gray-400 {% endif %}">
-                    KM
-                  </div>
-                  <div class="font-mono text-xxs leading-tight {% if order.requires_odometer %} text-black font-bold {% else %} text-gray-400 {% endif %}">
-                    OD
-                  </div>
-                </div>
-                <div class="w-full p-1 flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center whitespace-nowrap overflow-hidden">
-                  <div class="font-rubik leading-tight font-bold text-xs">
-                    {% if order.refuelings and order.refuelings.tractor_pic %}
-                      <a href="{{ order.refuelings.tractor_pic.url }}"
-                         target="_blank"
-                         title="Tractor">📎
-                      {% endif %}
-                    Tractor</a>
-                  </div>
-                  <div class="font-mono leading-tight text-xs">
-                    {% if order.tractor_liters %}{{ order.tractor_liters }}/{% endif %}
-                    {{ order.formated_tractor_liters_to_load_of }}
-                  </div>
-                </div>
-                <div class="w-full p-1 flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center whitespace-nowrap overflow-hidden">
-                  <div class="font-rubik leading-tight font-bold text-xs">
-                    {% if order.refuelings and order.refuelings.backpack_pic %}
-                      <a href="{{ order.refuelings.backpack_pic.url }}"
-                         target="_blank"
-                         title="Mochila">📎
-                      {% endif %}
-                    Mochila</a>
-                  </div>
-                  <div class="font-mono leading-tight text-xs">
-                    {% if order.backpack_liters %}{{ order.backpack_liters }}/{% endif %}
-                    {{ order.formated_backpack_liters_to_load_of }}
-                  </div>
-                </div>
-                <div class="w-full rounded-br-xl p-1 flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center whitespace-nowrap overflow-hidden">
-                  <div class="font-rubik leading-tight font-bold text-xs rounded-br-2xl">
-                    {% if order.refuelings and order.refuelings.chamber_pic %}
-                      <a href="{{ order.refuelings.chamber_pic.url }}"
-                         target="_blank"
-                         title="Cámara">📎
-                      {% endif %}
-                    Cámara</a>
-                  </div>
-                  <div class="font-mono leading-tight text-xs">
-                    {% if order.chamber_liters %}{{ order.chamber_liters }}/{% endif %}
-                    {{ order.formated_chamber_liters_to_load_of }}
-                  </div>
-                </div>
-              </div>
+            <div class="w-20 px-1 border-r text-sm flex flex-col justify-center items-center">
+              <div class="font-rubik leading-tight font-bold text-xs">
+              Cámara</a>
             </div>
-          {% endfor %}
-          <div class="h-24">
-            <!--margin-->
+            <div class="font-mono leading-tight text-xs">
+              {% if order.chamber_liters %}{{ order.chamber_liters }}/{% endif %}
+              {{ order.formated_chamber_liters_to_load_of }}
+            </div>
           </div>
         </div>
-        <!-- user not authenticated -->
-      {% else %}
-        {% if user.is_authenticated %}
-          <div class="fixed bottom-20 left-3 text-red-500 font-bold">Staff User no in "Pump Operators" Group</div>
+        <!-- tail button -->
+        <div class="w-8 rounded-r-full flex pl-0.5">
+          <button onclick="toggleColumns('{{ order.operation_code }}')"
+                  class="rounded-full focus:outline-none transition-colors duration-300">
+            <img class="w-full h-full"
+                 src="{% static 'svg/sandwich.svg' %}"
+                 alt="Menu" />
+          </button>
+        </div>
+      </div>
+      <!--Toggle-->
+      <div id="extra-{{ order.operation_code }}"
+           class="hidden flex flex-col mx-6 -mt-1 rounded-b-2xl md:rounded-none border {% if order.is_finished %} border-pantone7472c {% elif order.is_paused %} border-gray-400 {% elif order.is_locked %} border-pantone307c {% else %} border-pantone7689c {% endif %}">
+        <!-- date and info-->
+        <div class="text-xs leading-thig m-auto bg-sky-100 bg-opacity-50 w-full text-center font-rubik font-light border-b {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %}">
+          {{ order.order_date }}
+        </div>
+        <!-- comment -->
+        {% if order.comments %}
+          <div class="flex flex-col text-xxs leading-thig p-1 w-full font-rubik border-b {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %}">
+            <b class="text-xs">nota del cliente:</b>{{ order.comments }}
+          </div>
         {% endif %}
-        {% include "staff/base/login_form.html" %}
-      {% endif %}
-    </section>
-  {% endblock %}
-  {% block scripts %}
-    <script>
+        <!-- attachs -->
+        {% if order.refuelings %}
+          <div class="flex flex-col text-xxs leading-thig p-1 w-full font-rubik border-b {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %}">
+            <b class="text-xs">Observaciones</b>
+            <p class="w-72 sm:w-96">{{ order.refuelings.observation }}</p>
+            <p>
+              {% if order.refueling.observation_pic %}
+                adjunto:
+                <a href="{{ order.refueling.observation_pic }}"
+                   target="_blank"
+                   title="Tractor">📎</a>
+              {% endif %}
+            </p>
+            <p>
+              {% if order.refueling.dispatch_note_pic %}
+                orden de despacho adjunta:
+                <a href="{{ order.refueling.dispatch_note_pic }}"
+                   target="_blank"
+                   title="Tractor">📎</a>
+              {% endif %}
+            </p>
+          </div>
+        {% endif %}
+        <div class="flex md:hidden">
+          <!-- odo & km -->
+          <div class="w-24 flex-grow-0 rounded-bl-2xl p-1 flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center whitespace-nowrap overflow-hidden">
+            <div class="font-mono text-xxs leading-tight {% if order.requires_kilometers %} text-black font-bold {% else %} text-gray-400 {% endif %}">
+              KM
+            </div>
+            <div class="font-mono text-xxs leading-tight {% if order.requires_odometer %} text-black font-bold {% else %} text-gray-400 {% endif %}">
+              OD
+            </div>
+          </div>
+          <div class="w-full p-1 flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center whitespace-nowrap overflow-hidden">
+            <div class="font-rubik leading-tight font-bold text-xs">
+              {% if order.refuelings and order.refuelings.tractor_pic %}
+                <a href="{{ order.refuelings.tractor_pic.url }}"
+                   target="_blank"
+                   title="Tractor">📎
+                {% endif %}
+              Tractor</a>
+            </div>
+            <div class="font-mono leading-tight text-xs">
+              {% if order.tractor_liters %}{{ order.tractor_liters }}/{% endif %}
+              {{ order.formated_tractor_liters_to_load_of }}
+            </div>
+          </div>
+          <div class="w-full p-1 flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center whitespace-nowrap overflow-hidden">
+            <div class="font-rubik leading-tight font-bold text-xs">
+              {% if order.refuelings and order.refuelings.backpack_pic %}
+                <a href="{{ order.refuelings.backpack_pic.url }}"
+                   target="_blank"
+                   title="Mochila">📎
+                {% endif %}
+              Mochila</a>
+            </div>
+            <div class="font-mono leading-tight text-xs">
+              {% if order.backpack_liters %}{{ order.backpack_liters }}/{% endif %}
+              {{ order.formated_backpack_liters_to_load_of }}
+            </div>
+          </div>
+          <div class="w-full rounded-br-xl p-1 flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center whitespace-nowrap overflow-hidden">
+            <div class="font-rubik leading-tight font-bold text-xs rounded-br-2xl">
+              {% if order.refuelings and order.refuelings.chamber_pic %}
+                <a href="{{ order.refuelings.chamber_pic.url }}"
+                   target="_blank"
+                   title="Cámara">📎
+                {% endif %}
+              Cámara</a>
+            </div>
+            <div class="font-mono leading-tight text-xs">
+              {% if order.chamber_liters %}{{ order.chamber_liters }}/{% endif %}
+              {{ order.formated_chamber_liters_to_load_of }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="h-24">
+      <!--margin-->
+    </div>
+  </div>
+  <!-- user not authenticated -->
+{% else %}
+  {% if user.is_authenticated %}
+    <div class="fixed bottom-20 left-3 text-red-500 font-bold">Staff User no in "Pump Operators" Group</div>
+  {% endif %}
+  {% include "staff/base/login_form.html" %}
+{% endif %}
+</section>
+{% endblock %}
+{% block scripts %}
+  <script>
         function toggleColumns(operationCode) {
             const id = 'extra-' + operationCode;
             const element = document.getElementById(id);
@@ -207,5 +192,5 @@
             const showIcon = document.querySelector('.show-icon-' + operationCode);
             const hideIcon = document.querySelector('.hide-icon-' + operationCode);
         }
-    </script>
-  {% endblock %}
+  </script>
+{% endblock %}

@@ -2,6 +2,24 @@ from app.models import FuelOrders
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from staff.models import Refuelings
+from django import forms
+from staff.models import Documents
+from django.forms import formset_factory
+from django import forms
+from django.forms import FileInput
+
+
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Documents
+        fields = ["filename"]
+        widgets = {
+            "filename": FileInput(
+                attrs={
+                    "class": "font-rubik leading-none text-xs bg-gray-50 rounded-md m-0 px-2 py-0 cursor-pointer text-center border border-gray-500",
+                }
+            ),
+        }
 
 
 class CustomLoginForm(AuthenticationForm):
@@ -36,41 +54,26 @@ class QrForm(forms.Form):
 
 
 class RefuelingForm(forms.ModelForm):
-    observation = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': 4, 'cols': 40}),
-        required=False  
-    )
-    tractor_pic = forms.ImageField(
-        widget=forms.FileInput(attrs={'accept': 'image/*', 'capture': 'camera'}),
-        required=False  
-    )
-    backpack_pic = forms.ImageField(
-        widget=forms.FileInput(attrs={'accept': 'image/*', 'capture': 'camera'}),
-        required=False  
-    )
-    chamber_pic = forms.ImageField(
-        widget=forms.FileInput(attrs={'accept': 'image/*', 'capture': 'camera'}),
-        required=False  
-    )
-    
+    observation = forms.CharField(required=False)
+
     class Meta:
         model = Refuelings
-        exclude = ['fuel_order', 'pump_operator', 'is_finished']
+        exclude = ["fuel_order", "pump_operator", "is_finished"]
 
     def __init__(self, *args, **kwargs):
-        self.fuel_order = kwargs.pop('fuel_order', None)
+        self.fuel_order = kwargs.pop("fuel_order", None)
         super().__init__(*args, **kwargs)
         if self.fuel_order and self.fuel_order.tractor_liters_to_load == 0:
-            self.fields['tractor_liters'].initial = 0
-            self.fields['tractor_liters'].disabled = True
+            self.fields["tractor_liters"].initial = 0
+            self.fields["tractor_liters"].disabled = True
 
         if self.fuel_order and self.fuel_order.chamber_liters_to_load == 0:
-            self.fields['chamber_liters'].initial = 0
-            self.fields['chamber_liters'].disabled = True
+            self.fields["chamber_liters"].initial = 0
+            self.fields["chamber_liters"].disabled = True
 
         if self.fuel_order and self.fuel_order.backpack_liters_to_load == 0:
-            self.fields['backpack_liters'].initial = 0
-            self.fields['backpack_liters'].disabled = True
+            self.fields["backpack_liters"].initial = 0
+            self.fields["backpack_liters"].disabled = True
 
     def clean(self):
         if not self.fuel_order.is_locked or self.fuel_order.is_finished:
@@ -83,5 +86,3 @@ class RefuelingForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
-
-

@@ -292,16 +292,8 @@ class FuelOrders(models.Model):
     trailer_plate = models.ForeignKey(Trailers, on_delete=models.PROTECT, blank=True, null=True, verbose_name="trailer_plate")
 
     tractor_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True, verbose_name="tractor_fuel_type")
-
     backpack_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True, verbose_name="backpack_fuel_type")
-
-    chamber_fuel_type = models.CharField(
-        max_length=50,
-        choices=FUEL_TYPE_CHOICES,
-        blank=True,
-        null=True,
-        verbose_name="chamber_fuel_type",
-    )
+    chamber_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True, verbose_name="chamber_fuel_type")
 
     tractor_liters = models.PositiveIntegerField(blank=True, null=True, verbose_name="tractor_liters")  # leave blank until filled
     backpack_liters = models.PositiveIntegerField(blank=True, null=True, verbose_name="backpack_liters")  # leave blank until filled
@@ -321,23 +313,22 @@ class FuelOrders(models.Model):
     in_agreement = models.CharField(choices=AGREEMENT_CHOICES, default="under_negotiation", max_length=20, verbose_name="in_agreement")
     comments = models.TextField(blank=True, null=True, verbose_name="comments")
 
-
     def clean(self):
         # Rule 1: if x_liters_to_load is non-zero, x_fuel_type is required.
         if self.tractor_liters_to_load != 0 and not self.tractor_fuel_type:
-            raise ValidationError({'tractor_fuel_type': "Tractor fuel type is required if tractor liters to load is non-zero."})
+            raise ValidationError({"tractor_fuel_type": "Tractor fuel type is required if tractor liters to load is non-zero."})
 
         if self.backpack_liters_to_load != 0 and not self.backpack_fuel_type:
-            raise ValidationError({'backpack_fuel_type': "Backpack fuel type is required if backpack liters to load is non-zero."})
+            raise ValidationError({"backpack_fuel_type": "Backpack fuel type is required if backpack liters to load is non-zero."})
 
         if self.chamber_liters_to_load != 0 and not self.chamber_fuel_type:
-            raise ValidationError({'chamber_fuel_type': "Chamber fuel type is required if chamber liters to load is non-zero."})
+            raise ValidationError({"chamber_fuel_type": "Chamber fuel type is required if chamber liters to load is non-zero."})
 
         # Rule 2: if in_agreement changes to "agreed", disallow any further modification
         if self.pk:  # check if this instance is already saved in the database
             old_instance = FuelOrders.objects.get(pk=self.pk)  # retrieve the old instance
             if old_instance.in_agreement == "agreed" and self.in_agreement != "agreed":
-                raise ValidationError({'in_agreement': "You cannot modify this order as it has already been approved. Please contact the administrator for further assistance."})
+                raise ValidationError({"in_agreement": "You cannot modify this order as it has already been approved. Please contact the administrator for further assistance."})
 
         # Rule 3: At least one of the tanks must be non-zero
         if all(x == 0 for x in [self.tractor_liters_to_load, self.chamber_liters_to_load, self.backpack_liters_to_load]):
@@ -345,7 +336,6 @@ class FuelOrders(models.Model):
 
         # Always return the full collection of cleaned data.
         super().clean()
-
 
     def save(self, *args, **kwargs):
         # on new record, generate operation_code before saving the record
@@ -417,5 +407,3 @@ class FuelOrders(models.Model):
     class Meta:
         verbose_name = "Fuel Order"
         verbose_name_plural = "Fuel Orders"
-
-

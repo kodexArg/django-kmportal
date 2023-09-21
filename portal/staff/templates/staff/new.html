@@ -1,0 +1,137 @@
+{% extends "staff/base/base.html" %}
+{% load static components compress %}
+{% block title %}KM1151 - Staff Area{% endblock %}
+{% block content %}
+  <section class="mx-6 md:mx-10">
+    {% if messages %}
+      <div class="flex w-full justify-center">
+        {% for message in messages %}
+          <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 max-w-fit py-3 rounded relative"
+               role="alert">
+            <ul>
+              <li>{{ message }}</li>
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if form.errors %}
+      <div class="flex w-full justify-center">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 max-w-fit py-3 rounded relative"
+             role="alert">
+          <ul>
+            {% for field, errors in form.errors.items %}
+              {% for error in errors %}<li>{{ field }} {{ error }}</li>{% endfor %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+    {% if fuel_order.comments %}
+      <div class="flex italic text-green-950 border p-1 rounded-lg my-3">
+        <div class="w-[300px] overflow-y-auto overflow-x-hidden break-words">
+          <b>Observación del Cliente: "</b>
+          <span class="text-black text-sm">{{ fuel_order.comments }}</span><b>"</b>
+        </div>
+      </div>
+    {% endif %}
+  </section>
+  <!-- FORM -->
+  <section class="tw-bigform !bg-pantone7472c">
+    <form method="post" enctype="multipart/form-data" action="">
+      {% csrf_token %}
+      <div class="flex justify-center w-full mb-4">
+        <div class="font-quicksand text-2xl">
+          Orden:<span class="font-bold uppercase">{{ fuel_order }}</span>
+        </div>
+      </div>
+      <!-- FIELDS GRID -->
+      <div class="grid grid-cols-4 w-72 gap-2">
+        <!-- liters_fields -->
+        {% if fuel_order.tractor_liters_to_load %}
+          {% field_component ph=fuel_order.formated_tractor_liters_to_load_of phs=" lts." field=form.tractor_liters name="Tractor" %}
+          {% fuel_type_component color=fuel_order.backpack_fuel_type_color short=fuel_order.short_tractor_fuel_type %}
+        {% endif %}
+        {% if fuel_order.backpack_liters_to_load %}
+          {% field_component ph=fuel_order.formated_backpack_liters_to_load_of phs=" lts." field=form.backpack_liters name="Mochila" %}
+          {% fuel_type_component color=fuel_order.backpack_fuel_type_color short=fuel_order.short_backpack_fuel_type %}
+        {% endif %}
+        {% if fuel_order.chamber_liters_to_load %}
+          {% field_component ph=fuel_order.formated_chamber_liters_to_load_of phs=" lts." field=form.chamber_liters name="Cámara" %}
+          {% fuel_type_component color=fuel_order.backpack_fuel_type_color short=fuel_order.short_chamber_fuel_type %}
+        {% endif %}
+        {% field_component name="Notas" content="text" cols=3 ph="observaciones..." phs="" field=form.observation %}
+      </div>
+      <hr class="my-5" />
+      <!-- Document Formset -->
+      <div>Archivos Adjuntos</div>
+      <div data-formset-container>
+        {% for form in document_formset %}<div class="flex flex-col ">{{ form.filename }}</div>{% endfor %}
+      </div>
+      {{ document_formset.management_form }}
+      <menu class="w-full mt-8 mb-2 flex flex-col justify-center items-center drop-shadow-lg">
+        <div class="col-span2 bg-pantone7472c p-0.5 rounded-full w-fit h-fit">
+          <div class="border-2 border-sky-200 p-0.5 rounded-full flex justify-center items-center">
+            <button type="submit"
+                    class="flex whitespace-nowrap w-fit px-4 py-2 rounded-full bg-pantone7472c text-white font-rubik font-bold lowercase text-center">
+              Enviar
+            </button>
+          </div>
+        </div>
+      </menu>
+    </form>
+  </section>
+{% endblock %}
+{% block scripts %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const formsetContainer = document.querySelector('[data-formset-container]');
+      const totalForms = document.getElementById('id_documents-TOTAL_FORMS');
+      
+      console.log("DOMContentLoaded event fired.");
+    
+      const cloneForm = (lastForm) => {
+        console.log("Clone function called");
+        console.log("Last Form:", lastForm);
+        
+        const newForm = lastForm.cloneNode(true);
+        console.log("New Form:", newForm);
+
+        const newFormIndex = parseInt(totalForms.value);
+        console.log("New Form Index:", newFormIndex);
+
+        newForm.querySelectorAll('input').forEach(input => {
+          const regex = /-(\d+)-/;
+          input.name = input.name.replace(regex, `-${newFormIndex}-`);
+          input.id = input.id.replace(regex, `-${newFormIndex}-`);
+          console.log("Updated input:", input);
+
+          if (input.type !== 'hidden') {
+            console.log("Non-hidden input:", input);
+            input.value = '';
+          }
+        });
+
+        totalForms.value = newFormIndex + 1;
+        console.log("Total Forms:", totalForms.value);
+    
+        formsetContainer.appendChild(newForm);
+        newForm.querySelector('input[type="file"]').addEventListener('input', onFileInput);
+      };
+    
+      const onFileInput = (event) => {
+        console.log("File input event triggered.");
+        const lastForm = formsetContainer.lastElementChild;
+        console.log("Last element in formsetContainer:", lastForm);
+        
+        cloneForm(lastForm);
+      };
+    
+      formsetContainer.querySelectorAll('input[type="file"]').forEach(input => {
+        console.log("Attaching input event to:", input);
+        input.addEventListener('input', onFileInput);
+      });
+    });
+  </script>
+{% endblock %}
+

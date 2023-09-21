@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 from pytest import mark
+from django import template
 
 register = template.Library()
 
@@ -23,42 +24,21 @@ def nav_buttom_component(tooltip, icon, url, left=False, right=False):
 
 
 @register.simple_tag()
-def liters_field_component(id, ph, field_name, name):
+def field_component(field, name, ph, phs=" lts.", cols="2", content="number"):
+    align = "text-right" if content == "number" else "text-left"
+    cols = f"col-span-{cols}"
+
+    widget_attrs = field.field.widget.attrs.copy()
+    widget_attrs.update({"class": f"{cols} text-black {align} rounded-md h-8 appearance-none", "placeholder": f"{ph}{phs}"})
+
+    rendered_field = field.as_widget(attrs=widget_attrs)
+
     html = f"""
         <span class="text-black mr-2 w-full">
             {name}
         </span>
-        <div class="flex w-full">
-            <input type="number"
-                   class="w-36 text-black text-right rounded-md h-8 pr-10 appearence-none"
-                   placeholder="{ph} lts."
-                   name="{field_name}"
-                   id="{id}"
-            />
-        </div>
-
+        {rendered_field}
     """
-
-    return mark_safe(html)
-
-@register.simple_tag()
-def field_component(id, ph, field_name, name):
-    html = f"""
-        <span class="text-black mr-2 w-full">
-            {name}
-        </span>
-        <div class="flex w-full">
-            <textarea
-                   class="w-96 text-black text-right rounded-md h-32 pr-10 appearance-none"
-                   placeholder="{ph}"
-                   name="{field_name}"
-                   id="{id}"
-                   rows="4"
-            ></textarea>
-        </div>
-    """
-
-
     return mark_safe(html)
 
 
@@ -96,7 +76,7 @@ def camera_icon_component(name, label_id):
 @register.simple_tag()
 def fuel_type_component(color, short):
     html = f"""
-        <div class="w-18 px-2 text-xxs ml-2 rounded-full border-white border-2 whitespace-nowrap flex justify-center items-center"
+        <div class="text-xs text-white rounded-full border-white border-2 whitespace-nowrap flex justify-center items-center"
              style="background:{color}">
             {short}
         </div>

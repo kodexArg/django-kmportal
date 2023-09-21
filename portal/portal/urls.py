@@ -41,8 +41,8 @@ urlpatterns += [
     path("staff/logout/", auth_views.LogoutView.as_view(), name="staff_logout"),
     path("staff/qr/", StaffQrView.as_view(), name="staff_qr"),
     path("staff/refueling/<str:operation_code>/", StaffRefuelingView.as_view(), name="staff_refueling"),
-    path("staff/orders/", StaffListOrdersView.as_view(), name="staff_orders"),
     path("staff/refueling/<str:operation_code>/<str:was_locked>/", StaffRefuelingView.as_view(), name="staff_refueling"),
+    path("staff/orders/", StaffListOrdersView.as_view(), name="staff_orders"),
     path("staff/handle_qr_code/", handle_qr_code, name="handle_qr_code"),
 ]
 

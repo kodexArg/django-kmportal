@@ -1,21 +1,26 @@
 import json
+from app.models import FuelOrders
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.db.models import Prefetch
+from django.forms import inlineformset_factory
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.generic import TemplateView, ListView
+from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import FormView
-from django.db.models import Prefetch
 from loguru import logger
-from app.models import FuelOrders
-from staff.models import Refuelings
-from staff.forms import CustomLoginForm, QrForm, RefuelingForm
+from staff.forms import DocumentForm  # Import the DocumentForm
+from staff.forms import CustomLoginForm, QrForm, RefuelingForm  # Import your forms
+from staff.models import Documents, FuelOrders, Refuelings  # Import your models
+from icecream import ic
+# Create a formset for the Documents model
+DocumentFormSet = inlineformset_factory(Refuelings, Documents, form=DocumentForm, extra=1, can_delete=False)
 
 
 ### UNAUTHORIZED PAGES ###
@@ -56,15 +61,20 @@ class StaffHomeView(View):
 
 ### AUTHORIZED PAGES ###
 
+# Create a formset for the Documents model
+DocumentFormSet = inlineformset_factory(Refuelings, Documents, form=DocumentForm, extra=1, can_delete=False)
 
+
+# TODO: authorized user only
 class StaffRefuelingView(FormView):
-    template_name = "staff/refueling.html"
+    template_name = "staff/new.html"
     form_class = RefuelingForm
 
     def post(self, request, *args, **kwargs):
         logger.info("Post method called")
         return super().post(request, *args, **kwargs)
 
+    # Fetch the FuelOrders instance based on the operation_code
     def get_fuel_order(self):
         operation_code = self.kwargs.get("operation_code")
         return get_object_or_404(FuelOrders, operation_code=operation_code)
@@ -73,8 +83,8 @@ class StaffRefuelingView(FormView):
         self.fuel_order = self.get_fuel_order()
         return super().get(request, *args, **kwargs)
 
+    # Inject the fuel_order instance into the form kwargs
     def get_form_kwargs(self):
-        """Sending fuel_order record to the form based on the operation_code received from qr"""
         kwargs = super().get_form_kwargs()
         self.fuel_order = self.get_fuel_order()
         if self.fuel_order:
@@ -84,41 +94,64 @@ class StaffRefuelingView(FormView):
             logger.info(f"Fuel order found and locked. ID: {self.fuel_order.id}")
             return kwargs
         else:
-            # this should be handled by the qr view. Just in case the user change the GET url...
             logger.error(f"Fuel order not found")
             return redirect("staff_home")
 
+    # Add the DocumentFormSet to the context
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        self.fuel_order = self.get_fuel_order()
-        context["fuel_order"] = self.fuel_order
+        temp_refueling = Refuelings()  # Create a temporary instance
+        context["fuel_order"] = self.get_fuel_order()
+
+        if self.request.POST:
+            context["document_formset"] = DocumentFormSet(self.request.POST, self.request.FILES, instance=temp_refueling)
+        else:
+            context["document_formset"] = DocumentFormSet(instance=temp_refueling)
         return context
 
+    # Handle form submission
     def form_valid(self, form):
         logger.info(f"Form is valid. Refueling data: {form.cleaned_data}")
 
+        # Create or update the Refuelings instance
         refueling = form.save(commit=False)
         refueling.pump_operator = self.request.user
         refueling.is_finished = True
         refueling.save()
         logger.info(f"Refueling saved successfully. ID: {refueling.id}")
 
+        # Update the FuelOrders instance
         for field in ["tractor_liters", "backpack_liters", "chamber_liters"]:
             field_value = form.cleaned_data.get(field)
             if field_value:
                 setattr(self.fuel_order, field, field_value)
-
         self.fuel_order.is_finished = True
         self.fuel_order.save()
         logger.info(f"Fuel order saved successfully. ID: {self.fuel_order.id}")
+
+        # Handle the uploaded files and their descriptions
+        document_formset = DocumentFormSet(self.request.POST, self.request.FILES, instance=refueling)
+        if document_formset.is_valid():
+            instances = document_formset.save(commit=False)
+            for instance in instances:
+                print(self.request.FILES)
+                instance.refueling = refueling
+                instance.save()
+
+
         return redirect("staff_home")
 
+    # Handle form errors
     def form_invalid(self, form):
         logger.error(f"Form is invalid. Errors: {form.errors}")
         return super().form_invalid(form)
 
+    # URL to redirect to upon successful form submission
     def get_success_url(self):
         return reverse("staff_orders")
+
+
+
 
 
 class StaffQrView(FormView):
@@ -131,7 +164,7 @@ class StaffQrView(FormView):
         if fuel_order.is_finished:
             form.add_error(None, "Esta orden ya fue finalizada y no se puede modificar por este medio.")
             return self.form_invalid(form)
-        
+
         return redirect("staff_refueling", operation_code=operation_code, was_locked=fuel_order.is_locked)
 
 
