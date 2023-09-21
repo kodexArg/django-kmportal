@@ -119,12 +119,51 @@
         newForm.querySelector('input[type="file"]').addEventListener('input', onFileInput);
       };
     
+      const resizeImage = (file, maxWidth, maxHeight, callback) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+  
+            if (width > height) {
+              if (width > maxWidth) {
+                height *= maxWidth / width;
+                width = maxWidth;
+              }
+            } else {
+              if (height > maxHeight) {
+                width *= maxHeight / height;
+                height = maxHeight;
+              }
+            }
+  
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+  
+            canvas.toBlob(callback, 'image/png');
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      };
+  
       const onFileInput = (event) => {
         console.log("File input event triggered.");
         const lastForm = formsetContainer.lastElementChild;
-        console.log("Last element in formsetContainer:", lastForm);
-        
-        cloneForm(lastForm);
+        const fileInput = event.target;
+        const file = fileInput.files[0];
+  
+        resizeImage(file, 800, 600, (resizedBlob) => {
+          // Attach the resizedBlob to a FormData object or directly upload it to the server.
+          // You could also attach it back to the input file, but this would require a workaround.
+          // For now, let's proceed with cloning the form.
+          cloneForm(lastForm);
+        });
       };
     
       formsetContainer.querySelectorAll('input[type="file"]').forEach(input => {

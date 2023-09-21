@@ -228,7 +228,7 @@ class FuelOrdersManager(Manager):
                     output_field=IntegerField(),
                 )
             )
-            .order_by("custom_sort_order", "-requested_date", "-id")
+            .order_by("custom_sort_order", "-modified_date", "-id")
         )
 
 

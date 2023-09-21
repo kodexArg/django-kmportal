@@ -22,8 +22,17 @@ def get_filename(instance, filename):
     return f"{year}/{month}/{day}/{operation_code}/{random_string}_{time}.jpg"
 
 
+class RefuelingsManager(models.Manager):
+    def sorted_by_edited_date(self):
+        return self.get_queryset().order_by('edited_date')
+
+    def sorted_by_acceptance_date(self):
+        return self.get_queryset().order_by('acceptance_date')
+
+
 class Refuelings(models.Model):
     """Core Table of the refueling Workflow: STEP 2"""
+    objects = RefuelingsManager()
 
     acceptance_date = models.DateField(auto_now_add=True)
     edited_date = models.DateField(auto_now=True)
