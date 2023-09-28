@@ -25,12 +25,14 @@ class OrderView(CustomTemplateView):
         context["order"] = order
 
         try:
-            refueling = order.refuelings  # Access the related Refuelings record
+            refueling = order.refuelings  
+            documents = refueling.documents.all() 
             context["refueling"] = refueling
+            context["documents"] = documents
         except Refuelings.DoesNotExist:
-            context["refueling"] = None  # If no related Refuelings record exists
-
+            context["refueling"] = None  
         return context
+
 
 
 @method_decorator(login_required, name="dispatch")

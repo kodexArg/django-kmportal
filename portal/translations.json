@@ -539,7 +539,12 @@
     "es": "Descargar Órdenes de Carga en CSV",
     "pt": "Baixar Pedidos de Carga em CSV"
   },  
-  "template": {
+  "pictures": {
+    "en": "Pictures",
+    "es": "Fotografías",
+    "pt": "Fotografias"
+  },
+   "template": {
     "en": "",
     "es": "",
     "pt": ""

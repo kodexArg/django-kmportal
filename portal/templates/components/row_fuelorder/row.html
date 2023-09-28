@@ -2,7 +2,7 @@
 
 <!-- Orders List -->
 <article class="flex flex-col pt-2">
-  <div class="{% status_color_component order.is_finished order.is_paused order.is_locked %} h-12 rounded-full flex flex-nowrap p-1">
+  <div class="h-12 rounded-full flex flex-nowrap p-1 {% status_color_component order.is_finished order.is_paused order.is_locked %}">
     <!-- HEAD -->
     <div class="h-full aspect-fibbo-up rounded-l-full flex flex-col items-center justify-center">
       <span class="text-sm tracking-wider font-bold font-rubik text-white uppercase leading-none">{{ order.operation_code }}</span>
@@ -11,36 +11,36 @@
         {% translate "on_transit" %} {% endif %}
       </span>
     </div>
-
     <!-- MIDDLE-->
     <div class="h-full w-full flex overflow-clip">
-      <div class="flex-grow flex flex-col">
+      <div class="flex-grow flex flex-col lg:flex-row">
         <!-- Plates -->
-        <div class="min-w-max h-full bg-sky-100 flex space-x-1 py-0.5 px-1">
-          <span class="bg-black text-white font-bold font-mono text-xxs px-1 mt-0.5 leading-4"> {{ order.tractor_plate }} </span>
+        <div class="min-w-max h-full bg-sky-50 flex space-x-1 py-0.5 px-1 lg:flex-col lg:space-y-1 lg:space-x-0 lg:justify-center">
+          <span class="bg-sky-900 text-white font-bold font-mono text-xxs lg:text-xs pt-1 px-2 leading-none w-fit"> {{ order.tractor_plate }} </span>
           {% if order.trailer_plate %}
-          <span class="bg-black text-white font-bold font-mono text-xxs px-1 mt-0.5 leading-4 hidden sm:block"> {{ order.trailer_plate }} </span>
+          <span class="bg-sky-900 text-white font-bold font-mono text-xxs lg:text-xs pt-1 px-2 leading-none hidden sm:block w-fit"> {{ order.trailer_plate }} </span>
           {% endif %}
         </div>
         <!-- Driver -->
-        <div class="min-w-max h-full bg-sky-100 flex space-x-1 pl-0.5 flex-nowrap">
-          <span class="text-gray-800 font-mono text-xs flex p-1" style="white-space: nowrap">
+        <div class="min-w-max h-full bg-sky-50 flex space-x-1 pl-0.5 flex-nowrap lg:w-full">
+          <span class="text-gray-800 font-mono text-xs lg:text-lg items-center flex p-1" style="white-space: nowrap">
             <p class="block sm:hidden leading-none">{{ order.driver|truncatechars:12 }}</p>
             <p class="hidden sm:block leading-none">{{ order.driver }}</p>
           </span>
         </div>
       </div>
-      <div class="flex-grow-0 flex-shrink overflow-hidden flex">
-        <div class="bg-sky-100 h-full justify-end text-end w-full">
+      <!-- Date-->
+      <div class="overflow-hidden flex">
+        <div class="bg-sky-50 h-full justify-end text-end w-0 md:w-fit">
           <div class="flex flex-col opacity-0 md:opacity-100">
-            <span class="whitespace-nowrap text-xxs text-gray-400">{% translate "from" %}: {{ order.requested_date }} &nbsp;</span>
-            <span class="whitespace-nowrap text-xxs text-gray-400">{% translate "to" %}: {{ order.expiration_date }} &nbsp;</span>
+            <span class="text-xs text-gray-400 tracking-tighter">{{ order.modified_date|date }} {{ order.modified_date|time }} &nbsp;</span>
+            <span class="text-xs text-gray-400 tracking-tighter">{{ order.modified_date|timesince }} &nbsp;</span>
           </div>
         </div>
         <!-- odo & km -->
-        <div class="bg-sky-100 flex flex-col w-full h-full">
-          <span class="text-end font-mono text-xxs px-0.5 leading-0 {% if order.requires_odometer %} text-black {% else %} text-gray-400 {% endif %}">odo</span>
-          <span class="text-end font-mono text-xxs px-0.5 leading-0 {% if order.requires_kilometers %} text-black {% else %} text-gray-400 {% endif %}">km</span>
+        <div class="bg-sky-50 flex flex-col w-8 max-w-full h-full">
+          <span class="text-end font-mono text-xs px-0.5 leading-0 {% if order.requires_odometer %} text-black {% else %} text-gray-400 {% endif %}">odo</span>
+          <span class="text-end font-mono text-xs px-0.5 leading-0 {% if order.requires_kilometers %} text-black {% else %} text-gray-400 {% endif %}">km</span>
         </div>
       </div>
       <div class="w-32 min-w-max flex-grow-0 flex-shrink-0 flex flex-col">

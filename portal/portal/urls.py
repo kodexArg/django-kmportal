@@ -68,7 +68,6 @@ urlpatterns += i18n_patterns(
     path("orders/", OrdersListView.as_view(), name="orders"),
     path("order/new/", OrderCreateView.as_view(), name="order_new"),
     path("order/<str:operation_code>/", OrderView.as_view(), name="order"),
-    # path("order/edit/<int:order_id>/", OrderUpdateView.as_view(), name="order_edit"),
 )
 
 if settings.DEBUG:

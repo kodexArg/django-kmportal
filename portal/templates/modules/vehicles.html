@@ -2,22 +2,22 @@
 {% load static i18n socialaccount custom_components %}
 {% block title %}{% translate "vehicle_page_title" %}{% endblock %}
 
-{% block navbar %}{% include 'base/navbar_components.html' with icon='truck' %}{% endblock %}
+{% block navbar %}{% include "base/navbar_components.html" with icon="truck" %}{% endblock %}
 
 {% block content %}
-{% translate 'vehicle_title' as translated_title %}
+{% translate "vehicle_title" as translated_title %}
 {% module_title_component translated_title %}
 
 <section id="Vehicles" class="mx-6 md:mx-10">
     <!-- Header -->
     <article class="flex flex-col pt-4 pb-2 mt-24">
-        <p class="text-pantone7689c">{% translate 'tractors_and_trailers_subtitle' %}</p>
+        <p class="text-pantone7689c">{% translate "tractors_and_trailers_subtitle" %}</p>
     </article>
 
     <!-- Tractors -->
     <article class="flex flex-col pt-4 pb-2">
         <h3 class="font-semibold text-white font-Roboto text-sm  bg-pantone7689c rounded-full px-4">
-            {% translate 'Tractors' %}
+            {% translate "Tractors" %}
         </h3>
 
         <div class="tw-loop-container">
@@ -45,7 +45,7 @@
                     {% input_field_component name="domain" %}
 
                     <div class="flex flex-col justify-end pt-2">
-                        {% rbutton_component caption="add_tractor" bg="bg-pantone7472c"%}
+                        {% rbutton_component caption="add_tractor" bg="bg-pantone7472c" %}
                     </div>
                 </form>
             </div>
@@ -55,7 +55,7 @@
     <!-- Trailers -->
     <article class="flex flex-col pt-4 pb-2">
         <h3 class="font-semibold text-white font-Roboto text-sm  bg-pantone7689c rounded-full px-4">
-            {% translate 'Trailers' %}
+            {% translate "Trailers" %}
         </h3>
 
         <div class="tw-loop-container">
@@ -83,7 +83,7 @@
                     {% input_field_component name="domain" %}
 
                     <div class="flex flex-col justify-end pt-2">
-                        {% rbutton_component caption="add_trailer" bg="bg-pantone7472c"%}
+                        {% rbutton_component caption="add_trailer" bg="bg-pantone7472c" %}
                     </div>
                 </form>
             </div>

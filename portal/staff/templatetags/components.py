@@ -29,7 +29,10 @@ def field_component(field, name, ph, phs=" lts.", cols="2", content="number"):
     cols = f"col-span-{cols}"
 
     widget_attrs = field.field.widget.attrs.copy()
-    widget_attrs.update({"class": f"{cols} text-black {align} rounded-md h-8 appearance-none", "placeholder": f"{ph}{phs}"})
+    widget_attrs.update({
+        "class": f"{cols} text-black {align} rounded-md h-8 appearance-none",
+        "placeholder": f"{ph}{phs}"
+    })
 
     rendered_field = field.as_widget(attrs=widget_attrs)
 
@@ -39,6 +42,8 @@ def field_component(field, name, ph, phs=" lts.", cols="2", content="number"):
         </span>
         {rendered_field}
     """
+    print(widget_attrs)
+
     return mark_safe(html)
 
 

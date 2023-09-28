@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-03 23:44+0000\n"
+"POT-Creation-Date: 2023-09-26 21:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -247,20 +247,17 @@ msgid "fuel_order"
 msgstr "Pedido de Combustible"
 
 #: templates/modules/create_order.html:58 templates/modules/order.html:59
-#: templates/modules/order.html:75 templates/modules/order.html:94
-#: templates/modules/order.html:97 templates/modules/order_modal.html:70
+#: templates/modules/order.html:75 templates/modules/order_modal.html:70
 msgid "tractor"
 msgstr "Tractor"
 
 #: templates/modules/create_order.html:59 templates/modules/order.html:63
-#: templates/modules/order.html:79 templates/modules/order.html:105
-#: templates/modules/order.html:108 templates/modules/order_modal.html:74
+#: templates/modules/order.html:79 templates/modules/order_modal.html:74
 msgid "backpack"
 msgstr "Mochila"
 
 #: templates/modules/create_order.html:60 templates/modules/order.html:67
-#: templates/modules/order.html:83 templates/modules/order.html:116
-#: templates/modules/order.html:119 templates/modules/order_modal.html:78
+#: templates/modules/order.html:83 templates/modules/order_modal.html:78
 msgid "chamber"
 msgstr "Cámara"
 
@@ -341,9 +338,9 @@ msgstr "Placa del Remolque"
 msgid "fuel_order_fill"
 msgstr "Carga Realizada"
 
-#: templates/modules/order.html:90
+#: templates/modules/order.html:87
 msgid "pictures"
-msgstr ""
+msgstr "Fotografías"
 
 #: templates/modules/order_modal.html:46
 msgid "last_modification"

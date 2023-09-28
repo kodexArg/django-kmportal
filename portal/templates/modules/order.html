@@ -84,46 +84,15 @@
             <span class="order-field-value">{{ order.chamber_liters|default:"-" }}</span>
           </dd>
         </div>
-        <!-- Picutres -->
+        <div class="order-field-t">{% translate "pictures" %}</div>
+        <!-- Pictures -->
         {% if refueling %}
-          <div>
-            <dt class="order-field-t">{% translate "pictures" %}</dt>
-            {% if refueling.tractor_pic  and refueling.tractor_pic.url %}
-              <dd>
-                <span class="order-field">{% translate "tractor" %}:</span>
-                <div class="w-48 h-48 justify-center items-center border-2 border-white flex object-scale-down rounded-lg bg-white m-2 drop-shadow-lg">
-                  <a href="{{ refueling.tractor_pic.url }}" target="_blank">
-                    <img class="p-2 w-48 h-48 object-scale-down"
-                         src="{{ refueling.tractor_pic.url }}"
-                         alt="{% translate 'tractor' %}" />
-                  </a>
-                </div>
-              </dd>
-            {% endif %}
-            {% if refueling.backack_pic  and refueling.backack_pic.url %}
-              <dd>
-                <span class="order-field">{% translate "backpack" %}:</span>
-                <div class="w-48 h-48 justify-center items-center border-2 border-white flex object-scale-down rounded-lg bg-white m-2 drop-shadow-lg">
-                  <a href="{{ refueling.backack_pic.url }}" target="_blank">
-                    <img class="p-2 w-48 h-48 object-scale-down"
-                         src="{{ refueling.backack_pic.url }}"
-                         alt="{% translate 'backpack' %}" />
-                  </a>
-                </div>
-              </dd>
-            {% endif %}
-            {% if refueling.chamber_pic  and refueling.chamber_pic.url %}
-              <dd>
-                <span class="order-field">{% translate "chamber" %}:</span>
-                <div class="w-48 h-48 justify-center items-center border-2 border-white flex object-scale-down rounded-lg bg-white m-2 drop-shadow-lg">
-                  <a href="{{ refueling.chamber_pic.url }}" target="_blank">
-                    <img class="p-2 w-48 h-48 object-scale-down"
-                         src="{{ refueling.chamber_pic.url }}"
-                         alt="{% translate 'chamber' %}" />
-                  </a>
-                </div>
-              </dd>
-            {% endif %}
+          <div id="image-container">
+            {% for document in documents %}
+              <img class="toggle-size w-32 h-32 p-2 m-2 rounded-lg border-2 border-white drop-shadow-lg bg-sky-100 transition-all"
+                   src="{{ document.filename.url }}"
+                   alt="{{ document.description }}">
+            {% endfor %}
           </div>
         {% endif %}
       </dl>
@@ -132,4 +101,26 @@
   <div class="h-24 w-full">
     <!-- top margin -->
   </div>
+{% endblock %}
+{% block scripts %}
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const imageContainer = document.getElementById('image-container');
+    const images = imageContainer.querySelectorAll('.toggle-size');
+  
+    images.forEach(image => {
+      image.addEventListener('click', function() {
+        if (this.classList.contains('w-32')) {
+          this.classList.remove('w-32', 'h-32');
+          this.classList.add('w-96', 'h-96');
+        } else {
+          this.classList.remove('w-96', 'h-96');
+          this.classList.add('w-32', 'h-32');
+        }
+      });
+    });
+  });
+  
+
+  </script>
 {% endblock %}
