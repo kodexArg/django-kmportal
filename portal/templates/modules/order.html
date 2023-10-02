@@ -13,97 +13,170 @@
   <div class="h-24 w-full">
     <!-- top margin -->
   </div>
-  <section class="w-full flex flex-col">
+  <section class="w-full flex flex-col md:flex-row">
     <!-- QR -->
-    <div class="p-4 flex flex-col justify-center items-center mb-2">
-      <div class="w-40 h-40 mx-auto rounded-md border-2 border-pantone307c bg-white drop-shadow-lg">
+    <div class="flex flex-col mt-6 items-center">
+      <div class="w-40 h-40  rounded-md border-2 border-pantone307c bg-white drop-shadow-lg">
         <img class="p-0.5" src="{% url 'get_qr' operation_code %}" alt="QR Code" />
-        <p class="text-2xl font-quicksand leading-tight font-bold text-center"></p>
       </div>
-    </div>
-    <!-- Body -->
-    <div class="m-4 flex justify-center">
-      <dl class="flex flex-col">
-        <!-- Order Information -->
-        <div>
-          <dt class="order-field-t">{% translate "order_information" %}</dt>
-          <dd>
-            <span class="order-field">{% translate "creation_date" %}:</span>
-            <span class="order-field-value">{{ order.order_date }}</span>
-          </dd>
-          <dd>
-            <span class="order-field">{% translate "created_by" %}:</span>
-            <span class="order-field-value">{{ order.user_creator.first_name }}{{ order.user_creator.last_name }}</span>
-          </dd>
-          <dd>
-            <span class="order-field">{% translate "driver" %}:</span>
-            <span class="order-field-value">{{ order.driver }}</span>
-          </dd>
-        </div>
-        <!-- Vehicle Information -->
-        <div>
-          <dt class="order-field-t">{% translate "vehicle_information" %}</dt>
-          <dd>
-            <span class="order-field">{% translate "tractor_plate" %}:</span>
-            <span class="order-field-value">{{ order.tractor_plate }}</span>
-          </dd>
-          <dd>
-            <span class="order-field">{% translate "trailer_plate" %}:</span>
-            <span class="order-field-value">{{ order.trailer_plate|default:"-" }}</span>
-          </dd>
-        </div>
-        <!-- Fuel Order -->
-        <div>
-          <dt class="order-field-t">{% translate "fuel_order" %}</dt>
-          <dd>
-            <span class="order-field">{% translate "tractor" %}:</span>
-            <span class="order-field-value">{{ order.formated_tractor_liters_to_load_of }}</span>
-          </dd>
-          <dd>
-            <span class="order-field">{% translate "backpack" %}:</span>
-            <span class="order-field-value">{{ order.formated_backpack_liters_to_load_of }}</span>
-          </dd>
-          <dd>
-            <span class="order-field">{% translate "chamber" %}:</span>
-            <span class="order-field-value">{{ order.formated_chamber_liters_to_load_of }}</span>
-          </dd>
-        </div>
-        <!-- Fuel Liters -->
-        <div>
-          <dt class="order-field-t">{% translate "fuel_order_fill" %}</dt>
-          <dd>
-            <span class="order-field">{% translate "tractor" %}:</span>
-            <span class="order-field-value">{{ order.tractor_liters|default:"-" }}</span>
-          </dd>
-          <dd>
-            <span class="order-field">{% translate "backpack" %}:</span>
-            <span class="order-field-value">{{ order.backpack_liters|default:"-" }}</span>
-          </dd>
-          <dd>
-            <span class="order-field">{% translate "chamber" %}:</span>
-            <span class="order-field-value">{{ order.chamber_liters|default:"-" }}</span>
-          </dd>
-        </div>
-        <div class="order-field-t">{% translate "pictures" %}</div>
-        <!-- Pictures -->
-        {% if refueling %}
-          <div id="image-container">
-            {% for document in documents %}
-              <img class="toggle-size w-32 h-32 p-2 m-2 rounded-lg border-2 border-white drop-shadow-lg bg-sky-100 transition-all"
-                   src="{{ document.filename.url }}"
-                   alt="{{ document.description }}">
-            {% endfor %}
+      <menu>
+        <button id="copy-button-{{ id }}"
+                type="submit"
+                data-order-id="{{ id }}"
+                class="w-40 bg-sky-600 px-3 rounded-full leading-relaxed tracking-wider text-sky-50 font-bold uppercase m-2 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white">
+          <svg viewBox="0 0 24 24"
+               fill="none"
+               xmlns="http://www.w3.org/2000/svg"
+               class="w-5 h-5 mr-1">
+            <g id="SVGRepo_bgCarrier" stroke-width="0">
+            </g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+            </g>
+            <g id="SVGRepo_iconCarrier">
+            <path clip-rule="evenodd" d="m13.8 2.25h-.0321c-.8128-.00001-1.4685-.00001-1.9994.04336-.5466.04467-1.0267.13902-1.471.36537-.70557.35952-1.27925.9332-1.63877 1.63881-.22634.44421-.3207.92435-.36537 1.47099-.04337.53091-.04337 1.18651-.04336 1.99934v.00002.03211.45h-.45-.0321-.00003c-.81283-.00001-1.46843-.00001-1.99934.04336-.54663.04467-1.02678.13902-1.47099.36537-.70561.35952-1.27929.9332-1.63881 1.63877-.22634.4443-.3207.9244-.36537 1.471-.04337.5309-.04337 1.1866-.04336 1.9994v.0321 2.4.0321c-.00001.8128-.00001 1.4685.04336 1.9994.04467.5466.13903 1.0267.36537 1.471.35952.7056.9332 1.2792 1.63881 1.6388.44421.2263.92436.3207 1.47099.3653.53091.0434 1.18652.0434 1.99935.0434h.03212 2.4.0321c.8129 0 1.4685 0 1.9994-.0434.5466-.0446 1.0267-.139 1.471-.3653.7056-.3596 1.2792-.9332 1.6388-1.6388.2263-.4443.3207-.9244.3653-1.471.0434-.5309.0434-1.1865.0434-1.9994v-.0321-.45h.45.0321c.8129 0 1.4685 0 1.9994-.0434.5466-.0446 1.0267-.139 1.471-.3653.7056-.3596 1.2793-.9332 1.6388-1.6388.2263-.4443.3207-.9244.3653-1.471.0434-.5309.0434-1.1865.0434-1.9994v-.0321-2.4-.03212c0-.81283 0-1.46844-.0434-1.99935-.0446-.54664-.139-1.02678-.3653-1.47099-.3595-.70561-.9332-1.27929-1.6388-1.63881-.4443-.22635-.9244-.3207-1.471-.36537-.5309-.04337-1.1865-.04337-1.9994-.04336h-.0321zm1.95 12h.45c.8525 0 1.4467-.0006 1.9093-.0384.4539-.0371.7147-.1062.9122-.2068.4233-.2158.7675-.56.9833-.9833.1006-.1975.1697-.4583.2068-.9122.0378-.4626.0384-1.0568.0384-1.9093v-2.4c0-.85245-.0006-1.44669-.0384-1.90932-.0371-.45388-.1062-.71464-.2068-.91216-.2158-.42336-.56-.76757-.9833-.98328-.1975-.10064-.4583-.16978-.9122-.20686-.4626-.0378-1.0568-.03838-1.9093-.03838h-2.4c-.8525 0-1.4467.00058-1.9093.03838-.4539.03708-.7147.10622-.9122.20686-.4233.21571-.7675.55992-.98326.98328-.10064.19752-.16977.45828-.20686.91216-.0378.46263-.03838 1.05687-.03838 1.90932v.45h.45.0321c.8129-.00001 1.4685-.00001 1.9994.04336.5466.04467 1.0267.13902 1.471.36537.7056.35952 1.2792.9332 1.6388 1.63877.2263.4443.3207.9244.3653 1.471.0434.5309.0434 1.1865.0434 1.9994v.0321zm-10.77148-4.25476c.19752-.10064.45829-.16978.91216-.20686.46263-.0378 1.05687-.03838 1.90932-.03838h2.4c.8525 0 1.4467.00058 1.9093.03838.4539.03708.7147.10622.9122.20686.4233.21576.7675.55996.9833.98326.1006.1975.1697.4583.2068.9122.0378.4626.0384 1.0568.0384 1.9093v2.4c0 .8525-.0006 1.4467-.0384 1.9093-.0371.4539-.1062.7147-.2068.9122-.2158.4233-.56.7675-.9833.9833-.1975.1006-.4583.1697-.9122.2068-.4626.0378-1.0568.0384-1.9093.0384h-2.4c-.85245 0-1.44669-.0006-1.90932-.0384-.45387-.0371-.71464-.1062-.91216-.2068-.42336-.2158-.76757-.56-.98328-.9833-.10064-.1975-.16977-.4583-.20686-.9122-.0378-.4626-.03838-1.0568-.03838-1.9093v-2.4c0-.8525.00058-1.4467.03838-1.9093.03709-.4539.10622-.7147.20686-.9122.21571-.4233.55992-.7675.98328-.98326z" fill="#fff" fill-rule="evenodd">
+            </path>
+            </g>
+          </svg>
+          {% translate "copy" %}
+        </button>
+        <button id="pause-button-{{ id }}"
+                type="submit"
+                data-order-id="{{ id }}"
+                class="w-40 bg-sky-600 px-3 rounded-full leading-relaxed tracking-wider text-sky-50 font-bold uppercase m-2 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke-width="2"
+               stroke="currentColor"
+               class="w-5 h-5 mr-1">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          {% if order.is_paused %}
+            {% translate "continue" %}
+          {% else %}
+            {% translate "pause" %}
+          {% endif %}
+        </button>
+        <button id="aproval-button-{{ id }}"
+                type="submit"
+                data-order-id="{{ id }}"
+                class="w-40 bg-pantone7472c px-3 rounded-full leading-relaxed tracking-wider text-sky-50 font-bold uppercase m-2 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white">
+          <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
+               xmlns:cc="http://creativecommons.org/ns#"
+               xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+               xmlns:svg="http://www.w3.org/2000/svg"
+               xmlns="http://www.w3.org/2000/svg"
+               xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+               xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+               viewBox="0 0 448 448"
+               id="svg2"
+               version="1.1"
+               inkscape:version="0.91 r13725"
+               sodipodi:docname="work-item-2.svg"
+               fill="#fff"
+               stroke="#fff"
+               class="w-4 h-4 mr-1">
+            <g id="SVGRepo_bgCarrier" stroke-width="0">
+            </g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+            </g>
+            <g id="SVGRepo_iconCarrier">
+            <title id="title3350">work-item</title> <defs id="defs4"> <pattern y="0" x="0" height="6" width="6" patternUnits="userSpaceOnUse" id="EMFhbasepattern"></pattern> </defs> <sodipodi:namedview id="base" pagecolor="ffffff" bordercolor="" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="1.979899" inkscape:cx="100.38339" inkscape:cy="187.19657" inkscape:document-units="px" inkscape:current-layer="layer1" showgrid="true" units="px" inkscape:snap-bbox="true" inkscape:bbox-nodes="true" inkscape:window-width="3840" inkscape:window-height="2097" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:window-maximized="1" inkscape:object-nodes="true" inkscape:snap-grids="true" inkscape:snap-to-guides="false" inkscape:snap-nodes="true"> <inkscape:grid type="xygrid" id="grid3336" spacingx="16" spacingy="16" empspacing="2"></inkscape:grid> </sodipodi:namedview> <metadata id="metadata7"> <rdf:rdf> <cc:work rdf:about=""> <dc:format>image/svg+xml</dc:format> <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"></dc:type> <dc:title>work-item</dc:title> </cc:work> </rdf:rdf> </metadata>
+              <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(0,-604.36209)">
+              <path style="fill-opacity:1;stroke:none;stroke-width:64;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="M 112 0 L 90.666016 32 L 32 32 C 14.271983 32 0 46.271983 0 64 L 0 416 C 0 433.72802 14.271983 448 32 448 L 320 448 C 337.72802 448 352 433.72802 352 416 L 352 272 L 320 304 L 320 416 L 32 416 L 32 64 L 69.333984 64 L 48 96 L 304 96 L 282.66602 64 L 320 64 L 320 80 L 349.17773 50.822266 C 344.17232 39.706653 333.0229 32 320 32 L 261.33398 32 L 240 0 L 112 0 z M 128 32 L 224 32 L 240 64 L 112 64 L 128 32 z " transform="translate(0,604.36209)" id="rect3337">
+              </path>
+              <path style="fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 48,844.36209 128,128 272,-272 -32,-48 -240,240 -80,-80 z" id="path4147" inkscape:connector-curvature="0" sodipodi:nodetypes="ccccccc">
+              </path>
+              </g>
+              </g>
+            </svg>
+            {% translate "conforme" %}
+          </button>
+        </menu>
+      </div>
+      <!-- Body -->
+      <div class="m-4 flex justify-center">
+        <dl class="flex flex-col">
+          <!-- Order Information -->
+          <div>
+            <dt class="order-field-t">{% translate "order_information" %}</dt>
+            <dd>
+              <span class="order-field">{% translate "creation_date" %}:</span>
+              <span class="order-field-value">{{ order.order_date }}</span>
+            </dd>
+            <dd>
+              <span class="order-field">{% translate "created_by" %}:</span>
+              <span class="order-field-value">{{ order.user_creator.first_name }}{{ order.user_creator.last_name }}</span>
+            </dd>
+            <dd>
+              <span class="order-field">{% translate "driver" %}:</span>
+              <span class="order-field-value">{{ order.driver }}</span>
+            </dd>
           </div>
-        {% endif %}
-      </dl>
+          <!-- Vehicle Information -->
+          <div>
+            <dt class="order-field-t">{% translate "vehicle_information" %}</dt>
+            <dd>
+              <span class="order-field">{% translate "tractor_plate" %}:</span>
+              <span class="order-field-value">{{ order.tractor_plate }}</span>
+            </dd>
+            <dd>
+              <span class="order-field">{% translate "trailer_plate" %}:</span>
+              <span class="order-field-value">{{ order.trailer_plate|default:"-" }}</span>
+            </dd>
+          </div>
+          <!-- Fuel Order -->
+          <div>
+            <dt class="order-field-t">{% translate "fuel_order" %}</dt>
+            <dd>
+              <span class="order-field">{% translate "tractor" %}:</span>
+              <span class="order-field-value">{{ order.formated_tractor_liters_to_load_of }}</span>
+            </dd>
+            <dd>
+              <span class="order-field">{% translate "backpack" %}:</span>
+              <span class="order-field-value">{{ order.formated_backpack_liters_to_load_of }}</span>
+            </dd>
+            <dd>
+              <span class="order-field">{% translate "chamber" %}:</span>
+              <span class="order-field-value">{{ order.formated_chamber_liters_to_load_of }}</span>
+            </dd>
+          </div>
+          <!-- Fuel Liters -->
+          <div>
+            <dt class="order-field-t">{% translate "fuel_order_fill" %}</dt>
+            <dd>
+              <span class="order-field">{% translate "tractor" %}:</span>
+              <span class="order-field-value">{{ order.tractor_liters|default:"-" }}</span>
+            </dd>
+            <dd>
+              <span class="order-field">{% translate "backpack" %}:</span>
+              <span class="order-field-value">{{ order.backpack_liters|default:"-" }}</span>
+            </dd>
+            <dd>
+              <span class="order-field">{% translate "chamber" %}:</span>
+              <span class="order-field-value">{{ order.chamber_liters|default:"-" }}</span>
+            </dd>
+          </div>
+          {% if refueling %}
+            <!-- Pictures -->
+            <div class="order-field-t">{% translate "pictures" %}</div>
+            <div id="image-container">
+              {% for document in documents %}
+                <img class="toggle-size w-32 h-32 p-2 m-2 rounded-lg border-2 border-white drop-shadow-lg bg-sky-100 transition-all"
+                     src="{{ document.filename.url }}"
+                     alt="{{ document.description }}">
+              {% endfor %}
+            </div>
+          {% endif %}
+        </dl>
+      </div>
+    </section>
+    <div class="h-24 w-full">
+      <!-- top margin -->
     </div>
-  </section>
-  <div class="h-24 w-full">
-    <!-- top margin -->
-  </div>
-{% endblock %}
-{% block scripts %}
-  <script>
+  {% endblock %}
+  {% block scripts %}
+    <script>
   document.addEventListener("DOMContentLoaded", function() {
     const imageContainer = document.getElementById('image-container');
     const images = imageContainer.querySelectorAll('.toggle-size');
@@ -122,5 +195,5 @@
   });
   
 
-  </script>
-{% endblock %}
+    </script>
+  {% endblock %}

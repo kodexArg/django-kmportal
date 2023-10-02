@@ -25,14 +25,13 @@ class OrderView(CustomTemplateView):
         context["order"] = order
 
         try:
-            refueling = order.refuelings  
-            documents = refueling.documents.all() 
+            refueling = order.refuelings
+            documents = refueling.documents.all()
             context["refueling"] = refueling
             context["documents"] = documents
         except Refuelings.DoesNotExist:
-            context["refueling"] = None  
+            context["refueling"] = None
         return context
-
 
 
 @method_decorator(login_required, name="dispatch")

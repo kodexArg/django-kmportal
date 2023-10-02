@@ -1,5 +1,4 @@
 {% load static i18n custom_components %}
-
 <!-- Orders List -->
 <article class="flex flex-col pt-2">
   <div class="h-12 rounded-full flex flex-nowrap p-1 {% status_color_component order.is_finished order.is_paused order.is_locked %}">
@@ -7,8 +6,15 @@
     <div class="h-full aspect-fibbo-up rounded-l-full flex flex-col items-center justify-center">
       <span class="text-sm tracking-wider font-bold font-rubik text-white uppercase leading-none">{{ order.operation_code }}</span>
       <span class="text-xxs font-Roboto text-white leading-tight">
-        {% if order.is_finished %} {% translate "finished" %} {% elif order.is_paused %} {% translate "pauseed" %} {% elif order.is_locked %} {% translate "refueling" %} {% else %}
-        {% translate "on_transit" %} {% endif %}
+        {% if order.is_finished %}
+          {% translate "finished" %}
+        {% elif order.is_paused %}
+          {% translate "pauseed" %}
+        {% elif order.is_locked %}
+          {% translate "refueling" %}
+        {% else %}
+          {% translate "on_transit" %}
+        {% endif %}
       </span>
     </div>
     <!-- MIDDLE-->
@@ -18,12 +24,13 @@
         <div class="min-w-max h-full bg-sky-50 flex space-x-1 py-0.5 px-1 lg:flex-col lg:space-y-1 lg:space-x-0 lg:justify-center">
           <span class="bg-sky-900 text-white font-bold font-mono text-xxs lg:text-xs pt-1 px-2 leading-none w-fit"> {{ order.tractor_plate }} </span>
           {% if order.trailer_plate %}
-          <span class="bg-sky-900 text-white font-bold font-mono text-xxs lg:text-xs pt-1 px-2 leading-none hidden sm:block w-fit"> {{ order.trailer_plate }} </span>
+            <span class="bg-sky-900 text-white font-bold font-mono text-xxs lg:text-xs pt-1 px-2 leading-none hidden sm:block w-fit"> {{ order.trailer_plate }} </span>
           {% endif %}
         </div>
         <!-- Driver -->
         <div class="min-w-max h-full bg-sky-50 flex space-x-1 pl-0.5 flex-nowrap lg:w-full">
-          <span class="text-gray-800 font-mono text-xs lg:text-lg items-center flex p-1" style="white-space: nowrap">
+          <span class="text-gray-800 font-mono text-xs lg:text-lg items-center flex p-1"
+                style="white-space: nowrap">
             <p class="block sm:hidden leading-none">{{ order.driver|truncatechars:12 }}</p>
             <p class="hidden sm:block leading-none">{{ order.driver }}</p>
           </span>
@@ -33,8 +40,7 @@
       <div class="overflow-hidden flex">
         <div class="bg-sky-50 h-full justify-end text-end w-0 md:w-fit">
           <div class="flex flex-col opacity-0 md:opacity-100">
-            <span class="text-xs text-gray-400 tracking-tighter">{{ order.modified_date|date }} {{ order.modified_date|time }} &nbsp;</span>
-            <span class="text-xs text-gray-400 tracking-tighter">{{ order.modified_date|timesince }} &nbsp;</span>
+            <span class="text-xxs text-gray-400 tracking-tighter">{{ order.modified_date|date }} {{ order.modified_date|time }} &nbsp;</span>
           </div>
         </div>
         <!-- odo & km -->
@@ -47,42 +53,76 @@
         <div class="h-full space-x-1 ml-1 flex">
           <!-- fuel icons -->
           <div class="w-1/3 h-full bg-white flex justify-between text-xxs pt-[1px]">
-            <img style="background-color:{{ order.tractor_fuel_type_color }};" class="h-5 aspect-fibbo-up" src="{% static 'svg/fuel_tractor.svg' %}" alt="" />
+            <img style="background-color:{{ order.tractor_fuel_type_color }}"
+                 class="h-5 aspect-fibbo-up"
+                 src="{% static 'svg/fuel_tractor.svg' %}"
+                 alt="" />
           </div>
           <div class="w-1/3 h-full bg-white flex justify-between text-xxs p-[1px]">
-            <img style="background-color:{{ order.backpack_fuel_type_color }};" class="h-5 aspect-fibbo-up" src="{% static 'svg/fuel_chamber.svg' %}" alt="" />
+            <img style="background-color:{{ order.backpack_fuel_type_color }}"
+                 class="h-5 aspect-fibbo-up"
+                 src="{% static 'svg/fuel_chamber.svg' %}"
+                 alt="" />
           </div>
           <div class="w-1/3 h-full bg-white flex justify-between text-xxs p-[1px]">
-            <img style="background-color:{{ order.chamber_fuel_type_color }};" class="h-5 aspect-fibbo-up" src="{% static 'svg/fuel_backpack.svg' %}" alt="" />
+            <img style="background-color:{{ order.chamber_fuel_type_color }}"
+                 class="h-5 aspect-fibbo-up"
+                 src="{% static 'svg/fuel_backpack.svg' %}"
+                 alt="" />
           </div>
         </div>
         <div class="h-full space-x-1 ml-1 flex">
           <!-- fuel values -->
           <div class="w-1/3 h-full bg-white text-xxs leading-tight font-mono font-bold flex justify-center">
-            {% if order.tractor_liters and order.is_finished %} {{ order.tractor_liters }} {% else %} {{ order.formated_tractor_liters_to_load_of }} {% endif %}
+            {% if order.tractor_liters and order.is_finished %}
+              {{ order.tractor_liters }}
+            {% else %}
+              {{ order.formated_tractor_liters_to_load_of }}
+            {% endif %}
           </div>
           <div class="w-1/3 h-full bg-white text-xxs leading-tight font-mono font-bold flex justify-center">
-            {% if order.backpack_liters and order.is_finished %} {{ order.backpack_liters }} {% else %} {{ order.formated_backpack_liters_to_load_of }} {% endif %}
+            {% if order.backpack_liters and order.is_finished %}
+              {{ order.backpack_liters }}
+            {% else %}
+              {{ order.formated_backpack_liters_to_load_of }}
+            {% endif %}
           </div>
           <div class="w-1/3 h-full bg-white text-xxs leading-tight font-mono font-bold flex justify-center">
-            {% if order.chamber_liters and order.is_finished %} {{ order.chamber_liters }} {% else %} {{ order.formated_chamber_liters_to_load_of }} {% endif %}
+            {% if order.chamber_liters and order.is_finished %}
+              {{ order.chamber_liters }}
+            {% else %}
+              {{ order.formated_chamber_liters_to_load_of }}
+            {% endif %}
           </div>
         </div>
       </div>
     </div>
     <div>{% row_fuelorder_buttons_component order %}</div>
-
     <!-- Sandwitch -->
-    <div
-      id="accordion-flush"
-      data-accordion="collapse"
-      data-active-classes="transform duration-100 rotate-90 {% status_color_component order.is_finished order.is_paused order.is_locked %}"
-    >
-      <button class="h-full aspect-1 flex ml-1 rounded-full" data-accordion-target="#row-toggle-body-{{ order.id }}" aria-expanded="false">
-        <div class="h-full aspect-1 rounded-full">
-          <img class="w-full h-full" src="{% static 'svg/sandwich.svg' %}" alt="Menu" />
-        </div>
-      </button>
-    </div>
-  </div>
-</article>
+    <div class="h-full aspect-1">
+      <a href="{% url 'order' operation_code=order.operation_code %}"
+         class="w-full h-full flex flex-col items-center justify-center font-bold text-white">
+        <svg viewBox="0.25 -0.5 17 17"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink"
+             class="si-glyph si-glyph-magnifier-2 w-8 h-8">
+          <g id="SVGRepo_bgCarrier" stroke-width="0">
+          </g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+          </g>
+          <g id="SVGRepo_iconCarrier">
+          <title>897</title> <defs> </defs>
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g transform="translate(1.000000, 0.000000)" fill="#f3f3f3">
+            <path d="M15.0249854,7.49949627 C15.0249854,3.35684062 11.6685956,0 7.52649634,0 C3.38439709,0 0.027,3.35684062 0.027,7.49949627 C0.027,11.6421519 3.38439709,15 7.52649634,15 C9.74562199,15 15.027,14.9476123 15.027,14.9476123 C15.027,14.9476123 15.0249854,9.42373564 15.0249854,7.49949627 L15.0249854,7.49949627 Z M7.472,13.029 C4.431,13.029 1.967,10.563 1.967,7.522 C1.967,4.482 4.431,2.017 7.472,2.017 C10.512,2.017 12.978,4.482 12.978,7.522 C12.978,10.563 10.512,13.029 7.472,13.029 L7.472,13.029 Z M13.959,13.958 L12.959,13.958 L12.959,12.958 L13.959,12.958 L13.959,13.958 L13.959,13.958 Z" class="si-glyph-fill">
+            </path>
+            <path d="M6.844,3.044 C4.725,3.044 3.005,4.66 3.005,6.652 C3.005,6.902 3.031,7.148 3.082,7.382 C3.268,8.222 3.611,8.073 3.611,7.224 C3.611,5.226 5.33,3.615 7.451,3.615 C8.356,3.615 8.059,3.044 6.844,3.044 L6.844,3.044 Z" class="si-glyph-fill">
+            </path>
+            </g>
+            </g>
+            </g>
+          </svg>
+        </a>
+      </div>
+    </article>

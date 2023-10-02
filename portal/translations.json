@@ -544,6 +544,16 @@
     "es": "Fotografías",
     "pt": "Fotografias"
   },
+  "copy": {
+    "en": "Copy",
+    "es": "Copiar",
+    "pt": "Copiar"
+  },
+  "approve": {
+    "en": "Approve",
+    "es": "Conforme",
+    "pt": "Conforme"
+  },
    "template": {
     "en": "",
     "es": "",

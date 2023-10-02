@@ -3,7 +3,7 @@
 <menu class="fixed bottom-10 w-full flex justify-center z-20 drop-shadow-lg">
     <div class="bg-pantone307c p-0.5 rounded-full">
         <div class="border-2 border-sky-200 p-0.5 rounded-full flex justify-center items-center">
-            <div class="text-sky-200 font-bold flex justify-center items-center h-16 w-16">
+            {% comment %} <div class="text-sky-200 font-bold flex justify-center items-center h-16 w-16">
                 <a href="">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
                         <path fill-rule="evenodd"
@@ -11,11 +11,9 @@
                             clip-rule="evenodd" />
                     </svg>
                 </a>
-            </div>
+            </div> {% endcomment %}
 
- 
-            
-            <legend class="w-fit flex items-center">
+            <legend class="w-fit flex items-center ml-5">
                 <div class="transform -rotate-90 -mx-3 font-quicksand font-bold text-xxs text-sky-200 leading-none text-justify">
                     {% translate "Legend" %}
                 </div>
@@ -36,7 +34,7 @@
                     </svg>
                 </a>
             </div>
-            <div class="text-sky-200 font-bold flex justify-center items-center h-16 w-16 -ml-4">
+            {% comment %} <div class="text-sky-200 font-bold flex justify-center items-center h-16 w-16 -ml-4 bg-red-500">
                 <a href="">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
                         <path fill-rule="evenodd"
@@ -44,7 +42,7 @@
                             clip-rule="evenodd" />
                     </svg>
                 </a>
-            </div>
+            </div> {% endcomment %}
         </div>
     </div>
 </menu>
