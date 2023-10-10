@@ -1,3 +1,4 @@
+from django.urls import reverse
 from app.forms import FuelOrderForm
 from app.models import FuelOrders
 from staff.models import Refuelings
@@ -9,6 +10,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import RedirectView
 from django.views.generic.edit import FormView
+from django.http import HttpResponseRedirect
 
 from loguru import logger
 
@@ -45,22 +47,21 @@ class OrdersListView(CustomTemplateView):
             context["fuel_orders"] = FuelOrders.objects.filter(company=company)
         return context
 
-
 @method_decorator(login_required, name="dispatch")
 class OrderPauseView(RedirectView):
     def post(self, request, order_id, *args, **kwargs):
-        # Get the FuelOrders record with the given order_id
         fuel_order = get_object_or_404(FuelOrders, id=order_id)
+        fuel_order.is_paused = not fuel_order.is_paused
+        fuel_order.save()
+        return HttpResponseRedirect(reverse('orders'))
 
-        action = request.POST.get("action")
-        if action == "pause":
-            fuel_order.is_paused = not fuel_order.is_paused
-            fuel_order.save()
-        elif action == "delete":
-            logger.info(f"Deleting order {fuel_order}")
-            fuel_order.delete()
-
-        return JsonResponse({"result": "success"})
+@method_decorator(login_required, name="dispatch")
+class OrderDeleteView(RedirectView):
+    def post(self, request, order_id, *args, **kwargs):
+        fuel_order = get_object_or_404(FuelOrders, id=order_id)
+        logger.info(f"Deleting order {fuel_order}")
+        fuel_order.delete()
+        return HttpResponseRedirect(reverse('orders'))
 
 
 class OrderJsonView(View):
