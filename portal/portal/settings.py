@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",  # compressor
     "django.middleware.security.SecurityMiddleware",  # compressor
@@ -55,10 +56,10 @@ MIDDLEWARE = [
     "django.middleware.locale.LocaleMiddleware",
 ]
 
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_SECONDS = 3600  # 1 hour
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
+# SECURE_SSL_REDIRECT = True
+# SECURE_HSTS_SECONDS = 3600  # 1 hour
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True
 
 ROOT_URLCONF = "portal.urls"
 TEMPLATES = [
