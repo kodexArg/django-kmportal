@@ -17,13 +17,16 @@
     <!-- QR -->
     <div class="flex flex-col mt-6 items-center">
       <div class="w-40 h-40  rounded-md border-2 border-pantone307c bg-white drop-shadow-lg">
-        <img class="p-0.5" src="{% url 'get_qr' operation_code %}" alt="QR Code" />
+        <img id="qr-image"
+             class="p-0.5"
+             src="{% url 'get_qr' operation_code %}"
+             alt="QR Code" />
       </div>
-      <menu>
-        <button id="copy-button-{{ id }}"
+      <menu class="flex flex-col mt-3">
+        <button id="copy-button"
                 type="submit"
                 data-order-id="{{ id }}"
-                class="w-40 bg-sky-600 px-3 rounded-full leading-relaxed tracking-wider text-sky-50 font-bold uppercase m-2 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white">
+                class="h-6 w-36 bg-sky-600 pl-1 rounded-full text-sky-50 font-bold uppercase my-1 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white drop-shadow-md">
           <svg viewBox="0 0 24 24"
                fill="none"
                xmlns="http://www.w3.org/2000/svg"
@@ -39,28 +42,48 @@
           </svg>
           {% translate "copy" %}
         </button>
-        <button id="pause-button-{{ id }}"
-                type="submit"
-                data-order-id="{{ id }}"
-                class="w-40 bg-sky-600 px-3 rounded-full leading-relaxed tracking-wider text-sky-50 font-bold uppercase m-2 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               fill="none"
-               viewBox="0 0 24 24"
-               stroke-width="2"
-               stroke="currentColor"
-               class="w-5 h-5 mr-1">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          {% if order.is_paused %}
-            {% translate "continue" %}
-          {% else %}
-            {% translate "pause" %}
-          {% endif %}
-        </button>
+        <!-- Pause Button -->
+        <div class="flex justify-between">
+          <!-- Pause Link -->
+          <form action="{% url 'pause_order' order_id=order.id %}" method="post">
+              {% csrf_token %}
+              <button id="pause-button"
+                      type="submit"
+                      class="h-6 w-28 bg-sky-600 pl-1 rounded-l-full text-sky-50 font-bold uppercase my-1 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white drop-shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       fill="none"
+                       viewBox="0 0 24 24"
+                       stroke-width="2"
+                       stroke="currentColor"
+                       class="w-5 h-5 mr-1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {% translate "pause" %}
+              </button>
+          </form>
+      
+          <!-- Delete Link -->
+          <form action="{% url 'delete_order' order_id=order.id %}" method="post">
+              {% csrf_token %}
+              <button id="delete-button"
+                      type="submit"
+                      class="h-6 w-7 bg-red-500 pr-1 rounded-r-full text-white font-bold uppercase my-1 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white drop-shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       fill="none"
+                       viewBox="0 0 24 24"
+                       stroke-width="2"
+                       stroke="currentColor"
+                       class="w-5 h-5 mr-1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+              </button>
+          </form>
+      </div>
+      
         <button id="aproval-button-{{ id }}"
                 type="submit"
                 data-order-id="{{ id }}"
-                class="w-40 bg-pantone7472c px-3 rounded-full leading-relaxed tracking-wider text-sky-50 font-bold uppercase m-2 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white">
+                class="h-6 w-36 bg-pantone7472c pl-1 rounded-full text-sky-50 font-bold uppercase my-1 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white drop-shadow-md">
           <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
                xmlns:cc="http://creativecommons.org/ns#"
                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -177,6 +200,38 @@
   {% endblock %}
   {% block scripts %}
     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const copyButton = document.getElementById("copy-button");
+        const img = document.getElementById("qr-image");
+      
+        copyButton.addEventListener("click", function() {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+      
+          // Load image into canvas
+          const imgElement = new Image();
+          imgElement.src = img.src;
+          imgElement.onload = function () {
+            canvas.width = imgElement.width;
+            canvas.height = imgElement.height;
+            ctx.drawImage(imgElement, 0, 0);
+      
+            // Convert canvas to data URL and copy it
+            canvas.toBlob(function(blob) {
+              const item = new ClipboardItem({
+                "image/png": blob
+              });
+              navigator.clipboard.write([item]).then(function() {
+                console.log("Copied to clipboard");
+              }).catch(function(error) {
+                console.error("Unable to copy", error);
+              });
+            });
+          };
+        });
+      });
+      
+
   document.addEventListener("DOMContentLoaded", function() {
     const imageContainer = document.getElementById('image-container');
     const images = imageContainer.querySelectorAll('.toggle-size');

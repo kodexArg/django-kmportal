@@ -19,17 +19,17 @@
     </div>
     <!-- MIDDLE-->
     <div class="h-full w-full flex overflow-clip">
-      <div class="flex-grow flex flex-col lg:flex-row">
+      <div class="flex-grow flex flex-col sm:flex-row">
         <!-- Plates -->
-        <div class="min-w-max h-full bg-sky-50 flex space-x-1 py-0.5 px-1 lg:flex-col lg:space-y-1 lg:space-x-0 lg:justify-center">
-          <span class="bg-sky-900 text-white font-bold font-mono text-xxs lg:text-xs pt-1 px-2 leading-none w-fit"> {{ order.tractor_plate }} </span>
+        <div class="min-w-max h-full bg-sky-50 flex space-x-1 py-0.5 px-1 sm:flex-col sm:space-y-1 sm:space-x-0 sm:justify-center">
+          <span class="bg-sky-900 text-white font-bold font-mono text-xxs sm:text-xs pt-1 px-2 leading-none w-fit"> {{ order.tractor_plate }} </span>
           {% if order.trailer_plate %}
             <span class="bg-sky-900 text-white font-bold font-mono text-xxs lg:text-xs pt-1 px-2 leading-none hidden sm:block w-fit"> {{ order.trailer_plate }} </span>
           {% endif %}
         </div>
         <!-- Driver -->
-        <div class="min-w-max h-full bg-sky-50 flex space-x-1 pl-0.5 flex-nowrap lg:w-full">
-          <span class="text-gray-800 font-mono text-xs lg:text-lg items-center flex p-1"
+        <div class="min-w-max h-full bg-sky-50 flex space-x-1 pl-0.5 flex-nowrap sm:w-full">
+          <span class="text-gray-800 font-mono text-xs sm:text-lg items-center flex p-1"
                 style="white-space: nowrap">
             <p class="block sm:hidden leading-none">{{ order.driver|truncatechars:12 }}</p>
             <p class="hidden sm:block leading-none">{{ order.driver }}</p>
@@ -38,9 +38,9 @@
       </div>
       <!-- Date-->
       <div class="overflow-hidden flex">
-        <div class="bg-sky-50 h-full justify-end text-end w-0 md:w-fit">
+        <div class="bg-sky-50 flex h-full justify-center items-center w-0 md:w-fit">
           <div class="flex flex-col opacity-0 md:opacity-100">
-            <span class="text-xxs text-gray-400 tracking-tighter">{{ order.modified_date|date }} {{ order.modified_date|time }} &nbsp;</span>
+            <span class="text-xxs text-gray-400 tracking-tighter">{{ order.modified_date|date }}</span>
           </div>
         </div>
         <!-- odo & km -->
