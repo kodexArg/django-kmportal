@@ -62,7 +62,7 @@ CSRF_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
-CSRF_TRUSTED_ORIGINS = ['portal-km1151.grupo-avs.com']
+CSRF_TRUSTED_ORIGINS = ['https://portal-km1151.grupo-avs.com']
 
 #SECURE_SSL_REDIRECT = True
 #SECURE_HSTS_SECONDS = 3600  # 1 hour
