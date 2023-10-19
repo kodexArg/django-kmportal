@@ -1,3 +1,4 @@
+#ping
 import os
 import dotenv
 from pathlib import Path
@@ -56,10 +57,17 @@ MIDDLEWARE = [
     "django.middleware.locale.LocaleMiddleware",
 ]
 
-# SECURE_SSL_REDIRECT = True
-# SECURE_HSTS_SECONDS = 3600  # 1 hour
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_PRELOAD = True
+SESSION_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+CSRF_TRUSTED_ORIGINS = ['https://portal-km1151.grupo-avs.com']
+
+#SECURE_SSL_REDIRECT = True
+#SECURE_HSTS_SECONDS = 3600  # 1 hour
+#SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+#SECURE_HSTS_PRELOAD = True
 
 ROOT_URLCONF = "portal.urls"
 TEMPLATES = [
