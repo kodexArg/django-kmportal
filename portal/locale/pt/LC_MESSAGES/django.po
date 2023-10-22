@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-05 00:05+0000\n"
+"POT-Creation-Date: 2023-10-21 19:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -128,12 +128,12 @@ msgid "Legend"
 msgstr "Legenda"
 
 #: templates/components/row_fuelorder/buttons.html:33
-#: templates/modules/order.html:58
 msgid "continue"
 msgstr "Continuar"
 
 #: templates/components/row_fuelorder/buttons.html:35
-#: templates/modules/order.html:60
+#: templates/components/row_fuelorder/row.html:12
+#: templates/modules/order.html:61
 msgid "pause"
 msgstr "pausar"
 
@@ -145,10 +145,6 @@ msgstr "Ver"
 #: templates/modules/orders.html:119
 msgid "finished"
 msgstr "concluído"
-
-#: templates/components/row_fuelorder/row.html:12
-msgid "pauseed"
-msgstr ""
 
 #: templates/components/row_fuelorder/row.html:14
 msgid "refueling"
@@ -217,7 +213,7 @@ msgstr "CNPJ"
 msgid "download"
 msgstr "Baixar Pedidos de Carga em CSV"
 
-#: templates/modules/company.html:36 templates/modules/order.html:115
+#: templates/modules/company.html:36 templates/modules/order.html:133
 #: templates/modules/order_modal.html:50
 msgid "driver"
 msgstr "Motorista"
@@ -235,23 +231,23 @@ msgstr ""
 "carregará o tipo de combustível e as quantidades que você especificar. "
 "Revise o pedido novamente após ser inserido na próxima tela."
 
-#: templates/modules/create_order.html:55 templates/modules/order.html:133
+#: templates/modules/create_order.html:55 templates/modules/order.html:151
 #: templates/modules/order_modal.html:16 templates/modules/order_modal.html:68
 msgid "fuel_order"
 msgstr "Pedido de Combustível"
 
-#: templates/modules/create_order.html:58 templates/modules/order.html:135
-#: templates/modules/order.html:151 templates/modules/order_modal.html:70
+#: templates/modules/create_order.html:58 templates/modules/order.html:153
+#: templates/modules/order.html:169 templates/modules/order_modal.html:70
 msgid "tractor"
 msgstr "Trator"
 
-#: templates/modules/create_order.html:59 templates/modules/order.html:139
-#: templates/modules/order.html:155 templates/modules/order_modal.html:74
+#: templates/modules/create_order.html:59 templates/modules/order.html:157
+#: templates/modules/order.html:173 templates/modules/order_modal.html:74
 msgid "backpack"
 msgstr "Mochila"
 
-#: templates/modules/create_order.html:60 templates/modules/order.html:143
-#: templates/modules/order.html:159 templates/modules/order_modal.html:78
+#: templates/modules/create_order.html:60 templates/modules/order.html:161
+#: templates/modules/order.html:177 templates/modules/order_modal.html:78
 msgid "chamber"
 msgstr "Câmara"
 
@@ -308,41 +304,53 @@ msgstr "Ordem"
 msgid "copy"
 msgstr "Copiar QR"
 
-#: templates/modules/order.html:96
+#: templates/modules/order.html:114
 msgid "conforme"
 msgstr ""
 
-#: templates/modules/order.html:105 templates/modules/order_modal.html:40
+#: templates/modules/order.html:123 templates/modules/order_modal.html:40
 msgid "order_information"
 msgstr "Informações do Pedido"
 
-#: templates/modules/order.html:107 templates/modules/order_modal.html:42
+#: templates/modules/order.html:125 templates/modules/order_modal.html:42
 msgid "creation_date"
 msgstr "Data de Criação"
 
-#: templates/modules/order.html:111
+#: templates/modules/order.html:129
 msgid "created_by"
 msgstr "Criado por"
 
-#: templates/modules/order.html:121 templates/modules/order_modal.html:56
+#: templates/modules/order.html:139 templates/modules/order_modal.html:56
 msgid "vehicle_information"
 msgstr "Informações do Veículo"
 
-#: templates/modules/order.html:123 templates/modules/order_modal.html:58
+#: templates/modules/order.html:141 templates/modules/order_modal.html:58
 msgid "tractor_plate"
 msgstr "Placa do Trator"
 
-#: templates/modules/order.html:127 templates/modules/order_modal.html:62
+#: templates/modules/order.html:145 templates/modules/order_modal.html:62
 msgid "trailer_plate"
 msgstr "Placa do Reboque"
 
-#: templates/modules/order.html:149
+#: templates/modules/order.html:167
 msgid "fuel_order_fill"
 msgstr "Carga Realizada"
 
-#: templates/modules/order.html:165
+#: templates/modules/order.html:183
 msgid "pictures"
 msgstr "Fotografias"
+
+#: templates/modules/order.html:201
+msgid "confirm_operation"
+msgstr "Confirmar esta operação?"
+
+#: templates/modules/order.html:203
+msgid "yes"
+msgstr "Sim"
+
+#: templates/modules/order.html:204
+msgid "no"
+msgstr "Não"
 
 #: templates/modules/order_modal.html:46
 msgid "last_modification"

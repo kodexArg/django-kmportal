@@ -2,11 +2,11 @@
 {% load static i18n socialaccount custom_components compress %}
 {% block title %}
   {% translate "fuel_orders" %}
-{% endblock %}
+{% endblock title %}
 {% block navbar %}
   <!-- TODO: icon should be a BACK icon -->
   {% include "base/navbar_components.html" with icon="fuel" url="orders" %}
-{% endblock %}
+{% endblock navbar %}
 {% block content %}
   {% translate "order" as translated_title %}
   {% module_title_component translated_title extras=operation_code.upper %}
@@ -15,7 +15,7 @@
   </div>
   <section class="w-full flex flex-col md:flex-row">
     <!-- QR -->
-    <div class="flex flex-col mt-6 items-center">
+    <div class="p-2 flex flex-col mt-6 items-center">
       <div class="w-40 h-40  rounded-md border-2 border-pantone307c bg-white drop-shadow-lg">
         <img id="qr-image"
              class="p-0.5"
@@ -26,7 +26,7 @@
         <button id="copy-button"
                 type="submit"
                 data-order-id="{{ id }}"
-                class="h-6 w-36 bg-sky-600 pl-1 rounded-full text-sky-50 font-bold uppercase my-1 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white drop-shadow-md">
+                class="h-7 w-36 bg-sky-600 pl-1 rounded-full text-sky-50 font-bold uppercase my-1 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white drop-shadow-md border-2 border-white">
           <svg viewBox="0 0 24 24"
                fill="none"
                xmlns="http://www.w3.org/2000/svg"
@@ -46,44 +46,42 @@
         <div class="flex justify-between">
           <!-- Pause Link -->
           <form action="{% url 'pause_order' order_id=order.id %}" method="post">
-              {% csrf_token %}
-              <button id="pause-button"
-                      type="submit"
-                      class="h-6 w-28 bg-sky-600 pl-1 rounded-l-full text-sky-50 font-bold uppercase my-1 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white drop-shadow-md">
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                       fill="none"
-                       viewBox="0 0 24 24"
-                       stroke-width="2"
-                       stroke="currentColor"
-                       class="w-5 h-5 mr-1">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  {% translate "pause" %}
-              </button>
+            {% csrf_token %}
+            <button id="pause-button"
+                    type="submit"
+                    class="h-7 w-28 bg-sky-600 pl-1 rounded-l-full text-sky-50 font-bold uppercase my-1 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white drop-shadow-md border-2 border-white">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   fill="none"
+                   viewBox="0 0 24 24"
+                   stroke-width="2"
+                   stroke="currentColor"
+                   class="w-5 h-5 mr-1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {% translate "pause" %}
+            </button>
           </form>
-      
           <!-- Delete Link -->
           <form action="{% url 'delete_order' order_id=order.id %}" method="post">
-              {% csrf_token %}
-              <button id="delete-button"
-                      type="submit"
-                      class="h-6 w-7 bg-red-500 pr-1 rounded-r-full text-white font-bold uppercase my-1 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white drop-shadow-md">
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                       fill="none"
-                       viewBox="0 0 24 24"
-                       stroke-width="2"
-                       stroke="currentColor"
-                       class="w-5 h-5 mr-1">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-              </button>
+            {% csrf_token %}
+            <button id="delete-button"
+                    type="submit"
+                    class="h-7 w-8 bg-red-500 pr-1 rounded-r-full text-white font-bold uppercase my-1 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white drop-shadow-md border-2 border-white">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   fill="none"
+                   viewBox="0 0 24 24"
+                   stroke-width="2"
+                   stroke="currentColor"
+                   class="w-5 h-5 mr-1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </form>
-      </div>
-      
+        </div>
         <button id="aproval-button-{{ id }}"
                 type="submit"
                 data-order-id="{{ id }}"
-                class="h-6 w-36 bg-pantone7472c pl-1 rounded-full text-sky-50 font-bold uppercase my-1 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white drop-shadow-md">
+                class="h-7 w-36 bg-pantone7472c pl-1 rounded-full text-sky-50 font-bold uppercase my-1 flex justify-center items-center pb-0.5 shadow-lg hover:shadow-none hover:translate-y-0.5 hover:translate-x-0.5 hover:text-white drop-shadow-md border-2 border-white">
           <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
                xmlns:cc="http://creativecommons.org/ns#"
                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -197,9 +195,56 @@
     <div class="h-24 w-full">
       <!-- top margin -->
     </div>
-  {% endblock %}
+    <div id="confirmationModal"
+      class="hidden h-screen w-screen m-10 fixed inset-0 flex items-center justify-center z-50 drop-shadow-lg">
+      <div class="bg-white p-8 rounded-lg px-4 py-3 ">
+        <p class="mb-2">{% translate "confirm_operation" %}</p>
+        <div class="flex justify-end space-x-4">
+          <button id="confirmYes" class="bg-blue-500 text-white p-2 rounded ml-1">{% translate "yes" %}</button>
+          <button id="confirmNo" class="bg-red-500 text-white p-2 rounded ml-1">{% translate "no" %}</button>
+
+        </div>
+      </div>
+    </div>
+
+  {% endblock content %}
+  
   {% block scripts %}
     <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const pauseButton = document.getElementById("pause-button");
+        const deleteButton = document.getElementById("delete-button");
+        const confirmYes = document.getElementById("confirmYes");
+        const confirmNo = document.getElementById("confirmNo");
+        const confirmationModal = document.getElementById("confirmationModal");
+        let formToSubmit;
+      
+        const showModal = (form) => {
+          formToSubmit = form;
+          confirmationModal.classList.remove("hidden");
+        };
+      
+        pauseButton.addEventListener("click", function(event) {
+          event.preventDefault();
+          showModal(this.closest("form"));
+        });
+      
+        deleteButton.addEventListener("click", function(event) {
+          event.preventDefault();
+          showModal(this.closest("form"));
+        });
+      
+        confirmYes.addEventListener("click", function() {
+          formToSubmit.submit();
+          confirmationModal.classList.add("hidden");
+        });
+      
+        confirmNo.addEventListener("click", function() {
+          confirmationModal.classList.add("hidden");
+        });
+      });
+      
+
       document.addEventListener("DOMContentLoaded", function () {
         const copyButton = document.getElementById("copy-button");
         const img = document.getElementById("qr-image");
@@ -251,4 +296,4 @@
   
 
     </script>
-  {% endblock %}
+  {% endblock scripts %}

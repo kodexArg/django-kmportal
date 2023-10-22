@@ -538,7 +538,7 @@
     "en": "Download Fuel Load Orders in CSV",
     "es": "Descargar Órdenes de Carga en CSV",
     "pt": "Baixar Pedidos de Carga em CSV"
-  },  
+  },
   "pictures": {
     "en": "Pictures",
     "es": "Fotografías",
@@ -554,7 +554,22 @@
     "es": "Conforme",
     "pt": "Conforme"
   },
-   "template": {
+  "confirm_operation": {
+    "en": "Confirm this operation?",
+    "es": "Confirma esta operación?",
+    "pt": "Confirmar esta operação?"
+  },
+  "yes": {
+    "en": "Yes",
+    "es": "Sí",
+    "pt": "Sim"
+  },
+  "no": {
+    "en": "No",
+    "es": "No",
+    "pt": "Não"
+  },
+  "template": {
     "en": "",
     "es": "",
     "pt": ""
