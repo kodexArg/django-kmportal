@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-21 19:36+0000\n"
+"POT-Creation-Date: 2023-10-23 01:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,7 +133,7 @@ msgstr "Continue"
 
 #: templates/components/row_fuelorder/buttons.html:35
 #: templates/components/row_fuelorder/row.html:12
-#: templates/modules/order.html:61
+#: templates/modules/order.html:44
 msgid "pause"
 msgstr "pause"
 
@@ -212,7 +212,7 @@ msgstr "RUT"
 msgid "download"
 msgstr "Download Fuel Load Orders in CSV"
 
-#: templates/modules/company.html:36 templates/modules/order.html:133
+#: templates/modules/company.html:36 templates/modules/order.html:94
 #: templates/modules/order_modal.html:50
 msgid "driver"
 msgstr "Driver"
@@ -230,23 +230,23 @@ msgstr ""
 "fuel type and quantities you specify. Review the order again once it has "
 "been entered on the next screen."
 
-#: templates/modules/create_order.html:55 templates/modules/order.html:151
+#: templates/modules/create_order.html:55 templates/modules/order.html:112
 #: templates/modules/order_modal.html:16 templates/modules/order_modal.html:68
 msgid "fuel_order"
 msgstr "Fuel Order"
 
-#: templates/modules/create_order.html:58 templates/modules/order.html:153
-#: templates/modules/order.html:169 templates/modules/order_modal.html:70
+#: templates/modules/create_order.html:58 templates/modules/order.html:114
+#: templates/modules/order.html:130 templates/modules/order_modal.html:70
 msgid "tractor"
 msgstr "Tractor"
 
-#: templates/modules/create_order.html:59 templates/modules/order.html:157
-#: templates/modules/order.html:173 templates/modules/order_modal.html:74
+#: templates/modules/create_order.html:59 templates/modules/order.html:118
+#: templates/modules/order.html:134 templates/modules/order_modal.html:74
 msgid "backpack"
 msgstr "Backpack"
 
-#: templates/modules/create_order.html:60 templates/modules/order.html:161
-#: templates/modules/order.html:177 templates/modules/order_modal.html:78
+#: templates/modules/create_order.html:60 templates/modules/order.html:122
+#: templates/modules/order.html:138 templates/modules/order_modal.html:78
 msgid "chamber"
 msgstr "Chamber"
 
@@ -298,55 +298,63 @@ msgstr "No Extra-Cash orders"
 msgid "order"
 msgstr "Order"
 
-#: templates/modules/order.html:43
+#: templates/modules/order.html:33
 msgid "copy"
 msgstr "Copy QR"
 
-#: templates/modules/order.html:114
-msgid "conforme"
-msgstr ""
+#: templates/modules/order.html:47
+msgid "unpause"
+msgstr "unpause"
 
-#: templates/modules/order.html:123 templates/modules/order_modal.html:40
+#: templates/modules/order.html:70
+msgid "in_agreement"
+msgstr "Approve"
+
+#: templates/modules/order.html:74
+msgid "in_agreement_done"
+msgstr "agreed"
+
+#: templates/modules/order.html:84 templates/modules/order_modal.html:40
 msgid "order_information"
 msgstr "Order Information"
 
-#: templates/modules/order.html:125 templates/modules/order_modal.html:42
+#: templates/modules/order.html:86 templates/modules/order_modal.html:42
 msgid "creation_date"
 msgstr "Creation Date"
 
-#: templates/modules/order.html:129
+#: templates/modules/order.html:90
 msgid "created_by"
 msgstr "Created by"
 
-#: templates/modules/order.html:139 templates/modules/order_modal.html:56
+#: templates/modules/order.html:100 templates/modules/order_modal.html:56
 msgid "vehicle_information"
 msgstr "Vehicle Information"
 
-#: templates/modules/order.html:141 templates/modules/order_modal.html:58
+#: templates/modules/order.html:102 templates/modules/order_modal.html:58
 msgid "tractor_plate"
 msgstr "Tractor Plate"
 
-#: templates/modules/order.html:145 templates/modules/order_modal.html:62
+#: templates/modules/order.html:106 templates/modules/order_modal.html:62
 msgid "trailer_plate"
 msgstr "Trailer Plate"
 
-#: templates/modules/order.html:167
+#: templates/modules/order.html:128
 msgid "fuel_order_fill"
 msgstr "Load Completed"
 
-#: templates/modules/order.html:183
+#: templates/modules/order.html:144
 msgid "pictures"
 msgstr "Pictures"
 
-#: templates/modules/order.html:201
+#: templates/modules/order.html:162
 msgid "confirm_operation"
 msgstr "Confirm this operation?"
 
-#: templates/modules/order.html:203
+#: templates/modules/order.html:166
 msgid "yes"
 msgstr "Yes"
 
-#: templates/modules/order.html:204
+#: templates/modules/order.html:170
 msgid "no"
 msgstr "No"
 
@@ -492,9 +500,6 @@ msgstr "send request"
 
 msgid "add_driver"
 msgstr "add driver"
-
-msgid "approve"
-msgstr "Approve"
 
 msgid "template"
 msgstr ""

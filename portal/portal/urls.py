@@ -5,7 +5,7 @@ from app.views.authorized import ExportFuelOrderCSV, UserHomeView
 from app.views.extracash import ExtraCashView
 from app.views.helpers import get_qr, get_server_time
 from app.views.modules import CompanyView, VehiclesView
-from app.views.orders import OrderUpdateView, OrderCreateView, OrderJsonView, OrderPauseView, OrderDeleteView, OrdersListView, OrderView
+from app.views.orders import OrderUpdateView, OrderCreateView, OrderJsonView, OrderPauseView, OrderDeleteView, OrdersListView, OrderView, OrderAgreementView
 from app.views.unauthorized import AboutUsView, ContactUsView, HomeView, LogoutView, UnderConstructionView
 from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
@@ -33,6 +33,7 @@ urlpatterns = [
     path("orders/<int:order_id>/data/", OrderJsonView.as_view(), name="order_data"),
     path("orders/<int:order_id>/pause/", OrderPauseView.as_view(), name="pause_order"),
     path("orders/<int:order_id>/delete/", OrderDeleteView.as_view(), name="delete_order"),
+    path("orders/<int:order_id>/agreement/", OrderAgreementView.as_view(), name="agreement_order"),
 
 ]
 

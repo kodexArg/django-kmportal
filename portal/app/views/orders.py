@@ -47,13 +47,24 @@ class OrdersListView(CustomTemplateView):
             context["fuel_orders"] = FuelOrders.objects.filter(company=company)
         return context
 
+
 @method_decorator(login_required, name="dispatch")
 class OrderPauseView(RedirectView):
     def post(self, request, order_id, *args, **kwargs):
         fuel_order = get_object_or_404(FuelOrders, id=order_id)
         fuel_order.is_paused = not fuel_order.is_paused
         fuel_order.save()
-        return HttpResponseRedirect(reverse('orders'))
+        return HttpResponseRedirect(reverse("orders"))
+
+
+@method_decorator(login_required, name="dispatch")
+class OrderAgreementView(RedirectView):
+    def post(self, request, order_id, *args, **kwargs):
+        fuel_order = get_object_or_404(FuelOrders, id=order_id)
+        fuel_order.in_agreement = "agreed"
+        fuel_order.save()
+        return HttpResponseRedirect(reverse("orders"))
+
 
 @method_decorator(login_required, name="dispatch")
 class OrderDeleteView(RedirectView):
@@ -61,7 +72,7 @@ class OrderDeleteView(RedirectView):
         fuel_order = get_object_or_404(FuelOrders, id=order_id)
         logger.info(f"Deleting order {fuel_order}")
         fuel_order.delete()
-        return HttpResponseRedirect(reverse('orders'))
+        return HttpResponseRedirect(reverse("orders"))
 
 
 class OrderJsonView(View):

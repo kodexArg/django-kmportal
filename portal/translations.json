@@ -514,6 +514,11 @@
     "es": "pausar",
     "pt": "pausar"
   },
+  "unpause": {
+    "en": "unpause",
+    "es": "continuar",
+    "pt": "continuar"
+  },
   "btn_pause": {
     "en": "pause",
     "es": "pausar",
@@ -549,7 +554,7 @@
     "es": "Copiar QR",
     "pt": "Copiar QR"
   },
-  "approve": {
+  "in_agreement": {
     "en": "Approve",
     "es": "Conforme",
     "pt": "Conforme"
@@ -568,6 +573,11 @@
     "en": "No",
     "es": "No",
     "pt": "Não"
+  },
+  "in_agreement_done": {
+    "en": "agreed",
+    "es": "conforme",
+    "pt": "conforme"
   },
   "template": {
     "en": "",
