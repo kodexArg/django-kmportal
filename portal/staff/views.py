@@ -1,5 +1,5 @@
 import json
-from app.models import FuelOrders
+from app.models import FuelOrders, ExtraCash
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login
@@ -63,6 +63,35 @@ class StaffHomeView(View):
 
 # Create a formset for the Documents model
 DocumentFormSet = inlineformset_factory(Refuelings, Documents, form=DocumentForm, extra=1, can_delete=False)
+
+
+class StaffExtracashView(ListView):
+    template_name = "staff/extracash.html"
+    model = ExtraCash
+
+
+class StaffExtracashAttend(FormView):
+    template_name = "staff/extracash_attend.html"
+    form_class = QrForm
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {"form": form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            qr_code = form.cleaned_data.get("qr_code")
+            try:
+                extra_cash = ExtraCash.objects.get(qr_code=qr_code)
+                extra_cash.is_attend = True
+                extra_cash.save()
+                messages.success(request, "Extra cash attended successfully")
+            except ExtraCash.DoesNotExist:
+                messages.error(request, "Extra cash not found")
+        else:
+            messages.error(request, "Invalid QR code")
+        return redirect("staff_extracash_attend")
 
 
 # TODO: authorized user only

@@ -185,13 +185,13 @@
 {% endblock %}
 {% block scripts %}
   <script>
-        function toggleColumns(operationCode) {
-            const id = 'extra-' + operationCode;
-            const element = document.getElementById(id);
-            element.classList.toggle('hidden');
+    function toggleColumns(operationCode) {
+      const id = 'extra-' + operationCode;
+      const element = document.getElementById(id);
+      element.classList.toggle('hidden');
 
-            const showIcon = document.querySelector('.show-icon-' + operationCode);
-            const hideIcon = document.querySelector('.hide-icon-' + operationCode);
-        }
+      const showIcon = document.querySelector('.show-icon-' + operationCode);
+      const hideIcon = document.querySelector('.hide-icon-' + operationCode);
+    }
   </script>
 {% endblock %}

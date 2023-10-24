@@ -15,6 +15,7 @@ ALLOWED_HOSTS = ["*"]
 
 # Application definition
 INSTALLED_APPS = [
+    "django.contrib.humanize",
     "django.contrib.admin",
     "django.contrib.sites",
     "django.contrib.auth",

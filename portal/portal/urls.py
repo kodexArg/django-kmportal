@@ -15,7 +15,7 @@ from django.urls import include, path
 from staff.forms import CustomLoginForm
 
 # "staff" views
-from staff.views import StaffHomeView, StaffRefuelingView, StaffQrView, handle_qr_code, StaffListOrdersView
+from staff.views import StaffHomeView, StaffRefuelingView, StaffQrView, handle_qr_code, StaffListOrdersView, StaffExtracashView, StaffExtracashAttend
 
 # Without Internationalization
 urlpatterns = [
@@ -42,11 +42,13 @@ urlpatterns += [
     path("staff/", StaffHomeView.as_view(), name="staff_home"),
     path("staff/login/", auth_views.LoginView.as_view(template_name="staff/login.html", form_class=CustomLoginForm), name="staff_login"),
     path("staff/logout/", auth_views.LogoutView.as_view(), name="staff_logout"),
-    path("staff/qr/", StaffQrView.as_view(), name="staff_qr"),
     path("staff/refueling/<str:operation_code>/", StaffRefuelingView.as_view(), name="staff_refueling"),
     path("staff/refueling/<str:operation_code>/<str:was_locked>/", StaffRefuelingView.as_view(), name="staff_refueling"),
-    path("staff/orders/", StaffListOrdersView.as_view(), name="staff_orders"),
     path("staff/handle_qr_code/", handle_qr_code, name="handle_qr_code"),
+    path("staff/qr/", StaffQrView.as_view(), name="staff_qr"),
+    path("staff/orders/", StaffListOrdersView.as_view(), name="staff_orders"),
+    path("staff/extracash/", StaffExtracashView.as_view(), name="staff_extracash"),
+    path("staff/extracash/<str:operation_code>/", StaffExtracashAttend.as_view(), name="staff_extracash_attend"),
 ]
 
 # API Rest Framework

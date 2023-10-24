@@ -1,0 +1,40 @@
+{% extends "staff/base/base.html" %}
+{% load static custom_components compress humanize %}
+{% block title %}KM1151 - Staff Area{% endblock %}
+{% block content %}
+    <section class="min-h-screen min-w-screen flex flex-col items-center justify-center">
+        {% if user.is_authenticated and user|is_pump_operator %}
+            {% for order in object_list %}
+                <div class="flex rounded-full p-1 h-10 m-1 {% if order.is_finished %} bg-pantone7472c {% elif order.is_paused %} bg-gray-400 {% elif order.is_locked %} bg-pantone307c {% else %} bg-pantone7689c {% endif %} my-1">
+                    <!--code-->
+                    <div class="w-20 flex-shrink py-1 text-sm flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center rounded-l-full">
+                        <div class="font-rubik tracking-wider leading-none font-bold uppercase text-center w-full">
+                            {{ order.operation_code }}
+                            {% if order.is_locked and not order.is_finished %}<span class="text-sm -mx-1">🔒</span>{% endif %}
+                            {% if order.comments and not order.is_locked %}<span class="text-sm -mx-1">✍️</span>{% endif %}
+                        </div>
+                    </div>
+                    <div class="w-48 py-1 text-sm flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center">
+                        <div class="font-rubik">{{ order.driver }}</div>
+                    </div>
+                    <div class="w-20 py-1 text-sm flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center">
+                        <div class="font-rubik">${{ order.cash_amount|intcomma }}</div>
+                    </div>
+                    <div class="w-8 rounded-r-full flex pl-0.5">
+                        <button onclick="toggleColumns('{{ order.operation_code }}')"
+                                class="rounded-full focus:outline-none transition-colors duration-300">
+                            <img class="w-full h-full rounded-b-full"
+                                 src="{% static 'svg/cash.svg' %}"
+                                 alt="Menu" />
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            {% if user.is_authenticated %}
+                <div class="fixed bottom-20 left-3 text-red-500 font-bold">Staff User no in "Pump Operators" Group</div>
+            {% endif %}
+            {% include "staff/base/login_form.html" %}
+        {% endif %}
+    </section>
+{% endblock %}
