@@ -579,6 +579,16 @@
     "es": "conforme",
     "pt": "conforme"
   },
+  "expires": {
+    "en": "expires",
+    "es": "expira",
+    "pt": "expira"
+  },
+  "expired": {
+    "en": "expired",
+    "es": "expirado",
+    "pt": "expirado"
+  },
   "template": {
     "en": "",
     "es": "",

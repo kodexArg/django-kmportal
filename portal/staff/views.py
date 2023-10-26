@@ -70,28 +70,18 @@ class StaffExtracashView(ListView):
     model = ExtraCash
 
 
-class StaffExtracashAttend(FormView):
-    template_name = "staff/extracash_attend.html"
-    form_class = QrForm
+class StaffExtracashAttend(View):
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {"form": form})
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            qr_code = form.cleaned_data.get("qr_code")
-            try:
-                extra_cash = ExtraCash.objects.get(qr_code=qr_code)
-                extra_cash.is_attend = True
-                extra_cash.save()
-                messages.success(request, "Extra cash attended successfully")
-            except ExtraCash.DoesNotExist:
-                messages.error(request, "Extra cash not found")
-        else:
-            messages.error(request, "Invalid QR code")
-        return redirect("staff_extracash_attend")
+    def post(self, request, operation_code):
+        try:
+            order = ExtraCash.objects.get(operation_code=operation_code)
+            order.is_finished = True
+            order.save()
+            return JsonResponse({"status": "success", "message": "Order status updated successfully."})
+        except ExtraCash.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Order not found."}, status=404)
 
 
 # TODO: authorized user only

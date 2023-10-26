@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 01:39+0000\n"
+"POT-Creation-Date: 2023-10-26 00:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -142,7 +142,7 @@ msgid "view"
 msgstr "View"
 
 #: templates/components/row_fuelorder/row.html:10
-#: templates/modules/orders.html:119
+#: templates/modules/extracash.html:101 templates/modules/orders.html:119
 msgid "finished"
 msgstr "finished"
 
@@ -286,11 +286,23 @@ msgstr ""
 msgid "extracash_warning"
 msgstr "Remember to check the status of your account on the site:"
 
-#: templates/modules/extracash.html:73
+#: templates/modules/extracash.html:74
 msgid "extracash_pending_orders"
 msgstr "Pending Orders"
 
-#: templates/modules/extracash.html:96
+#: templates/modules/extracash.html:86
+msgid "expired"
+msgstr "expired"
+
+#: templates/modules/extracash.html:88
+msgid "until"
+msgstr ""
+
+#: templates/modules/extracash.html:115
+msgid "stop"
+msgstr ""
+
+#: templates/modules/extracash.html:124
 msgid "no_extracash_orders"
 msgstr "No Extra-Cash orders"
 
@@ -500,6 +512,9 @@ msgstr "send request"
 
 msgid "add_driver"
 msgstr "add driver"
+
+msgid "expires"
+msgstr "expires"
 
 msgid "template"
 msgstr ""

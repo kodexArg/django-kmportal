@@ -6,8 +6,15 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 from pytest import mark
 from django import template
+from datetime import datetime
 
 register = template.Library()
+
+@register.filter
+def is_after_today(value):
+    current_date = datetime.now().date()
+
+    return value > current_date
 
 
 # NAVBAR BOTTOM
