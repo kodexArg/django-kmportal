@@ -1,0 +1,154 @@
+{% extends "staff/base/base.html" %}
+{% load static custom_components compress humanize %}
+{% block title %}
+  KM1151 - Staff Area
+{% endblock title %}
+{% block content %}
+  <section class="min-h-screen min-w-screen flex flex-col items-center justify-center">
+    {% if user.is_authenticated and user|is_pump_operator %}
+      {% for order in object_list %}
+        <div class="flex rounded-full p-1 h-10 m-1 {% if order.is_finished %} bg-pantone7472c {% elif order.is_paused %} bg-gray-400 {% elif order.is_locked %} bg-pantone307c {% else %} bg-pantone7689c {% endif %} my-1">
+          <div class="w-20 flex-shrink py-1 text-sm flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center rounded-l-full">
+            <div class="font-rubik tracking-wider leading-none font-bold uppercase text-center w-full">
+              {{ order.operation_code }}
+              {% if order.is_locked and not order.is_finished %}<span class="text-sm -mx-1">🔒</span>{% endif %}
+              {% if order.comments and not order.is_locked %}<span class="text-sm -mx-1">✍️</span>{% endif %}
+            </div>
+          </div>
+          <div class="w-48 py-1 text-sm flex flex-col border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center">
+            <div class="font-rubik">{{ order.driver }}</div>
+          </div>
+          <div class="w-20 py-1 text-sm flex border-r {% if order.is_finished %}border-pantone7472c{% elif order.is_paused %}border-gray-400{% elif order.is_locked %}border-pantone307c{% else %}border-pantone7689c{% endif %} bg-white items-center justify-center">
+            <div class="font-rubik">${{ order.cash_amount|intcomma }}</div>
+          </div>
+          <div class="w-9 rounded-r-full flex pl-0.5">
+            <div class="w-7 rounded-r-full flex pl-0.5">
+              {% if order.is_finished %}
+                <img class="w-full h-full rounded-b-full"
+                     src="{% static 'svg/cash2.svg' %}">
+              {% else %}
+                <button type="button"
+                        class="rounded-full focus:outline-none transition-colors duration-300 order-trigger"
+                        data-operation="{{ order.operation_code }}">
+                  <img class="w-full h-full rounded-b-full"
+                       src="{% static 'svg/cash.svg' %}"
+                       alt="Menu" />
+                </button>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      {% if user.is_authenticated %}
+        <div class="fixed bottom-20 left-3 text-red-500 font-bold">Staff User no in "Pump Operators" Group</div>
+      {% endif %}
+      {% include "staff/base/login_form.html" %}
+    {% endif %}
+  </section>
+  <div id="confirmationModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-5 rounded-lg shadow-lg border-2 border-pantone7472c w-72">
+      <h2 class="text-lg mb-4">Confirmación de Orden</h2>
+      <form id="centralOrderForm" method="post" enctype="multipart/form-data">
+        <p class="text-xs text-justify mb-4">
+          Antes de continuar, asegúrese de pedir al chofer su nombre y código. Una vez ingresado el código, la orden se marcará como realizada.
+        </p>
+        {% csrf_token %}
+        <input type="hidden" name="operation_code" id="centralOperationCode">
+        <div class="w-full px-12">
+          <input type="text"
+                 id="modalInput"
+                 class="mt-3 border w-full px-2 py-1 rounded-full text-center">
+        </div>
+
+        <div class="flex flex-col justify-end p-2 space-y-2 mt-4">
+          <label for="documentInput">
+            <p class="text-xs text-justify">
+              Adjuntar comprobante:
+            </p>
+            <input type="file"
+                   id="documentInput"
+                   name="document"
+                   class="mb-6 rounded-full w-full font-rubik leading-none text-xxs bg-gray-50 m-0 px-2 py-0 cursor-pointer text-center border border-gray-500">
+          </label>
+          <button id="confirmBtn"
+                  class="px-2 py-1 rounded-full w-full bg-pantone307c hover:bg-blue-600 text-white">Confirmar</button>
+          <button type="button"
+                  id="cancelBtn"
+                  class="px-2 py-1 rounded-full w-full bg-gray-300 hover:bg-gray-400">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock content %}
+{% block scripts %}
+  <script>
+    const orderButtons = document.querySelectorAll(".order-trigger");
+    const modal = document.getElementById("confirmationModal");
+    const modalInput = document.getElementById("modalInput");
+    const centralOrderForm = document.getElementById("centralOrderForm");
+    const centralOperationCode = document.getElementById("centralOperationCode");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const confirmBtn = document.getElementById("confirmBtn");
+    const fileInput = document.getElementById("documentInput");
+    console.log("Files count:", fileInput.files.length);
+    
+
+    orderButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        const targetButton = e.target.closest(".order-trigger");
+        const operationCode = targetButton.getAttribute("data-operation");
+        centralOperationCode.value = operationCode;
+
+        modalInput.value = ""; 
+        modal.classList.remove('hidden'); 
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      cancelBtn.addEventListener("click", function() {
+          modal.classList.add('hidden');
+      });
+  
+      confirmBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        const confirmationCode = modalInput.value.toLowerCase();
+  
+        if (confirmationCode !== centralOperationCode.value.toLowerCase()) {
+            alert('Operation code does not match. Please try again.');
+            modal.classList.add('hidden');
+            return;
+        }
+
+        const actionURL = `/staff/extracash/${confirmationCode}/`;
+
+        centralOrderForm.action = actionURL; 
+
+        // Submit the form using AJAX
+        fetch(actionURL, {
+          method: 'POST',
+          headers: {
+              'X-Requested-With': 'XMLHttpRequest',  // Helps Django identify the request as AJAX
+              'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+          },
+          body: new FormData(centralOrderForm)
+        })
+
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert('There was an error processing the request.');
+        });
+    });
+
+
+    });
+  </script>
+{% endblock scripts %}

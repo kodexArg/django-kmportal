@@ -14,7 +14,7 @@ register = template.Library()
 def is_after_today(value):
     current_date = datetime.now().date()
 
-    return value > current_date
+    return value < current_date
 
 
 # NAVBAR BOTTOM

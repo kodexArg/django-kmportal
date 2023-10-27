@@ -70,15 +70,30 @@ class StaffExtracashView(ListView):
     model = ExtraCash
 
 
+from django.core.files.storage import FileSystemStorage
+
 class StaffExtracashAttend(View):
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
     def post(self, request, operation_code):
+        print(request.FILES)
         try:
             order = ExtraCash.objects.get(operation_code=operation_code)
+
+            # Handle file upload
+            if 'document' in request.FILES:
+                myfile = request.FILES['document']
+                fs = FileSystemStorage()
+                filename = fs.save(myfile.name, myfile)
+                uploaded_file_url = fs.url(filename)
+
+                # Assuming your model has a field called 'document'
+                order.document = filename  # You save the reference to the uploaded file to the model
+
             order.is_finished = True
             order.save()
+
             return JsonResponse({"status": "success", "message": "Order status updated successfully."})
         except ExtraCash.DoesNotExist:
             return JsonResponse({"status": "error", "message": "Order not found."}, status=404)

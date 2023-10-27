@@ -34,7 +34,6 @@ urlpatterns = [
     path("orders/<int:order_id>/pause/", OrderPauseView.as_view(), name="pause_order"),
     path("orders/<int:order_id>/delete/", OrderDeleteView.as_view(), name="delete_order"),
     path("orders/<int:order_id>/agreement/", OrderAgreementView.as_view(), name="agreement_order"),
-
 ]
 
 # Staff Area without internationalization

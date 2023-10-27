@@ -1,5 +1,6 @@
 import secrets
 from datetime import timedelta
+from portal.custom_storage import DocumentStorage
 
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.models import User
@@ -8,11 +9,27 @@ from django.db.models import Case, IntegerField, Manager, Value, When
 from django.forms import ValidationError
 from django.utils.timezone import now
 from django.utils.translation import gettext as _
+from datetime import datetime
+import random
+import string
 from loguru import logger
 
 
 def get_default_expiration_date():
     return now() + timedelta(days=7)
+
+def get_filename(instance, filename):
+    today = datetime.now()
+    year = today.year
+    month = today.month
+    day = today.day
+    time = today.strftime("%H%M%S")
+    operation_code = instance.fuel_order.operation_code
+
+    # Generate a random string of length 8
+    random_string = "".join(random.choices(string.ascii_letters + string.digits, k=5))
+
+    return f"extracash/{year}/{month}/{day}/{operation_code}/{random_string}_{time}.jpg"
 
 
 # Create your models here.
@@ -154,7 +171,7 @@ class ExtraCash(models.Model):
         on_delete=models.SET_NULL,
         related_name="extracash_modified",
         blank=True,
-        null=True,
+        null=True
     )
 
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
@@ -163,6 +180,8 @@ class ExtraCash(models.Model):
     is_locked = models.BooleanField(default=False, verbose_name="is_locked")
     is_paused = models.BooleanField(default=False, verbose_name="is_paused")
     is_finished = models.BooleanField(default=False, verbose_name="is_finished")
+ 
+    document = models.ImageField(upload_to=get_filename, blank=True, null=True, storage=DocumentStorage())
 
     pause_reason = models.TextField(blank=True, null=True, verbose_name="pause_reason")
     in_agreement = models.CharField(choices=AGREEMENT_CHOICES, default="under_negotiation", max_length=20, verbose_name="in_agreement")
@@ -295,20 +314,20 @@ class FuelOrders(models.Model):
     backpack_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True, verbose_name="backpack_fuel_type")
     chamber_fuel_type = models.CharField(max_length=50, choices=FUEL_TYPE_CHOICES, blank=True, null=True, verbose_name="chamber_fuel_type")
 
-    tractor_liters = models.PositiveIntegerField(blank=True, null=True, verbose_name="tractor_liters")  # leave blank until filled
-    backpack_liters = models.PositiveIntegerField(blank=True, null=True, verbose_name="backpack_liters")  # leave blank until filled
-    chamber_liters = models.PositiveIntegerField(blank=True, null=True, verbose_name="chamber_liters")  # leave blank until filled
+    tractor_liters = models.PositiveIntegerField(blank=True, null=True, verbose_name="tractor_liters")
+    backpack_liters = models.PositiveIntegerField(blank=True, null=True, verbose_name="backpack_liters")
+    chamber_liters = models.PositiveIntegerField(blank=True, null=True, verbose_name="chamber_liters")
 
-    tractor_liters_to_load = models.IntegerField(default=0, verbose_name="tractor_liters_to_load")  # show MAX on -1 and NO on 0
-    backpack_liters_to_load = models.IntegerField(default=0, verbose_name="backpack_liters_to_load")  # show MAX on -1 and NO on 0
-    chamber_liters_to_load = models.IntegerField(default=0, verbose_name="chamber_liters_to_load")  # show MAX on -1 and NO on 0
+    tractor_liters_to_load = models.IntegerField(default=0, verbose_name="tractor_liters_to_load")
+    backpack_liters_to_load = models.IntegerField(default=0, verbose_name="backpack_liters_to_load")
+    chamber_liters_to_load = models.IntegerField(default=0, verbose_name="chamber_liters_to_load")
 
     requires_odometer = models.BooleanField(default=False, verbose_name="requires_odometer")
     requires_kilometers = models.BooleanField(default=False, verbose_name="requires_kilometers")
 
-    is_locked = models.BooleanField(default=False, verbose_name="is_locked")  # because its being attended
-    is_paused = models.BooleanField(default=False, verbose_name="is_paused")  # because there's an error or user action
-    is_finished = models.BooleanField(default=False, verbose_name="is_finished")  # because it's been attended and it's been filled
+    is_locked = models.BooleanField(default=False, verbose_name="is_locked")
+    is_paused = models.BooleanField(default=False, verbose_name="is_paused")
+    is_finished = models.BooleanField(default=False, verbose_name="is_finished")
 
     in_agreement = models.CharField(choices=AGREEMENT_CHOICES, default="under_negotiation", max_length=20, verbose_name="in_agreement")
     comments = models.TextField(blank=True, null=True, verbose_name="comments")

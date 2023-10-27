@@ -39,9 +39,9 @@ class Refuelings(models.Model):
     fuel_order = models.OneToOneField("app.FuelOrders", on_delete=models.CASCADE)
     pump_operator = models.ForeignKey(User, limit_choices_to={"groups__name": "Pump Operators"}, on_delete=models.CASCADE)
 
-    tractor_liters = models.PositiveIntegerField(default=0) # not used... yet 
-    backpack_liters = models.PositiveIntegerField(default=0) # not used... yet 
-    chamber_liters = models.PositiveIntegerField(default=0) # not used... yet 
+    tractor_liters = models.PositiveIntegerField(default=0) 
+    backpack_liters = models.PositiveIntegerField(default=0) 
+    chamber_liters = models.PositiveIntegerField(default=0) 
 
     tractor_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES, null=True, blank=True)
     backpack_fuel_type = models.CharField(max_length=50, choices=FuelOrders.FUEL_TYPE_CHOICES, null=True, blank=True)
