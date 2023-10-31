@@ -97,17 +97,16 @@
           <div class="flex flex-col items-end w-full">
             <div class="text-sm leading-snug">{{ extracash_order.driver }}</div>
             <div class="font-mono text-sm leading-snug text-sky-800">AR$ {{ extracash_order.cash_amount }}</div>
-            {% if extracash_order.document != "0" %}
             <div
-            id="image-container"
-            class="flex w-20 h-20 rounded-lg cursor-pointer toggle-size">
-            <img class="w-full h-full transition-all border-2 border-white rounded-lg drop-shadow-lg bg-sky-100"
-                   src="{{ extracash_order.document.url }}" alt=""/>
-                  </div>
-                  <a href="{{ extracash_order.document.url }}" download class="z-50 px-1 py-0.5 -mt-5 mr-2 font-mono font-bold leading-none bg-white bg-opacity-50 rounded-full drop-shadow-lg shadow-white text-sky-800 text-xxs">LINK</a>
-                  
-                  {% endif %}
-                </div>
+              id="image-container"
+              class="flex flex-col w-20 h-20 rounded-lg cursor-pointer toggle-size">
+              {% if extracash_order.document and extracash_order.document.url %}
+              <img class="w-full h-full transition-all border-2 border-white rounded-lg drop-shadow-lg bg-sky-100" src="{{ extracash_order.document.url }}" alt=""/>
+              
+              <a href="{{ extracash_order.document.url }}" download class="z-50 w-fit px-1 py-0.5 -mt-5 mr-2 font-mono font-bold leading-none bg-white bg-opacity-50 rounded-full drop-shadow-lg shadow-white text-sky-800 text-xxs">LINK</a>
+              {% endif %}
+            </div>
+          </div>
           <div class="absolute flex items-center justify-between left-2 top-11 w-fit">
             {% if extracash_order.is_finished %}
             <p class="mt-2 font-mono text-xs font-bold text-green-500 uppercase">
