@@ -22,9 +22,28 @@ from icecream import ic
 # Create a formset for the Documents model
 DocumentFormSet = inlineformset_factory(Refuelings, Documents, form=DocumentForm, extra=1, can_delete=False)
 
-
+from datetime import datetime
+import random, string, os
+from portal.custom_storage import DocumentStorage
 ### UNAUTHORIZED PAGES ###
 
+
+## HELPER FUNCTION
+def get_filename(operation_code, filename):
+    today = datetime.now()
+    year = today.year
+    month = today.month
+    day = today.day
+    time = today.strftime("%H%M%S")
+
+    # Generate a random string of length 8
+    random_string = "".join(random.choices(string.ascii_letters + string.digits, k=5))
+
+    # Extract the file extension dynamically
+    extension = os.path.splitext(filename)[1]
+
+    return f"extracash/{year}/{month}/{day}/{operation_code}/{random_string}_{time}{extension}"
+ 
 
 class StaffHomeView(View):
     template_name = "staff/home.html"
@@ -70,8 +89,6 @@ class StaffExtracashView(ListView):
     model = ExtraCash
 
 
-from django.core.files.storage import FileSystemStorage
-
 class StaffExtracashAttend(View):
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
@@ -81,20 +98,26 @@ class StaffExtracashAttend(View):
         try:
             order = ExtraCash.objects.get(operation_code=operation_code)
 
+            # Check if the document is attached
+            if 'document' not in request.FILES:
+                return JsonResponse({"status": "error", "message": "No document attached."}, status=400)
+
             # Handle file upload
-            if 'document' in request.FILES:
-                myfile = request.FILES['document']
-                fs = FileSystemStorage()
-                filename = fs.save(myfile.name, myfile)
-                uploaded_file_url = fs.url(filename)
+            myfile = request.FILES['document']
+            
+            # Generate the new filename
+            new_filename = get_filename(order.operation_code, myfile.name)
 
-                # Assuming your model has a field called 'document'
-                order.document = filename  # You save the reference to the uploaded file to the model
+            # Use custom storage for S3
+            document_storage = DocumentStorage()
+            filename = document_storage.save(new_filename, myfile)
 
+            order.document = filename 
             order.is_finished = True
             order.save()
 
             return JsonResponse({"status": "success", "message": "Order status updated successfully."})
+
         except ExtraCash.DoesNotExist:
             return JsonResponse({"status": "error", "message": "Order not found."}, status=404)
 

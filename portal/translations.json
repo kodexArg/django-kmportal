@@ -589,6 +589,11 @@
     "es": "expirado",
     "pt": "expirado"
   },
+  "stop": {
+    "en": "stop",
+    "es": "detener",
+    "pt": "parar"
+  },
   "template": {
     "en": "",
     "es": "",

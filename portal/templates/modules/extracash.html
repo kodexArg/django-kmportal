@@ -16,8 +16,8 @@
       {% if request.COOKIES.last_order_id and request.COOKIES.last_order_timestamp|is_recent %}
         {% with last_order=extracash_orders|get_order_by_id:request.COOKIES.last_order_id %}
           {% if last_order %}
-            <article class="p-2 w-full">
-              <div class="max-w-fit m-auto py-2 px-4 rounded-full bg-yellow-100 border border-yellow-300">
+            <article class="w-full p-2">
+              <div class="px-4 py-2 m-auto bg-yellow-100 border border-yellow-300 rounded-full max-w-fit">
                 <p class="m-auto text-center text-green-700 font-rubik">
                   {% translate "new_order_advice" %} <b>{{ last_order.driver }}</b>
                   <br />
@@ -27,111 +27,136 @@
               </div>
             </article>
           {% else %}
-            <p class="text-pantone7689c mb-1">{% translate "extracash_welcome" %}</p>
+            <p class="mb-1 text-pantone7689c">{% translate "extracash_welcome" %}</p>
           {% endif %}
         {% endwith %}
       {% else %}
-        <p class="text-pantone7689c mb-1">{% translate "extracash_welcome" %}</p>
+        <p class="mb-1 text-pantone7689c">{% translate "extracash_welcome" %}</p>
       {% endif %}
     </article>
-    <article class="p-2 w-full">
-      <div class="max-w-fit m-auto bg-sky-200 border-2 border-pantone7689c rounded-lg shadow-lg drop-shadow-lg py-4 px-6">
-        {% if form.non_field_errors %}<div class=" ">{{ form.non_field_errors }}</div>{% endif %}
+    <article class="w-full p-2">
+      <div class="px-6 py-4 m-auto border-2 rounded-lg shadow-lg max-w-fit bg-sky-200 border-pantone7689c drop-shadow-lg">
+        {% if form.non_field_errors %}<div class="">{{ form.non_field_errors }}</div>{% endif %}
         <form method="post" action="{% url 'extracash' %}">
           {% csrf_token %}
           <div class="py-2">
             {{ form.driver.label }}
             {{ form.driver }}
-            {% if form.driver.errors %}<div class=" ">{{ form.driver.errors }}</div>{% endif %}
+            {% if form.driver.errors %}<div class="">{{ form.driver.errors }}</div>{% endif %}
           </div>
           <div class="grid grid-cols-2 gap-x-2">
-            <div class="py-2 flex flex-col">
+            <div class="flex flex-col py-2">
               {{ form.cash_amount.label }}
               {{ form.cash_amount }}
-              {% if form.cash_amount.errors %}<div class=" ">{{ form.cash_amount.errors }}</div>{% endif %}
+              {% if form.cash_amount.errors %}<div class="">{{ form.cash_amount.errors }}</div>{% endif %}
             </div>
-            <div class="py-2 flex flex-col">
+            <div class="flex flex-col py-2">
               {{ form.cash_amount_confirm.label }}
               {{ form.cash_amount_confirm }}
-              {% if form.cash_amount_confirm.errors %}<div class=" ">{{ form.cash_amount_confirm.errors }}</div>{% endif %}
+              {% if form.cash_amount_confirm.errors %}<div class="">{{ form.cash_amount_confirm.errors }}</div>{% endif %}
             </div>
           </div>
           <div class="py-2">
-            <p class="text-pantone7689c text-xs leading-tight">
+            <p class="text-xs leading-tight text-pantone7689c">
               {% translate "extracash_warning" %}
               <a class="text-orange-400" href="http://km1107.grupo-avs.com/clientes/">km1107.grupo-avs.com/clientes/</a>
             </p>
           </div>
-          <div class="flex justify-end items-center pt-4">
+          <div class="flex items-center justify-end pt-4">
             {% rbutton_component caption="add_extracash" bg="bg-pantone7472c" %}
           </div>
         </form>
       </div>
     </article>
     <div class="h-6"></div>
-    <h3 class="flex justify-between items-center font-semibold text-white font-Roboto text-sm bg-pantone7689c rounded-full px-4">
+    <h3 class="flex items-center justify-between px-4 text-sm font-semibold text-white rounded-full font-Roboto bg-pantone7689c">
       {% now "Y-m-d" as current_datetime %}
       {% translate "extracash_pending_orders" %}
       <span class="text-xxs">{{ current_datetime }}</span>
     </h3>
     <article class="tw-loop-container">
       {% for extracash_order in extracash_orders %}
-        <div class="tw-loop-element cursor-default">
-          <div class="absolute -ml-6 -mt-6 text-xl text-sky-900">
-            <span class="leading-snug font-bold font-mono text-center w-fit bg-white px-4 py-1 rounded-full border border-pantone307c">{{ extracash_order.operation_code|upper }}</span>
+        <div class="cursor-default tw-loop-element">
+          <div class="absolute -mt-6 -ml-6 text-xl text-sky-900">
+            <span class="px-4 py-1 font-mono font-bold leading-snug text-center bg-white border rounded-full w-fit border-pantone307c">{{ extracash_order.operation_code|upper }}</span>
           </div>
-          <div class="flex flex-row absolute right-0 top-0.5 p-0.5 mr-1 leading-none text-left text-xxs font-mono text-sky-900">
-            <span class="leading-none font-mono uppercase">
+          <div class="absolute flex flex-col left-0 top-7 p-0.5 ml-1 leading-none text-left text-xxs font-mono text-sky-900">
+            <span class="font-mono leadi{ng-none uppercase">
+              {% translate "created" %}&nbsp;{{ extracash_order.order_date|date:"Y-m-d" }}
+            </span>
+            <span class="font-mono leading-none uppercase">
               {% if extracash_order.expiration_date|is_after_today %}
                 {% translate "expired" %}&nbsp;
               {% else %}
                 {% translate "expires" %}&nbsp;
               {% endif %}
+              {{ extracash_order.expiration_date|date:"Y-m-d" }}
             </span>
-            {{ extracash_order.expiration_date|date:"Y-m-d" }}
+            
           </div>
-          <div class="flex flex-col w-full mt-4 items-end">
-            <div class="leading-snug text-sm">{{ extracash_order.driver }}</div>
-            <div class="leading-snug text-sm font-mono text-sky-800">AR$ {{ extracash_order.cash_amount }}</div>
-          </div>
-          <div class="absolute left-2 bottom-2 flex justify-between items-center w-fit">
+          <div class="flex flex-col items-end w-full">
+            <div class="text-sm leading-snug">{{ extracash_order.driver }}</div>
+            <div class="font-mono text-sm leading-snug text-sky-800">AR$ {{ extracash_order.cash_amount }}</div>
+            {% if extracash_order.document != "0" %}
+            <div
+            id="image-container"
+            class="flex w-20 h-20 rounded-lg cursor-pointer toggle-size">
+            <img class="w-full h-full transition-all border-2 border-white rounded-lg drop-shadow-lg bg-sky-100"
+                   src="{{ extracash_order.document.url }}" alt=""/>
+                  </div>
+                  <a href="{{ extracash_order.document.url }}" download class="z-50 px-1 py-0.5 -mt-5 mr-2 font-mono font-bold leading-none bg-white bg-opacity-50 rounded-full drop-shadow-lg shadow-white text-sky-800 text-xxs">LINK</a>
+                  
+                  {% endif %}
+                </div>
+          <div class="absolute flex items-center justify-between left-2 top-11 w-fit">
             {% if extracash_order.is_finished %}
-              <div>
-                <p class="text-pantone7472c leading-none px-2 py-1 font-mono uppercase text-xs font-bold">
-                  {% translate "finished" %}
-                </p>
-              </div>
-            {% else %}
-              {% if extracash_order.expiration_date|is_after_today %}
-              <div>
-                <p class="text-yellow-500 leading-none px-2 py-1 font-mono uppercase text-xs font-bold">
+            <p class="mt-2 font-mono text-xs font-bold text-green-500 uppercase">
+                {% translate "finished" %}
+              </p>
+              {% else %}
+                {% if extracash_order.expiration_date|is_after_today %}
+                <p class="mt-2 font-mono text-xs font-bold text-yellow-500 uppercase">
                   {% translate "expired" %}
                 </p>
-              </div>
-              {% else %}
-                <div class="bg-red-600 rounded-full border border-white shadow-lg transition-all hover:translate-x-0.5 hover:translate-y-0.5">
-                  <form method="post"
-                        action="{% url 'extracash' %}"
-                        onsubmit="return confirm('Are you sure you want to delete this record?');">
-                    {% csrf_token %}
-                    <button type="submit"
-                            name="delete"
-                            value="{{ extracash_order.id }}"
-                            class="text-white px-2 py-1 font-mono uppercase text-xs font-bold">
-                      <div class="flex items-center h-full justify-center">
-                        <p>{% translate "stop" %}</p>
-                      </div>
-                    </button>
-                  </form>
-                </div>
-              {% endif %}
+                {% else %}
+                <form method="post"
+                action="{% url 'extracash' %}"
+                onsubmit="return confirm('Are you sure you want to delete this record?');">
+                {% csrf_token %}
+                <button type="submit"
+                name="delete"
+                value="{{ extracash_order.id }}">
+                <p class="font-mono text-xs font-bold text-red-600 uppercase">{% translate "stop" %}</p>
+              </button>
+            </form>
+            {% endif %}
             {% endif %}
           </div>
         </div>
       {% empty %}
-        <p class="m-auto font-Roboto text-lg text-pantone7689c">{% translate "no_extracash_orders" %}</p>
+        <p class="m-auto text-lg font-Roboto text-pantone7689c">{% translate "no_extracash_orders" %}</p>
       {% endfor %}
     </article>
   </section>
-  <div class="h-24 w-full"></div>
+  <div class="w-full h-24"></div>
 {% endblock content %}
+
+{% block scripts %}
+<script>
+  // Select all elements with the 'toggle-size' class
+  const images = document.querySelectorAll('.toggle-size');
+
+  // Add a click event listener to each image
+  images.forEach(image => {
+    image.addEventListener('click', function() {
+      if (this.classList.contains('w-20')) {
+        this.classList.remove('w-20', 'h-20');
+        this.classList.add('w-full', 'h-fit');
+      } else {
+        this.classList.remove('w-full', 'h-fit');
+        this.classList.add('w-20', 'h-20');
+      }
+    });
+  });
+</script>
+{% endblock scripts %}

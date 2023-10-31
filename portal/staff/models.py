@@ -4,6 +4,7 @@ from django.forms import ValidationError
 from django.contrib.auth.models import User
 from portal.custom_storage import DocumentStorage
 from datetime import datetime
+from loguru import logger
 import random
 import string
 
@@ -14,12 +15,14 @@ def get_filename(instance, filename):
     month = today.month
     day = today.day
     time = today.strftime("%H%M%S")
-    operation_code = instance.refueling.fuel_order.operation_code
+    operation_code = instance.fuel_order.operation_code
+    logger.info(f">>> Operation Code: {operation_code}")
 
     # Generate a random string of length 8
     random_string = "".join(random.choices(string.ascii_letters + string.digits, k=5))
+    logger.info(f">>> {random_string}")
 
-    return f"{year}/{month}/{day}/{operation_code}/{random_string}_{time}.jpg"
+    return f"extracash/{year}/{month}/{day}/{operation_code}/{random_string}_{time}.jpg"
 
 
 class RefuelingsManager(models.Manager):

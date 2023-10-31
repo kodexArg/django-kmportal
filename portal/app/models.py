@@ -18,6 +18,7 @@ from loguru import logger
 def get_default_expiration_date():
     return now() + timedelta(days=7)
 
+
 def get_filename(instance, filename):
     today = datetime.now()
     year = today.year
@@ -25,9 +26,11 @@ def get_filename(instance, filename):
     day = today.day
     time = today.strftime("%H%M%S")
     operation_code = instance.fuel_order.operation_code
+    logger.info(f">>> Operation Code: {operation_code}")
 
     # Generate a random string of length 8
     random_string = "".join(random.choices(string.ascii_letters + string.digits, k=5))
+    logger.info(f">>> {random_string}")
 
     return f"extracash/{year}/{month}/{day}/{operation_code}/{random_string}_{time}.jpg"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-26 00:24+0000\n"
+"POT-Creation-Date: 2023-10-30 17:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,39 +66,39 @@ msgstr "Novembro"
 msgid "December"
 msgstr "Dezembro"
 
-#: app/models.py:43
+#: app/models.py:60
 msgid "Companies"
 msgstr ""
 
-#: app/models.py:61
+#: app/models.py:78
 msgid "first_name"
 msgstr "Nome"
 
-#: app/models.py:62
+#: app/models.py:79
 msgid "last_name"
 msgstr "Sobrenome"
 
-#: app/models.py:63
+#: app/models.py:80
 msgid "identification_type"
 msgstr "Tipo de ID"
 
-#: app/models.py:64
+#: app/models.py:81
 msgid "identification_number"
 msgstr "N° de ID"
 
-#: app/models.py:79 app/models.py:92
+#: app/models.py:96 app/models.py:109
 msgid "domain"
 msgstr "Domínio"
 
-#: app/models.py:251
+#: app/models.py:270
 msgid "no_agreement"
 msgstr "Sem acordo"
 
-#: app/models.py:252
+#: app/models.py:271
 msgid "under_negotiation"
 msgstr "Em negociação"
 
-#: app/models.py:253
+#: app/models.py:272
 msgid "agreed"
 msgstr "Acordado"
 
@@ -142,7 +142,7 @@ msgid "view"
 msgstr "Ver"
 
 #: templates/components/row_fuelorder/row.html:10
-#: templates/modules/extracash.html:101 templates/modules/orders.html:119
+#: templates/modules/extracash.html:100 templates/modules/orders.html:119
 msgid "finished"
 msgstr "concluído"
 
@@ -292,19 +292,19 @@ msgstr "Lembre-se de verificar o status da sua conta no site:"
 msgid "extracash_pending_orders"
 msgstr "Pedidos Pendentes"
 
-#: templates/modules/extracash.html:86
+#: templates/modules/extracash.html:86 templates/modules/extracash.html:105
 msgid "expired"
 msgstr "expirado"
 
 #: templates/modules/extracash.html:88
-msgid "until"
-msgstr ""
+msgid "expires"
+msgstr "expira"
 
 #: templates/modules/extracash.html:115
 msgid "stop"
-msgstr ""
+msgstr "parar"
 
-#: templates/modules/extracash.html:124
+#: templates/modules/extracash.html:123
 msgid "no_extracash_orders"
 msgstr "Sem ordens de Extra-Cash"
 
@@ -515,9 +515,6 @@ msgstr "enviar solicitação"
 
 msgid "add_driver"
 msgstr "adicionar motorista"
-
-msgid "expires"
-msgstr "expira"
 
 msgid "template"
 msgstr ""
