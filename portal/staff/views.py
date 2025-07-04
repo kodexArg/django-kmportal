@@ -49,8 +49,14 @@ class StaffHomeView(View):
     template_name = "staff/home.html"
 
     def get(self, request):
+ if request.user.is_authenticated and request.user.is_staff:
+            # Check if the user is in the "Pump Operators" group
+ try:
+                pump_operators_group = Group.objects.get(name="Pump Operators")
+ if pump_operators_group in request.user.groups.all():
+ return render(request, self.template_name)
         form = CustomLoginForm()
-        return render(request, self.template_name, {"form": form})
+ return redirect("staff_login")
 
     def post(self, request):
         form = CustomLoginForm(request, data=request.POST)
