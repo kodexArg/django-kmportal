@@ -50,15 +50,24 @@ class StaffHomeView(View):
 
     def get(self, request):
         if request.user.is_authenticated and request.user.is_staff:
+<<<<<<< HEAD
             # Check if the user is in the "Pump Operators" group
+=======
+>>>>>>> e7f6b71 (updating 2025 en instancia)
             try:
                 pump_operators_group = Group.objects.get(name="Pump Operators")
                 if pump_operators_group in request.user.groups.all():
                     return render(request, self.template_name)
             except Group.DoesNotExist:
+<<<<<<< HEAD
                 messages.error(request, "El grupo de Operadores de Bomba no existe.")
                 return redirect("staff_login")
         
+=======
+                messages.error(request, "El grupo de oepradores de bomba no existe")
+                return redirect("staff_login")
+
+>>>>>>> e7f6b71 (updating 2025 en instancia)
         form = CustomLoginForm()
         return redirect("staff_login")
 
